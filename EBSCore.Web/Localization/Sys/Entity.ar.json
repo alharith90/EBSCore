@@ -1,0 +1,21 @@
+{
+  "PageTitle": "ملف الجهة",
+  "CurrentEntity Profile": "ملف الجهة",
+  "Edit CurrentEntity": "تعديل بيانات الجهة",
+  "Edit": "تعديل",
+  "Cancel": "إلغاء",
+  "Name": "الاسم",
+  "Sector": "القطاع",
+  "Location": "الموقع",
+  "ContactPerson": "جهة الاتصال",
+  "Email": "البريد الإلكتروني",
+  "Phone": "رقم الهاتف",
+  "Description": "الوصف",
+  "Upload Logo": "تحميل الشعار",
+  "No Logo Available": "لا يوجد شعار متاح",
+  "Save": "حفظ",
+  "CurrentEntity Saved Successfully": "تم حفظ الجهة بنجاح",
+  "Load Failed": "فشل التحميل",
+  "Save Failed": "فشل الحفظ",
+  "Error": "خطأ"
+}

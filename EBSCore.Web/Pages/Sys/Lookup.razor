@@ -1,0 +1,147 @@
+@page "/Sys/Lookup"
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <div class="card-tools">
+                    <ul class="nav nav-pills ml-auto">
+                        <li class="nav-item">
+                            <button type="button" id="bOpenModal" class="btn btn-info">
+                                <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="LookupsTree"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="LookupID" />
+<input type="hidden" id="ParentID" />
+
+<form id="frmLookup" action="javascript:void(0)">
+    <div class="modal fade" id="modalAddLookup" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">@Localizer["Add/Edit Lookup"]</h4>
+                    <button type="button" class="close btn btn-warning" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="LookupType">@Localizer["Lookup Type"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                                    <input type="text" required class="form-control" id="LookupType" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Level">@Localizer["Level"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-layer-group"></i></span>
+                                    <input type="number" class="form-control" id="Level" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="LookupDescriptionAr">@Localizer["Description (Arabic)"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-language"></i></span>
+                                    <input type="text" class="form-control" id="LookupDescriptionAr" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="LookupDescriptionEn">@Localizer["Description (English)"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-language"></i></span>
+                                    <input type="text" required class="form-control" id="LookupDescriptionEn" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ParentID">@Localizer["Parent Lookup"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-sitemap"></i></span>
+                                    <input type="text" class="form-control" id="ParentID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Status">@Localizer["Status"]</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-toggle-on"></i></span>
+                                    <input type="checkbox" class="form-control" id="Status" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" id="bSaveLookup" class="btn btn-primary">
+                        <i class="fas fa-save"></i> &nbsp; @GLocalizer["Save"]
+                    </button>
+                    <button type="button" id="bCloseModal" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-arrow-circle-left"></i> &nbsp; @GLocalizer["Cancel"]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override void OnInitialized()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("LookupBlazor.init", new
+            {
+                apiBase = "/api/Lookup",
+                labels = new {
+                    add = GLocalizer["Add"].Value,
+                    edit = GLocalizer["Edit"].Value,
+                    del = GLocalizer["Delete"].Value,
+                    confirmDelete = GLocalizer["Confirm Delete"].Value,
+                    areYouSure = GLocalizer["Are you sure to delete this lookup?"].Value,
+                    yesDelete = GLocalizer["Yes, delete it"].Value,
+                    cancel = GLocalizer["Cancel"].Value,
+                    saved = GLocalizer["Saved Successfully"].Value,
+                    deleted = GLocalizer["Deleted Successfully"].Value,
+                    error = GLocalizer["Error Occurred"].Value,
+                    tryAgain = GLocalizer["Try Again Later"].Value
+                }
+            });
+        }
+    }
+}
+

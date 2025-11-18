@@ -1,0 +1,495 @@
+﻿@page "/BCM/Issues"
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Forms
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-success" @onclick="ShowInput">
+                                    <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                                </button>
+                            </li>
+                            <li class="ms-auto nav-item">
+                                <EditForm EditContext="SearchFormContext" OnValidSubmit="ApplySearch">
+                                    <div class="d-flex">
+                                        <label class="text-nowrap ms-2 align-self-center">
+                                            <i class="fas fa-filter me-1 text-muted"></i> Search By
+                                        </label>
+                                        <select class="form-select ms-2" @bind="SearchFields" required>
+                                            <option value="">-- Select Field --</option>
+                                            <option value="Description">Description</option>
+                                            <option value="Category">Category</option>
+                                            <option value="Owner">Owner</option>
+                                            <option value="Status">Status</option>
+                                        </select>
+
+                                        <label class="text-nowrap ms-2 align-self-center">
+                                            <i class="fas fa-search me-1 text-muted"></i> Search Text
+                                        </label>
+                                        <input type="text" class="form-control ms-2" @bind="SearchQuery" placeholder="Type to search..." @onkeydown="HandleEnterKey" />
+
+                                        <div>
+                                            <button class="btn btn-outline-dark text-nowrap ms-2 px-3">
+                                                <i class="fas fa-search"></i> @GLocalizer["Search"]
+                                            </button>
+                                        </div>
+                                    </div>
+                                </EditForm>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListIssues.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th @onclick='() => ApplySort("Description")' style="cursor:pointer;">
+                                        @Localizer["Description"]
+                                        @if (SortColumn == "Description")
+                                        {
+                                            <i class="fas @(SortDirection == "ASC" ? "fa-sort-up" : "fa-sort-down") ms-1"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-sort text-muted ms-1"></i>
+                                        }
+                                    </th>
+                                    <th @onclick='() => ApplySort("Category")' style="cursor:pointer;">
+                                        @Localizer["Category"]
+                                        @if (SortColumn == "Category")
+                                        {
+                                            <i class="fas @(SortDirection == "ASC" ? "fa-sort-up" : "fa-sort-down") ms-1"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-sort text-muted ms-1"></i>
+                                        }
+                                    </th>
+                                    <th>@Localizer["Source"]</th>
+                                    <th>@Localizer["Impact"]</th>
+                                    <th @onclick='() => ApplySort("DateIdentified")' style="cursor:pointer;">
+                                        @Localizer["DateIdentified"]
+                                        @if (SortColumn == "DateIdentified")
+                                        {
+                                            <i class="fas @(SortDirection == "ASC" ? "fa-sort-up" : "fa-sort-down") ms-1"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-sort text-muted ms-1"></i>
+                                        }
+                                    </th>
+                                    <th>@Localizer["Owner"]</th>
+                                    <th @onclick='() => ApplySort("Status")' style="cursor:pointer;">
+                                        @Localizer["Status"]
+                                        @if (SortColumn == "Status")
+                                        {
+                                            <i class="fas @(SortDirection == "ASC" ? "fa-sort-up" : "fa-sort-down") ms-1"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-sort text-muted ms-1"></i>
+                                        }
+                                    </th>
+                                    <th>@Localizer["CreatedAt"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var (issue, index) in ListIssues.Select((x, i) => (x, i)))
+                                {
+                                    <tr>
+                                        <td>@((CurrentPage - 1) * PageSize + index + 1)</td>
+                                        <td>@issue.Description</td>
+                                        <td>@issue.Category</td>
+                                        <td>@issue.Source</td>
+                                        <td>@issue.Impact</td>
+                                        <td>@issue.DateIdentified?.ToString("yyyy-MM-dd")</td>
+                                        <td>@issue.Owner</td>
+                                        <td>@issue.Status</td>
+                                        <td>@issue.CreatedAt?.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditIssue(issue)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteIssue(issue)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div>
+                            <button class="btn btn-outline-dark" @onclick="PreviousPage" disabled="@(!CanPreviousPage)">@GLocalizer["Previous"]</button>
+                            <span>Page
+                                <select class="form-select form-select-sm w-auto d-inline" @onchange="LoadIssueListAsync" @bind-value="CurrentPage" @bind-value:event="oninput">
+                                    @for (int i = 1; i <= TotalPages; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                                of @TotalPages</span>
+                            <button class="btn btn-outline-dark" @onclick="NextPage" disabled="@(!CanNextPage)">@GLocalizer["Next"]</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnSubmit="SaveIssueAsync">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-lg-flex flex-lg-row align-items-lg-center justify-content-lg-between">
+                        <h5 class="mb-0 steper-title">@Localizer[CurrentIssue.IssueID.HasValue ? "EditIssue" : "AddIssue"]</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Description"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentIssue.Description" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Category"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.Category" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Source"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.Source" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Impact"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.Impact" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["DateIdentified"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentIssue.DateIdentified" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Owner"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.Owner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.Status" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["RootCause"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIssue.RootCause" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["CorrectiveAction"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIssue.CorrectiveAction" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ActionOwner"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.ActionOwner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ActionDueDate"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentIssue.ActionDueDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ActionCompletionDate"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentIssue.ActionCompletionDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["VerificationOfEffectiveness"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIssue.VerificationOfEffectiveness" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RelatedProcess"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.RelatedProcess" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["AuditReference"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.AuditReference" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ReviewDate"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentIssue.ReviewDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RiskCategory"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.RiskCategory" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Likelihood"]</label>
+                            <input class="form-control" type="number" @bind-value="CurrentIssue.Likelihood" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Consequence"]</label>
+                            <input class="form-control" type="number" @bind-value="CurrentIssue.Consequence" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["DetectionMethod"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.DetectionMethod" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["IssueType"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.IssueType" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["LinkedBCP"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.LinkedBCP" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["LessonsLearned"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIssue.LessonsLearned" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-switch mt-4">
+                                <input class="form-check-input" type="checkbox" role="switch" id="IsRecurringSwitch" @bind="CurrentIssue.IsRecurring" @bind:event="oninput" />
+                                <label class="form-check-label" for="IsRecurringSwitch">@Localizer["IsRecurring"]</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["MitigationActions"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIssue.MitigationActions" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["EscalationLevel"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.EscalationLevel" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ClosureApprovedBy"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.ClosureApprovedBy" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ClosureComments"]</label>
+                            <input class="form-control" @bind-value="CurrentIssue.ClosureComments" @bind-value:event="oninput" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    // UI State
+    bool ShowInputScreen = false;
+    private bool ShowValidationMessage = false;
+
+    // Data
+    List<Issue> ListIssues = new();
+    Issue CurrentIssue = new();
+
+    // Forms
+    private EditContext EditContext;
+    private EditContext SearchFormContext;
+
+    // Localization
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    // Pagination / Sorting / Search
+    private int CurrentPage = 1;
+    private int PageSize = 10;
+    private int TotalPages = 1;
+    private string SortColumn = "IssueID";
+    private string SortDirection = "ASC";
+    private string SearchFields = string.Empty;
+    private string SearchQuery = string.Empty;
+    private bool CanPreviousPage = false;
+    private bool CanNextPage = true;
+
+    // Navigation
+    private async Task ShowInput()
+    {
+        CurrentIssue = new Issue();
+        EditContext = new EditContext(CurrentIssue);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    // Search / Sort / Paging
+    private async Task ApplySearch()
+    {
+        CurrentPage = 1;
+        await LoadIssueListAsync();
+    }
+
+    private async Task HandleEnterKey(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" || e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            await ApplySearch();
+        }
+    }
+
+    private async Task LoadIssueListAsync()
+    {
+        var response = await Http.GetStringAsync(
+             $"api/Issue/Get?PageNumber={CurrentPage}&PageSize={PageSize}&SortColumn={SortColumn}&SortDirection={SortDirection}&SearchFields={SearchFields}&SearchQuery={SearchQuery}"
+        );
+
+        var Result = JsonConvert.DeserializeObject<dynamic>(response);
+
+        ListIssues = Result.Data.ToObject<List<Issue>>();
+        TotalPages = Convert.ToInt32(Result.PageCount);
+
+        CanPreviousPage = CurrentPage > 1;
+        CanNextPage = CurrentPage < TotalPages;
+
+        StateHasChanged();
+    }
+
+    private async void PreviousPage()
+    {
+        if (CanPreviousPage)
+        {
+            CurrentPage--;
+            await LoadIssueListAsync();
+        }
+    }
+
+    private async void NextPage()
+    {
+        if (CanNextPage)
+        {
+            CurrentPage++;
+            await LoadIssueListAsync();
+        }
+    }
+
+    private async void ApplySort(string column)
+    {
+        if (SortColumn == column)
+        {
+            SortDirection = SortDirection == "ASC" ? "DESC" : "ASC";
+        }
+        else
+        {
+            SortColumn = column;
+            SortDirection = "ASC";
+        }
+
+        CurrentPage = 1;
+        await LoadIssueListAsync();
+    }
+
+    // CRUD
+    private async Task SaveIssueAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/Issue/Save", CurrentIssue);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadIssueListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Issue saved successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditIssue(Issue issue)
+    {
+        var response = await Http.GetStringAsync($"api/Issue/Get/{issue.IssueID}");
+        var data = JsonConvert.DeserializeObject<List<Issue>>(response);
+
+        if (data.Any())
+        {
+            CurrentIssue = data.First();
+            ShowInputScreen = true;
+            EditContext = new EditContext(CurrentIssue);
+        }
+    }
+
+    private async Task DeleteIssue(Issue issue)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"Issue ID {issue.IssueID} will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var jsonResult = result?.ToString();
+        if (jsonResult != null && jsonResult.Contains("\"isConfirmed\":true"))
+        {
+            var response = await Http.DeleteAsync($"api/Issue/Delete/{issue.IssueID}");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIssueListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Issue deleted successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new
+                {
+                    icon = "error",
+                    title = "Error!",
+                    text = response.ReasonPhrase ?? "Deletion failed"
+                });
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentIssue);
+        SearchFormContext = new EditContext(new object());
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+
+        await LoadIssueListAsync();
+    }
+}

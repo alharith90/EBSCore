@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Localization\Common.ar.json" />
+    <Content Remove="Localization\Common.en.json" />
+    <Content Remove="Localization\Common\Process.ar.json" />
+    <Content Remove="Localization\Common\Process.en.json" />
+    <Content Remove="Localization\Config1\InformationSystems.ar.json" />
+    <Content Remove="Localization\Config1\InformationSystems.en.json" />
+    <Content Remove="Localization\Config\InformationSystems.ar.json" />
+    <Content Remove="Localization\Config\InformationSystems.en.json" />
+    <Content Remove="Localization\Sys\Entity.ar.json" />
+    <Content Remove="Localization\Sys\Entity.en.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBSCore.AdoClass\EBSCore.AdoClass.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Views\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\MinAlakher.dll" />
+    <None Include="Localization\Common\Process.ar.json" />
+    <None Include="Localization\Common\Process.en.json" />
+    <None Include="Localization\Common.ar.json" />
+    <None Include="Localization\Common.en.json" />
+    <None Include="Localization\Config1\InformationSystems.ar.json" />
+    <None Include="Localization\Config1\InformationSystems.en.json" />
+    <None Include="Localization\Config\InformationSystems.ar.json" />
+    <None Include="Localization\Config\InformationSystems.en.json" />
+    <None Include="Localization\Sys\Entity.en.json" />
+    <None Include="Localization\Sys\Entity.ar.json" />
+    <None Include="Pages\Test.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Formats.Asn1" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MinAlakher">
+      <HintPath>bin\MinAlakher.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Config\InformationSystems - Copy %282%29.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+</Project>

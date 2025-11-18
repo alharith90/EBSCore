@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCM Impact Matrix – Enhanced Circles</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .aspect-card {
+      border-left: 5px solid #0d6efd;
+      transition: transform 0.2s;
+    }
+    .aspect-card:hover {
+      transform: scale(1.01);
+    }
+    .circle-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      margin-bottom: 5px;
+      border: 2px solid #6c757d;
+      transition: transform 0.2s;
+    }
+    .circle-btn:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    .circle-low { background-color: #A9DFBF; }
+    .circle-medium { background-color: #F9E79F; }
+    .circle-high { background-color: #F5B7B1; }
+    .circle-critical { background-color: #E74C3C; }
+
+    .dropdown-select {
+      position: absolute;
+      z-index: 1000;
+      display: none;
+      width: auto;
+    }
+    .circle-wrapper {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      margin: 0 6px;
+    }
+    .time-label-inline {
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: block;
+      text-align: center;
+      margin-top: 2px;
+    }
+    .timeframe-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .dropdown-select option[value="Low"] { background-color: #A9DFBF; }
+    .dropdown-select option[value="Medium"] { background-color: #F9E79F; }
+    .dropdown-select option[value="High"] { background-color: #F5B7B1; }
+    .dropdown-select option[value="Critical"] { background-color: #E74C3C; color: white; }
+  </style>
+</head>
+<body class="bg-light py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-6 fw-bold">BCM Impact Level Selection</h1>
+      <p class="text-muted">Click on circles to change impact level for each aspect</p>
+    </div>
+
+    <div class="row g-4" id="impactMatrix"></div>
+
+  <script>
+    const aspects = [
+      "Financial", "Reputational", "Operational", "Legal & Regulatory",
+      "Health & Safety", "Security", "Quality", "Environmental"
+    ];
+    const timeframes = ["1-4H", "8-24H", "24-72H", "3-7D", ">1W"];
+    const levelClasses = {
+      Low: "circle-low",
+      Medium: "circle-medium",
+      High: "circle-high",
+      Critical: "circle-critical"
+    };
+    let previousSelections = {};
+    let openDropdownId = null;
+
+    function toggleDropdown(id) {
+      if (openDropdownId && openDropdownId !== id) {
+        document.getElementById(openDropdownId + '_select').style.display = 'none';
+      }
+      const dropdown = document.getElementById(id + '_select');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      dropdown.focus();
+      openDropdownId = id;
+    }
+
+    function updateCircle(aspect, id, index, value) {
+      const circle = document.getElementById(id);
+      circle.className = 'circle-btn ' + levelClasses[value];
+      document.getElementById(id + '_select').style.display = 'none';
+      openDropdownId = null;
+
+      const key = aspect;
+      if (!previousSelections[key]) previousSelections[key] = [];
+      previousSelections[key][index] = value;
+
+      const levels = ["Low", "Medium", "High", "Critical"];
+      let startIndex = levels.indexOf(value);
+
+      for (let i = index + 1; i < 5; i++) {
+        const nextId = `${aspect}_${i}`.replace(/\s+/g, '_');
+        const select = document.getElementById(nextId + '_select');
+        const current = previousSelections[key][i] || levels[startIndex];
+        select.innerHTML = levels.slice(startIndex).map(lvl => `
+          <option value="${lvl}" ${lvl === current ? 'selected' : ''}>${lvl}</option>
+        `).join('');
+        document.getElementById(nextId).className = 'circle-btn ' + levelClasses[current];
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('circle-btn') && !e.target.classList.contains('dropdown-select')) {
+        document.querySelectorAll('.dropdown-select').forEach(drop => drop.style.display = 'none');
+        openDropdownId = null;
+      }
+    });
+
+    const matrix = document.getElementById("impactMatrix");
+    aspects.forEach(aspect => {
+      const card = document.createElement("div");
+      card.className = "col-12 col-md-6 col-lg-4";
+      card.innerHTML = `
+        <div class="card aspect-card shadow-sm p-3">
+          <h6 class="card-title text-primary mb-3">${aspect}</h6>
+          <div class="timeframe-row">
+            ${timeframes.map((tf, i) => {
+              const id = `${aspect}_${i}`.replace(/\s+/g, '_');
+              return `
+                <div class="circle-wrapper">
+                  <span id="${id}" class="circle-btn circle-low" onclick="toggleDropdown('${id}')" title="Click to set level"></span>
+                  <div class="time-label-inline">${tf}</div>
+                  <select class="form-select form-select-sm dropdown-select" id="${id}_select"
+                    onchange="updateCircle('${aspect}', '${id}', ${i}, this.value)">
+                    <option value="Low" title="Minor impact">Low</option>
+                    <option value="Medium" title="Noticeable impact">Medium</option>
+                    <option value="High" title="Severe impact">High</option>
+                    <option value="Critical" title="Critical/Shutdown">Critical</option>
+                  </select>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      matrix.appendChild(card);
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

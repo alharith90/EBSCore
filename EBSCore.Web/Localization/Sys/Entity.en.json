@@ -1,0 +1,21 @@
+{
+  "PageTitle": "Entity Profile",
+  "CurrentEntity Profile": "Entity Profile",
+  "Edit CurrentEntity": "Edit Entity",
+  "Edit": "Edit",
+  "Cancel": "Cancel",
+  "Name": "Name",
+  "Sector": "Sector",
+  "Location": "Location",
+  "ContactPerson": "Contact Person",
+  "Email": "Email",
+  "Phone": "Phone",
+  "Description": "Description",
+  "Upload Logo": "Upload Logo",
+  "No Logo Available": "No Logo Available",
+  "Save": "Save",
+  "CurrentEntity Saved Successfully": "Entity saved successfully",
+  "Load Failed": "Load failed",
+  "Save Failed": "Save failed",
+  "Error": "Error"
+}

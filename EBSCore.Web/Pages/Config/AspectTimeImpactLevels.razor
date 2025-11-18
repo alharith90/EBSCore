@@ -1,0 +1,189 @@
+﻿@page "/Config/AspectTimeImpactLevels"
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Localization
+@using EBSCore.Web.Pages.Controls
+@inject HttpClient Http
+@inject NavigationManager Nav
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@L["Aspect-Time Impact Levels"]</h3>
+
+@if (!showForm)
+{
+    <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between">
+            <div><strong>@L["Matrix"]</strong></div>
+            <div><button class="btn btn-success" @onclick="New">@GL["AddRecord"]</button></div>
+        </div>
+        <div class="card-body">
+            @if ((aspects?.Any() ?? false) && (frames?.Any() ?? false))
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="white-space:nowrap">@L["Aspect"] \ @L["Time Frame"]</th>
+                                @foreach (var tf in frames.OrderBy(f => f.MinHours ?? int.MaxValue).ThenBy(f => f.MaxHours ?? int.MaxValue))
+                                {
+                                    <th class="text-center" style="min-width:140px" title="@GetFrameName(tf.ImpactTimeFrameID)">@tf.TimeLabel</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var a in aspects)
+                            {
+                                <tr>
+                                    <th style="white-space:nowrap">@a.AspectName</th>
+                                    @foreach (var tf in frames.OrderBy(f => f.MinHours ?? int.MaxValue).ThenBy(f => f.MaxHours ?? int.MaxValue))
+                                    {
+                                        var cell = GetCell(a.ImpactAspectID, tf.ImpactTimeFrameID);
+                                        <td class="text-center">
+                                            <div class="d-flex flex-column gap-1 align-items-center">
+                                                @if (cell != null)
+                                                {
+                                                    <span class="badge" style="background-color:@(cell.ImpactColor ?? "#6c757d");color:#fff" title="@cell.Justification">@cell.ImpactLevel</span>
+                                                    <small class="text-muted">@L["LevelID"]: @(cell.LevelID?.ToString() ?? "-")</small>
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button class="btn btn-outline-primary" title="@GL["Edit"]" @onclick="() => EditCell(a.ImpactAspectID, tf.ImpactTimeFrameID)"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-outline-danger" title="@GL["Delete"]" @onclick="() => Remove(cell)"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-outline-secondary btn-sm" title="@GL["AddRecord"]" @onclick="() => EditCell(a.ImpactAspectID, tf.ImpactTimeFrameID)">+ @GL["Add"]</button>
+                                                }
+                                            </div>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">@GL["EmptyTable"]</p>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <strong>@GL["List"]</strong>
+        </div>
+        <div class="card-body">
+            @if (items?.Any() == true)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead><tr><th>#</th><th>@L["Aspect"]</th><th>@L["Time Frame"]</th><th>@L["LevelID"]</th><th>@L["ImpactLevel"]</th><th>@GL["Actions"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var (x,i) in items.Select((x,i)=>(x,i)))
+                        {
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td>@GetAspectName(x.ImpactAspectID)</td>
+                                <td>@GetFrameName(x.ImpactTimeFrameID)</td>
+                                <td>@x.LevelID</td>
+                                <td><span class="badge" style="background-color:@x.ImpactColor;color:#fff">@x.ImpactLevel</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(x)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => Remove(x)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else { <p>@GL["EmptyTable"]</p> }
+        </div>
+    </div>
+}
+else
+{
+    <EditForm EditContext="editCtx" OnValidSubmit="Save">
+        <div class="card">
+            <div class="card-body row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">@L["AspectId"]</label>
+                    <ImpactAspectSelect @bind-Value="current.ImpactAspectID" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@L["TimeFrameId"]</label>
+                    <ImpactTimeFrameSelect @bind-Value="current.ImpactTimeFrameID" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">@L["LevelID"]</label>
+                    <InputNumber TValue="int?" class="form-control" @bind-Value="current.LevelID" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@L["ImpactLevel"]</label>
+                    <InputText class="form-control" @bind-Value="current.ImpactLevel" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">@L["Justification"]</label>
+                    <InputTextArea class="form-control" @bind-Value="current.Justification" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@L["ImpactColor"]</label>
+                    <ColorPicker @bind-Value="current.ImpactColor" />
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <button class="btn btn-success">@GL["Save"]</button>
+                <button type="button" class="btn btn-light btn-outline-dark" @onclick="Close">@GL["Cancel"]</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    IStringLocalizer L = default!; IStringLocalizer GL = default!;
+    List<AspectTimeImpactLevel> items = new(); AspectTimeImpactLevel current = new();    List<ImpactAspect> aspects = new(); List<ImpactTimeFrame> frames = new();
+    string GetAspectName(int? id)=> aspects.FirstOrDefault(a=>a.ImpactAspectID==id)?.AspectName ?? (id?.ToString()??"");
+    string GetFrameName(int? id){ var tf = frames.FirstOrDefault(t=>t.ImpactTimeFrameID==id); return tf==null? (id?.ToString()??"") : $"{tf.TimeLabel}"; }
+    bool showForm = false; EditContext editCtx = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        L = LocalizerFactory.Create(new Uri(Nav.Uri).AbsolutePath, "");
+        GL = LocalizerFactory.Create("Common", "");
+        await LoadAsync();
+    }
+
+    async Task LoadAsync()
+    {
+        var json = await Http.GetStringAsync("/api/AspectTimeImpactLevels/Get");
+        var outer = Newtonsoft.Json.Linq.JToken.Parse(json);
+        var inner = outer.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)outer) : outer;
+        items = inner["Data"].ToObject<List<AspectTimeImpactLevel>>() ?? new();
+        var jsonA = await Http.GetStringAsync("/api/ImpactAspects/Get");
+        var oa = Newtonsoft.Json.Linq.JToken.Parse(jsonA); var ia = oa.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)oa) : oa;
+        aspects = ia["Data"].ToObject<List<ImpactAspect>>() ?? new();
+        var jsonF = await Http.GetStringAsync("/api/ImpactTimeFrames/Get");
+        var of = Newtonsoft.Json.Linq.JToken.Parse(jsonF); var inf = of.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)of) : of;
+        frames = inf["Data"].ToObject<List<ImpactTimeFrame>>() ?? new();
+        BuildMatrix();
+    }
+
+    Dictionary<string, AspectTimeImpactLevel> matrix = new();
+    static string Key(int? a, int? f) => $"{a ?? 0}-{f ?? 0}";
+    void BuildMatrix(){ matrix.Clear(); foreach(var it in items){ if(it.ImpactAspectID.HasValue && it.ImpactTimeFrameID.HasValue){ matrix[Key(it.ImpactAspectID, it.ImpactTimeFrameID)] = it; } } }
+    AspectTimeImpactLevel? GetCell(int? aspectId, int? frameId){ matrix.TryGetValue(Key(aspectId, frameId), out var val); return val; }
+    void EditCell(int? aspectId, int? frameId)
+    {
+        var existing = GetCell(aspectId, frameId);
+        if(existing != null){ Edit(existing); }
+        else { current = new AspectTimeImpactLevel{ ImpactAspectID = aspectId, ImpactTimeFrameID = frameId, ImpactColor = "#6c757d" }; editCtx = new EditContext(current); showForm = true; }
+    }
+    void New(){ current = new(); editCtx = new EditContext(current); showForm = true; }
+    void Edit(AspectTimeImpactLevel e){ current = new AspectTimeImpactLevel{ AspectTimeImpactLevelID = e.AspectTimeImpactLevelID, ImpactAspectID=e.ImpactAspectID, ImpactTimeFrameID=e.ImpactTimeFrameID, LevelID=e.LevelID, ImpactLevel=e.ImpactLevel, Justification=e.Justification, ImpactColor=e.ImpactColor}; editCtx = new EditContext(current); showForm=true; }
+    async Task Save(){ var res = await Http.PostAsJsonAsync("/api/AspectTimeImpactLevels/Save", current); if(res.IsSuccessStatusCode){ showForm=false; await LoadAsync(); } }
+    async Task Remove(AspectTimeImpactLevel e){ var res = await Http.DeleteAsync($"/api/AspectTimeImpactLevels/Delete/{e.AspectTimeImpactLevelID}"); if(res.IsSuccessStatusCode){ await LoadAsync(); } }
+    void Close(){ showForm=false; }
+}
+
+
+

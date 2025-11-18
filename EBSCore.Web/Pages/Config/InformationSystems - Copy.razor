@@ -1,0 +1,204 @@
+﻿@using EBSCore.Web.Models
+@using Microsoft.Extensions.Localization
+@page "/Config1/InformationSystems-Orignial"
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <button class="btn btn-info" @onclick="OpenAddModal">
+                    <i class="fas fa-plus"></i> @GLocalizer["AddRecord"]
+                </button>
+            </div>
+            <div class="card-body">
+                @if (InformationSystemList?.Count > 0)
+                {
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Localizer["SystemID"]</th>
+                                <th>@Localizer["SystemName"]</th>
+                                <th>@Localizer["RPO"]</th>
+                                <th>@Localizer["Type"]</th>
+                                <th>@Localizer["BusinessOwner"]</th>
+                                <th>@Localizer["NumberOfUsers"]</th>
+                                <th>@GLocalizer["Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var system in InformationSystemList)
+                            {
+                                <tr>
+                                    <td>@system.SystemID</td>
+                                    <td>@system.SystemName</td>
+                                    <td>@system.RPO</td>
+                                    <td>@system.Type</td>
+                                    <td>@system.BusinessOwner</td>
+                                    <td>@system.NumberOfUsers</td>
+                                    <td>
+                                        <button class="btn btn-info" @onclick ="() => OpenEditModal(system)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger" @onclick ="() => OpenDeleteModal(system)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>@GLocalizer["NoRecords"]</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Modal -->
+@if (ShowAddModal)
+{
+    <div class="modal show d-block" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">@Localizer["ModalTitle"]</h4>
+                    <button type="button" class="btn-close" @onclick ="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>@Localizer["SystemName"]</label>
+                        <input type="text" class="form-control" @bind ="CurrentSystem.SystemName" />
+                    </div>
+                    <!-- Repeat for other fields -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @onclick ="SaveSystemAsync">
+                        <i class="fas fa-save"></i> @GLocalizer["Save"]
+                    </button>
+                    <button class="btn btn-secondary" @onclick ="CloseModal">
+                        <i class="fas fa-arrow-circle-left"></i> @GLocalizer["Cancel"]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (ShowDeleteModal)
+{
+    <div class="modal show d-block" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@GLocalizer["Confirm"]</h5>
+                    <button type="button" class="btn-close" onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@DeleteConfirmationMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" @onclick ="DeleteSystemAsync">@GLocalizer["Delete"]</button>
+                    <button class="btn btn-secondary" @onclick ="CloseModal">@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+    private List<InformationSystem>
+    InformationSystemList = new();
+    private InformationSystem CurrentSystem = new();
+    private bool ShowAddModal = false;
+    private bool ShowDeleteModal = false;
+    private string DeleteConfirmationMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+    Localizer = LocalizerFactory.Create(this.GetType().FullName, "");
+    GLocalizer = LocalizerFactory.Create("Common", "");
+    await LoadInformationSystemListAsync();
+    }
+
+    private async Task LoadInformationSystemListAsync()
+    {
+    try
+    {
+    InformationSystemList = await Http.GetFromJsonAsync<List<InformationSystem>>("api/InformationSystem/Get");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading information systems: {ex.Message}");
+        }
+    }
+
+    private async Task SaveSystemAsync()
+    {
+        try
+        {
+            if (CurrentSystem.SystemID == "0")
+            {
+                await Http.PostAsJsonAsync("api/InformationSystem/Save", CurrentSystem);
+            }
+            else
+            {
+                await Http.PutAsJsonAsync($"api/InformationSystem/Update/{CurrentSystem.SystemID}", CurrentSystem);
+            }
+
+            await LoadInformationSystemListAsync();
+            CloseModal();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving system: {ex.Message}");
+        }
+    }
+
+    private void OpenAddModal()
+    {
+        
+        CurrentSystem = new InformationSystem();
+        ShowAddModal = true;
+    }
+
+    private void OpenEditModal(InformationSystem system)
+    {
+        CurrentSystem = system;
+        ShowAddModal = true;
+    }
+
+    private void OpenDeleteModal(InformationSystem system)
+    {
+        CurrentSystem = system;
+        DeleteConfirmationMessage = $"{GLocalizer["DeleteConfirmation"]} {system.SystemName}?";
+        ShowDeleteModal = true;
+    }
+
+    private async Task DeleteSystemAsync()
+    {
+        try
+        {
+            await Http.DeleteAsync($"api/InformationSystem/Delete/{CurrentSystem.SystemID}");
+            await LoadInformationSystemListAsync();
+            CloseModal();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting system: {ex.Message}");
+        }
+    }
+
+    private void CloseModal()
+    {
+        ShowAddModal = false;
+        ShowDeleteModal = false;
+        CurrentSystem = new InformationSystem();
+    }
+}

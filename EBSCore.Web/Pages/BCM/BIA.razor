@@ -1,0 +1,359 @@
+@page "/BCM/BIA"
+@using EBSCore.Web.Models
+@using BIAModel = EBSCore.Web.Models.BIA
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitID"]</label>
+                            <input class="form-control w-auto" placeholder="Enter Unit ID" @bind="FilterUnitID" @bind:event="oninput" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListBIA.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["BIACode"]</th>
+                                    <th>@Localizer["UnitID"]</th>
+                                    <th>@Localizer["ProcessName"]</th>
+                                    <th>@Localizer["Criticality"]</th>
+                                    <th>@Localizer["RTO"]</th>
+                                    <th>@Localizer["RPO"]</th>
+                                    <th>@Localizer["Priority"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                    var data = string.IsNullOrEmpty(FilterUnitID)
+                                        ? ListBIA
+                                        : ListBIA.Where(x => string.Equals(x.UnitID, FilterUnitID, StringComparison.OrdinalIgnoreCase)).ToList();
+                                }
+                                @foreach (var item in data)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@item.BIACode</td>
+                                        <td>@item.UnitID</td>
+                                        <td>@item.ProcessName</td>
+                                        <td>@item.Criticality</td>
+                                        <td>@item.RTO</td>
+                                        <td>@item.RPO</td>
+                                        <td>@item.Priority</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditBIA(item)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteBIA(item)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnSubmit="SaveBIAAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["BIACode"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.BIACode" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["UnitID"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.UnitID" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["ProcessID"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.ProcessID" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["ProcessName"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.ProcessName" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["ProcessDescription"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentBIA.ProcessDescription" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["Frequency"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.Frequency" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["Criticality"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.Criticality" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["RTO"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.RTO" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["RPO"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.RPO" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["MAO"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.MAO" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">@Localizer["Priority"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.Priority" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["PrimaryStaff"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.PrimaryStaff" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["BackupStaff"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.BackupStaff" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RTOJustification"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentBIA.RTOJustification" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["MBCODetails"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentBIA.MBCODetails" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RequiredCompetencies"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentBIA.RequiredCompetencies" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["RevenueLossPerHour"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.RevenueLossPerHour" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["CostOfDowntime"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.CostOfDowntime" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["ReviewDate"]</label>
+                            <input class="form-control" type="text" @bind-value="CurrentBIA.ReviewDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["WorkFlowStatus"]</label>
+                            <input class="form-control" @bind-value="CurrentBIA.WorkFlowStatus" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-switch mt-4">
+                                <input class="form-check-input" type="checkbox" role="switch" id="IsDeletedSwitch" @bind="IsDeletedBool" @bind:event="oninput" />
+                                <label class="form-check-label" for="IsDeletedSwitch">@Localizer["IsDeleted"]</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    // UI state
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    // Data
+    List<BIAModel> ListBIA = new();
+    BIAModel CurrentBIA = new();
+    string? FilterUnitID = null;
+
+    // Forms
+    EditContext EditContext = default!;
+
+    // Localization
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool IsDeletedBool
+    {
+        get => string.Equals(CurrentBIA.IsDeleted, "true", StringComparison.OrdinalIgnoreCase) || CurrentBIA.IsDeleted == "1";
+        set => CurrentBIA.IsDeleted = value ? "1" : "0";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentBIA);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+
+        await LoadBIAListAsync();
+    }
+
+    private Task ApplySearch()
+    {
+        // client-side filter is applied in UI; can re-fetch if needed
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private async Task LoadBIAListAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/BIAManag/Get");
+            // Controllers return JSON string of table; unwrap if necessary
+            if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+            {
+                var inner = JsonConvert.DeserializeObject<string>(response);
+                ListBIA = string.IsNullOrWhiteSpace(inner)
+                    ? new List<BIAModel>()
+                    : JsonConvert.DeserializeObject<List<BIAModel>>(inner) ?? new();
+            }
+            else
+            {
+                ListBIA = JsonConvert.DeserializeObject<List<BIAModel>>(response) ?? new();
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+        }
+        StateHasChanged();
+    }
+
+    private Task ShowInput()
+    {
+        CurrentBIA = new BIAModel { UnitID = FilterUnitID };
+        EditContext = new EditContext(CurrentBIA);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+        return Task.CompletedTask;
+    }
+
+    private Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+        return Task.CompletedTask;
+    }
+
+    private async Task SaveBIAAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/BIAManag/Save", CurrentBIA);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadBIAListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "BIA saved successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditBIA(BIAModel item)
+    {
+        var response = await Http.GetStringAsync($"api/BIAManag/GetOne?BIAID={item.BIAID}");
+        // unwrap
+        List<BIAModel>? data;
+        if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+        {
+            var inner = JsonConvert.DeserializeObject<string>(response);
+            data = string.IsNullOrWhiteSpace(inner) ? new List<BIAModel>() : JsonConvert.DeserializeObject<List<BIAModel>>(inner);
+        }
+        else
+        {
+            data = JsonConvert.DeserializeObject<List<BIAModel>>(response);
+        }
+
+        if (data?.Any() == true)
+        {
+            CurrentBIA = data.First();
+            EditContext = new EditContext(CurrentBIA);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteBIA(BIAModel item)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"BIA ID {item.BIAID} will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/BIAManag/Delete")
+            {
+                Content = JsonContent.Create(new BIAModel { BIAID = item.BIAID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadBIAListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "BIA deleted successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}

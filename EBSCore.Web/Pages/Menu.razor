@@ -1,0 +1,174 @@
+@using EBSCore.Web.Models
+@using System.Data
+@using Newtonsoft.Json
+@inject HttpClient Http
+
+@if (ParentRows != null)
+{
+    foreach (System.Data.DataRow parentRow in ParentRows)
+    {
+        // Check if the parent item is a title
+        if (parentRow["Type"].ToString() == "Title")
+        {
+            <li class="menu-label">@parentRow["LabelEN"]</li>
+            // Render child items under the title
+            {
+                var parentId = (parentRow["MenuItemID"]?.ToString() ?? string.Empty).Replace("'", "''");
+                var childRows = MenuItems.Select($"ParentID = '{parentId}'");
+                if (childRows.Length > 0)
+                {
+                    <ul>
+                        @foreach (System.Data.DataRow childRow in childRows)
+                        {
+                            // Render child items
+                            <li>
+                                @if (!string.IsNullOrEmpty(childRow["Url"].ToString()))
+                                {
+                                    <a href="@childRow["Url"]"><i class="@childRow["Icon"]"></i>@childRow["LabelEN"]</a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:;" class="has-arrow">
+                                        <i class="@childRow["Icon"]"></i>@childRow["LabelEN"]
+                                    </a>
+                                }
+                                @* Sub-items *@
+                                @{
+                                    var childId = (childRow["MenuItemID"]?.ToString() ?? string.Empty).Replace("'", "''");
+                                    var subRows = MenuItems.Select($"ParentID = '{childId}'");
+                                    if (subRows.Length > 0)
+                                    {
+                                        <ul>
+                                            @foreach (System.Data.DataRow subRow in subRows)
+                                            {
+                                                <li>
+                                                    <a href="@subRow["Url"]"><i class="@subRow["Icon"]"></i>@subRow["LabelEN"]</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            }
+        }
+        else
+        {
+            // Parent menu item
+            <li>
+                @if (!string.IsNullOrEmpty(parentRow["Url"].ToString()))
+                {
+                    <a href="@parentRow["Url"]">
+                        <div class="parent-icon">
+                            <i class="@parentRow["Icon"]"></i>
+                        </div>
+                        <div class="menu-title">@parentRow["LabelEN"]</div>
+                    </a>
+                }
+                else
+                {
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class="@parentRow["Icon"]"></i>
+                        </div>
+                        <div class="menu-title">@parentRow["LabelEN"]</div>
+                    </a>
+                }
+                @* Child items *@
+                @{
+                    var parentId = (parentRow["MenuItemID"]?.ToString() ?? string.Empty).Replace("'", "''");
+                    var childRows = MenuItems.Select($"ParentID = '{parentId}'");
+                    if (childRows.Length > 0)
+                    {
+                        <ul>
+                            @foreach (System.Data.DataRow childRow in childRows)
+                            {
+                                // Check if the child item is a title
+                                if (childRow["Type"].ToString() == "Title")
+                                {
+                                    <li class="menu-label">@childRow["LabelEN"]</li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @if (!string.IsNullOrEmpty(childRow["Url"].ToString()))
+                                        {
+                                            <a href="@childRow["Url"]"><i class="@childRow["Icon"]"></i>@childRow["LabelEN"]</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:;" class="has-arrow">
+                                                <i class="@childRow["Icon"]"></i>@childRow["LabelEN"]
+                                            </a>
+                                        }
+                                        @* Sub-items *@
+                                        @{
+                                            var childId = (childRow["MenuItemID"]?.ToString() ?? string.Empty).Replace("'", "''");
+                                            var subRows = MenuItems.Select($"ParentID = '{childId}'");
+                                            if (subRows.Length > 0)
+                                            {
+                                                <ul>
+                                                    @foreach (System.Data.DataRow subRow in subRows)
+                                                    {
+                                                        <li>
+                                                            <a href="@subRow["Url"]"><i class="@subRow["Icon"]"></i>@subRow["LabelEN"]</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        }
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    }
+                }
+            </li>
+        }
+    }
+}
+@code {
+    DataTable MenuItems = new();
+    DataRow[] ParentRows = System.Array.Empty<DataRow>();
+
+    protected override async Task OnInitializedAsync()
+    {
+                var response = await Http.GetStringAsync("/api/MenuItems/Get");
+                // Deserialize the JSON string into a DataTable
+        // Some API endpoints return a JSON-string payload (double-serialized).
+        // Also guard against HTML error responses (e.g., exception handler pages).
+        var trimmed = response?.TrimStart();
+        if (!string.IsNullOrEmpty(trimmed) && trimmed.StartsWith("<"))
+        {
+            throw new Exception("Unexpected HTML response from /api/MenuItems/Get. Check server logs.");
+        }
+
+        try
+        {
+            var token = Newtonsoft.Json.Linq.JToken.Parse(response);
+            string innerJson = token.Type == Newtonsoft.Json.Linq.JTokenType.String
+                ? (string)token
+                : token.ToString();
+
+            MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(innerJson);
+        }
+        catch
+        {
+            // Fallback: attempt direct DataTable parse
+            MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(response);
+        }
+
+        // Consider multiple root representations: null, empty, '0', 'null'
+        ParentRows = MenuItems.Select("ParentID IS NULL OR ParentID = '' OR ParentID = '0' OR ParentID = 'null'");
+    }
+}
+
+
+
+
+
+
+
+

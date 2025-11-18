@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCM Impact Level Matrix - Tab View</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-5">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h1 class="display-5 fw-bold">BCM Impact Level Matrix</h1>
+      <p class="text-muted">Navigate by aspect to select impact levels across time frames</p>
+    </div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="aspectTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="financial-tab" data-bs-toggle="tab" data-bs-target="#financial" type="button">Financial</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="reputational-tab" data-bs-toggle="tab" data-bs-target="#reputational" type="button">Reputational</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="operational-tab" data-bs-toggle="tab" data-bs-target="#operational" type="button">Operational</button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content p-4 border border-top-0 bg-white rounded-bottom">
+      <div class="tab-pane fade show active" id="financial" role="tabpanel">
+        <h5 class="mb-3">Financial</h5>
+        <div class="row g-3">
+          <div class="col-md-6"><label>0-4 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>8-24 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>72 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>Within 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>After 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="reputational" role="tabpanel">
+        <h5 class="mb-3">Reputational</h5>
+        <div class="row g-3">
+          <div class="col-md-6"><label>0-4 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>8-24 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>72 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>Within 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>After 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="operational" role="tabpanel">
+        <h5 class="mb-3">Operational</h5>
+        <div class="row g-3">
+          <div class="col-md-6"><label>0-4 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>8-24 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>72 Hours</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>Within 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+          <div class="col-md-6"><label>After 1 Week</label><select class="form-select"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

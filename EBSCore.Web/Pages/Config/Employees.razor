@@ -1,0 +1,236 @@
+﻿@page "/Config/Employees"
+@using EBSCore.Web.Models
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@Localizer["Employees"]</h3>
+
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <button class="btn btn-success" @onclick="OpenAdd">
+                <i class="fas fa-plus"></i> @GLocalizer["AddRecord"]
+            </button>
+            <EditForm EditContext="SearchFormContext" OnValidSubmit="ApplySearch">
+                <div class="d-flex">
+                    <input class="form-control" placeholder="Search..." @bind="SearchQuery" />
+                    <button class="btn btn-outline-dark ms-2">@GLocalizer["Search"]</button>
+                </div>
+            </EditForm>
+        </div>
+        <div class="card-body">
+            @if (EmployeeList?.Any() == true)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["FullName"]</th>
+                            <th>@Localizer["Email"]</th>
+                            <th>@Localizer["Department"]</th>
+                            <th>@Localizer["JobTitle"]</th>
+                            <th>@Localizer["IsActive"]</th>
+                            <th>@GLocalizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var (e, idx) in EmployeeList.Select((x,i) => (x,i)))
+                        {
+                            <tr>
+                                <td>@((CurrentPage-1)*PageSize + idx + 1)</td>
+                                <td>@e.FullName</td>
+                                <td>@e.Email</td>
+                                <td>@e.Department</td>
+                                <td>@e.JobTitle</td>
+                                <td>@(e.IsActive == true ? "Active" : "Inactive")</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(e)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => Remove(e)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>@GLocalizer["EmptyTable"]</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">@Localizer[Current.EmployeeId.HasValue ? "EditEmployee" : "AddEmployee"]</h5>
+        </div>
+        <EditForm EditContext="EditContext" OnValidSubmit="Save">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["FullName"]</label>
+                        <InputText class="form-control" @bind-Value="Current.FullName" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Position"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Position" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Email"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Email" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Phone"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Phone" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["OrganizationUnitId"]</label>
+                        <InputNumber TValue="int?" class="form-control" @bind-Value="Current.OrganizationUnitId" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["SupervisorId"]</label>
+                        <InputNumber TValue="int?" class="form-control" @bind-Value="Current.SupervisorId" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["SourceId"]</label>
+                        <InputText class="form-control" @bind-Value="Current.SourceId" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["SourceSystem"]</label>
+                        <InputText class="form-control" @bind-Value="Current.SourceSystem" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["JobTitle"]</label>
+                        <InputText class="form-control" @bind-Value="Current.JobTitle" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["JobFamily"]</label>
+                        <InputText class="form-control" @bind-Value="Current.JobFamily" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["EmploymentType"]</label>
+                        <InputText class="form-control" @bind-Value="Current.EmploymentType" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Location"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Location" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Department"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Department" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["IsActive"]</label>
+                        <InputCheckbox class="form-check-input ms-2" @bind-Value="Current.IsActive" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <button class="btn btn-success"><i class="fas fa-save"></i> @GLocalizer["Save"]</button>
+                <button type="button" class="btn btn-light btn-outline-dark" @onclick="Close">
+                    <i class="fas fa-arrow-circle-left"></i> @GLocalizer["Cancel"]
+                </button>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    private IStringLocalizer Localizer = default!;
+    private IStringLocalizer GLocalizer = default!;
+
+    private List<Employee> EmployeeList = new();
+    private Employee Current = new();
+    private bool ShowInput = false;
+    private EditContext EditContext = default!;
+    private EditContext SearchFormContext = new(new object());
+
+    private int CurrentPage = 1;
+    private int PageSize = 10;
+    private int TotalPages = 1;
+    private string SearchQuery = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var json = await Http.GetStringAsync($"/api/Employee/Get?PageNumber={CurrentPage}&PageSize={PageSize}&SearchQuery={SearchQuery}");
+        var outer = Newtonsoft.Json.Linq.JToken.Parse(json);
+        var inner = outer.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)outer) : outer;
+        EmployeeList = inner["Data"].ToObject<List<Employee>>();
+        TotalPages = (int?)inner["PageCount"] ?? 1;
+    }
+
+    private async Task ApplySearch()
+    {
+        CurrentPage = 1;
+        await LoadAsync();
+    }
+
+    private void OpenAdd()
+    {
+        Current = new Employee { IsActive = true };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Close() => ShowInput = false;
+
+    private void Edit(Employee e){
+        Current = new Employee
+        {
+            EmployeeId = e.EmployeeId,
+            FullName = e.FullName,
+            Position = e.Position,
+            Email = e.Email,
+            Phone = e.Phone,
+            OrganizationUnitId = e.OrganizationUnitId,
+            SourceId = e.SourceId,
+            SourceSystem = e.SourceSystem,
+            JobTitle = e.JobTitle,
+            JobFamily = e.JobFamily,
+            SupervisorId = e.SupervisorId,
+            EmploymentType = e.EmploymentType,
+            Location = e.Location,
+            Department = e.Department,
+            IsActive = e.IsActive
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task Save()
+    {
+        var res = await Http.PostAsJsonAsync("/api/Employee/Save", Current);
+        if (res.IsSuccessStatusCode)
+        {
+            ShowInput = false;
+            await LoadAsync();
+        }
+    }
+
+    private async Task Remove(Employee e){
+        var res = await Http.DeleteAsync($"/api/Employee/Delete/{e.EmployeeId}");
+        if (res.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+
+
+
+

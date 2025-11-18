@@ -1,0 +1,136 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+@inject HttpClient Http
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="unit-tree-selector @(ShowTree ? "open" : null)" @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseLeave">
+    <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-sitemap"></i></span>
+        <div class="form-control" style="cursor:pointer" tabindex="0" @onclick="ToggleTree" @onfocusin="OnFocusIn" @onfocusout="OnFocusOut">
+            @(_selectedText ?? Placeholder)
+        </div>
+    </div>
+    <div id="@_treeId" class="unit-tree-dropdown" style="display:@(ShowTree ? "block" : "none")"></div>
+</div>
+
+@code {
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+    [Parameter] public EventCallback<string?> OnValueChanged { get; set; }
+    [Parameter] public string Placeholder { get; set; } = "Select Unit";
+
+    private string? _treeJson;
+    private string? _selectedText;
+    private bool ShowTree = false;
+    private string _treeId = $"UnitTree_{Guid.NewGuid().ToString("N")}";
+    private DotNetObjectReference<UnitTreeSelector>? _ref;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTreeAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_treeJson is null) return;
+        if (firstRender)
+        {
+            if (_ref == null) _ref = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("unitTree.init", _treeId, _treeJson, _ref);
+            if (!string.IsNullOrEmpty(Value))
+            {
+                await JS.InvokeVoidAsync("unitTree.select", _treeId, Value);
+            }
+        }
+        else
+        {
+            if (_ref == null) _ref = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("unitTree.update", _treeId, _treeJson, _ref);
+            if (!string.IsNullOrEmpty(Value))
+            {
+                await JS.InvokeVoidAsync("unitTree.select", _treeId, Value);
+            }
+        }
+    }
+
+    private async Task LoadTreeAsync()
+    {
+        var response = await Http.GetStringAsync("api/OrganisationUnit/GetTree");
+        // API often returns string-encoded JSON; unwrap when needed
+        if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+        {
+            _treeJson = JsonConvert.DeserializeObject<string>(response) ?? "[]";
+        }
+        else
+        {
+            _treeJson = response;
+        }
+        StateHasChanged();
+    }
+
+    private void ToggleTree() { ShowTree = !ShowTree; StateHasChanged(); }
+    private void OnMouseEnter() { ShowTree = true; StateHasChanged(); }
+    private void OnMouseLeave() { ShowTree = false; StateHasChanged(); }
+    private void OnFocusIn(FocusEventArgs _)
+    {
+        ShowTree = true;
+        StateHasChanged();
+    }
+    private async Task OnFocusOut(FocusEventArgs _){ await Task.Delay(100); ShowTree = false; StateHasChanged(); }
+
+    [JSInvokable]
+    public async Task OnNodeChanged(string id, string text)
+    {
+        Value = id;
+        _selectedText = text;
+        await ValueChanged.InvokeAsync(Value);
+        await OnValueChanged.InvokeAsync(Value);
+        ShowTree = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        _ref?.Dispose();
+    }
+}
+
+<style>
+    .unit-tree-selector { position: relative; display: inline-block; width: 100%; }
+    .unit-tree-selector .unit-tree-dropdown {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        /* overlap 1px to eliminate any gap between input and dropdown */
+        margin-top: -1px;
+        max-height: 300px;
+        overflow: auto;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        z-index: 1060;
+        padding: .25rem .25rem .5rem .25rem;
+    }
+
+    /* Ensure the dropdown edges align nicely with the input */
+    .unit-tree-selector .input-group + .unit-tree-dropdown {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top-color: transparent;
+    }
+
+    /* When open, visually merge input bottom border with dropdown */
+    .unit-tree-selector.open .form-control {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-color: transparent;
+    }
+
+    /* On small touch devices users tap; hover may not exist. The click toggler already works. */
+    @@media (pointer: coarse) {
+        .unit-tree-selector .unit-tree-dropdown { max-height: 50vh; }
+    }
+</style>

@@ -1,0 +1,329 @@
+@page "/Sys/MenuItems"
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["PageTitle"]</h5>
+                    <button type="button" class="btn btn-success" @onclick="() => OpenCreate(null)">
+                        <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div id="MenuItemsTree" class="border rounded p-2" style="min-height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnSubmit="SaveAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["LabelAR"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.LabelAR" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["LabelEN"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.LabelEN" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["DescriptionAR"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentItem.DescriptionAR" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["DescriptionEN"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentItem.DescriptionEn" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Url"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.Url" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["Icon"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.Icon" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["Order"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.Order" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-switch mt-4">
+                                <input class="form-check-input" type="checkbox" role="switch" id="IsActiveSwitch" @bind="IsActiveBool" @bind:event="oninput" />
+                                <label class="form-check-label" for="IsActiveSwitch">@Localizer["IsActive"]</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["Permission"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.Permission" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["Type"]</label>
+                            <input class="form-control" @bind-value="CurrentItem.Type" @bind-value:event="oninput" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    // UI state
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    // Data
+    string TreeJson = "[]";
+    MenuItem CurrentItem = new();
+    string? ActiveParentID = null;
+
+    // Forms
+    EditContext EditContext = default!;
+
+    // Localization
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+    DotNetObjectReference<MenuItems>? _dotNetRef;
+
+    private bool IsActiveBool
+    {
+        get => string.Equals(CurrentItem.IsActive, "true", StringComparison.OrdinalIgnoreCase) || CurrentItem.IsActive == "1";
+        set => CurrentItem.IsActive = value ? "1" : "0";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentItem);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        _dotNetRef = DotNetObjectReference.Create(this);
+        await LoadTreeAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await InitJsTree();
+        }
+        else
+        {
+            await UpdateJsTree();
+        }
+    }
+
+    private async Task LoadTreeAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/MenuItems/GetTree");
+            // unwrap potential string-encoded JSON
+            string? inner = null;
+            if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+            {
+                inner = JsonConvert.DeserializeObject<string>(response);
+            }
+            TreeJson = inner ?? response;
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+        }
+        StateHasChanged();
+    }
+    private int ToInt(string? s)
+    {
+        if (int.TryParse(s, out var n)) return n;
+        return int.MaxValue;
+    }
+
+    // jsTree integration
+    private async Task InitJsTree()
+    {
+        if (_dotNetRef == null) _dotNetRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("menuItemsTree.init", "MenuItemsTree", TreeJson, _dotNetRef);
+    }
+
+    private async Task UpdateJsTree()
+    {
+        if (_dotNetRef == null) _dotNetRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("menuItemsTree.update", "MenuItemsTree", TreeJson, _dotNetRef);
+    }
+
+    [JSInvokable]
+    public async Task OnCreate(string parentId)
+    {
+        OpenCreate(parentId == "#" ? null : parentId);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task OnEdit(string id)
+    {
+        await OpenEdit(id);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task OnDelete(string id)
+    {
+        await ConfirmDelete(id);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        _dotNetRef?.Dispose();
+    }
+
+    private void OpenCreate(string? parentId)
+    {
+        CurrentItem = new MenuItem { ParentID = parentId };
+        ActiveParentID = parentId;
+        EditContext = new EditContext(CurrentItem);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task OpenEdit(string id)
+    {
+        try
+        {
+            var response = await Http.GetStringAsync($"api/MenuItems/GetOne?MenuItemID={id}");
+            string json = response;
+            if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+            {
+                json = JsonConvert.DeserializeObject<string>(response) ?? "[]";
+            }
+            var list = JsonConvert.DeserializeObject<List<MenuItem>>(json);
+            if (list?.Any() == true)
+            {
+                CurrentItem = list.First();
+                EditContext = new EditContext(CurrentItem);
+                ShowInputScreen = true;
+                return;
+            }
+        }
+        catch (HttpRequestException)
+        {
+            // Fallback if the API expects numeric ID but we received non-numeric: pull full list and find locally
+            try
+            {
+                var all = await Http.GetStringAsync("api/MenuItems/Get");
+                string jsonAll = all;
+                if (!string.IsNullOrWhiteSpace(all) && all.TrimStart().StartsWith("\""))
+                {
+                    jsonAll = JsonConvert.DeserializeObject<string>(all) ?? "[]";
+                }
+                var items = JsonConvert.DeserializeObject<List<MenuItem>>(jsonAll) ?? new();
+                var hit = items.FirstOrDefault(x => string.Equals(x.MenuItemID, id, StringComparison.OrdinalIgnoreCase));
+                if (hit != null)
+                {
+                    CurrentItem = hit;
+                    EditContext = new EditContext(CurrentItem);
+                    ShowInputScreen = true;
+                    return;
+                }
+            }
+            catch { /* ignore and surface friendly error below */ }
+        }
+
+        await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = $"Could not load Menu Item {id}" });
+    }
+
+    private async Task SaveAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/MenuItems/Save", CurrentItem);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadTreeAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Menu Item saved successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task ConfirmDelete(string id)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"Menu Item ID {id} will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/MenuItems/Delete")
+            {
+                Content = JsonContent.Create(new MenuItem { MenuItemID = id })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadTreeAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Menu Item deleted successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+
+    private Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+        return Task.CompletedTask;
+    }
+}

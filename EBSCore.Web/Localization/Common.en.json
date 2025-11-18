@@ -1,0 +1,16 @@
+{
+  "AddRecord": "Add",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "Actions": "Actions",
+  "Search": "Search",
+  "Processing": "Please Wait !",
+  "ZeroRecords": " No Records Available ",
+  "LengthMenu": "View _MENU_ Records",
+  "Info": "Showing (_START_ to _END_) Of _TOTAL_ ",
+  "Next": "Next",
+  "Previous": "Previous",
+  "EmptyTable": " No Records Available ",
+  "InfoEmpty": " No Records Available "
+
+}

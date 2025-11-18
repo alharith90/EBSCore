@@ -1,0 +1,110 @@
+@page "/"
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Web
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3 class="mb-3">@Localizer["BCM Dashboard (NCEMA 7000)"]</h3>
+
+<div class="row g-3">
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="text-muted small">@Localizer["Open Issues"]</div>
+            <div class="h4">@OpenIssues</div>
+          </div>
+          <i class="fas fa-exclamation-triangle text-warning fa-2x"></i>
+        </div>
+        <button class="btn btn-link p-0 mt-2" @onclick="NavigateToIssues">@GLocalizer["ViewAll"] </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="text-muted small">@Localizer["Critical Systems"]</div>
+        <div class="h4">@CriticalSystems</div>
+        <div class="small text-muted">@Localizer["RTO/RPO sensitivity"]</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="text-muted small">@Localizer["BCM Exercises (YTD)"]</div>
+        <div class="h4">@ExercisesYTD</div>
+        <div class="small text-muted">@Localizer["Preparedness & Response"]</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="text-muted small">@Localizer["Incidents (YTD)"]</div>
+        <div class="h4">@IncidentsYTD</div>
+        <div class="small text-muted">@Localizer["Impact & Recovery"]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-header">
+    @Localizer["NCEMA 7000 Alignment"]
+  </div>
+  <div class="card-body">
+    <ul class="mb-0">
+      <li>@Localizer["Governance & Program Management"]</li>
+      <li>@Localizer["Business Impact Analysis (BIA)"]</li>
+      <li>@Localizer["Risk Assessment & Treatment"]</li>
+      <li>@Localizer["BC Strategies (RTO, RPO)"]</li>
+      <li>@Localizer["Exercise, Maintenance, and Review"]</li>
+      <li>@Localizer["Incident Response & Communication"]</li>
+    </ul>
+  </div>
+</div>
+
+@code {
+  private IStringLocalizer Localizer;
+  private IStringLocalizer GLocalizer;
+
+  private int OpenIssues;
+  private int CriticalSystems;
+  private int ExercisesYTD;
+  private int IncidentsYTD;
+
+  protected override async Task OnInitializedAsync()
+  {
+    Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+    GLocalizer = LocalizerFactory.Create("Common", "");
+
+    await LoadCardsAsync();
+  }
+
+  private void NavigateToIssues()
+  {
+    Navigation.NavigateTo("/BCM/Issues");
+  }
+
+  private async Task LoadCardsAsync()
+  {
+    try
+    {
+      var json = await Http.GetStringAsync("/api/Issue/Get?PageNumber=1&PageSize=1");
+      var outer = Newtonsoft.Json.Linq.JToken.Parse(json);
+      var inner = outer.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)outer) : outer;
+      OpenIssues = (int?)inner["Data"]?.Count() ?? 0;
+    }
+    catch { OpenIssues = 0; }
+
+    CriticalSystems = 5;
+    ExercisesYTD = 2;
+    IncidentsYTD = 1;
+  }
+}
+

@@ -1,0 +1,9 @@
+﻿@code {
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+    private string internalValue { get => string.IsNullOrWhiteSpace(Value) ? "#000000" : Value!; set { Value = value; ValueChanged.InvokeAsync(value); } }
+}
+<div class="d-flex align-items-center gap-2">
+    <input type="color" class="form-control form-control-color" style="width:3rem; padding:0;" @bind="internalValue" @bind:event="oninput" />
+    <input type="text" class="form-control" style="max-width:10rem;" @bind="Value" @bind:event="oninput" />
+</div>

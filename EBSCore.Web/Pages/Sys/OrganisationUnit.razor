@@ -1,0 +1,214 @@
+﻿@page "/Sys/OrganisationUnit"
+
+@using Microsoft.AspNetCore.Components.Forms
+@using EBSCore.Web.Models
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+<div id="OrgChart" class="border rounded p-2" style="min-height: 500px;"></div>
+
+@if (ShowModal)
+{
+    <EditForm Model="CurrentUnit" OnValidSubmit="SaveOrganisationUnit">
+        <div class="modal show d-block" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@((string.IsNullOrEmpty(CurrentUnit.UnitID) ? "Add" : "Edit") + " Organisation Unit")</h5>
+                        <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Unit Code</label>
+                            <InputText class="form-control" @bind-Value="CurrentUnit.UnitCode" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Unit Name</label>
+                            <InputText class="form-control" @bind-Value="CurrentUnit.UnitName" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Description</label>
+                            <InputText class="form-control" @bind-Value="CurrentUnit.Description" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Location</label>
+                            <InputText class="form-control" @bind-Value="CurrentUnit.Location" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                        <button type="button" class="btn btn-secondary" @onclick="CloseModal">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade show"></div>
+    </EditForm>
+}
+
+@code {
+    private List<object>? OrgUnits = new();
+    private DotNetObjectReference<OrganisationUnit>? ObjRef;
+
+    private SysOrganisationUnit CurrentUnit = new();
+    private string OrganisationUnitID = string.Empty;
+    private string ParentUnitID = string.Empty;
+    private bool ShowModal = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ObjRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("registerOrgChartInterop", ObjRef);
+            await LoadOrgChart();
+        }
+    }
+
+    private async Task LoadOrgChart()
+    {
+        try
+        {
+            var result = await Http.GetStringAsync("api/OrganisationUnit/Get");
+            await JS.InvokeVoidAsync("drawOrgChart", result);
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+        }
+    }
+
+    [JSInvokable("UpdateChart")]
+    public async Task UpdateChart(string action, string id)
+    {
+        if (action == "Edit")
+        {
+            OrganisationUnitID = id;
+            await LoadUnitForEdit(id);
+            ShowModal = true;
+        }
+        else if (action == "Add")
+        {
+            ParentUnitID = id;
+            CurrentUnit = new SysOrganisationUnit { ParentUnitID = id };
+            ShowModal = true;
+        }
+        else if (action == "Delete")
+        {
+            await ConfirmDelete(id);
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task LoadUnitForEdit(string id)
+    {
+        var response = await Http.GetStringAsync($"api/OrganisationUnit/GetOne/{id}");
+        var list = JsonConvert.DeserializeObject<List<SysOrganisationUnit>>(response);
+        if (list?.Any() == true)
+            CurrentUnit = list.First();
+    }
+
+    private async Task SaveOrganisationUnit()
+    {
+        var result = await Http.PostAsJsonAsync("api/OrganisationUnit/Save", CurrentUnit);
+        if (result.IsSuccessStatusCode)
+        {
+            CloseModal();
+            await LoadOrgChart();
+            await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Saved successfully" });
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = result.ReasonPhrase });
+        }
+    }
+
+    private async Task ConfirmDelete(string id)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"This unit (ID: {id}) will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        if (result?.ToString()?.Contains("\"isConfirmed\":true") == true)
+        {
+            var response = await Http.DeleteAsync($"api/OrganisationUnit/Delete/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadOrgChart();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Deleted successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase });
+            }
+        }
+    }
+
+    private void CloseModal()
+    {
+        ShowModal = false;
+        CurrentUnit = new SysOrganisationUnit();
+    }
+
+    public void Dispose()
+    {
+        ObjRef?.Dispose();
+    }
+}
+<script>
+    // Prevent redeclaration
+    window.blazorComponentRef = window.blazorComponentRef || null;
+
+    window.registerOrgChartInterop = function (dotNetHelper) {
+        if (!window.blazorComponentRef) {
+            window.blazorComponentRef = dotNetHelper;
+        }
+    };
+
+    // Only attach once
+    if (!window.orgChartHandlerAttached) {
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Use document-level delegation to capture dynamic buttons
+            document.addEventListener("click", function (e) {
+                const target = e.target.closest("button");
+                if (!target || !target.id || !window.blazorComponentRef) return;
+
+                const id = target.id.split("_")[1];
+                if (!id) return;
+
+                if (target.classList.contains("bAddChild")) {
+                    window.blazorComponentRef.invokeMethodAsync("UpdateChart", "Add", id);
+                } else if (target.classList.contains("bEdit")) {
+                    window.blazorComponentRef.invokeMethodAsync("UpdateChart", "Edit", id);
+                } else if (target.classList.contains("bDelete")) {
+                    window.blazorComponentRef.invokeMethodAsync("UpdateChart", "Delete", id);
+                }
+            });
+        });
+
+        window.orgChartHandlerAttached = true;
+    }
+</script>

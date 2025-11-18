@@ -1,0 +1,212 @@
+﻿@page "/Sys/Entity"
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Forms
+@using EBSCore.Web.Models
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using System.Net.Http.Headers
+
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!IsEditMode)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@GLocalizer["CurrentEntity Profile"]</h5>
+            <button class="btn btn-info" onclick="@ToggleEdit">
+                <i class="fas fa-edit"></i> @GLocalizer["Edit"] Edit
+            </button>
+        </div>
+        <div class="card-body row">
+            <div class="col-md-4 text-center">
+                @if (CurrentEntity.Logo != null)
+                {
+                    <img src="data:image/png;base64,CurrentEntity.Logo" class="img-fluid rounded" style="max-height: 200px;" />
+                }
+                else
+                {
+                    <p class="text-muted">@GLocalizer["No Logo Available"]</p>
+                }
+            </div>
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">@Localizer["Name"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Name</dd>
+
+                    <dt class="col-sm-4">@Localizer["Sector"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Sector</dd>
+
+                    <dt class="col-sm-4">@Localizer["Location"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Location</dd>
+
+                    <dt class="col-sm-4">@Localizer["ContactPerson"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.ContactPerson</dd>
+
+                    <dt class="col-sm-4">@Localizer["Email"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Email</dd>
+
+                    <dt class="col-sm-4">@Localizer["Phone"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Phone</dd>
+
+                    <dt class="col-sm-4">@Localizer["Description"]</dt>
+                    <dd class="col-sm-8">@CurrentEntity.Description</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <EditForm Model="CurrentEntity" OnValidSubmit="SaveCurrentEntityAsync">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">@GLocalizer["Edit CurrentEntity"]</h5>
+                <button class="btn btn-secondary" onclick="@ToggleEdit">
+                    <i class="fas fa-times"></i> @GLocalizer["Cancel"]
+                </button>
+            </div>
+            <div class="card-body row g-3">
+                <div class="col-md-6">
+                    <label>@Localizer["Name"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.Name" />
+                </div>
+                <div class="col-md-6">
+                    <label>@Localizer["Sector"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.Sector" />
+                </div>
+                <div class="col-md-6">
+                    <label>@Localizer["Location"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.Location" />
+                </div>
+                <div class="col-md-6">
+                    <label>@Localizer["ContactPerson"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.ContactPerson" />
+                </div>
+                <div class="col-md-6">
+                    <label>@Localizer["Email"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.Email" />
+                </div>
+                <div class="col-md-6">
+                    <label>@Localizer["Phone"]</label>
+                    <InputText class="form-control" @bind-Value="CurrentEntity.Phone" />
+                </div>
+                <div class="col-md-12">
+                    <label>@Localizer["Description"]</label>
+                    <InputTextArea class="form-control" @bind-Value="CurrentEntity.Description" />
+                </div>
+                <div class="col-md-12">
+                    <label>@Localizer["Upload Logo"]</label>
+                    <InputFile OnChange="OnLogoChanged" />
+                </div>
+                <div class="col-12 text-end mt-3">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="fas fa-save me-2"></i>@GLocalizer["Save"]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    private SysEntity CurrentEntity = new SysEntity();
+
+
+    private bool IsEditMode = false;
+
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = @Localizer["PageTitle"]; // ✅ Set the title
+        try
+        {
+            await LoadCurrentEntityAsync();
+        }
+        catch (Exception ex)
+        {
+            ShowLoadError = true;
+            LoadErrorMessage = ex.Message;
+        }
+    }
+
+    private async Task LoadCurrentEntityAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("api/SysEntity/GetCurrent");
+            var list = JsonConvert.DeserializeObject<List<SysEntity>>(json);
+            if (list != null && list.Count > 0)
+            {
+                CurrentEntity = list.First();
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+        }
+    }
+    private void ToggleEdit()
+    {
+        IsEditMode = !IsEditMode;
+    }
+    private async Task SaveCurrentEntityAsync()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/SysEntity/Save", CurrentEntity);
+            if (response.IsSuccessStatusCode)
+            {
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "CurrentEntity Saved Successfully" });
+                IsEditMode = false;
+                await LoadCurrentEntityAsync();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Save Failed", text = response.ReasonPhrase });
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    private async Task OnLogoChanged(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file != null)
+        {
+            // using var stream = new MemoryStream();
+            // await file.OpenReadStream(maxAllowedSize: 2 * 1024 * 1024).CopyToAsync(stream);
+            // CurrentEntity.Logo = stream.ToArray();
+        }
+    }
+    private bool ShowLoadError = false;
+    private string LoadErrorMessage = "";
+    private bool JsRendered = false;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && ShowLoadError && !JsRendered)
+        {
+            JsRendered = true;
+            await JS.InvokeVoidAsync("Swal.fire", new
+            {
+                icon = "error",
+                title = "Load Failed",
+                text = LoadErrorMessage
+            });
+        }
+    }
+
+}

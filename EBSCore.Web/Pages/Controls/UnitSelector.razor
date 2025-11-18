@@ -1,0 +1,81 @@
+@using EBSCore.Web.Models
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@inject HttpClient Http
+@using Microsoft.AspNetCore.Components
+@using System.Linq
+
+<div class="input-group">
+    <span class="input-group-text"><i class="fas fa-sitemap"></i></span>
+    <select class="form-select" value="@Value" @onchange="OnChanged">
+        <option value="">-- Select Unit --</option>
+        @if (Units is not null)
+        {
+            @foreach (var u in Units)
+            {
+                <option value="@u.UnitID">@u.UnitName</option>
+            }
+        }
+    </select>
+    @if (!string.IsNullOrEmpty(SelectedUnitName))
+    {
+        <span class="input-group-text text-muted">@SelectedUnitName</span>
+    }
+</div>
+@code {
+    // Selected UnitID (string to match existing models)
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+    // Optional external callback for parent side-effects (e.g., reload list)
+    [Parameter] public EventCallback<string?> OnValueChanged { get; set; }
+    // Mark input required if used in forms
+    [Parameter] public bool Required { get; set; } = false;
+
+    private List<SysOrganisationUnit>? Units;
+    private string? SelectedUnitName => Units?.FirstOrDefault(x => x.UnitID == Value)?.UnitName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUnits();
+        // Hydrate parent with initial value if provided
+        if (!string.IsNullOrEmpty(Value))
+        {
+            await ValueChanged.InvokeAsync(Value);
+            await OnValueChanged.InvokeAsync(Value);
+        }
+    }
+
+    private async Task LoadUnits()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/OrganisationUnit/Get");
+
+            // Some controllers return double-serialized JSON (string containing JSON)
+            // Attempt to detect and unwrap gracefully
+            if (!string.IsNullOrWhiteSpace(response) && response.TrimStart().StartsWith("\""))
+            {
+                var inner = JsonConvert.DeserializeObject<string>(response);
+                Units = string.IsNullOrWhiteSpace(inner)
+                    ? new List<SysOrganisationUnit>()
+                    : JsonConvert.DeserializeObject<List<SysOrganisationUnit>>(inner) ?? new();
+            }
+            else
+            {
+                Units = JsonConvert.DeserializeObject<List<SysOrganisationUnit>>(response) ?? new();
+            }
+        }
+        catch
+        {
+            Units = new List<SysOrganisationUnit>();
+        }
+        StateHasChanged();
+    }
+
+    private async Task OnChanged(ChangeEventArgs e)
+    {
+        Value = e.Value?.ToString();
+        await ValueChanged.InvokeAsync(Value);
+        await OnValueChanged.InvokeAsync(Value);
+    }
+}

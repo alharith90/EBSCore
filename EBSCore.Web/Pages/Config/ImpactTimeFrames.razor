@@ -1,0 +1,96 @@
+﻿@page "/Config/ImpactTimeFrames"
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Localization
+@inject HttpClient Http
+@inject NavigationManager Nav
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@L["Impact Time Frames"]</h3>
+
+@if (!showForm)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <button class="btn btn-success" @onclick="New">@GL["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (items?.Any() == true)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead><tr><th>#</th><th>@L["TimeLabel"]</th><th>@L["MinHours"]</th><th>@L["MaxHours"]</th><th>@GL["Actions"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var (x,i) in items.Select((x,i)=>(x,i)))
+                        {
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td>@x.TimeLabel</td>
+                                <td>@x.MinHours</td>
+                                <td>@x.MaxHours</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(x)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => Remove(x)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else { <p>@GL["EmptyTable"]</p> }
+        </div>
+    </div>
+}
+else
+{
+    <EditForm EditContext="editCtx" OnValidSubmit="Save">
+        <div class="card">
+            <div class="card-body row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@L["TimeLabel"]</label>
+                    <InputText class="form-control" @bind-Value="current.TimeLabel" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@L["MinHours"]</label>
+                    <InputNumber TValue="int?" class="form-control" @bind-Value="current.MinHours" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">@L["MaxHours"]</label>
+                    <InputNumber TValue="int?" class="form-control" @bind-Value="current.MaxHours" />
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <button class="btn btn-success">@GL["Save"]</button>
+                <button type="button" class="btn btn-light btn-outline-dark" @onclick="Close">@GL["Cancel"]</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    IStringLocalizer L = default!; IStringLocalizer GL = default!;
+    List<ImpactTimeFrame> items = new(); ImpactTimeFrame current = new();
+    bool showForm = false; EditContext editCtx = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        L = LocalizerFactory.Create(new Uri(Nav.Uri).AbsolutePath, "");
+        GL = LocalizerFactory.Create("Common", "");
+        await LoadAsync();
+    }
+
+    async Task LoadAsync()
+    {
+        var json = await Http.GetStringAsync("/api/ImpactTimeFrames/Get");
+        var outer = Newtonsoft.Json.Linq.JToken.Parse(json);
+        var inner = outer.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)outer) : outer;
+        items = inner["Data"].ToObject<List<ImpactTimeFrame>>();
+    }
+
+    void New(){ current = new(); editCtx = new EditContext(current); showForm = true; }
+    void Edit(ImpactTimeFrame e){ current = new ImpactTimeFrame{ ImpactTimeFrameID = e.ImpactTimeFrameID, TimeLabel=e.TimeLabel, MinHours=e.MinHours, MaxHours=e.MaxHours}; editCtx = new EditContext(current); showForm=true; }
+    async Task Save(){ var res = await Http.PostAsJsonAsync("/api/ImpactTimeFrames/Save", current); if(res.IsSuccessStatusCode){ showForm=false; await LoadAsync(); } }
+    async Task Remove(ImpactTimeFrame e){ var res = await Http.DeleteAsync($"/api/ImpactTimeFrames/Delete/{e.ImpactTimeFrameID}"); if(res.IsSuccessStatusCode){ await LoadAsync(); } }
+    void Close(){ showForm=false; }
+}
+

@@ -1,0 +1,44 @@
+﻿@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Routing
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IHttpClientFactory HttpClientFactory
+@inject HttpClient Http
+@inject LoggingService LoggingService
+@inject NavigationManager NavigationManager
+
+<Router AppAssembly="@typeof(Program).Assembly" OnNavigateAsync="HandleNavigation">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(EBSCore.Web.Pages.MainLayout)" />
+    </Found>
+    <NotFound>
+        <h1>Page not found</h1>
+    </NotFound>
+</Router>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var cookies = HttpContextAccessor.HttpContext?.Request.Cookies;
+        if (cookies != null && cookies.TryGetValue(".AspNetCore.Session", out var sessionId))
+        {
+            Http.DefaultRequestHeaders.Add("Cookie", $".AspNetCore.Session={sessionId}; path=/; HttpOnly");
+        }
+    }
+
+    private async Task HandleNavigation(NavigationContext args)
+    {
+        try
+        {
+            var isLoggedIn = await LoggingService.EnsureLoggedIn();
+            if (!isLoggedIn)
+            {
+                NavigationManager.NavigateTo("/login", true); // Redirect to login page
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Navigation Error: {ex.Message}");
+        }
+    }
+}

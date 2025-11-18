@@ -1,0 +1,116 @@
+@page "/"
+@namespace EBSCore.Web
+@using Microsoft.Extensions.Localization
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IStringLocalizerFactory LocalizerFactory
+@{
+    var GLocalizer = LocalizerFactory.Create("Common", "");
+}
+<!DOCTYPE html>
+<html lang="@GLocalizer["LangCode"]" dir="@GLocalizer["Direction"]" >
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="/assets/images/favicon-32x32.png" type="image/png" />
+    <!--plugins-->
+    <link href="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/bs-stepper/css/bs-stepper.css" rel="stylesheet" />
+    <link href="/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.12.2/sweetalert2.min.css" integrity="sha512-WxRv0maH8aN6vNOcgNFlimjOhKp+CUqqNougXbz0E+D24gP5i+7W/gcc5tenxVmr28rH85XHF5eXehpV2TQhRg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/assets/plugins/highcharts/css/highcharts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+
+    <!-- loader-->
+    <link href="/assets/css/pace.min.css" rel="stylesheet" />
+    <script src="/assets/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-extended.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+  
+    <link href="/assets/css/app.css" rel="stylesheet" />
+    <link href="/assets/css/icons.css" rel="stylesheet">
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="/assets/css/dark-theme.css" />
+    <link rel="stylesheet" href="/assets/css/semi-dark.css" />
+    <link rel="stylesheet" href="/assets/css/header-colors.css" />
+    <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+    <base href="/" />
+</head>
+<body>
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <script src="~/_framework/blazor.server.js"></script>
+
+    <!--end switcher-->
+    <!-- Bootstrap JS -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/assets/plugins/chartjs/js/chart.js"></script>
+    <script src="/assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.12.2/sweetalert2.all.min.js" integrity="sha512-aqDAfJm/8ZCYk9al9Nu3dHzaojXe7rchO7AbW6LCdeayMJA2L5c9Cbusbu9ms9ERNOmCBKIxemSlfy0sqcfwdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/assets/plugins/bs-stepper/js/main.js"></script>
+    <script src="/assets/plugins/highcharts/js/highcharts.js"></script>
+    <script src="/assets/plugins/highcharts/js/highcharts-3d.js"></script>
+    <script src="/assets/plugins/highcharts/js/modules/sankey.js"></script>
+    <script src="/assets/plugins/highcharts/js/modules/organization.js"></script>
+    <script src="/assets/plugins/highcharts/js/modules/exporting.js"></script>
+    <script src="/assets/plugins/highcharts/js/modules/accessibility.js"></script>
+    @*	<script src="/assets/js/index.js"></script>*@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <script src="/js/menuItemsTree.js"></script>
+    <script src="/js/unitTree.js"></script>`n    <script src="/js/lookup-blazor.js"></script>
+
+
+    @*	<script src="/assets/js/index.js"></script>*@
+    <!--app JS-->
+    @* <script src="~/assets/js/commonfunctions.js"></script> *@
+    @*<script src="/assets/js/app.js"></script> *@
+    <script>
+        new PerfectScrollbar(".app-container")
+        // Data Table Functions //
+        var DataTableLang = {
+            "sSearch": "@GLocalizer["Search"]",
+            "sProcessing": "@GLocalizer["Processing"]",
+            "sZeroRecords": "@GLocalizer["ZeroRecords"]",
+            "sLengthMenu": "@GLocalizer["LengthMenu"]",
+            "sInfo": "@GLocalizer["Info"]",
+            "oPaginate": {
+                "sNext": "@GLocalizer["Next"]",
+                "sPrevious": "@GLocalizer["Previous"]",
+            },
+            "sEmptyTable": "@GLocalizer["EmptyTable"]",
+            "sInfoEmpty": "@GLocalizer["InfoEmpty"]",
+        }
+        Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+        });
+    </script>
+</body>
+</html>
+

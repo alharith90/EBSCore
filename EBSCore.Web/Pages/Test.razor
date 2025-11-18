@@ -1,0 +1,16 @@
+﻿@page "/test"
+
+<div>@result</div>
+
+<br />
+<button type="button" onclick=@DisplayMessage>Click Here</button>
+
+@code
+{
+    public string result { get; set; }
+
+    void DisplayMessage()
+    {
+        result = "The button is clicked";
+    }
+}

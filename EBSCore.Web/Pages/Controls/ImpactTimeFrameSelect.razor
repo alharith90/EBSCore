@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Linq.Expressions
+@using EBSCore.Web.Models
+@inject HttpClient Http
+@code {
+    [Parameter] public int? Value { get; set; }
+    [Parameter] public EventCallback<int?> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<int?>>? ValueExpression { get; set; }
+    [Parameter] public string? Placeholder { get; set; } = "-- Select Time Frame --";
+    private List<ImpactTimeFrame> items = new();
+    private int? internalValue { get => Value; set { if (Value != value) { Value = value; ValueChanged.InvokeAsync(value); } } }
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("/api/ImpactTimeFrames/Get");
+            var outer = Newtonsoft.Json.Linq.JToken.Parse(json!);
+            var inner = outer.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)outer) : outer;
+            items = inner?["Data"]?.ToObject<List<ImpactTimeFrame>>() ?? new();
+        }
+        catch { items = new(); }
+    }
+}
+<InputSelect TValue="int?" class="form-select" @bind-Value="internalValue">
+    <option value="">@Placeholder</option>
+    @if (items != null)
+    {
+        foreach (var t in items)
+        {
+            <option value="@t.ImpactTimeFrameID">@t.TimeLabel (@t.MinHours-@t.MaxHours h)</option>
+        }
+    }
+</InputSelect>
+
+

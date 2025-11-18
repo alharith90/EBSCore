@@ -1,0 +1,385 @@
+﻿@page "/Config1/InformationSystemsDT"
+@using EBSCore.Web.Models
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using System.Data
+@using Newtonsoft.Json
+
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <button type="button" id="bOpenModal" class="btn btn-info" onclick=@ShowInput>
+                                    <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="card-body">
+                    <table id="tblInformationSystem" class="table table-bordered table-striped">
+                    </table>
+                    @*             @if (dtInformationSystem?.Rows.Count > 0)
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["SystemID"]</th>
+                                    <th>@Localizer["SystemName"]</th>
+                                    <th>@Localizer["RPO"]</th>
+                                    <th>@Localizer["Type"]</th>
+                                    <th>@Localizer["BusinessOwner"]</th>
+                                    <th>@Localizer["NumberOfUsers"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow drSystem in dtInformationSystem.Rows)
+                                {
+                                    <tr>
+                                        <td>@drSystem["SystemID"]</td>
+                                        <td>@drSystem["SystemName"]</td>
+                                        <td>@drSystem["RPO"]</td>
+                                        <td>@drSystem["Type"]</td>
+                                        <td>@drSystem["BusinessOwner"]</td>
+                                        <td>@drSystem["NumberOfUsers"]</td>
+                                        <td>
+                                            <button class="btn btn-info" @onclick="() => OpenEditModal(system)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger" @onclick="() => OpenDeleteModal(system)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["NoRecords"]</p>
+                    } *@
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <div class="card">
+
+            <div class="card-header">
+                <div class="d-lg-flex flex-lg-row align-items-lg-center justify-content-lg-between" role="tablist">
+                    <h5 class="mb-0 steper-title">Add New System</h5>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="test-l-4" role="tabpanel" class="">
+                    <h5 class="mb-1"></h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="SystemName">
+                                    @Localizer["SystemName"]
+                                </label>
+                                <input class="form-control" type="text" @bind-value="CurrentSystem.SystemName" @bind-value:event="oninput" />
+                            </div>
+                        </div>
+                        <!-- RPO -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="RPO">@Localizer["RPO"]</label>
+                                <input type="text" class="form-control" @bind-value="CurrentSystem.RPO" @bind-value:event="oninput">
+                            </div>
+                        </div>
+                        <!-- ApplicationLifecycleStatus -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ApplicationLifecycleStatus">
+                                    @Localizer["ApplicationLifecycleStatus"]
+                                </label>
+                                <input type="text" class="form-control" @bind-value="CurrentSystem.ApplicationLifecycleStatus" @bind-value:event="oninput">
+                            </div>
+                        </div>
+                        <!-- Type -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Type">@Localizer["Type"]</label>
+                                <input type="text" class="form-control" @bind-value="CurrentSystem.Type" @bind-value:event="oninput">
+                            </div>
+                        </div>
+                        <!-- RequiredFor -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="RequiredFor">
+                                    @Localizer["RequiredFor"]
+                                </label>
+                                <textarea id="RequiredFor" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- SystemDescription -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="SystemDescription">
+                                    @Localizer["SystemDescription"]
+                                </label>
+                                <textarea id="SystemDescription" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- PrimaryOwnerId -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="PrimaryOwnerId">
+                                    @Localizer["PrimaryOwnerId"]
+                                </label>
+                                <input type="number" class="form-control" id="PrimaryOwnerId">
+                            </div>
+                        </div>
+                        <!-- SecondaryOwner -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="SecondaryOwner">
+                                    @Localizer["SecondaryOwner"]
+                                </label>
+                                <input type="text" class="form-control" id="SecondaryOwner">
+                            </div>
+                        </div>
+                        <!-- BusinessOwner -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="BusinessOwner">
+                                    @Localizer["BusinessOwner"]
+                                </label>
+                                <input type="text" class="form-control" id="BusinessOwner">
+                            </div>
+                        </div>
+                        <!-- InternetFacing -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="InternetFacing">@Localizer["InternetFacing"]</label>
+                                <input type="checkbox" id="InternetFacing" @bind-checked="CurrentSystem.InternetFacing" @bind-checked:event="onchange">
+                            </div>
+                        </div>
+                        <!-- ThirdPartyAccess -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ThirdPartyAccess">@Localizer["ThirdPartyAccess"]</label>
+                                <input type="checkbox" id="ThirdPartyAccess" @bind-checked="CurrentSystem.ThirdPartyAccess" @bind-checked:event="onchange">
+                            </div>
+                        </div>
+                        <!-- NumberOfUsers -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="NumberOfUsers">@Localizer["NumberOfUsers"]</label>
+                                <input type="number" class="form-control" id="NumberOfUsers">
+                            </div>
+                        </div>
+                        <!-- LicenseType -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="LicenseType">@Localizer["LicenseType"]</label>
+                                <input type="text" class="form-control" id="LicenseType">
+                            </div>
+                        </div>
+                        <!-- Infrastructure -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Infrastructure">@Localizer["Infrastructure"]</label>
+                                <input type="checkbox" id="Infrastructure">
+                            </div>
+                        </div>
+                        <!-- MFAEnabled -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="MFAEnabled">@Localizer["MFAEnabled"]</label>
+                                <input type="checkbox" id="MFAEnabled">
+                            </div>
+                        </div>
+                        <!-- MFAStatusDetails -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="MFAStatusDetails">
+                                    @Localizer["MFAStatusDetails"]
+                                </label>
+                                <textarea id="MFAStatusDetails" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- AssociatedInformationSystems -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="AssociatedInformationSystems">
+                                    @Localizer["AssociatedInformationSystems"]
+                                </label>
+                                <textarea id="AssociatedInformationSystems" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- Confidentiality -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Confidentiality">@Localizer["Confidentiality"]</label>
+                                <input type="text" class="form-control" id="Confidentiality">
+                            </div>
+                        </div>
+                        <!-- Integrity -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Integrity">@Localizer["Integrity"]</label>
+                                <input type="text" class="form-control" id="Integrity">
+                            </div>
+                        </div>
+                        <!-- Availability -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Availability">@Localizer["Availability"]</label>
+                                <input type="text" class="form-control" id="Availability">
+                            </div>
+                        </div>
+                        <!-- OverallCategorizationRating -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="OverallCategorizationRating">@Localizer["OverallCategorizationRating"]</label>
+                                <input type="text" class="form-control" id="OverallCategorizationRating">
+                            </div>
+                        </div>
+                        <!-- HighestInformationClassification -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="HighestInformationClassification">@Localizer["HighestInformationClassification"]</label>
+                                <input type="text" class="form-control" id="HighestInformationClassification">
+                            </div>
+                        </div>
+                        <!-- RiskHighlightedByIT -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="RiskHighlightedByIT">
+                                    @Localizer["RiskHighlightedByIT"]
+                                </label>
+                                <textarea id="RiskHighlightedByIT" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- AdditionalNote -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="AdditionalNote">@Localizer["AdditionalNote"]</label>
+                                <textarea id="AdditionalNote" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- Logo -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Logo">@Localizer["Logo"]</label>
+                                <input type="file" class="form-control" id="Logo">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn btn-primary px-4" onclick=@ShowDisplay><i class="bx bx-left-arrow-alt me-2"></i>Previous</button>
+                                <button class="btn btn-success px-4" onclick=@SaveSystemAsync>Submit</button>
+                            </div>
+                        </div>
+                    </div><!---end row-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@inject HttpClient Http
+@code {
+    bool ShowInputScreen = false;
+    InformationSystem CurrentSystem = new();
+    //DataTable dtInformationSystem = new();
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    async Task ShowInput()
+    {
+        ShowInputScreen = true;
+    }
+    async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+        await LoadInformationSystemListAsync(); 
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        await ShowDisplay();
+    }
+    private async Task LoadInformationSystemListAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/InformationSystem/Get");
+            //dtInformationSystem = JsonConvert.DeserializeObject<DataTable>(response);
+
+            object dtObject = new
+            {
+                data = response,// dtInformationSystem,
+                columns = new[]
+                {
+                    new { data = "SystemID",        title = "#" },
+                    new { data = "SystemName",      title = Localizer["SystemName"].ToString() },
+                    new { data = "RPO",             title = Localizer["RPO"].ToString() },
+                    new { data = "Type",            title = Localizer["Type"].ToString() },
+                    new { data = "BusinessOwner",   title = Localizer["BusinessOwner"].ToString() },
+                    new { data = "NumberOfUsers",   title = Localizer["NumberOfUsers"].ToString() },
+                    new { data = "MFAEnabled",      title = Localizer["MFAEnabled"].ToString() },
+                    new { data = "Availability",    title = Localizer["Availability"].ToString() }
+                }
+            };
+
+            // Initialize DataTable after data is loaded
+            await JS.InvokeVoidAsync("InitializeDataTable", "tblInformationSystem", JsonConvert.SerializeObject(dtObject));
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading information systems: {ex.Message}");
+        }
+    }
+
+
+    private async Task SaveSystemAsync()
+    {
+        var response = await Http.PostAsJsonAsync("api/InformationSystem/Save", CurrentSystem);
+        if (response.IsSuccessStatusCode)
+        {
+            // Show success Toast notification
+            await ShowDisplay();
+            await JS.InvokeVoidAsync("Toast.fire", new
+            {
+                icon = "success",
+                title = "Information System Saved Successfully"
+            });
+         
+
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new
+            {
+                icon = "error",
+                title = "Error!",
+                text = response.ReasonPhrase ?? "Something went wrong"
+            });
+        }
+    }
+}

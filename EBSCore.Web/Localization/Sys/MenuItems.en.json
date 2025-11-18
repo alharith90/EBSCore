@@ -1,0 +1,15 @@
+{
+  "PageTitle": "Menu Items",
+  "ModalTitle": "Add / Update Menu Item",
+  "LabelAR": "Arabic Label",
+  "LabelEN": "English Label",
+  "DescriptionAR": "Arabic Description",
+  "DescriptionEN": "English Description",
+  "Url": "URL",
+  "Icon": "Icon",
+  "Order": "Order",
+  "IsActive": "Active",
+  "Permission": "Permission",
+  "Type": "Type",
+  "Untitled": "Untitled"
+}
