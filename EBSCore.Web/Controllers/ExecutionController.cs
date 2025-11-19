@@ -1,29 +1,154 @@
-using EBSCore.Web.WorkflowEngine.Application.DTOs;
-using EBSCore.Web.WorkflowEngine.Application.Interfaces;
+using EBSCore.AdoClass;
+using EBSCore.Web.AppCode;
+using EBSCore.Web.Models;
+using EBSCore.Web.Models.Workflow;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
-namespace EBSCore.Web.Controllers;
-
-[ApiController]
-[Route("api/executions")]
-public class ExecutionController : ControllerBase
+namespace EBSCore.Web.Controllers
 {
-    private readonly IExecutionService _executionService;
-
-    public ExecutionController(IExecutionService executionService)
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class ExecutionController : ControllerBase
     {
-        _executionService = executionService;
-    }
+        private readonly DBWorkflowExecutionSP _executionSP;
+        private readonly Common _common;
+        private readonly User? _currentUser;
 
-    [HttpGet("{executionId:long}")]
-    public async Task<ActionResult<ExecutionDetailDto>> GetExecution(long executionId, CancellationToken cancellationToken)
-    {
-        var execution = await _executionService.GetExecutionAsync(executionId, cancellationToken);
-        if (execution == null)
+        public ExecutionController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
-            return NotFound();
+            _executionSP = new DBWorkflowExecutionSP(configuration);
+            _common = new Common();
+            _currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
         }
 
-        return Ok(execution);
+        [HttpGet("{workflowId}")]
+        public async Task<object> GetByWorkflow(int workflowId, string? PageNumber = "1", string? PageSize = "20")
+        {
+            try
+            {
+                var ds = (DataSet)_executionSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.FillDataset,
+                    Operation: "rtvExecutions",
+                    WorkflowID: workflowId.ToString(),
+                    PageNumber: PageNumber,
+                    PageSize: PageSize
+                );
+
+                var list = new List<WorkflowExecutionModel>();
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        list.Add(new WorkflowExecutionModel
+                        {
+                            ExecutionID = Convert.ToInt64(row["ExecutionID"]),
+                            WorkflowID = Convert.ToInt32(row["WorkflowID"]),
+                            Status = row["Status"].ToString(),
+                            TriggerType = row["TriggerType"].ToString(),
+                            TriggerDataJson = row["TriggerDataJson"].ToString(),
+                            WebhookRequestJson = row["WebhookRequestJson"].ToString(),
+                            ErrorMessage = row["ErrorMessage"].ToString()
+                        });
+                    }
+                }
+
+                var totalCount = ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0
+                    ? Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"])
+                    : list.Count;
+
+                return Ok(new { Data = list, TotalCount = totalCount });
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error retrieving executions");
+            }
+        }
+
+        [HttpGet("detail/{executionId}")]
+        public async Task<object> Get(long executionId)
+        {
+            try
+            {
+                var ds = (DataSet)_executionSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.FillDataset,
+                    Operation: "rtvExecution",
+                    ExecutionID: executionId.ToString()
+                );
+
+                if (_common.IsEmptyDataSet(ds))
+                {
+                    return NotFound();
+                }
+
+                var detail = new WorkflowExecutionDetail();
+                var executionRow = ds.Tables[0].Rows[0];
+                detail.Execution = new WorkflowExecutionModel
+                {
+                    ExecutionID = Convert.ToInt64(executionRow["ExecutionID"]),
+                    WorkflowID = Convert.ToInt32(executionRow["WorkflowID"]),
+                    Status = executionRow["Status"].ToString(),
+                    TriggerType = executionRow["TriggerType"].ToString(),
+                    TriggerDataJson = executionRow["TriggerDataJson"].ToString(),
+                    WebhookRequestJson = executionRow["WebhookRequestJson"].ToString(),
+                    ErrorMessage = executionRow["ErrorMessage"].ToString()
+                };
+
+                if (ds.Tables.Count > 1)
+                {
+                    foreach (DataRow stepRow in ds.Tables[1].Rows)
+                    {
+                        detail.Steps.Add(new WorkflowExecutionStepModel
+                        {
+                            ExecutionStepID = Convert.ToInt64(stepRow["ExecutionStepID"]),
+                            ExecutionID = Convert.ToInt64(stepRow["ExecutionID"]),
+                            NodeID = Convert.ToInt32(stepRow["NodeID"]),
+                            Status = stepRow["Status"].ToString(),
+                            SelectedOutputKey = stepRow["SelectedOutputKey"].ToString(),
+                            OutputJson = stepRow["OutputJson"].ToString(),
+                            ErrorMessage = stepRow["ErrorMessage"].ToString()
+                        });
+                    }
+                }
+
+                return Ok(detail);
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error retrieving execution");
+            }
+        }
+
+        [HttpPost("{workflowId}")]
+        public async Task<object> Start(int workflowId, [FromBody] WorkflowExecutionRequest request)
+        {
+            try
+            {
+                if (_currentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var executionId = _executionSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.ExecuteScalar,
+                    Operation: "StartManualExecution",
+                    UserID: _currentUser.UserID,
+                    WorkflowID: workflowId.ToString(),
+                    PayloadJson: request?.PayloadJson ?? string.Empty
+                );
+
+                return Ok(new { ExecutionID = executionId });
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error starting execution");
+            }
+        }
     }
 }

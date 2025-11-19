@@ -1,46 +1,62 @@
-using System.IO;
-using System.Text;
-using EBSCore.Web.WorkflowEngine.Application.DTOs;
-using EBSCore.Web.WorkflowEngine.Application.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using EBSCore.AdoClass;
+using EBSCore.Web.AppCode;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EBSCore.Web.Controllers;
-
-[ApiController]
-[AllowAnonymous]
-[Route("api/workflows/webhook")]
-public class WorkflowWebhookController : ControllerBase
+namespace EBSCore.Web.Controllers
 {
-    private readonly IExecutionService _executionService;
-
-    public WorkflowWebhookController(IExecutionService executionService)
+    [ApiController]
+    [Route("api/workflows/webhook")]
+    public class WorkflowWebhookController : ControllerBase
     {
-        _executionService = executionService;
-    }
+        private readonly DBWorkflowExecutionSP _executionSP;
+        private readonly Common _common;
 
-    [HttpPost("{workflowId:int}/{secret}")]
-    public async Task<ActionResult<object>> InvokeWebhook(int workflowId, string secret, CancellationToken cancellationToken)
-    {
-        Request.EnableBuffering();
-        string body;
-        using (var reader = new StreamReader(Request.Body, Encoding.UTF8, leaveOpen: true))
+        public WorkflowWebhookController(IConfiguration configuration)
         {
-            body = await reader.ReadToEndAsync(cancellationToken);
-            Request.Body.Position = 0;
+            _executionSP = new DBWorkflowExecutionSP(configuration);
+            _common = new Common();
         }
 
-        var headers = Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString());
-        var query = Request.Query.ToDictionary(q => q.Key, q => q.Value.ToString());
-
-        var requestDto = new WebhookRequestDto
+        [HttpPost("{workflowId:int}/{secret}")]
+        public async Task<IActionResult> Invoke(int workflowId, string secret)
         {
-            Headers = headers,
-            Query = query,
-            Body = body
-        };
+            try
+            {
+                Request.EnableBuffering();
+                string body;
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    body = await reader.ReadToEndAsync();
+                    Request.Body.Position = 0;
+                }
 
-        var executionId = await _executionService.HandleWebhookAsync(workflowId, secret, requestDto, cancellationToken);
-        return Ok(new { executionId });
+                var payload = new
+                {
+                    Headers = Request.Headers.ToDictionary(x => x.Key, x => x.Value.ToString()),
+                    Query = Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString()),
+                    Body = body
+                };
+
+                var executionId = _executionSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.ExecuteScalar,
+                    Operation: "StartWebhookExecution",
+                    WorkflowID: workflowId.ToString(),
+                    WebhookSecret: secret,
+                    RequestJson: JsonConvert.SerializeObject(payload)
+                );
+
+                return Ok(new { ExecutionID = executionId });
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Webhook trigger failed");
+            }
+        }
     }
 }

@@ -1,63 +1,123 @@
-using EBSCore.Web.WorkflowEngine.Application.DTOs;
-using EBSCore.Web.WorkflowEngine.Application.Interfaces;
+using EBSCore.AdoClass;
+using EBSCore.Web.AppCode;
+using EBSCore.Web.Models;
+using EBSCore.Web.Models.Workflow;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
-namespace EBSCore.Web.Controllers;
-
-[ApiController]
-[Route("api/credentials")]
-public class CredentialController : ControllerBase
+namespace EBSCore.Web.Controllers
 {
-    private readonly ICredentialService _credentialService;
-
-    public CredentialController(ICredentialService credentialService)
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class CredentialController : ControllerBase
     {
-        _credentialService = credentialService;
-    }
+        private readonly DBWorkflowCredentialSP _credentialSP;
+        private readonly Common _common;
+        private readonly User? _currentUser;
 
-    [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<CredentialDto>>> GetCredentials(CancellationToken cancellationToken)
-    {
-        var credentials = await _credentialService.GetCredentialsAsync(cancellationToken);
-        return Ok(credentials);
-    }
-
-    [HttpGet("{credentialId:int}")]
-    public async Task<ActionResult<CredentialDto>> GetCredential(int credentialId, CancellationToken cancellationToken)
-    {
-        var credential = await _credentialService.GetCredentialAsync(credentialId, cancellationToken);
-        if (credential == null)
+        public CredentialController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
-            return NotFound();
+            _credentialSP = new DBWorkflowCredentialSP(configuration);
+            _common = new Common();
+            _currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
         }
 
-        return Ok(credential);
-    }
+        [HttpGet]
+        public async Task<object> Get()
+        {
+            try
+            {
+                var ds = (DataSet)_credentialSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.FillDataset,
+                    Operation: "rtvCredentials",
+                    UserID: _currentUser?.UserID,
+                    CompanyID: _currentUser?.CompanyID
+                );
 
-    [HttpPost]
-    public async Task<ActionResult> CreateCredential([FromBody] CredentialRequestDto request, CancellationToken cancellationToken)
-    {
-        var credentialId = await _credentialService.CreateCredentialAsync(request, GetUserName(), cancellationToken);
-        return CreatedAtAction(nameof(GetCredential), new { credentialId }, null);
-    }
+                var list = new List<WorkflowCredentialModel>();
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        list.Add(new WorkflowCredentialModel
+                        {
+                            CredentialID = Convert.ToInt32(row["CredentialID"]),
+                            CredentialName = row["Name"].ToString(),
+                            CredentialType = row["CredentialType"].ToString(),
+                            DataJson = row["DataJson"].ToString(),
+                            Notes = row["Notes"].ToString()
+                        });
+                    }
+                }
 
-    [HttpPut("{credentialId:int}")]
-    public async Task<IActionResult> UpdateCredential(int credentialId, [FromBody] CredentialRequestDto request, CancellationToken cancellationToken)
-    {
-        await _credentialService.UpdateCredentialAsync(credentialId, request, GetUserName(), cancellationToken);
-        return NoContent();
-    }
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error retrieving credentials");
+            }
+        }
 
-    [HttpDelete("{credentialId:int}")]
-    public async Task<IActionResult> DeleteCredential(int credentialId, CancellationToken cancellationToken)
-    {
-        await _credentialService.DeleteCredentialAsync(credentialId, GetUserName(), cancellationToken);
-        return NoContent();
-    }
+        [HttpPost]
+        public async Task<object> Save([FromBody] WorkflowCredentialModel credential)
+        {
+            try
+            {
+                if (_currentUser == null || _currentUser.UserType != UserType.Manager)
+                {
+                    return Unauthorized();
+                }
 
-    private string GetUserName()
-    {
-        return User?.Identity?.Name ?? HttpContext?.Session?.GetString("User") ?? "system";
+                var credentialId = _credentialSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.ExecuteScalar,
+                    Operation: "SaveCredential",
+                    UserID: _currentUser.UserID,
+                    CompanyID: _currentUser.CompanyID,
+                    CredentialID: credential.CredentialID?.ToString(),
+                    CredentialName: credential.CredentialName,
+                    CredentialType: credential.CredentialType,
+                    DataJson: credential.DataJson,
+                    Notes: credential.Notes
+                );
+
+                return Ok(new { CredentialID = credentialId });
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error saving credential");
+            }
+        }
+
+        [HttpDelete("{credentialId}")]
+        public async Task<object> Delete(int credentialId)
+        {
+            try
+            {
+                if (_currentUser == null || _currentUser.UserType != UserType.Manager)
+                {
+                    return Unauthorized();
+                }
+
+                _credentialSP.QueryDatabase(
+                    DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                    Operation: "DeleteCredential",
+                    UserID: _currentUser.UserID,
+                    CompanyID: _currentUser.CompanyID,
+                    CredentialID: credentialId.ToString()
+                );
+
+                return Ok("Deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                _common.LogError(ex, Request);
+                return BadRequest("Error deleting credential");
+            }
+        }
     }
 }

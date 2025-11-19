@@ -45,18 +45,7 @@ builder.Services.AddHttpClient("WorkflowHttp");
 // Register other services
 builder.Services.AddSingleton<ServiceLocator>();
 
-builder.Services.AddSingleton<ISqlConnectionFactory, SqlConnectionFactory>();
-builder.Services.AddScoped<IWorkflowRepository, WorkflowRepository>();
-builder.Services.AddScoped<IExecutionRepository, ExecutionRepository>();
-builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
-builder.Services.AddScoped<IWorkflowService, WorkflowService>();
-builder.Services.AddScoped<IExecutionService, ExecutionService>();
-builder.Services.AddScoped<ICredentialService, CredentialService>();
-builder.Services.AddScoped<IWorkflowExecutor, WorkflowExecutor>();
-builder.Services.AddScoped<INodeExecutorStrategy, HttpNodeExecutor>();
-builder.Services.AddScoped<INodeExecutorStrategy, DelayNodeExecutor>();
-builder.Services.AddScoped<INodeExecutorStrategy, CodeNodeExecutor>();
-builder.Services.AddScoped<INodeExecutorStrategy, ConditionalNodeExecutor>();
+builder.Services.AddHostedService<WorkflowBackgroundService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
