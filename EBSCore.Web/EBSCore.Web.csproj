@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WorkflowEngine\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Localization\Common.ar.json" />
     <Content Remove="Localization\Common.en.json" />
     <Content Remove="Localization\Common\Process.ar.json" />
