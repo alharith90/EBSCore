@@ -1,0 +1,364 @@
+@page "/Workflow/Designer"
+@using EBSCore.Web.Models.Workflow
+@using Microsoft.Extensions.Localization
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@code {
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+    private List<WorkflowSummary> Workflows = new();
+    private WorkflowDefinition CurrentWorkflow = new();
+    private WorkflowNodeModel NewNode = new() { NodeKey = $"node-{Guid.NewGuid():N}", NodeType = "Http" };
+    private WorkflowConnectionModel NewConnection = new();
+    private bool ShowEditor;
+    private bool IsLoading;
+    private string? ErrorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        await PageTitleService.SetPageTitle(Localizer["PageTitle"]);
+        await LoadWorkflowsAsync();
+    }
+
+    private async Task LoadWorkflowsAsync()
+    {
+        IsLoading = true;
+        ErrorMessage = null;
+        try
+        {
+            var response = await Http.GetFromJsonAsync<WorkflowListResponse>("api/Workflow/Get?pageNumber=1&pageSize=200");
+            Workflows = response?.Data ?? new List<WorkflowSummary>();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private void StartNew()
+    {
+        CurrentWorkflow = new WorkflowDefinition
+        {
+            WorkflowCode = $"WF-{DateTime.UtcNow:yyyyMMddHHmmss}",
+            WorkflowName = Localizer["WorkflowName"],
+            Nodes = new List<WorkflowNodeModel>(),
+            Connections = new List<WorkflowConnectionModel>(),
+            Triggers = new List<WorkflowTriggerModel>()
+        };
+        ShowEditor = true;
+    }
+
+    private async Task EditWorkflowAsync(WorkflowSummary workflow)
+    {
+        IsLoading = true;
+        ErrorMessage = null;
+        try
+        {
+            var detail = await Http.GetFromJsonAsync<WorkflowDefinition>($"api/Workflow/GetById/{workflow.WorkflowID}");
+            if (detail != null)
+            {
+                CurrentWorkflow = detail;
+                CurrentWorkflow.Nodes ??= new List<WorkflowNodeModel>();
+                CurrentWorkflow.Connections ??= new List<WorkflowConnectionModel>();
+                CurrentWorkflow.Triggers ??= new List<WorkflowTriggerModel>();
+                ShowEditor = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private void CancelEdit()
+    {
+        ShowEditor = false;
+        CurrentWorkflow = new WorkflowDefinition();
+    }
+
+    private void AddNode()
+    {
+        if (string.IsNullOrWhiteSpace(NewNode.NodeKey))
+        {
+            NewNode.NodeKey = $"node-{Guid.NewGuid():N}";
+        }
+
+        CurrentWorkflow.Nodes.Add(new WorkflowNodeModel
+        {
+            NodeKey = NewNode.NodeKey,
+            Name = NewNode.Name,
+            NodeType = NewNode.NodeType,
+            ConfigJson = NewNode.ConfigJson,
+            CredentialID = NewNode.CredentialID,
+            PositionX = NewNode.PositionX,
+            PositionY = NewNode.PositionY,
+            RetryCount = NewNode.RetryCount
+        });
+
+        NewNode = new WorkflowNodeModel { NodeKey = $"node-{Guid.NewGuid():N}", NodeType = "Http" };
+    }
+
+    private void RemoveNode(WorkflowNodeModel node)
+    {
+        CurrentWorkflow.Nodes.Remove(node);
+        CurrentWorkflow.Connections.RemoveAll(c => c.SourceNodeKey == node.NodeKey || c.TargetNodeKey == node.NodeKey);
+    }
+
+    private void AddConnection()
+    {
+        if (!string.IsNullOrWhiteSpace(NewConnection.SourceNodeKey) && !string.IsNullOrWhiteSpace(NewConnection.TargetNodeKey))
+        {
+            CurrentWorkflow.Connections.Add(new WorkflowConnectionModel
+            {
+                SourceNodeKey = NewConnection.SourceNodeKey,
+                TargetNodeKey = NewConnection.TargetNodeKey,
+                SourceOutputKey = NewConnection.SourceOutputKey,
+                TargetInputKey = NewConnection.TargetInputKey
+            });
+            NewConnection = new WorkflowConnectionModel();
+        }
+    }
+
+    private void RemoveConnection(WorkflowConnectionModel connection)
+    {
+        CurrentWorkflow.Connections.Remove(connection);
+    }
+
+    private async Task SaveWorkflowAsync()
+    {
+        try
+        {
+            await Http.PostAsJsonAsync("api/Workflow/Save", CurrentWorkflow);
+            await LoadWorkflowsAsync();
+            ShowEditor = false;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    private async Task DeleteWorkflowAsync(WorkflowSummary workflow)
+    {
+        try
+        {
+            await Http.DeleteAsync($"api/Workflow/Delete/{workflow.WorkflowID}");
+            await LoadWorkflowsAsync();
+            if (ShowEditor && CurrentWorkflow.WorkflowID == workflow.WorkflowID)
+            {
+                CancelEdit();
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    private string DisplayConnection(WorkflowConnectionModel connection)
+        => $"{connection.SourceNodeKey} -> {connection.TargetNodeKey}";
+
+    private class WorkflowListResponse
+    {
+        public List<WorkflowSummary>? Data { get; set; }
+        public int TotalCount { get; set; }
+    }
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card card-primary">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["ListTitle"]</h5>
+                    <button class="btn btn-success" @onclick="StartNew"><i class="fas fa-plus"></i> @Localizer["AddWorkflow"]</button>
+                </div>
+                <div class="card-body">
+                    @if (IsLoading)
+                    {
+                        <p>@GLocalizer["Loading"]...</p>
+                    }
+                    else if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="alert alert-danger">@ErrorMessage</div>
+                    }
+                    else if (Workflows.Count == 0)
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                    else
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["WorkflowCode"]</th>
+                                    <th>@Localizer["WorkflowName"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Workflows)
+                                {
+                                    <tr>
+                                        <td>@item.WorkflowID</td>
+                                        <td>@item.WorkflowCode</td>
+                                        <td>@item.WorkflowName</td>
+                                        <td>@item.Status</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary me-1" @onclick="() => EditWorkflowAsync(item)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteWorkflowAsync(item)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer[ShowEditor ? "EditWorkflow" : "DesignerHelp"]</h5>
+                </div>
+                <div class="card-body">
+                    @if (!ShowEditor)
+                    {
+                        <p>@Localizer["DesignerHelp"]</p>
+                    }
+                    else
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">@Localizer["WorkflowCode"]</label>
+                            <input class="form-control" @bind="CurrentWorkflow.WorkflowCode" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">@Localizer["WorkflowName"]</label>
+                            <input class="form-control" @bind="CurrentWorkflow.WorkflowName" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">@Localizer["WorkflowDescription"]</label>
+                            <textarea class="form-control" rows="2" @bind="CurrentWorkflow.WorkflowDescription"></textarea>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label class="form-label">@Localizer["Status"]</label>
+                                <input class="form-control" @bind="CurrentWorkflow.Status" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">@Localizer["Priority"]</label>
+                                <input class="form-control" @bind="CurrentWorkflow.Priority" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">@Localizer["Frequency"]</label>
+                                <input class="form-control" @bind="CurrentWorkflow.Frequency" />
+                            </div>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="activeCheck" @bind="CurrentWorkflow.IsActive" />
+                            <label class="form-check-label" for="activeCheck">@Localizer["IsActive"]</label>
+                        </div>
+
+                        <hr />
+                        <h6>@Localizer["Nodes"]</h6>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>@Localizer["NodeName"]</th>
+                                    <th>@Localizer["NodeType"]</th>
+                                    <th>@Localizer["Credential"]</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var node in CurrentWorkflow.Nodes)
+                                {
+                                    <tr>
+                                        <td>@node.Name</td>
+                                        <td>@node.NodeType</td>
+                                        <td>@node.CredentialID</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm" @onclick="() => RemoveNode(node)"><i class="fas fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="card card-body mb-3">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["NodeName"]</label>
+                                    <input class="form-control" @bind="NewNode.Name" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["NodeType"]</label>
+                                    <input class="form-control" @bind="NewNode.NodeType" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["Credential"]</label>
+                                    <input class="form-control" @bind="NewNode.CredentialID" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">@Localizer["Config"]</label>
+                                    <textarea class="form-control" rows="2" @bind="NewNode.ConfigJson"></textarea>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary mt-2" type="button" @onclick="AddNode">@Localizer["AddNode"]</button>
+                        </div>
+
+                        <h6>@Localizer["Connections"]</h6>
+                        <ul class="list-group mb-3">
+                            @foreach (var connection in CurrentWorkflow.Connections)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    @DisplayConnection(connection)
+                                    <button class="btn btn-sm btn-outline-danger" @onclick="() => RemoveConnection(connection)"><i class="fas fa-times"></i></button>
+                                </li>
+                            }
+                        </ul>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label class="form-label">@Localizer["SourceNode"]</label>
+                                <input class="form-control" @bind="NewConnection.SourceNodeKey" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@Localizer["TargetNode"]</label>
+                                <input class="form-control" @bind="NewConnection.TargetNodeKey" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@Localizer["SourceOutputKey"]</label>
+                                <input class="form-control" @bind="NewConnection.SourceOutputKey" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@Localizer["TargetInputKey"]</label>
+                                <input class="form-control" @bind="NewConnection.TargetInputKey" />
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary mt-2" type="button" @onclick="AddConnection">@Localizer["AddConnection"]</button>
+
+                        <div class="mt-4 d-flex gap-2">
+                            <button class="btn btn-success" type="button" @onclick="SaveWorkflowAsync">@Localizer["Save"]</button>
+                            <button class="btn btn-secondary" type="button" @onclick="CancelEdit">@Localizer["Cancel"]</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
