@@ -2,6 +2,11 @@ using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Fillters;
 using EBSCore.Web.Services;
+using EBSCore.Web.WorkflowEngine.Application.Execution.Strategies;
+using EBSCore.Web.WorkflowEngine.Application.Interfaces;
+using EBSCore.Web.WorkflowEngine.Application.Services;
+using EBSCore.Web.WorkflowEngine.Infrastructure;
+using EBSCore.Web.WorkflowEngine.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Localization;
@@ -35,9 +40,23 @@ builder.Services.AddHttpClient("EBSCoreAPI", client =>
     };
 });
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("EBSCoreAPI"));
+builder.Services.AddHttpClient("WorkflowHttp");
 
 // Register other services
 builder.Services.AddSingleton<ServiceLocator>();
+
+builder.Services.AddSingleton<ISqlConnectionFactory, SqlConnectionFactory>();
+builder.Services.AddScoped<IWorkflowRepository, WorkflowRepository>();
+builder.Services.AddScoped<IExecutionRepository, ExecutionRepository>();
+builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
+builder.Services.AddScoped<IWorkflowService, WorkflowService>();
+builder.Services.AddScoped<IExecutionService, ExecutionService>();
+builder.Services.AddScoped<ICredentialService, CredentialService>();
+builder.Services.AddScoped<IWorkflowExecutor, WorkflowExecutor>();
+builder.Services.AddScoped<INodeExecutorStrategy, HttpNodeExecutor>();
+builder.Services.AddScoped<INodeExecutorStrategy, DelayNodeExecutor>();
+builder.Services.AddScoped<INodeExecutorStrategy, CodeNodeExecutor>();
+builder.Services.AddScoped<INodeExecutorStrategy, ConditionalNodeExecutor>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
@@ -86,7 +105,8 @@ app.Use(async (ctx, next) =>
         path.StartsWithSegments("/css") ||
         path.StartsWithSegments("/images") ||
         path.StartsWithSegments("/favicon.ico") ||
-        path.StartsWithSegments("/api/CurrentUser/Login");
+        path.StartsWithSegments("/api/CurrentUser/Login") ||
+        path.StartsWithSegments("/api/workflows/webhook");
 
     if (!allow)
     {
