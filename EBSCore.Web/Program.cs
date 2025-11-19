@@ -35,9 +35,12 @@ builder.Services.AddHttpClient("EBSCoreAPI", client =>
     };
 });
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("EBSCoreAPI"));
+builder.Services.AddHttpClient("WorkflowHttp");
 
 // Register other services
 builder.Services.AddSingleton<ServiceLocator>();
+
+builder.Services.AddHostedService<WorkflowBackgroundService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
@@ -86,7 +89,8 @@ app.Use(async (ctx, next) =>
         path.StartsWithSegments("/css") ||
         path.StartsWithSegments("/images") ||
         path.StartsWithSegments("/favicon.ico") ||
-        path.StartsWithSegments("/api/CurrentUser/Login");
+        path.StartsWithSegments("/api/CurrentUser/Login") ||
+        path.StartsWithSegments("/api/workflows/webhook");
 
     if (!allow)
     {
