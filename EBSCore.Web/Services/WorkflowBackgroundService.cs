@@ -121,7 +121,7 @@ namespace EBSCore.Web.Services
                     catch (Exception ex)
                     {
                         await SaveStepAsync(executionSP, executionId, nodeId, "Failed", null, ex.Message);
-                        await executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                        executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                             Operation: "MarkExecutionStatus",
                             ExecutionID: executionId.ToString(),
                             Status: "Failed",
@@ -138,7 +138,7 @@ namespace EBSCore.Web.Services
             if (pending.Count > 0)
             {
                 var message = "Workflow halted due to missing dependencies";
-                await executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                     Operation: "MarkExecutionStatus",
                     ExecutionID: executionId.ToString(),
                     Status: "Failed",
@@ -146,7 +146,7 @@ namespace EBSCore.Web.Services
             }
             else
             {
-                await executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                executionSP.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                     Operation: "MarkExecutionStatus",
                     ExecutionID: executionId.ToString(),
                     Status: "Succeeded");
@@ -268,15 +268,17 @@ namespace EBSCore.Web.Services
             return new NodeExecutionResult(null, JsonConvert.SerializeObject(payload));
         }
 
-        private async Task SaveStepAsync(DBWorkflowExecutionSP sp, long executionId, int nodeId, string status, string? outputKey, string? payload)
+        private Task SaveStepAsync(DBWorkflowExecutionSP sp, long executionId, int nodeId, string status, string? outputKey, string? payload)
         {
-            await sp.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+            sp.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                 Operation: "SaveExecutionStep",
                 ExecutionID: executionId.ToString(),
                 NodeID: nodeId.ToString(),
                 Status: status,
                 OutputKey: outputKey,
                 OutputJson: payload);
+
+            return Task.CompletedTask;
         }
 
         private record NodeExecutionResult(string? OutputKey, string? OutputJson);
