@@ -141,9 +141,18 @@
 
     private async Task SaveWorkflowAsync()
     {
+        ErrorMessage = null;
         try
         {
-            await Http.PostAsJsonAsync("api/Workflow/Save", CurrentWorkflow);
+            var response = await Http.PostAsJsonAsync("api/Workflow/Save", CurrentWorkflow);
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                ErrorMessage = string.IsNullOrWhiteSpace(content)
+                    ? Localizer["SaveFailed"]
+                    : content;
+                return;
+            }
             await LoadWorkflowsAsync();
             ShowEditor = false;
         }
@@ -239,6 +248,10 @@
                     <h5 class="mb-0">@Localizer[ShowEditor ? "EditWorkflow" : "DesignerHelp"]</h5>
                 </div>
                 <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="alert alert-danger">@ErrorMessage</div>
+                    }
                     @if (!ShowEditor)
                     {
                         <p>@Localizer["DesignerHelp"]</p>
