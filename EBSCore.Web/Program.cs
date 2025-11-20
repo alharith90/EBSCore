@@ -7,10 +7,30 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using static System.Reflection.Metadata.BlobBuilder;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Ensure log folder exists early
+var logDirectory = Path.Combine(builder.Environment.ContentRootPath, "Logs");
+Directory.CreateDirectory(logDirectory);
+
+// Configure Serilog from appsettings.json
+builder.Host.UseSerilog((ctx, services, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .ReadFrom.Configuration(ctx.Configuration)
+        .Enrich.FromLogContext()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .WriteTo.File(Path.Combine(logDirectory, "log-.txt"),
+            rollingInterval: RollingInterval.Day,
+            shared: true,
+            restrictedToMinimumLevel: LogEventLevel.Information);
+});
 
 // *** 1. Configure Services ***
 builder.Services.AddControllers(); // API controllers
