@@ -15,6 +15,8 @@
     private WorkflowDefinition CurrentWorkflow = new();
     private WorkflowNodeModel NewNode = new() { NodeKey = $"node-{Guid.NewGuid():N}", NodeType = "Http" };
     private WorkflowConnectionModel NewConnection = new();
+    private WorkflowCredentialModel EditingCredential = new();
+    private List<WorkflowCredentialModel> Credentials = new();
     private bool ShowEditor;
     private bool IsLoading;
     private string? ErrorMessage;
@@ -25,6 +27,7 @@
         GLocalizer = LocalizerFactory.Create("Common", "");
         await PageTitleService.SetPageTitle(Localizer["PageTitle"]);
         await LoadWorkflowsAsync();
+        await LoadCredentialsAsync();
     }
 
     private async Task LoadWorkflowsAsync()
@@ -43,6 +46,20 @@
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    private async Task LoadCredentialsAsync()
+    {
+        try
+        {
+            var list = await Http.GetFromJsonAsync<List<WorkflowCredentialModel>>("api/Credential/Get");
+            Credentials = list ?? new List<WorkflowCredentialModel>();
+        }
+        catch
+        {
+            // Credentials are an optional enhancement for now; avoid breaking the designer if the API is missing.
+            Credentials = new List<WorkflowCredentialModel>();
         }
     }
 
@@ -137,6 +154,59 @@
     private void RemoveConnection(WorkflowConnectionModel connection)
     {
         CurrentWorkflow.Connections.Remove(connection);
+    }
+
+    private void ApplyCredentialTemplate(string template)
+    {
+        EditingCredential = template switch
+        {
+            "OpenAI" => new WorkflowCredentialModel
+            {
+                CredentialName = "OpenAI Key",
+                CredentialType = "OpenAI",
+                DataJson = "{\n  \"apiKey\": \"sk-...\",\n  \"model\": \"gpt-4o-mini\",\n  \"endpoint\": \"https://api.openai.com/v1\"\n}"
+            },
+            "Webhook" => new WorkflowCredentialModel
+            {
+                CredentialName = "Webhook Receiver",
+                CredentialType = "Webhook",
+                DataJson = "{\n  \"url\": \"https://example.com/webhook\",\n  \"secret\": \"<shared-secret>\"\n}"
+            },
+            "Database" => new WorkflowCredentialModel
+            {
+                CredentialName = "Default Database",
+                CredentialType = "Database",
+                DataJson = "{\n  \"connectionString\": \"Server=.;Database=EBS;Trusted_Connection=True;\"\n}"
+            },
+            _ => new WorkflowCredentialModel()
+        };
+    }
+
+    private async Task SaveCredentialAsync()
+    {
+        if (string.IsNullOrWhiteSpace(EditingCredential.CredentialName) || string.IsNullOrWhiteSpace(EditingCredential.CredentialType))
+        {
+            ErrorMessage = Localizer["MissingCredentialFields"];
+            return;
+        }
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/Credential/Save", EditingCredential);
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                ErrorMessage = string.IsNullOrWhiteSpace(content) ? Localizer["SaveFailed"] : content;
+                return;
+            }
+
+            await LoadCredentialsAsync();
+            EditingCredential = new WorkflowCredentialModel();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
     }
 
     private async Task SaveWorkflowAsync()
@@ -326,7 +396,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">@Localizer["Credential"]</label>
-                                    <input class="form-control" @bind="NewNode.CredentialID" />
+                                    <select class="form-select" @bind="NewNode.CredentialID">
+                                        <option value="">@Localizer["SelectCredential"]</option>
+                                        @foreach (var credential in Credentials)
+                                        {
+                                            <option value="@credential.CredentialID">@credential.CredentialName (@credential.CredentialType)</option>
+                                        }
+                                    </select>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label">@Localizer["Config"]</label>
@@ -369,6 +445,39 @@
                         <div class="mt-4 d-flex gap-2">
                             <button class="btn btn-success" type="button" @onclick="SaveWorkflowAsync">@Localizer["Save"]</button>
                             <button class="btn btn-secondary" type="button" @onclick="CancelEdit">@Localizer["Cancel"]</button>
+                        </div>
+
+                        <hr />
+                        <h6>@Localizer["CredentialDefaults"]</h6>
+                        <p class="text-muted small">@Localizer["CredentialDefaultsHelp"]</p>
+                        <div class="btn-group mb-3" role="group">
+                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"OpenAI\")">OpenAI</button>
+                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"Webhook\")">Webhook</button>
+                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"Database\")">Database</button>
+                        </div>
+                        <div class="card card-body">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["CredentialName"]</label>
+                                    <input class="form-control" @bind="EditingCredential.CredentialName" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["CredentialType"]</label>
+                                    <input class="form-control" @bind="EditingCredential.CredentialType" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">@Localizer["Notes"]</label>
+                                    <input class="form-control" @bind="EditingCredential.Notes" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">@Localizer["DataJson"]</label>
+                                    <textarea class="form-control" rows="4" @bind="EditingCredential.DataJson"></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 mt-3">
+                                <button class="btn btn-outline-success" type="button" @onclick="SaveCredentialAsync">@Localizer["SaveCredential"]</button>
+                                <button class="btn btn-outline-secondary" type="button" @onclick="() => EditingCredential = new WorkflowCredentialModel()">@Localizer["Clear"]</button>
+                            </div>
                         </div>
                     }
                 </div>
