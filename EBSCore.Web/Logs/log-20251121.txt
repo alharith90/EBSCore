@@ -20,3 +20,9 @@
 2025-11-21 00:00:45.427 +04:00 [INF] [Workflow] Polling for executions
 2025-11-21 00:00:50.432 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
 2025-11-21 00:00:50.432 +04:00 [INF] [Workflow] Polling for executions
+2025-11-21 00:00:55.449 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-21 00:00:55.449 +04:00 [INF] [Workflow] Polling for executions
+2025-11-21 00:01:00.459 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-21 00:01:00.459 +04:00 [INF] [Workflow] Polling for executions
+2025-11-21 00:01:05.472 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-21 00:01:05.472 +04:00 [INF] [Workflow] Polling for executions
