@@ -51,7 +51,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Save(BIA bia)
+        public async Task<object> Save(EBSCore.Web.Models.BIA.BIA bia)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpDelete]
-        public object Delete(BIA BIA)
+        public object Delete(EBSCore.Web.Models.BIA.BIA BIA)
         {
             try
             {
