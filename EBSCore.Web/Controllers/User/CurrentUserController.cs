@@ -44,9 +44,10 @@ namespace EBSCore.Web.Controllers
         }
 
         public object UserActions(string Operation, User user) {
-       
+
             try
             {
+                objCommon.LogInfo("User action start", $"Operation:{Operation} User:{user?.Email} Session:{HttpContext?.Session?.Id}");
                 var referURL = "";
                 var UserAgent = HttpContext.Request.Headers["User-Agent"].ToString();
                 bool IsMobile = false;
@@ -92,9 +93,11 @@ namespace EBSCore.Web.Controllers
                         user.UserImage = rowUser["UserImage"].ToString();
                         user.CompanyName = rowUser["CompanyName"].ToString();
                         HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
+                        objCommon.LogInfo("Login succeeded", $"User:{user.Email} UserID:{user.UserID} Attempts:reset");
                     }
                     else
                     {
+                        objCommon.LogInfo("Login failed", $"User:{user.Email} Reason:Wrong Email Or Password");
                         throw new Exception("Wrong Email Or Password !");
                     }
                 }
@@ -147,6 +150,7 @@ namespace EBSCore.Web.Controllers
                         user.UserName = rowUser["UserName"].ToString();
                         user.UserImage = rowUser["UserImage"].ToString();
                         HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
+                        objCommon.LogInfo("User profile updated", $"User:{user.Email} UserID:{user.UserID}");
                     }
                 }
                 else if (Operation == "ForgetPassword")
@@ -162,7 +166,7 @@ namespace EBSCore.Web.Controllers
                     if (IsExist)
                     {
 
-                        // Send Email with Reset Password Link 
+                        // Send Email with Reset Password Link
 
 
                         //// Get Reset Password Email Template 
@@ -174,9 +178,11 @@ namespace EBSCore.Web.Controllers
 
                         //App_Code.Email objEmail = new App_Code.Email();
                         //objEmail.Send(user.Email.Split(','), "Reset Password", EmailBody);
+                        objCommon.LogInfo("Reset password token created", $"User:{user.Email} Token:{ResetPasswordKey}");
                     }
                     else
                     {
+                        objCommon.LogInfo("Forget password failed", $"User:{user.Email} Reason:Email Not Exist");
                         throw new Exception("Email Not Exist");
 
                     }
@@ -196,19 +202,14 @@ namespace EBSCore.Web.Controllers
                          objCommon.getIPAddres(HttpContext), referURL, UserAgent, UserAgent,
                            UserAgent, IsMobile.ToString(), HttpContext.Session.Id);
 
+                    objCommon.LogInfo("Password reset completed", $"User:{user.Email}");
+
                 }
                 return user.UserType;
             }
             catch (System.Exception ex)
             {
-                // Save Error before throw it
-
-
-                objErrorHandler.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery, "SaveErrorHandler",
-                    null, null, ex.Message, ex.Source,
-                    "URL : " + HttpContext.Request.GetDisplayUrl() + " /n Full Request : " + Request.ToString(),
-                    ex.TargetSite.ToString(),
-                    ex.StackTrace, "FromCodeBehind:UserID:RegScreen");
+                objCommon.LogError(ex, Request);
                 return BadRequest(new { message = "Call System Administrator" });
                 //  throw new HttpResponseException(HttpContext.CreateErrorResponse(HttpStatusCode.BadRequest, "Call System Administrator"));
             }

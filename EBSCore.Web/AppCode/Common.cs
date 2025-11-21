@@ -104,16 +104,65 @@ namespace EBSCore.Web.AppCode
         }
         public async void LogError(Exception ex, HttpRequest Request)
         {
-            ErrorHandler objErrorHandler = new ErrorHandler(configuration);
-            objErrorHandler.QueryDatabase(SqlQueryType.ExecuteNonQuery,
-                Operation: "SaveErrorHandler",
-                ExDate: "",
-                Message: ex.Message,
-                Form: await FormatRequest(Request),
-                Source: ex.Source,
-                TargetSite: ex.TargetSite?.Name,
-                StackTrace: ex.StackTrace,
-                UserName: currentUser?.UserName);
+            try
+            {
+                ErrorHandler objErrorHandler = new ErrorHandler(configuration);
+                objErrorHandler.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "SaveErrorHandler",
+                    ExDate: "",
+                    Message: ex.Message,
+                    Form: Request != null ? await FormatRequest(Request) : "Request context unavailable",
+                    Source: ex.Source,
+                    TargetSite: ex.TargetSite?.Name,
+                    StackTrace: ex.StackTrace,
+                    UserName: currentUser?.UserName);
+            }
+            catch
+            {
+                // Explicitly ignore logging failures to avoid breaking the caller.
+            }
+        }
+
+        public async void LogError(Exception ex, string context)
+        {
+            try
+            {
+                ErrorHandler objErrorHandler = new ErrorHandler(configuration);
+                objErrorHandler.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "SaveErrorHandler",
+                    ExDate: "",
+                    Message: ex.Message,
+                    Form: context,
+                    Source: ex.Source,
+                    TargetSite: ex.TargetSite?.Name,
+                    StackTrace: ex.StackTrace,
+                    UserName: currentUser?.UserName);
+            }
+            catch
+            {
+                // Explicitly ignore logging failures to avoid breaking the caller.
+            }
+        }
+
+        public async void LogInfo(string message, string context)
+        {
+            try
+            {
+                ErrorHandler objErrorHandler = new ErrorHandler(configuration);
+                objErrorHandler.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "SaveErrorHandler",
+                    ExDate: "",
+                    Message: message,
+                    Form: context,
+                    Source: "INFO",
+                    TargetSite: "INFO",
+                    StackTrace: string.Empty,
+                    UserName: currentUser?.UserName);
+            }
+            catch
+            {
+                // Explicitly ignore logging failures to avoid breaking the caller.
+            }
         }
 
         //public string SaveFile(string FileString)
