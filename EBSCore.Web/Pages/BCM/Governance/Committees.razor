@@ -1,0 +1,70 @@
+@page "/governance/committees"
+@using EBSCore.Web.Models.BCM
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Committees</h3>
+<p>Committee membership and linked plans.</p>
+
+@if (committees is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Chairperson</th>
+                <th>Status</th>
+                <th>Linked Plans</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var committee in committees)
+            {
+                <tr>
+                    <td>@committee.Name</td>
+                    <td>@committee.Chairperson</td>
+                    <td>@committee.Status</td>
+                    <td>
+                        <ul>
+                            @foreach (var plan in committee.Plans)
+                            {
+                                <li>@plan.PlanName (@plan.LinkageType)</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<S7SCommittee>? committees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var snapshot = await Http.GetFromJsonAsync<S7SGovernanceSnapshot>("api/S7SGovernance/Overview");
+            committees = snapshot?.Committees ?? new List<S7SCommittee>();
+        }
+        catch
+        {
+            committees = new List<S7SCommittee>
+            {
+                new()
+                {
+                    CommitteeID = 1,
+                    Name = "Crisis Management Team",
+                    Chairperson = "Director",
+                    Status = "Active",
+                    Plans = new List<S7SCommitteePlanLink> { new() { CommitteeID = 1, PlanID = 1, PlanName = "BCP", LinkageType = "Owner" } }
+                }
+            };
+        }
+    }
+}

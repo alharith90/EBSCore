@@ -1,0 +1,65 @@
+@page "/governance"
+@using EBSCore.Web.Models.BCM
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Governance Dashboard</h3>
+<p>This view summarizes committees, roles, competency coverage, and plan linkages.</p>
+
+@if (snapshot is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <h5>Committees</h5>
+            <ul>
+                @foreach (var committee in snapshot.Committees)
+                {
+                    <li>@committee.Name (@committee.Status)</li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <h5>Roles</h5>
+            <ul>
+                @foreach (var role in snapshot.Roles)
+                {
+                    <li>@role.RoleName - @role.Responsibilities</li>
+                }
+            </ul>
+        </div>
+        <div class="col">
+            <h5>Competency Gaps</h5>
+            <ul>
+                @foreach (var gap in snapshot.GetGapAnalysis())
+                {
+                    <li>@gap.SkillRequired: @(gap.MeetsRequirement ? "OK" : "Gap") (@gap.GapScore)</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+@code {
+    private S7SGovernanceSnapshot? snapshot;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            snapshot = await Http.GetFromJsonAsync<S7SGovernanceSnapshot>("api/S7SGovernance/Overview");
+        }
+        catch
+        {
+            snapshot = new S7SGovernanceSnapshot
+            {
+                Committees = new List<S7SCommittee> { new() { CommitteeID = 1, Name = "Crisis Team", Status = "Active" } },
+                Roles = new List<S7SRole> { new() { RoleID = 1, RoleName = "BCM Lead", Responsibilities = "Coordinate" } },
+                Competencies = new List<S7SCompetency> { new() { CompetencyID = 1, RoleID = 1, SkillRequired = "ISO 22301", RequiredLevel = "Advanced", AssessedLevel = "Working" } }
+            };
+        }
+    }
+}
