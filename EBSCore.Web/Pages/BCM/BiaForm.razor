@@ -59,7 +59,7 @@
 
 @code {
     [Parameter] public EventCallback OnSaved { get; set; }
-    [Parameter] public S7SBIA Model { get; set; } = new();
+    [Parameter] public Models.BIA.S7SBIA Model { get; set; } = new();
 
     private async Task HandleValidSubmit()
     {
