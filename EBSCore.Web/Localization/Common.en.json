@@ -12,8 +12,6 @@
   "Previous": "Previous",
   "EmptyTable": " No Records Available ",
   "InfoEmpty": " No Records Available ",
-<<<<<<< ours
-<<<<<<< ours
   "BCM.ViewPlan": "View Plan",
   "BCM.EditPlan": "Edit Plan",
   "BCM.ApprovePlan": "Approve Plan",
@@ -22,33 +20,31 @@
   "BCM.PlanDetails": "Plan Details",
   "BCM.PlanEditor": "Plan Editor",
   "BCM.ExerciseTracker": "Exercise Tracker",
-  "BCM.PIRForm": "Post-Incident Report"
-=======
-  "SignInTitle": "Sign In",
-  "SignInSubtitle": "Please log in to your account",
-  "SignIn": "Sign in",
-  "UserName": "User Name",
+  "BCM.PIRForm": "Post-Incident Report",
+  "Login": "Login",
+  "LoginSubtitle": "Please log in to your account",
+  "UserName": "Username",
+  "Password": "Password",
   "KeepMeSignedIn": "Keep me signed in",
-  "ForgotPassword": "Forgot Password?",
-  "ResetPasswordTitle": "Reset Password",
-  "ResetPasswordSubtitle": "Send a reset link to your email or username",
-  "UserNameOrEmail": "User name or email",
+  "ForgotPassword": "Forgot Password",
+  "OrSignInWith": "OR SIGN IN WITH",
+  "LoginSuccess": "Signed in successfully",
+  "ResetPassword": "Reset Password",
+  "ResetPasswordConfirm": "Confirm Password Reset",
   "SendResetLink": "Send Reset Link",
-  "BackToLogin": "Back to login",
-  "ResetEmailSent": "If the account exists, a reset link has been generated.",
-  "ResetEmailFailed": "Reset request failed. Please try again.",
-  "ResetPasswordConfirmTitle": "Create New Password",
-  "ResetPasswordConfirmSubtitle": "Enter a new password to secure your account",
+  "ResetLinkSent": "A reset link has been generated.",
+  "InvalidCredentials": "Invalid credentials",
+  "AccountLocked": "Your account is locked. Please try again later.",
+  "PasswordUpdatedSuccessfully": "Password updated successfully",
+  "UserNotFound": "User not found",
+  "InvalidOrExpiredToken": "The reset link is invalid or has expired",
+  "Error": "Error",
+  "UserNameOrEmail": "Username or Email",
   "NewPassword": "New Password",
-  "ConfirmPassword": "Confirm Password",
-  "PasswordResetSuccess": "Password reset successfully. You may now sign in.",
-  "PasswordResetFailed": "Unable to reset password. Please try again.",
-  "AccessDeniedTitle": "Access Denied",
-  "AccessDeniedMessage": "You do not have permission to view this page.",
-  "InvalidCredentials": "Invalid credentials"
->>>>>>> theirs
-
-=======
+  "ConfirmNewPassword": "Confirm New Password",
+  "AccessDenied": "Access Denied",
+  "AccessDeniedDescription": "You do not have permission to view this page.",
+  "BackToLogin": "Back to Login"
   "DocumentLibraryTitle": "Document Library",
   "DocumentReviewTitle": "Document Review",
   "DocumentHistoryTitle": "Document History",
@@ -62,5 +58,4 @@
   "Versions": "Versions",
   "Reviews": "Reviews",
   "Approvals": "Approvals"
->>>>>>> theirs
 }

@@ -1,14 +1,22 @@
-@page "/AccessDenied"
+@page "/access-denied"
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizerFactory LocalizerFactory
 @inject NavigationManager Navigation
 
-<h3>@Localizer["AccessDeniedTitle"]</h3>
-<p>@Localizer["AccessDeniedMessage"]</p>
-<a class="btn btn-primary" href="/login">@Localizer["BackToLogin"]</a>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm text-center p-4">
+                <h3>@Localizer["AccessDenied"]</h3>
+                <p class="text-muted">@Localizer["AccessDeniedDescription"]</p>
+                <a class="btn btn-primary" href="/login">@Localizer["BackToLogin"]</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
-    private IStringLocalizer Localizer;
+    private Microsoft.Extensions.Localization.IStringLocalizer Localizer;
 
     protected override void OnInitialized()
     {
