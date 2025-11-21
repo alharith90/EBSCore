@@ -16,6 +16,7 @@ namespace EBSCore.Web.Fillters
     {
         public string MenuCode { get; set; }
         public string ActionCode { get; set; }
+        private readonly Common _common = new Common();
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -42,6 +43,7 @@ namespace EBSCore.Web.Fillters
 
             if (menuRow == null || actionRow == null)
             {
+                _common.LogError(new Exception("Authorization target not found"), $"DbAuthorize Menu:{targetMenuCode} Action:{targetActionCode} User:{currentUser.UserID}");
                 context.Result = new ForbidResult();
                 return;
             }
@@ -55,6 +57,7 @@ namespace EBSCore.Web.Fillters
 
             if (!isAllowed)
             {
+                _common.LogError(new Exception("Permission denied"), $"DbAuthorize Denied User:{currentUser.UserID} Menu:{targetMenuCode} Action:{targetActionCode} Url:{httpContext.Request.Path}");
                 if (context.Controller is ControllerBase)
                 {
                     context.Result = new ForbidResult();
@@ -65,6 +68,8 @@ namespace EBSCore.Web.Fillters
                 }
                 return;
             }
+
+            _common.LogInfo("Authorization granted", $"User:{currentUser.UserID} Menu:{targetMenuCode} Action:{targetActionCode}");
 
             await next();
         }

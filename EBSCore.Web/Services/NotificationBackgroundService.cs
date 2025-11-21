@@ -18,6 +18,7 @@ namespace EBSCore.Web.Services
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<NotificationBackgroundService> _logger;
+        private readonly EBSCore.Web.AppCode.Common _common = new EBSCore.Web.AppCode.Common();
 
         public NotificationBackgroundService(IServiceScopeFactory scopeFactory, IHttpClientFactory httpClientFactory, ILogger<NotificationBackgroundService> logger)
         {
@@ -28,10 +29,12 @@ namespace EBSCore.Web.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _common.LogInfo("NotificationBackgroundService starting", "Background worker starting");
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
                 {
+                    _common.LogInfo("NotificationBackgroundService tick", "Polling notifications");
                     using var scope = _scopeFactory.CreateScope();
                     var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
                     var dispatcher = new DBNotificationDispatchSP(configuration);
@@ -39,12 +42,14 @@ namespace EBSCore.Web.Services
                     var dataSet = (DataSet)dispatcher.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.FillDataset, Operation: "DequeueOutbox");
                     if (dataSet == null || dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
                     {
+                        _common.LogInfo("No pending notifications", "Dispatch queue empty");
                         await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
                         continue;
                     }
 
                     var row = dataSet.Tables[0].Rows[0];
                     var item = NotificationDispatchItem.FromDataRow(row);
+                    _common.LogInfo("Dispatching notification", $"Outbox:{item.OutboxID} Channel:{item.ChannelID} Template:{item.TemplateID} Notification:{item.NotificationID}");
                     _logger.LogInformation("[Notification] Dispatching outbox item {OutboxID} via {ChannelType} to {RecipientID}", item.OutboxID, item.ChannelType, item.RecipientID);
 
                     try
@@ -55,10 +60,12 @@ namespace EBSCore.Web.Services
                             OutboxID: item.OutboxID.ToString(),
                             Status: "Succeeded",
                             ResponseJson: response ?? string.Empty);
+                        _common.LogInfo("Notification sent", $"Outbox:{item.OutboxID} Channel:{item.ChannelID} Response:{response}");
                         _logger.LogInformation("[Notification] Outbox {OutboxID} delivered", item.OutboxID);
                     }
                     catch (Exception ex)
                     {
+                        _common.LogError(ex, $"Notification send failure Outbox:{item.OutboxID} Channel:{item.ChannelID} Template:{item.TemplateID}");
                         _logger.LogError(ex, "[Notification] Failed sending Outbox {OutboxID}", item.OutboxID);
                         dispatcher.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                             Operation: "FailOutbox",
@@ -68,11 +75,13 @@ namespace EBSCore.Web.Services
                 }
                 catch (Exception ex)
                 {
+                    _common.LogError(ex, "Notification background service error");
                     _logger.LogError(ex, "Notification background service error");
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
             }
+            _common.LogInfo("NotificationBackgroundService stopping", "Background worker stopping");
         }
 
         private async Task<string?> SendAsync(NotificationDispatchItem item, CancellationToken cancellationToken)
