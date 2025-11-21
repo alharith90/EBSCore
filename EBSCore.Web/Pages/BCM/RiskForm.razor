@@ -1,0 +1,185 @@
+@page "/BCM/RiskForm"
+@page "/BCM/RiskForm/{RiskId:int}"
+@using EBSCore.Web.Models.BCM
+@using Newtonsoft.Json
+@using System.Data
+@using Microsoft.AspNetCore.Components.Forms
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@{
+    var Localizer = LocalizerFactory.Create("BCM/Risk", "");
+    var GLocalizer = LocalizerFactory.Create("Common", "");
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">@Localizer["RiskForm"]</h5>
+        <button class="btn btn-outline-dark" @onclick="GoBack"><i class="fas fa-arrow-left"></i> @GLocalizer["Back"]</button>
+    </div>
+    <div class="card-body">
+        <EditForm Model="Model" OnValidSubmit="SaveAsync">
+            <DataAnnotationsValidator />
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RiskTitle"]</label>
+                    <InputText class="form-control" @bind-Value="Model.RiskTitle" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RiskCategory"]</label>
+                    <InputSelect class="form-select" @bind-Value="Model.RiskCategoryID">
+                        <option value="">@GLocalizer["Select"]</option>
+                        @foreach (var c in Categories)
+                        {
+                            <option value="@c.RiskCategoryID">@c.CategoryName</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["Impact"]</label>
+                    <InputNumber class="form-control" @bind-Value="Model.ImpactID" />
+                    <small class="text-muted">@Localizer["ImpactHelp"]</small>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["Likelihood"]</label>
+                    <InputSelect class="form-select" @bind-Value="Model.LikelihoodID">
+                        @foreach (var l in Likelihoods)
+                        {
+                            <option value="@l.LikelihoodID">@l.LikelihoodName (@l.LikelihoodValue)</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["RiskAssessment"]</label>
+                    <InputNumber class="form-control" @bind-Value="Model.BCMRiskAssessmentId" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ImpactAspect"]</label>
+                    <InputNumber class="form-control" @bind-Value="Model.ImpactAspectID" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ImpactTimeFrame"]</label>
+                    <InputNumber class="form-control" @bind-Value="Model.ImpactTimeFrameID" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">@Localizer["RiskDescription"]</label>
+                    <InputTextArea class="form-control" @bind-Value="Model.RiskDescription" Rows="3" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">@Localizer["MitigationPlan"]</label>
+                    <InputTextArea class="form-control" @bind-Value="Model.MitigationPlan" Rows="3" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["RiskScore"]</label>
+                    <input class="form-control" value="@Model.RiskScore" disabled />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["RiskLevel"]</label>
+                    <input class="form-control" value="@Model.RiskLevel" disabled />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">@Localizer["NCEMAPillar"]</label>
+                    <input class="form-control" value="@Model.NCEMAPillar" disabled />
+                </div>
+            </div>
+            <div class="mt-3 d-flex gap-2 justify-content-end">
+                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> @GLocalizer["Save"]</button>
+                <button class="btn btn-secondary" type="button" @onclick="GoBack"><i class="fas fa-times"></i> @GLocalizer["Cancel"]</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int? RiskId { get; set; }
+
+    private S7SRisk Model { get; set; } = new();
+    private List<S7SRiskCategory> Categories { get; set; } = new();
+    private List<S7SRiskLikelihood> Likelihoods { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        PageTitleService.SetTitle(LocalizerFactory.Create("BCM/Risk", "")["RiskForm"]);
+        await LoadLookups();
+        if (RiskId.HasValue)
+        {
+            await LoadRiskAsync(RiskId.Value);
+        }
+    }
+
+    private async Task LoadLookups()
+    {
+        try
+        {
+            var catJson = await Http.GetStringAsync("/api/S7SRisk/Categories");
+            Categories = JsonConvert.DeserializeObject<List<S7SRiskCategory>>(catJson) ?? new List<S7SRiskCategory>();
+
+            var likeJson = await Http.GetStringAsync("/api/S7SRisk/Likelihoods");
+            Likelihoods = JsonConvert.DeserializeObject<List<S7SRiskLikelihood>>(likeJson) ?? new List<S7SRiskLikelihood>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Risk lookups failed: {ex.Message}");
+        }
+    }
+
+    private async Task LoadRiskAsync(int id)
+    {
+        try
+        {
+            var json = await Http.GetStringAsync($"/api/S7SRisk/Get/{id}");
+            var table = JsonConvert.DeserializeObject<DataTable>(json);
+            if (table != null && table.Rows.Count > 0)
+            {
+                var row = table.Rows[0];
+                Model.RiskID = id;
+                Model.RiskTitle = row["RiskTitle"].ToString();
+                Model.RiskDescription = row["RiskDescription"].ToString();
+                Model.MitigationPlan = row["MitigationPlan"].ToString();
+                Model.ImpactID = Convert.ToInt32(row["ImpactID"]);
+                Model.LikelihoodID = Convert.ToInt32(row["LikelihoodID"]);
+                Model.RiskCategoryID = row["RiskCategoryID"] == DBNull.Value ? null : Convert.ToInt32(row["RiskCategoryID"]);
+                Model.BCMRiskAssessmentId = row["BCMRiskAssessmentId"] == DBNull.Value ? null : Convert.ToInt32(row["BCMRiskAssessmentId"]);
+                Model.ImpactAspectID = row["ImpactAspectID"] == DBNull.Value ? null : Convert.ToInt32(row["ImpactAspectID"]);
+                Model.ImpactTimeFrameID = row["ImpactTimeFrameID"] == DBNull.Value ? null : Convert.ToInt32(row["ImpactTimeFrameID"]);
+                Model.RiskScore = Convert.ToInt32(row["RiskScore"]);
+                Model.RiskLevel = row["RiskLevel"].ToString();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Risk load failed: {ex.Message}");
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("/api/S7SRisk/Save", Model);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var table = JsonConvert.DeserializeObject<DataTable>(json);
+                if (table != null && table.Rows.Count > 0)
+                {
+                    Model.RiskScore = Convert.ToInt32(table.Rows[0]["RiskScore"]);
+                    Model.RiskLevel = table.Rows[0]["RiskLevel"].ToString();
+                }
+                Navigation.NavigateTo("/BCM/RiskIndex");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Risk save failed: {ex.Message}");
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/BCM/RiskIndex");
+    }
+}

@@ -626,6 +626,16 @@ FROM (VALUES
 ) AS v(ActionCode, ActionName, ActionNameKey, Description)
 WHERE NOT EXISTS (SELECT 1 FROM sec.Action a WHERE a.ActionCode = v.ActionCode);
 
+INSERT INTO sec.Action(ActionCode, ActionName, ActionNameKey, Description, StatusID, IsDeleted, CreatedBy)
+SELECT v.ActionCode, v.ActionName, v.ActionNameKey, v.Description, 1, 0, @AdminUserID
+FROM (VALUES
+    ('ManageMatrix', 'Manage Matrix', 'ActionManageMatrix', 'Configure risk matrices and tolerances'),
+    ('AddRisk', 'Add Risk', 'ActionAddRisk', 'Create BCM risk records'),
+    ('EditRisk', 'Edit Risk', 'ActionEditRisk', 'Update BCM risk records'),
+    ('ApproveRisk', 'Approve Risk', 'ActionApproveRisk', 'Approve BCM risks')
+) AS v(ActionCode, ActionName, ActionNameKey, Description)
+WHERE NOT EXISTS (SELECT 1 FROM sec.Action a WHERE a.ActionCode = v.ActionCode);
+
 IF NOT EXISTS (SELECT 1 FROM sec.Role WHERE RoleCode = 'ADMIN')
 BEGIN
     INSERT INTO sec.Role(RoleName, RoleCode, Description, StatusID, IsDeleted, CreatedBy)
@@ -640,6 +650,9 @@ END
 
 DECLARE @RootMenuID INT;
 DECLARE @SecurityMenuID INT;
+DECLARE @BCMMenuID INT;
+DECLARE @RiskMenuID INT;
+DECLARE @RiskMatrixMenuID INT;
 
 IF NOT EXISTS (SELECT 1 FROM sec.MenuItem WHERE MenuCode = 'Dashboard')
 BEGIN
@@ -656,6 +669,25 @@ BEGIN
 END
 
 SELECT @SecurityMenuID = MenuItemID FROM sec.MenuItem WHERE MenuCode = 'Security';
+
+IF NOT EXISTS (SELECT 1 FROM sec.MenuItem WHERE MenuCode = 'BCM')
+BEGIN
+    INSERT INTO sec.MenuItem(ParentMenuItemID, MenuCode, MenuName, MenuNameKey, Url, ApiRoute, IconCssClass, DisplayOrder, IsVisible, StatusID, IsDeleted, CreatedBy)
+    VALUES(@RootMenuID, 'BCM', 'Business Continuity', 'MenuBCM', '/BCM', NULL, 'fas fa-life-ring', 3, 1, 1, 0, @AdminUserID);
+END
+
+SELECT @BCMMenuID = MenuItemID FROM sec.MenuItem WHERE MenuCode = 'BCM';
+
+IF NOT EXISTS (SELECT 1 FROM sec.MenuItem WHERE MenuCode = 'BCM.Risk')
+    INSERT INTO sec.MenuItem(ParentMenuItemID, MenuCode, MenuName, MenuNameKey, Url, ApiRoute, IconCssClass, DisplayOrder, IsVisible, StatusID, IsDeleted, CreatedBy)
+    VALUES(@BCMMenuID, 'BCM.Risk', 'Risk Register', 'RiskRegister', '/BCM/RiskIndex', '/api/S7SRisk/Get', 'fas fa-fire', 1, 1, 1, 0, @AdminUserID);
+
+IF NOT EXISTS (SELECT 1 FROM sec.MenuItem WHERE MenuCode = 'BCM.Risk.Matrix')
+    INSERT INTO sec.MenuItem(ParentMenuItemID, MenuCode, MenuName, MenuNameKey, Url, ApiRoute, IconCssClass, DisplayOrder, IsVisible, StatusID, IsDeleted, CreatedBy)
+    VALUES(@BCMMenuID, 'BCM.Risk.Matrix', 'Risk Matrix', 'RiskMatrixConfiguration', '/BCM/RiskMatrixConfiguration', '/api/S7SRisk/MatrixConfig', 'fas fa-th-large', 2, 1, 1, 0, @AdminUserID);
+
+SELECT @RiskMenuID = MenuItemID FROM sec.MenuItem WHERE MenuCode = 'BCM.Risk';
+SELECT @RiskMatrixMenuID = MenuItemID FROM sec.MenuItem WHERE MenuCode = 'BCM.Risk.Matrix';
 
 IF NOT EXISTS (SELECT 1 FROM sec.MenuItem WHERE MenuCode = 'Security.Roles')
     INSERT INTO sec.MenuItem(ParentMenuItemID, MenuCode, MenuName, MenuNameKey, Url, ApiRoute, IconCssClass, DisplayOrder, IsVisible, StatusID, IsDeleted, CreatedBy)
@@ -676,6 +708,18 @@ FROM sec.MenuItem mi
 CROSS JOIN sec.Action a
 WHERE mi.MenuCode LIKE 'Security.%'
 AND NOT EXISTS (SELECT 1 FROM sec.MenuItemAction mia WHERE mia.MenuItemID = mi.MenuItemID AND mia.ActionID = a.ActionID);
+
+INSERT INTO sec.MenuItemAction(MenuItemID, ActionID, StatusID, IsDeleted, CreatedBy)
+SELECT @RiskMenuID, a.ActionID, 1, 0, @AdminUserID
+FROM sec.Action a
+WHERE a.ActionCode IN ('AddRisk', 'EditRisk', 'ApproveRisk')
+AND NOT EXISTS (SELECT 1 FROM sec.MenuItemAction mia WHERE mia.MenuItemID = @RiskMenuID AND mia.ActionID = a.ActionID);
+
+INSERT INTO sec.MenuItemAction(MenuItemID, ActionID, StatusID, IsDeleted, CreatedBy)
+SELECT @RiskMatrixMenuID, a.ActionID, 1, 0, @AdminUserID
+FROM sec.Action a
+WHERE a.ActionCode IN ('ManageMatrix')
+AND NOT EXISTS (SELECT 1 FROM sec.MenuItemAction mia WHERE mia.MenuItemID = @RiskMatrixMenuID AND mia.ActionID = a.ActionID);
 
 DECLARE @AdminRoleID INT = (SELECT RoleID FROM sec.Role WHERE RoleCode = 'ADMIN');
 DECLARE @AdminGroupID INT = (SELECT GroupID FROM sec.[Group] WHERE GroupCode = 'ADMINS');

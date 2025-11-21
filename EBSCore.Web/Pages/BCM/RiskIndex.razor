@@ -1,0 +1,155 @@
+@page "/BCM/RiskIndex"
+@using EBSCore.Web.Models.BCM
+@using Newtonsoft.Json
+@using System.Data
+@using System.Linq
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@inject PageTitleService PageTitleService
+
+@{
+    var Localizer = LocalizerFactory.Create("BCM/Risk", "");
+    var GLocalizer = LocalizerFactory.Create("Common", "");
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-primary">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">@Localizer["RiskRegister"]</h5>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-dark" @onclick="Refresh">
+                        <i class="fas fa-rotate"></i> @GLocalizer["Refresh"]
+                    </button>
+                    <button class="btn btn-success" @onclick="() => Navigation.NavigateTo("/BCM/RiskForm")">
+                        <i class="fas fa-plus"></i> @Localizer["AddRisk"]
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (Risks.Count == 0)
+                {
+                    <p>@GLocalizer["EmptyTable"]</p>
+                }
+                else
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>@Localizer["RiskTitle"]</th>
+                                <th>@Localizer["Impact"]</th>
+                                <th>@Localizer["Likelihood"]</th>
+                                <th>@Localizer["RiskScore"]</th>
+                                <th>@Localizer["RiskLevel"]</th>
+                                <th>@Localizer["NCEMAPillar"]</th>
+                                <th>@GLocalizer["Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var risk in Risks.Select((value, index) => new { value, index }))
+                            {
+                                <tr>
+                                    <td>@(risk.index + 1)</td>
+                                    <td>@risk.value.RiskTitle</td>
+                                    <td>@risk.value.ImpactID</td>
+                                    <td>@risk.value.LikelihoodID</td>
+                                    <td>@risk.value.RiskScore</td>
+                                    <td><span class="badge bg-primary">@risk.value.RiskLevel</span></td>
+                                    <td>@risk.value.NCEMAPillar</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" @onclick="() => Navigation.NavigateTo($"/BCM/RiskForm/{risk.value.RiskID}")">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-outline">
+            <div class="card-header">
+                <h6 class="mb-0">@Localizer["RiskHeatmap"]</h6>
+            </div>
+            <div class="card-body">
+                <div id="risk-heatmap" style="height:360px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<S7SRisk> Risks { get; set; } = new();
+    private class RiskListResponse
+    {
+        public List<S7SRisk>? Data { get; set; }
+        public int PageCount { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        PageTitleService.SetTitle(LocalizerFactory.Create("BCM/Risk", "")["RiskRegister"]);
+        await Refresh();
+    }
+
+    private async Task Refresh()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("/api/S7SRisk/Get");
+            var data = JsonConvert.DeserializeObject<RiskListResponse>(response);
+            Risks = data?.Data ?? new List<S7SRisk>();
+            await LoadHeatmapAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"RiskIndex refresh failed: {ex.Message}");
+        }
+    }
+
+    private async Task LoadHeatmapAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("/api/S7SRisk/Heatmap");
+            var ds = JsonConvert.DeserializeObject<DataSet>(response);
+            if (ds == null || ds.Tables.Count == 0)
+            {
+                return;
+            }
+
+            var points = ds.Tables[0].AsEnumerable()
+                .Select(row => new
+                {
+                    Impact = Convert.ToInt32(row["Impact"]),
+                    Likelihood = Convert.ToInt32(row["Likelihood"]),
+                    Count = Convert.ToInt32(row["RiskCount"])
+                }).ToList();
+
+            var matrixSize = 5;
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                matrixSize = Convert.ToInt32(ds.Tables[1].Rows[0]["MatrixSize"]);
+            }
+
+            int high = 15, medium = 8;
+            if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                high = Convert.ToInt32(ds.Tables[2].Rows[0]["HighThreshold"]);
+                medium = Convert.ToInt32(ds.Tables[2].Rows[0]["MediumThreshold"]);
+            }
+
+            await JS.InvokeVoidAsync("RiskHeatmap.render", "risk-heatmap", points, matrixSize, high, medium);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"RiskIndex heatmap failed: {ex.Message}");
+        }
+    }
+}
