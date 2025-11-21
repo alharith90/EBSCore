@@ -1,3 +1,4 @@
+using EBSCore.AdoClass;
 using EBSCore.AdoClass.Notification;
 using EBSCore.Web.AppCode;
 using Microsoft.Extensions.Configuration;
