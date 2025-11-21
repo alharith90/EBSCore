@@ -52,8 +52,7 @@ namespace EBSCore.Web.AppCode
         User currentUser;
         public Common()
         {
-
-            currentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
+            currentUser = httpContextAccessor?.HttpContext?.Session?.GetObject<User>("User");
         }
 
 
