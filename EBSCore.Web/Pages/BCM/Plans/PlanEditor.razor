@@ -1,0 +1,11 @@
+@page "/bcm/plans/edit/{PlanId:int?}"
+@using EBSCore.Web.Models.BCM
+@inject ILogger<PlanEditor> Logger
+
+<h3>Plan Editor</h3>
+<p>Drawer-based form placeholder.</p>
+
+@code {
+    [Parameter]
+    public int? PlanId { get; set; }
+}

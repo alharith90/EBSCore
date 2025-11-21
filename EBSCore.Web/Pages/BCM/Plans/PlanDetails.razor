@@ -1,0 +1,11 @@
+@page "/bcm/plans/{PlanId:int}"
+@using EBSCore.Web.Models.BCM
+@inject ILogger<PlanDetails> Logger
+
+<h3>Plan Details</h3>
+<p>Details for plan @PlanId.</p>
+
+@code {
+    [Parameter]
+    public int PlanId { get; set; }
+}
