@@ -1,220 +1,290 @@
-﻿using EBSCore.AdoClass;
-using EBSCore.AdoClass.Common;
+using EBSCore.AdoClass.Security;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models;
+using EBSCore.Web.Models.Security;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
 using System.Data;
-using System.Diagnostics;
-using System.Net;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
-
 
 namespace EBSCore.Web.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]/[action]")]
-	public class CurrentUserController : BaseController
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class CurrentUserController : BaseController
     {
-        private readonly ILogger<CurrentUserController> _logger;
-        private readonly IConfiguration _configuration;
-        AppCode.Common objCommon = new AppCode.Common();
-        DBUserSP objUser;
-        ErrorHandler objErrorHandler;
-        User currentUser=null;
-        MinAlakherTools.MinAlakherEncryption objEncryption = new MinAlakherTools.MinAlakherEncryption();
+        private readonly ILogger<CurrentUserController> logger;
+        private readonly IConfiguration configuration;
+        private readonly Common common = new Common();
+        private readonly DBS7SUserAuthSP authSP;
+        private readonly DBSecuritySP securitySP;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly MinAlakherTools.MinAlakherEncryption encryption = new MinAlakherTools.MinAlakherEncryption();
+        private const int DefaultLockMinutes = 15;
+        private const int DefaultMaxAttempts = 5;
 
-
-        public CurrentUserController(ILogger<CurrentUserController> logger, IConfiguration configuration)
+        public CurrentUserController(ILogger<CurrentUserController> logger, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
-            objErrorHandler = new ErrorHandler(configuration);
-            objUser = new DBUserSP(configuration);
-            _logger = logger;
-            if(HttpContext != null) { 
-               currentUser = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("User"));
-			}
-		}
-
-        [HttpPost]
-        public object Login( User user)
-        {
-            return UserActions("Login", user);
+            this.logger = logger;
+            this.configuration = configuration;
+            this.httpContextAccessor = httpContextAccessor;
+            authSP = new DBS7SUserAuthSP(configuration);
+            securitySP = new DBSecuritySP(configuration);
         }
 
-        public object UserActions(string Operation, User user) {
-
+        [HttpGet]
+        public IActionResult Login()
+        {
             try
             {
-                objCommon.LogInfo("User action start", $"Operation:{Operation} User:{user?.Email} Session:{HttpContext?.Session?.Id}");
-                var referURL = "";
-                var UserAgent = HttpContext.Request.Headers["User-Agent"].ToString();
-                bool IsMobile = false;
-                if (
-                               UserAgent.Contains("Mobile") ||
-                               UserAgent.Contains("Android") ||
-                               UserAgent.Contains("iPhone") ||
-                               UserAgent.Contains("iPad") ||
-                               UserAgent.Contains("Opera Mini") ||
-                               UserAgent.Contains("BlackBerry") ||
-                               UserAgent.Contains("IEMobile")
-                   )
-                {
-                    IsMobile = true;
-
-                }
-                if (HttpContext.Request.Headers["Referer"].ToString() != null)
-                {
-                    referURL = HttpContext.Request.Headers["Referer"].ToString();
-                }
-                if (Operation == "Login")
-                {
-                    // Encrypt Password
-
-
-                    user.Password = objEncryption.Encrypt(user.Password, objCommon.getEncryptionPassword());
-                    ///admin=EC4B7A5C7A05405DDA20D766D2BD97C8
-                    DataSet dsUser = (DataSet)objUser.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.FillDataset,
-                       "Login", null, null, user.Email, user.Password, null, null, null, null, null, null, null, null, null, null, null, null, referURL,
-                        objCommon.getIPAddres(HttpContext), referURL, UserAgent, UserAgent,
-                        UserAgent, IsMobile.ToString(), HttpContext.Session.Id);
-                    if (!objCommon.IsEmptyDataSet(dsUser))
-                    {
-
-                        DataRow rowUser = dsUser.Tables[0].Rows[0];
-                        user.UserID = rowUser["UserID"].ToString();
-                        user.Email = rowUser["Email"].ToString();
-                        user.UserFullName = rowUser["UserFullName"].ToString();
-                        user.CompanyID = rowUser["CompanyID"].ToString();
-                        user.CategoryID = rowUser["CategoryID"].ToString();
-                        user.UserType = (UserType)rowUser["UserType"];
-                        user.UserName = rowUser["UserName"].ToString();
-                        user.UserImage = rowUser["UserImage"].ToString();
-                        user.CompanyName = rowUser["CompanyName"].ToString();
-                        HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
-                        objCommon.LogInfo("Login succeeded", $"User:{user.Email} UserID:{user.UserID} Attempts:reset");
-                    }
-                    else
-                    {
-                        objCommon.LogInfo("Login failed", $"User:{user.Email} Reason:Wrong Email Or Password");
-                        throw new Exception("Wrong Email Or Password !");
-                    }
-                }
-                //else if (Operation == "Register")
-                //{
-                //    // Encrypt Password
-                //    user.Password = objEncryption.Encrypt(user.Password, objCommon.getEncryptionPassword());
-                //    DataSet dsUser = (DataSet)objUser.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.FillDataset,
-                //       "Register", null, user.Email, user.Password, user.UserFullName);
-                //    if (!objCommon.IsEmptyDataSet(dsUser))
-                //    {
-
-                //        DataRow rowUser = dsUser.Tables[0].Rows[0];
-                //        user.UserID = rowUser["UserID"].ToString();
-                //        user.Email = rowUser["Email"].ToString();
-                //        user.UserFullName = rowUser["UserFullName"].ToString();
-                //        System.Web.HttpContext.Current.Session.Add("User", user);
-                //    }
-                //    else
-                //    {
-                //        throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Wrong User"));
-
-                //    }
-                //}
-                else if (Operation == "Update")
-                {
-
-                    byte[] BytesUseImage = null;
-                    string meteUserImage = "";
-                    if (user.UserImage != "")
-                    {
-                        BytesUseImage = Convert.FromBase64String(user.UserImage.Split(',')[1]);
-                        meteUserImage = user.UserImage.Split(',')[0];
-                    }
-                    // Encrypt Password
-
-                    user.Password = objEncryption.Encrypt(user.Password, objCommon.getEncryptionPassword());
-                    DataSet dsUser = (DataSet)objUser.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.FillDataset,
-                       "UpdateUser", currentUser.UserID, currentUser.UserID, user.Email, user.Password, user.UserFullName, null, null, null,
-                        user.UserName, BytesUseImage, meteUserImage, user.Mobile, null, null, null, null, HttpContext.Request.GetDisplayUrl(),
-                        objCommon.getIPAddres(HttpContext), referURL, UserAgent, UserAgent,
-                        UserAgent, IsMobile.ToString(), HttpContext.Session.Id);
-                    if (!objCommon.IsEmptyDataSet(dsUser))
-                    {
-
-                        DataRow rowUser = dsUser.Tables[0].Rows[0];
-                        user.UserID = rowUser["UserID"].ToString();
-                        user.Email = rowUser["Email"].ToString();
-                        user.UserFullName = rowUser["UserFullName"].ToString();
-                        user.UserName = rowUser["UserName"].ToString();
-                        user.UserImage = rowUser["UserImage"].ToString();
-                        HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
-                        objCommon.LogInfo("User profile updated", $"User:{user.Email} UserID:{user.UserID}");
-                    }
-                }
-                else if (Operation == "ForgetPassword")
-                {
-                    // Encrypt Password
-                    string ResetPasswordKey = objEncryption.Encrypt(user.Email + "|" + DateTime.UtcNow.ToString(), objCommon.getEncryptionPassword());
-
-                    bool IsExist = (bool)objUser.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteScalar,
-                       "IsExistsEmail", null, null, user.Email, user.Password, user.UserFullName, user.UserName, null, null, null,
-                       null, null, null, null, null, null, null, referURL,
-                        objCommon.getIPAddres(HttpContext), referURL, UserAgent, UserAgent,
-                        UserAgent, IsMobile.ToString(), HttpContext.Session.Id, ResetPasswordKey);
-                    if (IsExist)
-                    {
-
-                        // Send Email with Reset Password Link
-
-
-                        //// Get Reset Password Email Template 
-                        //DBEmailTemplateSP objEmailTemplate = new DBEmailTemplateSP();
-                        //string EmailTemplate = objEmailTemplate.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteScalar,
-                        //"rtvByTemplateID", null, "1").ToString();
-
-                        //string EmailBody = String.Format(EmailTemplate, ResetPasswordKey);
-
-                        //App_Code.Email objEmail = new App_Code.Email();
-                        //objEmail.Send(user.Email.Split(','), "Reset Password", EmailBody);
-                        objCommon.LogInfo("Reset password token created", $"User:{user.Email} Token:{ResetPasswordKey}");
-                    }
-                    else
-                    {
-                        objCommon.LogInfo("Forget password failed", $"User:{user.Email} Reason:Email Not Exist");
-                        throw new Exception("Email Not Exist");
-
-                    }
-
-                }
-                else if (Operation == "ResetPassword")
-                {
-                    // Encrypt Password
-
-                    user.Password = objEncryption.Encrypt(user.Password, objCommon.getEncryptionPassword());
-                    user.Email = objEncryption.Decrypt(user.ResetPasswordKey, objCommon.getEncryptionPassword()).Split('|')[0];
-
-
-                    objUser.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
-                       "ResetPassword", null, null, user.Email, user.Password, user.UserFullName, user.UserName, null,
-                        null, null, null, null, null, null, null, null, null, HttpContext.Request.GetDisplayUrl(),
-                         objCommon.getIPAddres(HttpContext), referURL, UserAgent, UserAgent,
-                           UserAgent, IsMobile.ToString(), HttpContext.Session.Id);
-
-                    objCommon.LogInfo("Password reset completed", $"User:{user.Email}");
-
-                }
-                return user.UserType;
+                common.LogInfo("Login GET", $"Session:{HttpContext?.Session?.Id}");
+                return Ok();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                objCommon.LogError(ex, Request);
-                return BadRequest(new { message = "Call System Administrator" });
-                //  throw new HttpResponseException(HttpContext.CreateErrorResponse(HttpStatusCode.BadRequest, "Call System Administrator"));
+                common.LogError(ex, $"CurrentUserController.Login GET Session:{HttpContext?.Session?.Id}");
+                return BadRequest("Login unavailable");
             }
-
         }
 
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid login request");
+                }
+
+                var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
+                var ip = common.getIPAddres(HttpContext);
+                common.LogInfo("Login POST", $"User:{request.UserName} Session:{HttpContext?.Session?.Id} IP:{ip}");
+
+                var loginTable = authSP.Login(request.UserName, request.Password, request.UserName, ip, userAgent, DefaultLockMinutes, DefaultMaxAttempts);
+                if (loginTable.Rows.Count == 0)
+                {
+                    return Unauthorized(LocalizerString("InvalidCredentials"));
+                }
+
+                var loginRow = loginTable.Rows[0];
+                var isAuthenticated = loginRow.Table.Columns.Contains("IsAuthenticated") && Convert.ToBoolean(loginRow["IsAuthenticated"]);
+                var reason = loginRow.Table.Columns.Contains("Reason") ? loginRow["Reason"].ToString() : string.Empty;
+
+                if (!isAuthenticated)
+                {
+                    if (string.Equals(reason, "AccountLocked", StringComparison.OrdinalIgnoreCase))
+                    {
+                        common.LogInfo("Login locked", $"User:{request.UserName} Reason:{reason}");
+                        return Unauthorized(LocalizerString("AccountLocked"));
+                    }
+
+                    common.LogInfo("Login failed", $"User:{request.UserName} Reason:{reason}");
+                    return Unauthorized(LocalizerString("InvalidCredentials"));
+                }
+
+                var user = new User
+                {
+                    UserID = loginRow["UserID"].ToString(),
+                    Email = loginRow["Email"].ToString(),
+                    UserFullName = loginRow["UserFullName"].ToString(),
+                    CompanyID = loginRow["CompanyID"].ToString(),
+                    CategoryID = loginRow["CategoryID"].ToString(),
+                    UserType = (UserType)Convert.ToInt32(loginRow["UserType"]),
+                    UserName = loginRow["UserName"].ToString(),
+                    LastLoginAt = loginRow.Table.Columns.Contains("LastLoginAt") ? loginRow["LastLoginAt"].ToString() : null
+                };
+
+                HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
+
+                var payload = JsonSerializer.Serialize(new { user.UserID, user.UserName, issued = DateTime.UtcNow });
+                var encryptedTicket = encryption.Encrypt(payload, common.getEncryptionPassword());
+                var options = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.Strict
+                };
+                if (request.KeepMeSignedIn)
+                {
+                    options.Expires = DateTimeOffset.UtcNow.AddDays(30);
+                }
+
+                Response.Cookies.Append("AppAuth", encryptedTicket, options);
+
+                authSP.UpdateLastLogin(Convert.ToInt32(user.UserID));
+
+                var permissions = securitySP.RtvUserEffectivePermissions(Convert.ToInt32(user.UserID), Convert.ToInt32(user.UserID));
+                HttpContext.Session.SetString("Permissions", JsonConvert.SerializeObject(permissions));
+
+                common.LogInfo("Login succeeded", $"User:{request.UserName} UserID:{user.UserID}");
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, $"CurrentUserController.Login POST User:{request?.UserName}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Login failed");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            try
+            {
+                common.LogInfo("Logout", $"Session:{HttpContext?.Session?.Id}");
+                HttpContext.Session.Clear();
+                Response.Cookies.Delete("AppAuth");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, $"CurrentUserController.Logout Session:{HttpContext?.Session?.Id}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Logout failed");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            try
+            {
+                common.LogInfo("ResetPassword GET", $"Session:{HttpContext?.Session?.Id}");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, "CurrentUserController.ResetPassword GET");
+                return BadRequest("Reset password unavailable");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid request");
+                }
+
+                common.LogInfo("ResetPassword POST", $"Identifier:{request.UserNameOrEmail}");
+                var lookupTable = authSP.GetUserByUsername(request.UserNameOrEmail);
+                if (lookupTable.Rows.Count == 0)
+                {
+                    lookupTable = authSP.GetUserByEmail(request.UserNameOrEmail);
+                }
+
+                if (lookupTable.Rows.Count == 0)
+                {
+                    return NotFound(LocalizerString("UserNotFound"));
+                }
+
+                var row = lookupTable.Rows[0];
+                var userId = Convert.ToInt32(row["UserID"]);
+                var tokenTable = authSP.CreateResetToken(userId, 60);
+                var token = tokenTable.Rows.Count > 0 ? tokenTable.Rows[0]["Token"].ToString() : string.Empty;
+
+                common.LogInfo("Reset token generated", $"UserID:{userId} Token:{token}");
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, $"CurrentUserController.ResetPassword POST Identifier:{request?.UserNameOrEmail}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Reset password failed");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ResetPasswordConfirm([FromQuery] Guid token)
+        {
+            try
+            {
+                common.LogInfo("ResetPasswordConfirm GET", $"Token:{token}");
+                var tokenTable = authSP.ValidateResetToken(token);
+                if (tokenTable.Rows.Count == 0)
+                {
+                    return BadRequest(LocalizerString("InvalidOrExpiredToken"));
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, $"CurrentUserController.ResetPasswordConfirm GET Token:{token}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Token validation failed");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ResetPasswordConfirm([FromBody] ResetPasswordConfirmRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid password request");
+                }
+
+                common.LogInfo("ResetPasswordConfirm POST", $"Token:{request.Token}");
+                var tokenTable = authSP.ValidateResetToken(request.Token);
+                if (tokenTable.Rows.Count == 0)
+                {
+                    return BadRequest(LocalizerString("InvalidOrExpiredToken"));
+                }
+
+                var tokenRow = tokenTable.Rows[0];
+                var userId = Convert.ToInt32(tokenRow["UserID"]);
+                var userName = tokenRow.Table.Columns.Contains("UserName") ? tokenRow["UserName"].ToString() : string.Empty;
+                var email = tokenRow.Table.Columns.Contains("Email") ? tokenRow["Email"].ToString() : string.Empty;
+
+                authSP.ResetPassword(userId, request.Token, request.NewPassword, string.IsNullOrWhiteSpace(userName) ? email : userName);
+                authSP.UpdateLastLogin(userId);
+
+                common.LogInfo("Password reset", $"UserID:{userId}");
+                return Ok(LocalizerString("PasswordUpdatedSuccessfully"));
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, $"CurrentUserController.ResetPasswordConfirm POST Token:{request?.Token}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Password reset failed");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            try
+            {
+                common.LogInfo("AccessDenied", $"Session:{HttpContext?.Session?.Id}");
+                return Forbid();
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, "CurrentUserController.AccessDenied");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Access denied");
+            }
+        }
+
+        private string LocalizerString(string key)
+        {
+            try
+            {
+                var factory = HttpContext?.RequestServices.GetService(typeof(IStringLocalizerFactory)) as IStringLocalizerFactory;
+                var localizer = factory?.Create("Common", string.Empty);
+                return localizer?[key] ?? key;
+            }
+            catch
+            {
+                return key;
+            }
+        }
     }
 }

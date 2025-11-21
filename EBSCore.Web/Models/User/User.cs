@@ -23,6 +23,10 @@
         public string? UserStatus { get; set; }
         public string? ExpiryDate { get; set; }
 
+        public string? LastLoginAt { get; set; }
+        public int FailedLoginAttempts { get; set; }
+        public string? LockUntil { get; set; }
+
     }
     public enum UserType
     {

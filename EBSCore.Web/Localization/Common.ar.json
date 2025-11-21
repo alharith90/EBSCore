@@ -1,3 +1,27 @@
 {
-  "CreateNew": "إضافة"
+  "CreateNew": "إضافة",
+  "Login": "تسجيل الدخول",
+  "LoginSubtitle": "يرجى تسجيل الدخول إلى حسابك",
+  "UserName": "اسم المستخدم",
+  "Password": "كلمة المرور",
+  "KeepMeSignedIn": "تذكرني",
+  "ForgotPassword": "نسيت كلمة المرور",
+  "OrSignInWith": "أو سجل الدخول عبر",
+  "LoginSuccess": "تم تسجيل الدخول بنجاح",
+  "ResetPassword": "إعادة تعيين كلمة المرور",
+  "ResetPasswordConfirm": "تأكيد إعادة التعيين",
+  "SendResetLink": "إرسال رابط التعيين",
+  "ResetLinkSent": "تم إنشاء رابط إعادة التعيين.",
+  "InvalidCredentials": "بيانات الدخول غير صحيحة",
+  "AccountLocked": "تم قفل الحساب، الرجاء المحاولة لاحقاً",
+  "PasswordUpdatedSuccessfully": "تم تحديث كلمة المرور بنجاح",
+  "UserNotFound": "المستخدم غير موجود",
+  "InvalidOrExpiredToken": "الرابط غير صالح أو منتهي الصلاحية",
+  "Error": "خطأ",
+  "UserNameOrEmail": "اسم المستخدم أو البريد الإلكتروني",
+  "NewPassword": "كلمة مرور جديدة",
+  "ConfirmNewPassword": "تأكيد كلمة المرور الجديدة",
+  "AccessDenied": "ممنوع الوصول",
+  "AccessDeniedDescription": "ليست لديك صلاحية لعرض هذه الصفحة",
+  "BackToLogin": "العودة لتسجيل الدخول"
 }
