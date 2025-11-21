@@ -1,0 +1,155 @@
+@page "/Notification/Templates"
+@using EBSCore.Web.Models.Notification
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@using System.Text
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+<h3>@Localizer["PageTitle"]</h3>
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <span>@Localizer["Templates"]</span>
+                <button class="btn btn-outline-primary" @onclick="LoadTemplates">@Localizer["Refresh"]</button>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["Name"]</th>
+                            <th>@Localizer["Channel"]</th>
+                            <th>@Localizer["Subject"]</th>
+                            <th>@Localizer["Active"]</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Templates.Count == 0)
+                        {
+                            <tr><td colspan="6" class="text-center text-muted">@Localizer["NoData"]</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var template in Templates)
+                            {
+                                <tr>
+                                    <td>@template.NotificationTemplateID</td>
+                                    <td>@template.Name</td>
+                                    <td>@template.ChannelID</td>
+                                    <td>@template.Subject</td>
+                                    <td>
+                                        @if (template.IsActive)
+                                        {
+                                            <span class="badge bg-success">@Localizer["Active"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@Localizer["Inactive"]</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" @onclick="() => EditTemplate(template)">@Localizer["Edit"]</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">@Localizer["EditTemplate"]</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["Name"]</label>
+                    <input class="form-control" @bind="CurrentTemplate.Name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["TemplateKey"]</label>
+                    <input class="form-control" @bind="CurrentTemplate.TemplateKey" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["Subject"]</label>
+                    <input class="form-control" @bind="CurrentTemplate.Subject" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["Body"]</label>
+                    <textarea class="form-control" rows="5" @bind="CurrentTemplate.Body"></textarea>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" @bind="CurrentTemplate.UseDesign" />
+                    <label class="form-check-label">@Localizer["UseDesign"]</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" @bind="CurrentTemplate.IsActive" />
+                    <label class="form-check-label">@Localizer["Active"]</label>
+                </div>
+                <button class="btn btn-success" @onclick="SaveTemplate">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="ResetForm">@Localizer["Reset"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<S7SNotificationTemplate> Templates { get; set; } = new();
+    private S7SNotificationTemplate CurrentTemplate { get; set; } = new() { IsActive = true, UseDesign = true, ChannelID = 1 };
+    private IStringLocalizer Localizer { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(NavigationManager.Uri).AbsolutePath, "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        await LoadTemplates();
+    }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    private async Task LoadTemplates()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("api/S7SNotification/RtvTemplates");
+            Templates = JsonConvert.DeserializeObject<List<S7SNotificationTemplate>>(json) ?? new();
+        }
+        catch
+        {
+            Templates = new List<S7SNotificationTemplate>();
+        }
+    }
+
+    private void EditTemplate(S7SNotificationTemplate template)
+    {
+        CurrentTemplate = new S7SNotificationTemplate
+        {
+            NotificationTemplateID = template.NotificationTemplateID,
+            Name = template.Name,
+            TemplateKey = template.TemplateKey,
+            ChannelID = template.ChannelID,
+            Subject = template.Subject,
+            Body = template.Body,
+            UseDesign = template.UseDesign,
+            IsActive = template.IsActive
+        };
+    }
+
+    private async Task SaveTemplate()
+    {
+        var payload = new StringContent(JsonConvert.SerializeObject(CurrentTemplate), Encoding.UTF8, "application/json");
+        await Http.PostAsync("api/S7SNotification/SaveTemplate", payload);
+        await LoadTemplates();
+        ResetForm();
+    }
+
+    private void ResetForm()
+    {
+        CurrentTemplate = new S7SNotificationTemplate { IsActive = true, UseDesign = true, ChannelID = 1 };
+    }
+}

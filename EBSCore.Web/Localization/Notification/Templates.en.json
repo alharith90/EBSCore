@@ -1,0 +1,18 @@
+{
+  "PageTitle": "Notification Templates",
+  "Templates": "Templates",
+  "Refresh": "Refresh",
+  "Name": "Name",
+  "Channel": "Channel",
+  "Subject": "Subject",
+  "Active": "Active",
+  "Inactive": "Inactive",
+  "Edit": "Edit",
+  "EditTemplate": "Edit Template",
+  "TemplateKey": "Template Key",
+  "Body": "Body",
+  "UseDesign": "Use design",
+  "Save": "Save",
+  "Reset": "Reset",
+  "NoData": "No templates found"
+}

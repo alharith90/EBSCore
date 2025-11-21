@@ -1,0 +1,12 @@
+{
+  "PageTitle": "Notification Connections",
+  "Connections": "Connections",
+  "Refresh": "Refresh",
+  "Name": "Name",
+  "Channel": "Channel",
+  "Provider": "Provider",
+  "IsDefault": "Default",
+  "Yes": "Yes",
+  "No": "No",
+  "NoData": "No connections found"
+}

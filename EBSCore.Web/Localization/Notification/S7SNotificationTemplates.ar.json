@@ -1,0 +1,18 @@
+{
+  "PageTitle": "قوالب الإشعارات",
+  "Templates": "القوالب",
+  "Refresh": "تحديث",
+  "Name": "الاسم",
+  "Channel": "القناة",
+  "Subject": "الموضوع",
+  "Active": "فعال",
+  "Inactive": "غير فعال",
+  "Edit": "تعديل",
+  "EditTemplate": "تعديل القالب",
+  "TemplateKey": "مفتاح القالب",
+  "Body": "المحتوى",
+  "UseDesign": "استخدام التصميم",
+  "Save": "حفظ",
+  "Reset": "إعادة ضبط",
+  "NoData": "لا توجد قوالب"
+}

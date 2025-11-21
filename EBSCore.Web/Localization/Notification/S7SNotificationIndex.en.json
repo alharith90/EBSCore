@@ -1,0 +1,16 @@
+{
+  "PageTitle": "Notification Status",
+  "PendingCount": "Pending",
+  "Refresh": "Refresh",
+  "Template": "Template",
+  "Channel": "Channel",
+  "Email": "Email",
+  "Mobile": "Mobile",
+  "Status": "Status",
+  "LastTry": "Last Try",
+  "Error": "Error",
+  "NoData": "No notifications found",
+  "Sent": "Sent",
+  "Pending": "Pending",
+  "Failed": "Failed"
+}
