@@ -56,11 +56,13 @@ builder.Services.AddHttpClient("EBSCoreAPI", client =>
 });
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("EBSCoreAPI"));
 builder.Services.AddHttpClient("WorkflowHttp");
+builder.Services.AddHttpClient();
 
 // Register other services
 builder.Services.AddSingleton<ServiceLocator>();
 
 builder.Services.AddHostedService<WorkflowBackgroundService>();
+builder.Services.AddHostedService<NotificationBackgroundService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
