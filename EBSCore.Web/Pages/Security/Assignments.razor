@@ -1,0 +1,30 @@
+@page "/Security/Assignments"
+@using EBSCore.Web.Models.Security
+@using EBSCore.Web.AppCode
+@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject IHttpContextAccessor Accessor
+@inject Microsoft.Extensions.Localization.IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private Microsoft.Extensions.Localization.IStringLocalizer Localizer => LocalizerFactory.Create("Common", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">@Localizer["Assignments"]</h5>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">@Localizer["UseAssignments"]</p>
+        <div class="d-flex gap-2">
+            @if (RbacHelper.HasPermission(Accessor, Configuration, "Security.Assignments", "Add"))
+            {
+                <button class="btn btn-primary">@Localizer["Assign"]</button>
+            }
+            @if (RbacHelper.HasPermission(Accessor, Configuration, "Security.Assignments", "View"))
+            {
+                <button class="btn btn-secondary">@Localizer["Review"]</button>
+            }
+        </div>
+    </div>
+</div>

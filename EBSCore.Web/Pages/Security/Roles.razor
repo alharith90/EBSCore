@@ -1,0 +1,66 @@
+@page "/Security/Roles"
+@using EBSCore.Web.Models.Security
+@using EBSCore.Web.AppCode
+@inject HttpClient Http
+@inject IHttpContextAccessor Accessor
+@inject IConfiguration Configuration
+@inject Microsoft.Extensions.Localization.IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private List<Role> roles = new();
+    private Microsoft.Extensions.Localization.IStringLocalizer Localizer => LocalizerFactory.Create("Common", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+
+    protected override async Task OnInitializedAsync()
+    {
+        var json = await Http.GetStringAsync("/api/Security/IndexRoles");
+        roles = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Role>>(json) ?? new List<Role>();
+    }
+
+    private bool CanAdd => RbacHelper.HasPermission(Accessor, Configuration, "Security.Roles", "Add");
+    private bool CanEdit => RbacHelper.HasPermission(Accessor, Configuration, "Security.Roles", "Edit");
+    private bool CanDelete => RbacHelper.HasPermission(Accessor, Configuration, "Security.Roles", "Delete");
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">@Localizer["Roles"]</h5>
+        @if (CanAdd)
+        {
+            <button class="btn btn-primary">@Localizer["Add"]</button>
+        }
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Localizer["RoleName"]</th>
+                    <th>@Localizer["RoleCode"]</th>
+                    <th>@Localizer["Description"]</th>
+                    <th>@Localizer["Status"]</th>
+                    <th>@Localizer["Actions"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in roles)
+                {
+                    <tr>
+                        <td>@role.RoleName</td>
+                        <td>@role.RoleCode</td>
+                        <td>@role.Description</td>
+                        <td>@role.StatusID</td>
+                        <td>
+                            @if (CanEdit)
+                            {
+                                <button class="btn btn-sm btn-info">@Localizer["Edit"]</button>
+                            }
+                            @if (CanDelete)
+                            {
+                                <button class="btn btn-sm btn-danger">@Localizer["Delete"]</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+@page "/Security/RolePermissions"
+@using EBSCore.Web.Models.Security
+@using SecurityAction = EBSCore.Web.Models.Security.Action
+@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject IHttpContextAccessor Accessor
+@inject Microsoft.Extensions.Localization.IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private List<MenuItem> menus = new();
+    private List<SecurityAction> actions = new();
+    private List<RolePermission> permissions = new();
+    private int selectedRoleId;
+    private Microsoft.Extensions.Localization.IStringLocalizer Localizer => LocalizerFactory.Create("Common", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMetadata();
+    }
+
+    private async Task LoadMetadata()
+    {
+        var roleJson = await Http.GetStringAsync("/api/Security/IndexRoles");
+        var roleList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Role>>(roleJson) ?? new List<Role>();
+        selectedRoleId = roleList.FirstOrDefault()?.RoleID ?? 0;
+
+        var menuData = await Http.GetStringAsync("/api/Security/MenuItems");
+        menus = Newtonsoft.Json.JsonConvert.DeserializeObject<List<MenuItem>>(menuData) ?? new List<MenuItem>();
+
+        var actionJson = await Http.GetStringAsync("/api/Security/Actions");
+        actions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SecurityAction>>(actionJson) ?? new List<SecurityAction>();
+
+        if (selectedRoleId > 0)
+        {
+            await LoadPermissions();
+        }
+    }
+
+    private async Task LoadPermissions()
+    {
+        var permissionJson = await Http.GetStringAsync($"/api/Security/RolePermissions?roleId={selectedRoleId}");
+        permissions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<RolePermission>>(permissionJson) ?? new List<RolePermission>();
+    }
+
+    private bool IsAllowed(int menuItemId, int actionId)
+    {
+        return permissions.Any(p => p.MenuItemID == menuItemId && p.ActionID == actionId && p.IsAllowed);
+    }
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">@Localizer["Permissions"]</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>@Localizer["MenuItem"]</th>
+                    @foreach (var action in actions)
+                    {
+                        <th>@action.ActionName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menu in menus)
+                {
+                    <tr>
+                        <td>@menu.MenuName</td>
+                        @foreach (var action in actions)
+                        {
+                            <td>
+                                <input type="checkbox" checked="@IsAllowed(menu.MenuItemID, action.ActionID)" disabled />
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

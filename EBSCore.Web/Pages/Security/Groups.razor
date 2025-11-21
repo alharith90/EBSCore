@@ -1,0 +1,66 @@
+@page "/Security/Groups"
+@using EBSCore.Web.Models.Security
+@using EBSCore.Web.AppCode
+@inject HttpClient Http
+@inject IHttpContextAccessor Accessor
+@inject IConfiguration Configuration
+@inject Microsoft.Extensions.Localization.IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private List<Group> groups = new();
+    private Microsoft.Extensions.Localization.IStringLocalizer Localizer => LocalizerFactory.Create("Common", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+
+    protected override async Task OnInitializedAsync()
+    {
+        var json = await Http.GetStringAsync("/api/Security/IndexGroups");
+        groups = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Group>>(json) ?? new List<Group>();
+    }
+
+    private bool CanAdd => RbacHelper.HasPermission(Accessor, Configuration, "Security.Groups", "Add");
+    private bool CanEdit => RbacHelper.HasPermission(Accessor, Configuration, "Security.Groups", "Edit");
+    private bool CanDelete => RbacHelper.HasPermission(Accessor, Configuration, "Security.Groups", "Delete");
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">@Localizer["Groups"]</h5>
+        @if (CanAdd)
+        {
+            <button class="btn btn-primary">@Localizer["Add"]</button>
+        }
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Localizer["GroupName"]</th>
+                    <th>@Localizer["GroupCode"]</th>
+                    <th>@Localizer["Description"]</th>
+                    <th>@Localizer["Status"]</th>
+                    <th>@Localizer["Actions"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var group in groups)
+                {
+                    <tr>
+                        <td>@group.GroupName</td>
+                        <td>@group.GroupCode</td>
+                        <td>@group.Description</td>
+                        <td>@group.StatusID</td>
+                        <td>
+                            @if (CanEdit)
+                            {
+                                <button class="btn btn-sm btn-info">@Localizer["Edit"]</button>
+                            }
+                            @if (CanDelete)
+                            {
+                                <button class="btn btn-sm btn-danger">@Localizer["Delete"]</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
