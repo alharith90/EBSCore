@@ -1,0 +1,71 @@
+@using EBSCore.Web.Models.BIA
+@inject HttpClient Http
+@inject IStringLocalizer<Localization.BCM.BIA> Localizer
+
+<EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row">
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["BIACode"]</label>
+            <InputText class="form-control" @bind-Value="Model.BIACode" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["ProcessName"]</label>
+            <InputText class="form-control" @bind-Value="Model.ProcessName" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-3">
+            <label class="form-label">RTO</label>
+            <InputText class="form-control" @bind-Value="Model.RTO" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">RPO</label>
+            <InputText class="form-control" @bind-Value="Model.RPO" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">MTPD</label>
+            <InputText class="form-control" @bind-Value="Model.MTPD" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">MBCO</label>
+            <InputText class="form-control" @bind-Value="Model.MBCO" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["Criticality"]</label>
+            <InputText class="form-control" @bind-Value="Model.Criticality" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["RequiredCompetencies"]</label>
+            <InputText class="form-control" @bind-Value="Model.RequiredCompetencies" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["AlternativeWorkLocation"]</label>
+            <InputText class="form-control" @bind-Value="Model.AlternativeWorkLocation" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">@Localizer["RegulatoryRequirements"]</label>
+            <InputText class="form-control" @bind-Value="Model.RegulatoryRequirements" />
+        </div>
+    </div>
+    <button class="btn btn-primary mt-3" type="submit">@Localizer["Save"]</button>
+</EditForm>
+
+@code {
+    [Parameter] public EventCallback OnSaved { get; set; }
+    [Parameter] public S7SBIA Model { get; set; } = new();
+
+    private async Task HandleValidSubmit()
+    {
+        await Http.PostAsJsonAsync("api/S7SBIA/Save", Model);
+        if (OnSaved.HasDelegate)
+        {
+            await OnSaved.InvokeAsync();
+        }
+    }
+}

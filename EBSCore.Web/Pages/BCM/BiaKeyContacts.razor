@@ -1,0 +1,24 @@
+@using EBSCore.Web.Models.BIA
+
+<div class="card mt-3">
+    <div class="card-header">Key Contacts</div>
+    <div class="card-body">
+        <ul class="list-group">
+            @if (Items?.Count == 0)
+            {
+                <li class="list-group-item">No key contacts defined</li>
+            }
+            else
+            {
+                @foreach (var contact in Items)
+                {
+                    <li class="list-group-item">@contact.EmployeeId - @contact.Role (@contact.ContactType)</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<S7SBIAKeyContact> Items { get; set; } = new();
+}
