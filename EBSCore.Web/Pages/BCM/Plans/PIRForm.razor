@@ -1,0 +1,10 @@
+@page "/bcm/plans/{PlanId:int}/pir"
+@using EBSCore.Web.Models.BCM
+
+<h3>Post-Incident Report</h3>
+<p>NCEMA 7000 mandatory fields placeholder for plan @PlanId.</p>
+
+@code {
+    [Parameter]
+    public int PlanId { get; set; }
+}

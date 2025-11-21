@@ -1,0 +1,10 @@
+@page "/bcm/plans/{PlanId:int}/exercises"
+@using EBSCore.Web.Models.BCM
+
+<h3>Exercise Tracker</h3>
+<p>Exercises linked to plan @PlanId.</p>
+
+@code {
+    [Parameter]
+    public int PlanId { get; set; }
+}

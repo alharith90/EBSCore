@@ -11,6 +11,15 @@
   "Next": "Next",
   "Previous": "Previous",
   "EmptyTable": " No Records Available ",
-  "InfoEmpty": " No Records Available "
+  "InfoEmpty": " No Records Available ",
+  "BCM.ViewPlan": "View Plan",
+  "BCM.EditPlan": "Edit Plan",
+  "BCM.ApprovePlan": "Approve Plan",
+  "BCM.PublishPlan": "Publish Plan",
+  "BCM.PlansIndex": "BCM Plans",
+  "BCM.PlanDetails": "Plan Details",
+  "BCM.PlanEditor": "Plan Editor",
+  "BCM.ExerciseTracker": "Exercise Tracker",
+  "BCM.PIRForm": "Post-Incident Report"
 
 }
