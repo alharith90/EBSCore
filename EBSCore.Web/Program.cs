@@ -63,6 +63,7 @@ builder.Services.AddSingleton<ServiceLocator>();
 
 builder.Services.AddHostedService<WorkflowBackgroundService>();
 builder.Services.AddHostedService<NotificationBackgroundService>();
+builder.Services.AddHostedService<S7SNotificationBackgroundService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
@@ -149,10 +150,3 @@ app.MapBlazorHub(); // Enable Blazor Server
 app.MapFallbackToPage("/_Host"); // Fallback to Blazor app (_Host.cshtml)
 
 app.Run();
-
-
-
-
-
-
-
