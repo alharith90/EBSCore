@@ -3,6 +3,7 @@ using EBSCore.Web.Models.BCM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Controllers
 {
@@ -24,7 +25,7 @@ namespace EBSCore.Web.Controllers
         public IActionResult Get(int? planId)
         {
             _logger.LogInformation("Fetching BCM plans {PlanId}", planId);
-            var data = _planSp.QueryDatabase(SqlQueryType.Select, "Get", UserID: User?.Identity?.Name ?? string.Empty, PlanID: planId?.ToString() ?? string.Empty);
+            var data = _planSp.QueryDatabase(SqlQueryType.FillDataset, "Get", UserID: User?.Identity?.Name ?? string.Empty, PlanID: planId?.ToString() ?? string.Empty);
             return Ok(data);
         }
 
@@ -33,7 +34,7 @@ namespace EBSCore.Web.Controllers
         {
             _logger.LogInformation("Upserting BCM plan {Plan}", plan.PlanName);
             var result = _planSp.QueryDatabase(
-                SqlQueryType.Insert,
+                SqlQueryType.ExecuteNonQuery,
                 "Upsert",
                 UserID: User?.Identity?.Name ?? string.Empty,
                 CompanyID: plan.CompanyID.ToString(),

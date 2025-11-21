@@ -113,7 +113,7 @@ namespace EBSCore.Web.Controllers.BIA
                     WorkFlowStatus: bia.WorkFlowStatus,
                     IsDeleted: bia.IsDeleted);
 
-                _common.LogInfo($"BIA saved: {bia.BIACode}", Request);
+                _common.LogInfo($"BIA saved: {bia.BIACode}", Request?.Path.Value ?? "BIA save");
                 return "[]";
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace EBSCore.Web.Controllers.BIA
                     UserID: _currentUser.UserID,
                     BIAID: biaId.ToString());
 
-                _common.LogInfo($"BIA deleted: {biaId}", Request);
+                _common.LogInfo($"BIA deleted: {biaId}", Request?.Path.Value ?? "BIA delete");
                 return "[]";
             }
             catch (Exception ex)

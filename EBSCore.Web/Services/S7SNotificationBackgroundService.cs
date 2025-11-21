@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Services
 {
@@ -39,7 +40,10 @@ namespace EBSCore.Web.Services
                     var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
                     var sp = new DBS7SNotificationSP(configuration);
 
-                    var pending = sp.RtvPendingNotifications(25, 0);
+                    var pendingDs = (DataSet)sp.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.FillDataset,
+                        Operation: "RtvPendingNotifications",
+                        BatchSize: "25");
+                    var pending = pendingDs?.Tables.Count > 0 ? pendingDs.Tables[0] : new DataTable();
                     if (pending.Rows.Count == 0)
                     {
                         await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
@@ -57,7 +61,9 @@ namespace EBSCore.Web.Services
                         try
                         {
                             var response = await SendAsync(row, stoppingToken);
-                            sp.MarkSent(statusId, 0);
+                            sp.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                                Operation: "MarkSent",
+                                NotificationStatusID: statusId.ToString());
                             logger.LogInformation("Notification {Id} sent", statusId);
                             common.LogInfo($"Notification sent {statusId}", response ?? string.Empty);
                         }
@@ -65,7 +71,11 @@ namespace EBSCore.Web.Services
                         {
                             logger.LogError(ex, "Notification {Id} failed", statusId);
                             common.LogError(ex, $"Notification failed {statusId}");
-                            sp.MarkFailed(statusId, ex.Message, ex.StackTrace ?? string.Empty, 0);
+                            sp.QueryDatabase(DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
+                                Operation: "MarkFailed",
+                                NotificationStatusID: statusId.ToString(),
+                                ErrorMessage: ex.Message,
+                                ErrorStack: ex.StackTrace ?? string.Empty);
                         }
                     }
                 }

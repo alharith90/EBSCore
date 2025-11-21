@@ -23,5 +23,10 @@ namespace EBSCore.Web.Services
             CurrentPageTitle = title;
             return Task.CompletedTask;
         }
+
+        public void SetTitle(string title)
+        {
+            CurrentPageTitle = title;
+        }
     }
 }
