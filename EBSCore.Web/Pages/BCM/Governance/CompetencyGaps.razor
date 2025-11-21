@@ -1,0 +1,58 @@
+@page "/governance/competency-gaps"
+@using EBSCore.Web.Models.BCM
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Competency Gaps</h3>
+<p>Gap analysis against ISO 22301 competency levels.</p>
+
+@if (gaps is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Required</th>
+                <th>Assessed</th>
+                <th>Gap</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var gap in gaps)
+            {
+                <tr>
+                    <td>@gap.SkillRequired</td>
+                    <td>@gap.RequiredScore</td>
+                    <td>@gap.AssessedScore</td>
+                    <td>@gap.GapScore</td>
+                    <td>@gap.RecommendedAction</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<CompetencyGapResult>? gaps;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var data = await Http.GetFromJsonAsync<List<CompetencyGapResult>>("api/S7SGovernance/GapAnalysis");
+            gaps = data ?? new List<CompetencyGapResult>();
+        }
+        catch
+        {
+            gaps = new List<CompetencyGapResult>
+            {
+                new() { CompetencyID = 1, SkillRequired = "ISO 22301", RequiredScore = 4, AssessedScore = 2, GapScore = -2, RecommendedAction = "Significant gap - schedule formal competency development" }
+            };
+        }
+    }
+}

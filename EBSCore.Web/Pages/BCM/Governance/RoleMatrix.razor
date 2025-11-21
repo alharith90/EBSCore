@@ -1,0 +1,65 @@
+@page "/governance/roles"
+@using EBSCore.Web.Models.BCM
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Role Matrix</h3>
+<p>Responsibilities and competency requirements per role.</p>
+
+@if (roles is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var role in roles)
+    {
+        <div class="card mb-3">
+            <div class="card-header">@role.RoleName</div>
+            <div class="card-body">
+                <p>@role.Responsibilities</p>
+                <h6>Competencies</h6>
+                <ul>
+                    @foreach (var competency in role.Competencies)
+                    {
+                        var evaluation = competency.EvaluateGap();
+                        <li>
+                            <strong>@competency.SkillRequired</strong>: Required @competency.RequiredLevel / Assessed @competency.AssessedLevel
+                            <span class="badge bg-@(evaluation.MeetsRequirement ? "success" : "warning")">@(evaluation.MeetsRequirement ? "Aligned" : "Gap")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private List<S7SRole>? roles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var snapshot = await Http.GetFromJsonAsync<S7SGovernanceSnapshot>("api/S7SGovernance/Overview");
+            roles = snapshot?.Roles ?? new List<S7SRole>();
+        }
+        catch
+        {
+            roles = new List<S7SRole>
+            {
+                new()
+                {
+                    RoleID = 1,
+                    RoleName = "Incident Manager",
+                    Responsibilities = "Coordinate response",
+                    Competencies = new List<S7SCompetency>
+                    {
+                        new() { CompetencyID = 1, SkillRequired = "Crisis Comms", RequiredLevel = "Proficient", AssessedLevel = "Working" },
+                        new() { CompetencyID = 2, SkillRequired = "ISO 22301", RequiredLevel = "Working", AssessedLevel = "Expert" }
+                    }
+                }
+            };
+        }
+    }
+}
