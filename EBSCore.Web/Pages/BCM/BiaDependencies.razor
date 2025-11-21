@@ -1,0 +1,24 @@
+@using EBSCore.Web.Models.BIA
+
+<div class="card mt-3">
+    <div class="card-header">Dependencies</div>
+    <div class="card-body">
+        <ul class="list-group">
+            @if (Items?.Count == 0)
+            {
+                <li class="list-group-item">No dependencies defined</li>
+            }
+            else
+            {
+                @foreach (var dep in Items)
+                {
+                    <li class="list-group-item">@dep.DependencyType - @dep.Description</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<S7SBIADependency> Items { get; set; } = new();
+}

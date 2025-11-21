@@ -1,0 +1,50 @@
+@page "/BCM/S7SBIA"
+@using EBSCore.Web.Models.BIA
+@inject HttpClient Http
+@inject IStringLocalizer<Localization.BCM.BIA> Localizer
+@inject IJSRuntime JS
+
+<h3>@Localizer["BIA"]</h3>
+<BiaForm OnSaved="LoadAsync" />
+
+<ul class="list-group mt-3">
+    @foreach (var item in List)
+    {
+        <li class="list-group-item d-flex justify-content-between">
+            <span>@item.BIACode - @item.ProcessName</span>
+            <div>
+                <button class="btn btn-sm btn-info" @onclick="() => Edit(item)">@Localizer["Edit"]</button>
+                <button class="btn btn-sm btn-danger" @onclick="() => Delete(item)">@Localizer["Delete"]</button>
+            </div>
+        </li>
+    }
+</ul>
+
+@code {
+    private List<S7SBIA> List = new();
+    private S7SBIA? Selected;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetStringAsync("api/S7SBIA/GetList");
+        List = JsonConvert.DeserializeObject<List<S7SBIA>>(response) ?? new();
+        StateHasChanged();
+    }
+
+    private void Edit(S7SBIA item)
+    {
+        Selected = item;
+    }
+
+    private async Task Delete(S7SBIA item)
+    {
+        await Http.DeleteAsync($"api/S7SBIA/Delete?biaId={item.BIAID}");
+        await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["Deleted"] });
+        await LoadAsync();
+    }
+}

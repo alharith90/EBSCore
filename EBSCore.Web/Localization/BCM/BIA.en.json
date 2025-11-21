@@ -20,11 +20,18 @@
   "MBCODetails": "MBCO Details",
   "Priority": "Priority",
   "RequiredCompetencies": "Required Competencies",
+  "AlternativeWorkLocation": "Alternative Work Location",
+  "RegulatoryRequirements": "Regulatory Requirements",
   "RevenueLossPerHour": "Revenue Loss/Hour",
   "CostOfDowntime": "Cost Of Downtime",
   "Remarks": "Remarks",
   "LastComment": "Last Comment",
   "ReviewDate": "Review Date",
   "WorkFlowStatus": "Workflow Status",
-  "IsDeleted": "Is Deleted"
+  "IsDeleted": "Is Deleted",
+  "Save": "Save",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Deleted": "Deleted",
+  "BIA": "Business Impact Analysis"
 }
