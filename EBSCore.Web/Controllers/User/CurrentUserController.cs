@@ -2,6 +2,9 @@ using EBSCore.AdoClass.Security;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models;
 using EBSCore.Web.Models.Security;
+using AuthLoginRequest = EBSCore.Web.Models.Security.LoginRequest;
+using AuthResetPasswordRequest = EBSCore.Web.Models.Security.ResetPasswordRequest;
+using AuthResetPasswordConfirmRequest = EBSCore.Web.Models.Security.ResetPasswordConfirmRequest;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +57,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] LoginRequest request)
+        public IActionResult Login([FromBody] AuthLoginRequest request)
         {
             try
             {
@@ -183,7 +186,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ResetPassword([FromBody] ResetPasswordRequest request)
+        public IActionResult ResetPassword([FromBody] AuthResetPasswordRequest request)
         {
             try
             {
@@ -254,7 +257,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ResetPasswordConfirm([FromBody] ResetPasswordConfirmRequest request)
+        public IActionResult ResetPasswordConfirm([FromBody] AuthResetPasswordConfirmRequest request)
         {
             try
             {

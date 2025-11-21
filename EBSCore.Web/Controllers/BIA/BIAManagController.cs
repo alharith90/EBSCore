@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using EBSCore.AdoClass;
 using EBSCore.Web.Models;
+using EBSCore.Web.Models.BIA;
 using System;
 using System.Data;
 using Newtonsoft.Json;
@@ -50,11 +51,11 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Save(BIA BIA)
+        public async Task<object> Save(BIA bia)
         {
             try
             {
-                if (BIA.UnitID == null || BIA.UnitID == "")
+                if (bia.UnitID == null || bia.UnitID == "")
                 {
                     throw new Exception("Unit ID is required");
                 }
@@ -63,33 +64,33 @@ namespace EBSCore.Web.Controllers
                     Operation: "SaveBIA",
                     UserID: CurrentUser.UserID,
                     CompanyID: CurrentUser.CompanyID,
-                    BIAID: BIA.BIAID,
-                    BIACode: BIA.BIACode,
-                    UnitID: BIA.UnitID,
-                    ProcessID: BIA.ProcessID,
-                    ProcessName: BIA.ProcessName,
-                    ProcessDescription: BIA.ProcessDescription,
-                    Frequency: BIA.Frequency,
-                    Criticality: BIA.Criticality,
-                    RTO: BIA.RTO,
-                    RPO: BIA.RPO,
-                    MAO: BIA.MAO,
-                    MTPD: BIA.MTPD,
-                    MTD: BIA.MTD,
-                    MBCO: BIA.MBCO,
-                    PrimaryStaff: BIA.PrimaryStaff,
-                    BackupStaff: BIA.BackupStaff,
-                    RTOJustification: BIA.RTOJustification,
-                    MBCODetails: BIA.MBCODetails,
-                    Priority: BIA.Priority,
-                    RequiredCompetencies: BIA.RequiredCompetencies,
-                    RevenueLossPerHour: BIA.RevenueLossPerHour,
-                    CostOfDowntime: BIA.CostOfDowntime,
-                    Remarks: BIA.Remarks,
-                    LastComment: BIA.LastComment,
-                    ReviewDate: BIA.ReviewDate,
-                    WorkFlowStatus: BIA.WorkFlowStatus,
-                    IsDeleted: BIA.IsDeleted,
+                    BIAID: bia.BIAID,
+                    BIACode: bia.BIACode,
+                    UnitID: bia.UnitID,
+                    ProcessID: bia.ProcessID,
+                    ProcessName: bia.ProcessName,
+                    ProcessDescription: bia.ProcessDescription,
+                    Frequency: bia.Frequency,
+                    Criticality: bia.Criticality,
+                    RTO: bia.RTO,
+                    RPO: bia.RPO,
+                    MAO: bia.MAO,
+                    MTPD: bia.MTPD,
+                    MTD: bia.MTD,
+                    MBCO: bia.MBCO,
+                    PrimaryStaff: bia.PrimaryStaff,
+                    BackupStaff: bia.BackupStaff,
+                    RTOJustification: bia.RTOJustification,
+                    MBCODetails: bia.MBCODetails,
+                    Priority: bia.Priority,
+                    RequiredCompetencies: bia.RequiredCompetencies,
+                    RevenueLossPerHour: bia.RevenueLossPerHour,
+                    CostOfDowntime: bia.CostOfDowntime,
+                    Remarks: bia.Remarks,
+                    LastComment: bia.LastComment,
+                    ReviewDate: bia.ReviewDate,
+                    WorkFlowStatus: bia.WorkFlowStatus,
+                    IsDeleted: bia.IsDeleted,
                     CreatedBy: CurrentUser.UserID,
                     UpdatedBy: CurrentUser.UserID);
 
