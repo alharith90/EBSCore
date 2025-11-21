@@ -233,6 +233,56 @@ namespace EBSCore.AdoClass
             return ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 ? ds.Tables[0].Rows[0] : null;
         }
 
+        public DataSet SaveAll(
+            string notificationTemplateID,
+            string templateKey,
+            string name,
+            string channelID,
+            string connectionID,
+            string subject,
+            string body,
+            string useDesign,
+            string attachments,
+            string description,
+            string companyID,
+            string isActive,
+            string email,
+            string ccEmails,
+            string bccEmails,
+            string countryCode,
+            string mobileNo,
+            string toUserID,
+            string priority,
+            string scheduledAt,
+            string createdBy)
+        {
+            FieldsArrayList = new ArrayList();
+            this.Operation.SetValue("SaveAll", ref FieldsArrayList);
+            this.NotificationTemplateID.SetValue(notificationTemplateID, ref FieldsArrayList);
+            this.TemplateKey.SetValue(templateKey, ref FieldsArrayList);
+            this.Name.SetValue(name, ref FieldsArrayList);
+            this.ChannelID.SetValue(channelID, ref FieldsArrayList);
+            this.ConnectionID.SetValue(connectionID, ref FieldsArrayList);
+            this.Subject.SetValue(subject, ref FieldsArrayList);
+            this.Body.SetValue(body, ref FieldsArrayList);
+            this.UseDesign.SetValue(useDesign, ref FieldsArrayList);
+            this.Attachments.SetValue(attachments, ref FieldsArrayList);
+            this.Description.SetValue(description, ref FieldsArrayList);
+            this.CompanyID.SetValue(companyID, ref FieldsArrayList);
+            this.IsActive.SetValue(isActive, ref FieldsArrayList);
+            this.Email.SetValue(email, ref FieldsArrayList);
+            this.CCEmails.SetValue(ccEmails, ref FieldsArrayList);
+            this.BCCEmails.SetValue(bccEmails, ref FieldsArrayList);
+            this.CountryCode.SetValue(countryCode, ref FieldsArrayList);
+            this.MobileNo.SetValue(mobileNo, ref FieldsArrayList);
+            this.ToUserID.SetValue(toUserID, ref FieldsArrayList);
+            this.Priority.SetValue(priority, ref FieldsArrayList);
+            this.ScheduledAt.SetValue(scheduledAt, ref FieldsArrayList);
+            this.CreatedBy.SetValue(createdBy, ref FieldsArrayList);
+
+            return (DataSet)base.QueryDatabase(SqlQueryType.FillDataset);
+        }
+
         public int MarkSent(string notificationStatusID, string updatedBy, string exceptionID = "")
         {
             FieldsArrayList = new ArrayList();

@@ -376,10 +376,10 @@ namespace EBSCore.AdoClass.Security
                 handler.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveErrorHandler",
                     Message: ex.Message,
-                    Form: context,
-                    Source: ex.Source,
-                    TargetSite: ex.TargetSite?.Name,
-                    StackTrace: ex.StackTrace);
+                    Form: context ?? string.Empty,
+                    Source: ex.Source ?? string.Empty,
+                    TargetSite: ex.TargetSite?.Name ?? string.Empty,
+                    StackTrace: ex.StackTrace ?? string.Empty);
             }
             catch
             {
