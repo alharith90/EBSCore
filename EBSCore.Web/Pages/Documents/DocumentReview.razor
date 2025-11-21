@@ -12,7 +12,7 @@
     <ValidationSummary />
     <div class="mb-3">
         <label class="form-label">@Localizer["ReviewComments"]</label>
-        <InputTextArea class="form-control" @bind-Value="review.ReviewComments" />
+        <textarea class="form-control" rows="4" @bind-value="review.ReviewComments" @bind-value:event="oninput"></textarea>
     </div>
     <button class="btn btn-primary" type="submit">@Localizer["Submit"]</button>
 </EditForm>

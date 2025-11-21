@@ -2,6 +2,7 @@ using EBSCore.AdoClass;
 using EBSCore.AdoClass.Common;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models.BIA;
+using EBSCore.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

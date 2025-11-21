@@ -1,6 +1,7 @@
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models.BCM;
+using EBSCore.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
