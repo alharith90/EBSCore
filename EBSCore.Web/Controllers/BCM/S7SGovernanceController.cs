@@ -67,7 +67,7 @@ namespace EBSCore.Web.Controllers.BCM
             try
             {
                 _governanceSp.QueryDatabase(
-                    DBParentStoredProcedureClass.SqlQueryType.NonQuery,
+                    DBParentStoredProcedureClass.SqlQueryType.ExecuteNonQuery,
                     Operation: "upsertCompetency",
                     UserID: _currentUser?.UserID,
                     CompanyID: _currentUser?.CompanyID,

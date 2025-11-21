@@ -114,9 +114,9 @@ namespace EBSCore.Web.Controllers
                     LastLoginAt = loginRow.Table.Columns.Contains("LastLoginAt") ? loginRow["LastLoginAt"].ToString() : null
                 };
 
-                HttpContext.Session.SetString("User", JsonSerializer.Serialize(user));
+                HttpContext.Session.SetString("User", System.Text.Json.JsonSerializer.Serialize(user));
 
-                var payload = JsonSerializer.Serialize(new { user.UserID, user.UserName, issued = DateTime.UtcNow });
+                var payload = System.Text.Json.JsonSerializer.Serialize(new { user.UserID, user.UserName, issued = DateTime.UtcNow });
                 var encryptedTicket = encryption.Encrypt(payload, common.getEncryptionPassword());
                 var options = new CookieOptions
                 {

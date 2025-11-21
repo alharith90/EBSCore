@@ -4,8 +4,8 @@ using EBSCore.AdoClass.Notification;
 using EBSCore.AdoClass.Common;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models;
-using NotificationTemplate = EBSCore.Web.Models.Notification.S7SNotificationTemplate;
-using NotificationStatus = EBSCore.Web.Models.Notification.S7SNotificationStatus;
+using NotificationTemplate = EBSCore.Web.Models.S7SNotificationTemplate;
+using NotificationStatus = EBSCore.Web.Models.S7SNotificationStatus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +40,14 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                DataSet ds = notificationSP.GetStatus(PageNumber ?? "1", PageSize ?? "10", SortColumn ?? string.Empty, SortDirection ?? string.Empty, SearchQuery ?? string.Empty);
+                DataSet ds = (DataSet)notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "GetStatus",
+                    PageNumber: PageNumber ?? "1",
+                    PageSize: PageSize ?? "10",
+                    SortColumn: SortColumn ?? string.Empty,
+                    SortDirection: SortDirection ?? string.Empty,
+                    SearchQuery: SearchQuery ?? string.Empty,
+                    CompanyID: currentUser?.CompanyID ?? string.Empty);
                 var result = new
                 {
                     Data = ds.Tables.Count > 0 ? ds.Tables[0] : null,
@@ -61,7 +68,10 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                var table = notificationSP.RtvTemplates();
+                var ds = (DataSet)notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplates",
+                    CompanyID: currentUser?.CompanyID ?? string.Empty);
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
@@ -76,8 +86,11 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                var row = notificationSP.RtvTemplate(NotificationTemplateID.ToString());
-                return Ok(JsonConvert.SerializeObject(row?.Table));
+                var ds = (DataSet)notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplate",
+                    NotificationTemplateID: NotificationTemplateID.ToString(),
+                    CompanyID: currentUser?.CompanyID ?? string.Empty);
+                return Ok(JsonConvert.SerializeObject(ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable()));
             }
             catch (Exception ex)
             {
@@ -91,22 +104,22 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                var row = notificationSP.SaveTemplate(
-                    model.NotificationTemplateID?.ToString() ?? string.Empty,
-                    model.TemplateKey ?? string.Empty,
-                    model.Name ?? string.Empty,
-                    model.ChannelID?.ToString() ?? string.Empty,
-                    model.Subject ?? string.Empty,
-                    model.Body ?? string.Empty,
-                    model.UseDesign?.ToString() ?? string.Empty,
-                    model.Attachments ?? string.Empty,
-                    model.Description ?? string.Empty,
-                    model.CompanyID?.ToString() ?? string.Empty,
-                    model.IsActive?.ToString() ?? string.Empty,
-                    currentUser?.UserID?.ToString() ?? string.Empty
-                );
+                var ds = (DataSet)notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "SaveTemplate",
+                    NotificationTemplateID: model.NotificationTemplateID?.ToString() ?? string.Empty,
+                    TemplateKey: model.TemplateKey ?? string.Empty,
+                    Name: model.Name ?? string.Empty,
+                    ChannelID: model.ChannelID?.ToString() ?? string.Empty,
+                    Subject: model.Subject ?? string.Empty,
+                    Body: model.Body ?? string.Empty,
+                    UseDesign: model.UseDesign.ToString(),
+                    Attachments: model.Attachments ?? string.Empty,
+                    Description: model.Description ?? string.Empty,
+                    CompanyID: model.CompanyID?.ToString() ?? currentUser?.CompanyID ?? string.Empty,
+                    IsActive: model.IsActive.ToString(),
+                    CreatedBy: currentUser?.UserID?.ToString() ?? string.Empty);
 
-                return Ok(JsonConvert.SerializeObject(row?.Table ?? new DataTable()));
+                return Ok(JsonConvert.SerializeObject(ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable()));
             }
             catch (Exception ex)
             {
@@ -120,7 +133,10 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                notificationSP.DeleteTemplate(NotificationTemplateID.ToString(), currentUser?.UserID?.ToString() ?? string.Empty);
+                notificationSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "DeleteTemplate",
+                    NotificationTemplateID: NotificationTemplateID.ToString(),
+                    UpdatedBy: currentUser?.UserID?.ToString() ?? string.Empty);
                 return Ok("Deleted Successfully!");
             }
             catch (Exception ex)
@@ -135,24 +151,25 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                var row = notificationSP.SaveStatus(
-                    status.NotificationTemplateID?.ToString() ?? string.Empty,
-                    status.Email ?? string.Empty,
-                    status.CCEmails ?? string.Empty,
-                    status.BCCEmails ?? string.Empty,
-                    status.CountryCode?.ToString() ?? string.Empty,
-                    status.MobileNo ?? string.Empty,
-                    status.ToUserID?.ToString() ?? string.Empty,
-                    status.ChannelID?.ToString() ?? string.Empty,
-                    status.ConnectionID?.ToString() ?? string.Empty,
-                    status.Priority?.ToString() ?? string.Empty,
-                    status.ScheduledAt?.ToString("yyyy-MM-ddTHH:mm:ss") ?? string.Empty,
-                    status.ExceptionID?.ToString() ?? string.Empty,
-                    status.ErrorMessage ?? string.Empty,
-                    status.ErrorStack ?? string.Empty
-                );
+                var ds = (DataSet)notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "SaveStatus",
+                    NotificationTemplateID: status.NotificationTemplateID?.ToString() ?? string.Empty,
+                    Email: status.Email ?? string.Empty,
+                    CCEmails: status.CCEmails ?? string.Empty,
+                    BCCEmails: status.BCCEmails ?? string.Empty,
+                    CountryCode: status.CountryCode?.ToString() ?? string.Empty,
+                    MobileNo: status.MobileNo ?? string.Empty,
+                    ToUserID: status.ToUserID?.ToString() ?? string.Empty,
+                    ChannelID: status.ChannelID?.ToString() ?? string.Empty,
+                    ConnectionID: status.ConnectionID?.ToString() ?? string.Empty,
+                    Priority: status.Priority?.ToString() ?? string.Empty,
+                    ScheduledAt: status.ScheduledAt?.ToString("yyyy-MM-ddTHH:mm:ss") ?? string.Empty,
+                    ExceptionID: status.ExceptionID?.ToString() ?? string.Empty,
+                    ErrorMessage: status.ErrorMessage ?? string.Empty,
+                    ErrorStack: status.ErrorStack ?? string.Empty,
+                    CreatedBy: currentUser?.UserID ?? string.Empty);
 
-                return Ok(JsonConvert.SerializeObject(row?.Table ?? new DataTable()));
+                return Ok(JsonConvert.SerializeObject(ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable()));
             }
             catch (Exception ex)
             {
