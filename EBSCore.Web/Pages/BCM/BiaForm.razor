@@ -1,4 +1,5 @@
 @using EBSCore.Web.Models.BIA
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @inject HttpClient Http
 @inject IStringLocalizer<BCM.BIA> Localizer
@@ -9,49 +10,49 @@
     <div class="row">
         <div class="col-md-6">
             <label class="form-label">@Localizer["BIACode"]</label>
-            <InputText class="form-control" @bind-Value="Model.BIACode" />
+            <input class="form-control" @bind-value="Model.BIACode" @bind-value:event="oninput" />
         </div>
         <div class="col-md-6">
             <label class="form-label">@Localizer["ProcessName"]</label>
-            <InputText class="form-control" @bind-Value="Model.ProcessName" />
+            <input class="form-control" @bind-value="Model.ProcessName" @bind-value:event="oninput" />
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-md-3">
             <label class="form-label">RTO</label>
-            <InputText class="form-control" @bind-Value="Model.RTO" />
+            <input class="form-control" @bind-value="Model.RTO" @bind-value:event="oninput" />
         </div>
         <div class="col-md-3">
             <label class="form-label">RPO</label>
-            <InputText class="form-control" @bind-Value="Model.RPO" />
+            <input class="form-control" @bind-value="Model.RPO" @bind-value:event="oninput" />
         </div>
         <div class="col-md-3">
             <label class="form-label">MTPD</label>
-            <InputText class="form-control" @bind-Value="Model.MTPD" />
+            <input class="form-control" @bind-value="Model.MTPD" @bind-value:event="oninput" />
         </div>
         <div class="col-md-3">
             <label class="form-label">MBCO</label>
-            <InputText class="form-control" @bind-Value="Model.MBCO" />
+            <input class="form-control" @bind-value="Model.MBCO" @bind-value:event="oninput" />
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-md-6">
             <label class="form-label">@Localizer["Criticality"]</label>
-            <InputText class="form-control" @bind-Value="Model.Criticality" />
+            <input class="form-control" @bind-value="Model.Criticality" @bind-value:event="oninput" />
         </div>
         <div class="col-md-6">
             <label class="form-label">@Localizer["RequiredCompetencies"]</label>
-            <InputText class="form-control" @bind-Value="Model.RequiredCompetencies" />
+            <input class="form-control" @bind-value="Model.RequiredCompetencies" @bind-value:event="oninput" />
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-md-6">
             <label class="form-label">@Localizer["AlternativeWorkLocation"]</label>
-            <InputText class="form-control" @bind-Value="Model.AlternativeWorkLocation" />
+            <input class="form-control" @bind-value="Model.AlternativeWorkLocation" @bind-value:event="oninput" />
         </div>
         <div class="col-md-6">
             <label class="form-label">@Localizer["RegulatoryRequirements"]</label>
-            <InputText class="form-control" @bind-Value="Model.RegulatoryRequirements" />
+            <input class="form-control" @bind-value="Model.RegulatoryRequirements" @bind-value:event="oninput" />
         </div>
     </div>
     <button class="btn btn-primary mt-3" type="submit">@Localizer["Save"]</button>

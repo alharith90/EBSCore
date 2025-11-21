@@ -1,4 +1,4 @@
-﻿namespace EBSCore.Web.Models
+namespace EBSCore.Web.Models.BIA
 {
     public class BIA
     {

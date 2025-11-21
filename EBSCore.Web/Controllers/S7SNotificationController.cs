@@ -1,7 +1,9 @@
 using EBSCore.AdoClass;
+using EBSCore.AdoClass.Notification;
 using EBSCore.Web.AppCode;
 using EBSCore.Web.Models;
-using EBSCore.Web.Models.Notification;
+using NotificationTemplate = EBSCore.Web.Models.Notification.S7SNotificationTemplate;
+using NotificationStatus = EBSCore.Web.Models.Notification.S7SNotificationStatus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -96,7 +98,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> SaveTemplate([FromBody] S7SNotificationTemplate template)
+        public async Task<object> SaveTemplate([FromBody] NotificationTemplate template)
         {
             try
             {
@@ -183,7 +185,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> SaveStatus([FromBody] S7SNotificationStatus status)
+        public async Task<object> SaveStatus([FromBody] NotificationStatus status)
         {
             try
             {
