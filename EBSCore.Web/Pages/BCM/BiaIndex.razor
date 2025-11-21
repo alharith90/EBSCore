@@ -2,8 +2,9 @@
 @using EBSCore.Web.Models.BIA
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
+@using Newtonsoft.Json
 @inject HttpClient Http
-@inject IStringLocalizer<Localization.BCM.BIA> Localizer
+@inject IStringLocalizer<BCM.BIA> Localizer
 @inject IJSRuntime JS
 
 <h3>@Localizer["BIA"]</h3>
@@ -23,8 +24,8 @@
 </ul>
 
 @code {
-    private List<S7SBIA> List = new();
-    private S7SBIA? Selected;
+    private List<Models.BIA.S7SBIA> List = new();
+    private Models.BIA.S7SBIA? Selected;
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,16 +35,16 @@
     private async Task LoadAsync()
     {
         var response = await Http.GetStringAsync("api/S7SBIA/GetList");
-        List = JsonConvert.DeserializeObject<List<S7SBIA>>(response) ?? new();
+        List = JsonConvert.DeserializeObject<List<Models.BIA.S7SBIA>>(response) ?? new();
         StateHasChanged();
     }
 
-    private void Edit(S7SBIA item)
+    private void Edit(Models.BIA.S7SBIA item)
     {
         Selected = item;
     }
 
-    private async Task Delete(S7SBIA item)
+    private async Task Delete(Models.BIA.S7SBIA item)
     {
         await Http.DeleteAsync($"api/S7SBIA/Delete?biaId={item.BIAID}");
         await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["Deleted"] });

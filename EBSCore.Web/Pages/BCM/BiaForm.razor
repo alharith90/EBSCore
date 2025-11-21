@@ -1,6 +1,7 @@
 @using EBSCore.Web.Models.BIA
+@using Microsoft.Extensions.Localization
 @inject HttpClient Http
-@inject IStringLocalizer<Localization.BCM.BIA> Localizer
+@inject IStringLocalizer<BCM.BIA> Localizer
 
 <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />

@@ -1,5 +1,5 @@
+@using EBSCore.Web.Models
 @using EBSCore.Web.Models.BIA
-
 <div class="card mt-3">
     <div class="card-header">Dependencies</div>
     <div class="card-body">
@@ -20,5 +20,5 @@
 </div>
 
 @code {
-    [Parameter] public List<S7SBIADependency> Items { get; set; } = new();
+    [Parameter] public List<Models.BIA.S7SBIADependency> Items { get; set; } = new();
 }
