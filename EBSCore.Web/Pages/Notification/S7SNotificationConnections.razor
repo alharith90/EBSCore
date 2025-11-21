@@ -1,0 +1,75 @@
+@page "/Notification/Connections"
+@using EBSCore.Web.Models.Notification
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+<h3>@Localizer["PageTitle"]</h3>
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <span>@Localizer["Connections"]</span>
+        <button class="btn btn-outline-primary" @onclick="LoadConnections">@Localizer["Refresh"]</button>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@Localizer["Name"]</th>
+                    <th>@Localizer["Channel"]</th>
+                    <th>@Localizer["Provider"]</th>
+                    <th>@Localizer["IsDefault"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Connections.Count == 0)
+                {
+                    <tr><td colspan="5" class="text-center text-muted">@Localizer["NoData"]</td></tr>
+                }
+                else
+                {
+                    @foreach (var connection in Connections)
+                    {
+                        <tr>
+                            <td>@connection.NotificationConnectionID</td>
+                            <td>@connection.Name</td>
+                            <td>@connection.ChannelID</td>
+                            <td>@connection.ProviderType</td>
+                            <td>@(connection.IsDefault ? Localizer["Yes"] : Localizer["No"])</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<S7SNotificationConnection> Connections { get; set; } = new();
+    private IStringLocalizer Localizer { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(NavigationManager.Uri).AbsolutePath, "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        await LoadConnections();
+    }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    private async Task LoadConnections()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("api/S7SNotification/RtvConnections");
+            Connections = JsonConvert.DeserializeObject<List<S7SNotificationConnection>>(json) ?? new();
+        }
+        catch
+        {
+            Connections = new List<S7SNotificationConnection>();
+        }
+    }
+}

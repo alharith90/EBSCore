@@ -1,0 +1,97 @@
+@page "/Notification"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.Notification
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+<h3>@Localizer["PageTitle"]</h3>
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <span class="badge bg-info">@Localizer["PendingCount"]: @Statuses.Count</span>
+        </div>
+        <button class="btn btn-outline-primary" @onclick="LoadStatuses">@Localizer["Refresh"]</button>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@Localizer["Template"]</th>
+                    <th>@Localizer["Channel"]</th>
+                    <th>@Localizer["Email"]</th>
+                    <th>@Localizer["Mobile"]</th>
+                    <th>@Localizer["Status"]</th>
+                    <th>@Localizer["LastTry"]</th>
+                    <th>@Localizer["Error"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Statuses.Count == 0)
+                {
+                    <tr><td colspan="8" class="text-center text-muted">@Localizer["NoData"]</td></tr>
+                }
+                else
+                {
+                    @foreach (var item in Statuses)
+                    {
+                        <tr>
+                            <td>@item.S7SNotificationStatusID</td>
+                            <td>@item.NotificationTemplateID</td>
+                            <td>@item.ChannelID</td>
+                            <td>@item.Email</td>
+                            <td>@item.MobileNo</td>
+                            <td>
+                                @if (item.Sent)
+                                {
+                                    <span class="badge bg-success">@Localizer["Sent"]</span>
+                                }
+                                else if (item.TryAgain)
+                                {
+                                    <span class="badge bg-warning text-dark">@Localizer["Pending"] (@item.NoOfTry/@item.MaxTry)</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">@Localizer["Failed"]</span>
+                                }
+                            </td>
+                            <td>@item.LastTryDate?.ToLocalTime().ToString("g")</td>
+                            <td>@item.ErrorMessage</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<S7SNotificationStatus> Statuses { get; set; } = new();
+    private IStringLocalizer Localizer { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(NavigationManager.Uri).AbsolutePath, "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        await LoadStatuses();
+    }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    private async Task LoadStatuses()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("api/S7SNotification/RtvStatusList");
+            Statuses = JsonConvert.DeserializeObject<List<S7SNotificationStatus>>(json) ?? new();
+        }
+        catch
+        {
+            Statuses = new List<S7SNotificationStatus>();
+        }
+    }
+}
