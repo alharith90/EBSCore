@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 namespace EBSCore.Web.AppCode
 {
@@ -25,7 +26,36 @@ namespace EBSCore.Web.AppCode
 
         public LocalizedString this[string name] => GetString(name);
 
-        public LocalizedString this[string name, params object[] args] => throw new NotImplementedException();
+        public LocalizedString this[string name, params object[] args]
+        {
+            get
+            {
+                try
+                {
+                    var localizedString = GetString(name);
+
+                    if (localizedString.ResourceNotFound)
+                    {
+                        return localizedString;
+                    }
+
+                    var formattedValue = string.Format(_culture ?? CultureInfo.CurrentCulture, localizedString.Value, args);
+                    return new LocalizedString(name, formattedValue);
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        new Common().LogError(ex, $"Localization formatting failed for key '{name}'");
+                    }
+                    catch
+                    {
+                    }
+
+                    return new LocalizedString(name, name, true);
+                }
+            }
+        }
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
