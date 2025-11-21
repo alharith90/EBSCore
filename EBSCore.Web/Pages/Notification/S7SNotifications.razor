@@ -1,0 +1,456 @@
+@page "/Notification/S7SNotifications"
+@using System.Net.Http.Json
+@using System.Text
+@using EBSCore.Web.Models
+@using EBSCore.Web.AppCode
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@inject HttpClient Http
+@inject NavigationManager Nav
+@inject IStringLocalizerFactory LocalizerFactory
+@inject IJSRuntime JS
+@inject IConfiguration Configuration
+@inject IHttpContextAccessor Accessor
+@inject PageTitleService PageTitleService
+
+<h3>@L["Notification"]</h3>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <input class="form-control" style="min-width:220px" placeholder='@GL["Search"]' @bind="searchQuery" @bind:event="oninput" />
+            <button class="btn btn-outline-dark" @onclick="LoadAsync"><i class="fas fa-search"></i> @GL["Search"]</button>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            @if (CanManageTemplates)
+            {
+                <button class="btn btn-success" @onclick="NewTemplate"><i class="fas fa-plus"></i> @L["S7SNotificationTemplate"]</button>
+            }
+            @if (CanManageChannels)
+            {
+                <button class="btn btn-primary" @onclick="NewChannel"><i class="fas fa-plus"></i> @L["Channel"]</button>
+                <button class="btn btn-info" @onclick="NewConnection"><i class="fas fa-plug"></i> @L["Connection"]</button>
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        @if (notifications?.Any() == true)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@L["Channel"]</th>
+                            <th>@L["S7SNotificationTemplate"]</th>
+                            <th>@L["Status"]</th>
+                            <th>@L["Priority"]</th>
+                            <th>@L["ScheduledAt"]</th>
+                            <th>@L["CreatedAt"]</th>
+                            <th>@GL["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var (item, idx) in notifications.Select((n, i) => (n, i + 1)))
+                        {
+                            <tr>
+                                <td>@idx</td>
+                                <td>@(item.ChannelID)</td>
+                                <td>@item.NotificationTemplateID</td>
+                                <td>
+                                    @if (item.Sent == true && item.Success == true)
+                                    {
+                                        <span class="badge bg-success">@L["MarkSent"]</span>
+                                    }
+                                    else if (item.Sent == true && item.Success == false)
+                                    {
+                                        <span class="badge bg-danger">@L["MarkFailed"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">@L["Status"]</span>
+                                    }
+                                </td>
+                                <td>@item.Priority</td>
+                                <td>@item.ScheduledAt?.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td>@item.CreatedAt?.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td class="d-flex gap-1">
+                                    <button class="btn btn-sm btn-info" @onclick="() => ShowHistory(item)"><i class="fas fa-history"></i></button>
+                                    @if (CanManageTemplates)
+                                    {
+                                        <button class="btn btn-sm btn-secondary" @onclick="() => Retry(item)"><i class="fas fa-redo"></i> @L["Retry"]</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>@GL["EmptyTable"]</p>
+        }
+    </div>
+</div>
+
+@if (showTemplateModal)
+{
+    <div class="modal d-block" style="background:rgba(0,0,0,.5)">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@L["S7SNotificationTemplate"]</h5>
+                    <button type="button" class="btn-close" @onclick="CloseTemplate"></button>
+                </div>
+                <EditForm EditContext="templateContext" OnValidSubmit="SaveTemplateAsync">
+                    <div class="modal-body">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">@L["TemplateName"]</label>
+                                <InputText class="form-control" @bind-Value="currentTemplate.Name" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["TemplateKey"]</label>
+                                <InputText class="form-control" @bind-Value="currentTemplate.TemplateKey" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["Channel"]</label>
+                                <InputSelect class="form-select" @bind-Value="currentTemplate.ChannelID">
+                                    <option value="">@GL["Select"]</option>
+                                    @foreach (var c in channels)
+                                    {
+                                        <option value="@c.NotificationChannelID">@c.Name</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["Priority"]</label>
+                                <InputNumber TValue="int?" class="form-control" @bind-Value="templatePriority" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["Subject"]</label>
+                                <InputText class="form-control" @bind-Value="currentTemplate.Subject" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">@L["Body"]</label>
+                                <InputTextArea class="form-control" rows="4" @bind-Value="currentTemplate.Body" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@L["Attachments"]</label>
+                                <InputText class="form-control" @bind-Value="currentTemplate.Attachments" />
+                            </div>
+                            <div class="col-md-6 form-check mt-4">
+                                <InputCheckbox class="form-check-input" @bind-Value="currentTemplate.UseDesign" />
+                                <label class="form-check-label">@L["UseDesign"]</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> @GL["Save"]</button>
+                        <button class="btn btn-light btn-outline-dark" type="button" @onclick="CloseTemplate">@GL["Cancel"]</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showConnectionModal)
+{
+    <div class="modal d-block" style="background:rgba(0,0,0,.5)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@L["Connection"]</h5>
+                    <button type="button" class="btn-close" @onclick="CloseConnection"></button>
+                </div>
+                <EditForm EditContext="connectionContext" OnValidSubmit="SaveConnectionAsync">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">@L["Name"]</label>
+                            <InputText class="form-control" @bind-Value="currentConnection.Name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">@L["Channel"]</label>
+                            <InputSelect class="form-select" @bind-Value="currentConnection.ChannelID">
+                                <option value="">@GL["Select"]</option>
+                                @foreach (var c in channels)
+                                {
+                                    <option value="@c.NotificationChannelID">@c.Name</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">@L["ProviderType"]</label>
+                            <InputText class="form-control" @bind-Value="currentConnection.ProviderType" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">@L["ConfigurationJson"]</label>
+                            <InputTextArea class="form-control" rows="4" @bind-Value="currentConnection.ConfigurationJson" />
+                        </div>
+                        <div class="form-check">
+                            <InputCheckbox class="form-check-input" @bind-Value="currentConnection.IsDefault" />
+                            <label class="form-check-label">@L["Default"]</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit">@GL["Save"]</button>
+                        <button class="btn btn-light btn-outline-dark" type="button" @onclick="CloseConnection">@GL["Cancel"]</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showHistory)
+{
+    <div class="modal d-block" style="background:rgba(0,0,0,.5)">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@L["History"]</h5>
+                    <button type="button" class="btn-close" @onclick="CloseHistory"></button>
+                </div>
+                <div class="modal-body">
+                    @if (historyEntries.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead><tr><th>#</th><th>@L["ChangeType"]</th><th>@L["CreatedAt"]</th></tr></thead>
+                            <tbody>
+                                @foreach (var (h,i) in historyEntries.Select((h,i)=>(h,i+1)))
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@h.ChangeType</td>
+                                        <td>@h.CreatedAt?.ToString("yyyy-MM-dd HH:mm")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GL["EmptyTable"]</p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light btn-outline-dark" type="button" @onclick="CloseHistory">@GL["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    IStringLocalizer L = default!; IStringLocalizer GL = default!;
+    List<S7SNotificationStatus> notifications = new();
+    List<S7SNotificationTemplate> templates = new();
+    List<S7SNotificationChannel> channels = new();
+    List<S7SNotificationConnection> connections = new();
+    List<S7SNotificationHistory> historyEntries = new();
+
+    bool showTemplateModal = false;
+    bool showConnectionModal = false;
+    bool showHistory = false;
+
+    EditContext templateContext = default!;
+    EditContext connectionContext = default!;
+
+    S7SNotificationTemplate currentTemplate = new();
+    S7SNotificationConnection currentConnection = new();
+    S7SNotificationStatus? selectedStatus = null;
+    int? templatePriority = 1;
+    string searchQuery = string.Empty;
+
+    bool CanManageTemplates => RbacHelper.HasPermission(Accessor, Configuration, "Notification.S7S", "Edit");
+    bool CanManageChannels => RbacHelper.HasPermission(Accessor, Configuration, "Notification.S7S", "Add");
+
+    protected override async Task OnInitializedAsync()
+    {
+        L = LocalizerFactory.Create(new Uri(Nav.Uri).AbsolutePath, "");
+        GL = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = L["Notification"];
+        await LoadAsync();
+    }
+
+    async Task LoadAsync()
+    {
+        await LoadChannelsAsync();
+        await LoadConnectionsAsync();
+        await LoadTemplatesAsync();
+        await LoadNotificationsAsync();
+    }
+
+    async Task LoadNotificationsAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync($"/api/S7SNotification/Index?SearchQuery={Uri.EscapeDataString(searchQuery ?? string.Empty)}");
+            var token = Newtonsoft.Json.Linq.JToken.Parse(json);
+            var outer = token.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)token) : token;
+            notifications = outer["Data"].ToObject<List<S7SNotificationStatus>>() ?? new List<S7SNotificationStatus>();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task LoadTemplatesAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("/api/S7SNotification/Templates");
+            var token = Newtonsoft.Json.Linq.JToken.Parse(json);
+            var outer = token.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)token) : token;
+            templates = outer.ToObject<List<S7SNotificationTemplate>>() ?? new List<S7SNotificationTemplate>();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task LoadChannelsAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("/api/S7SNotification/Channels");
+            var token = Newtonsoft.Json.Linq.JToken.Parse(json);
+            var outer = token.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)token) : token;
+            channels = outer.ToObject<List<S7SNotificationChannel>>() ?? new List<S7SNotificationChannel>();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task LoadConnectionsAsync()
+    {
+        try
+        {
+            var json = await Http.GetStringAsync("/api/S7SNotification/Connections");
+            var token = Newtonsoft.Json.Linq.JToken.Parse(json);
+            var outer = token.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)token) : token;
+            connections = outer.ToObject<List<S7SNotificationConnection>>() ?? new List<S7SNotificationConnection>();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    void NewTemplate()
+    {
+        currentTemplate = new();
+        templatePriority = 1;
+        templateContext = new EditContext(currentTemplate);
+        showTemplateModal = true;
+    }
+
+    void NewConnection()
+    {
+        currentConnection = new();
+        connectionContext = new EditContext(currentConnection);
+        showConnectionModal = true;
+    }
+
+    void NewChannel()
+    {
+        // Channels are seeded; placeholder for future creation.
+        JS.InvokeVoidAsync("Swal.fire", new { icon = "info", title = L["Channel"].Value, text = L["Channel"] });
+    }
+
+    async Task SaveTemplateAsync()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("/api/S7SNotification/SaveTemplate", currentTemplate);
+            if (response.IsSuccessStatusCode)
+            {
+                showTemplateModal = false;
+                await LoadTemplatesAsync();
+                await LoadNotificationsAsync();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = response.ReasonPhrase });
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task SaveConnectionAsync()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("/api/S7SNotification/SaveConnection", currentConnection);
+            if (response.IsSuccessStatusCode)
+            {
+                showConnectionModal = false;
+                await LoadConnectionsAsync();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = response.ReasonPhrase });
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task Retry(S7SNotificationStatus status)
+    {
+        try
+        {
+            await Http.PostAsJsonAsync("/api/S7SNotification/SaveStatus", new S7SNotificationStatus
+            {
+                NotificationTemplateID = status.NotificationTemplateID,
+                Email = status.Email,
+                MobileNo = status.MobileNo,
+                ChannelID = status.ChannelID,
+                ConnectionID = status.ConnectionID,
+                Priority = status.Priority,
+                ScheduledAt = DateTime.UtcNow
+            });
+            await LoadNotificationsAsync();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    async Task ShowHistory(S7SNotificationStatus status)
+    {
+        selectedStatus = status;
+        try
+        {
+            var json = await Http.GetStringAsync($"/api/S7SNotification/History?NotificationStatusID={status.NotificationStatusID}");
+            var token = Newtonsoft.Json.Linq.JToken.Parse(json);
+            var outer = token.Type == Newtonsoft.Json.Linq.JTokenType.String ? Newtonsoft.Json.Linq.JToken.Parse((string)token) : token;
+            historyEntries = outer["Data"].ToObject<List<S7SNotificationHistory>>() ?? new List<S7SNotificationHistory>();
+            showHistory = true;
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error", text = ex.Message });
+        }
+    }
+
+    void CloseTemplate() => showTemplateModal = false;
+    void CloseConnection() => showConnectionModal = false;
+    void CloseHistory() => showHistory = false;
+}

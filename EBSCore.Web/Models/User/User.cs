@@ -1,4 +1,5 @@
-﻿namespace EBSCore.Web.Models
+using System;
+namespace EBSCore.Web.Models
 {
     public class User
     {

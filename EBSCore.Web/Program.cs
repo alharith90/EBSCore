@@ -63,6 +63,7 @@ builder.Services.AddSingleton<ServiceLocator>();
 
 builder.Services.AddHostedService<WorkflowBackgroundService>();
 builder.Services.AddHostedService<NotificationBackgroundService>();
+builder.Services.AddHostedService<S7SNotificationBackgroundService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
@@ -112,6 +113,8 @@ app.Use(async (ctx, next) =>
         path.StartsWithSegments("/images") ||
         path.StartsWithSegments("/favicon.ico") ||
         path.StartsWithSegments("/api/CurrentUser/Login") ||
+        path.StartsWithSegments("/api/CurrentUser/ResetPassword") ||
+        path.StartsWithSegments("/api/CurrentUser/ResetPasswordConfirm") ||
         path.StartsWithSegments("/api/workflows/webhook");
 
     if (!allow)
@@ -149,10 +152,3 @@ app.MapBlazorHub(); // Enable Blazor Server
 app.MapFallbackToPage("/_Host"); // Fallback to Blazor app (_Host.cshtml)
 
 app.Run();
-
-
-
-
-
-
-

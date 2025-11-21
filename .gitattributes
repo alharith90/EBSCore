@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Enforce UTF-8-friendly LF endings on key source assets
+*.cs text eol=lf
+*.razor text eol=lf
+*.json text eol=lf
+*.sql text eol=lf

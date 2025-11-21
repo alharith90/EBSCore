@@ -45,4 +45,17 @@
   "AccessDenied": "Access Denied",
   "AccessDeniedDescription": "You do not have permission to view this page.",
   "BackToLogin": "Back to Login"
+  "DocumentLibraryTitle": "Document Library",
+  "DocumentReviewTitle": "Document Review",
+  "DocumentHistoryTitle": "Document History",
+  "CommunicationLogsTitle": "Communication Logs",
+  "CommunicationLogsDescription": "Queue and track document-related notifications.",
+  "QueueNotifications": "Queue Review Notifications",
+  "Reference": "Reference",
+  "Version": "Version",
+  "NextReviewDate": "Next Review",
+  "DocumentWorkflow": "Document Workflow",
+  "Versions": "Versions",
+  "Reviews": "Reviews",
+  "Approvals": "Approvals"
 }

@@ -55,6 +55,8 @@ namespace EBSCore.Web.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
+        public object UserActions(string Operation, User user) {
+
             try
             {
                 if (!ModelState.IsValid)
@@ -71,6 +73,12 @@ namespace EBSCore.Web.Controllers
                 {
                     return Unauthorized(LocalizerString("InvalidCredentials"));
                 }
+                {
+                    return Unauthorized(new { message = "Invalid credentials" });
+                }
+                if (Operation == "Login")
+                {
+                    // Encrypt Password
 
                 var loginRow = loginTable.Rows[0];
                 var isAuthenticated = loginRow.Table.Columns.Contains("IsAuthenticated") && Convert.ToBoolean(loginRow["IsAuthenticated"]);
@@ -130,6 +138,29 @@ namespace EBSCore.Web.Controllers
             {
                 common.LogError(ex, $"CurrentUserController.Login POST User:{request?.UserName}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Login failed");
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, Request);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public object Logout()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                Response.Cookies.Delete("AppAuth");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, Request);
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -162,6 +193,23 @@ namespace EBSCore.Web.Controllers
             {
                 common.LogError(ex, "CurrentUserController.ResetPassword GET");
                 return BadRequest("Reset password unavailable");
+                        //App_Code.Email objEmail = new App_Code.Email();
+                        //objEmail.Send(user.Email.Split(','), "Reset Password", EmailBody);
+                        objCommon.LogInfo("Reset password token created", $"User:{user.Email} Token:{ResetPasswordKey}");
+                    }
+                    else
+                    {
+                        objCommon.LogInfo("Forget password failed", $"User:{user.Email} Reason:Email Not Exist");
+                        throw new Exception("Email Not Exist");
+
+                var token = dsToken.Tables[0].Rows[0]["Token"].ToString();
+                var resetLink = Url.Action("ResetPasswordConfirm", "Account", new { token }, Request.Scheme);
+                return Ok(new { token, resetLink });
+            }
+            catch (Exception ex)
+            {
+                common.LogError(ex, Request);
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -232,6 +280,7 @@ namespace EBSCore.Web.Controllers
                 {
                     return BadRequest("Invalid password request");
                 }
+                    objCommon.LogInfo("Password reset completed", $"User:{user.Email}");
 
                 common.LogInfo("ResetPasswordConfirm POST", $"Token:{request.Token}");
                 var tokenTable = authSP.ValidateResetToken(request.Token);
@@ -255,6 +304,12 @@ namespace EBSCore.Web.Controllers
             {
                 common.LogError(ex, $"CurrentUserController.ResetPasswordConfirm POST Token:{request?.Token}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Password reset failed");
+            }
+            catch (Exception ex)
+            {
+                objCommon.LogError(ex, Request);
+                return BadRequest(new { message = "Call System Administrator" });
+                //  throw new HttpResponseException(HttpContext.CreateErrorResponse(HttpStatusCode.BadRequest, "Call System Administrator"));
             }
         }
 
@@ -285,6 +340,39 @@ namespace EBSCore.Web.Controllers
             {
                 return key;
             }
+            }
+
+            Response.Cookies.Append("AppAuth", encrypted, options);
+        }
+
+        private string HashPassword(string password)
+        {
+            var salt = configuration["Security:PasswordSalt"] ?? "EBSCoreSalt";
+            var data = Encoding.UTF8.GetBytes(password + salt);
+            using var sha = SHA256.Create();
+            var hash = sha.ComputeHash(data);
+            return Convert.ToBase64String(hash);
+        }
+
+        private User MapUser(DataRow rowUser)
+        {
+            return new User
+            {
+                UserID = rowUser["UserID"].ToString(),
+                Email = rowUser["Email"].ToString(),
+                UserFullName = rowUser["UserFullName"].ToString(),
+                CompanyID = rowUser["CompanyID"].ToString(),
+                CategoryID = rowUser["CategoryID"].ToString(),
+                UserType = (UserType)Convert.ToInt32(rowUser["UserType"]),
+                UserName = rowUser["UserName"].ToString(),
+                UserImage = rowUser["UserImage"].ToString(),
+                CompanyName = rowUser["CompanyName"].ToString(),
+                LastLoginAt = rowUser.IsNull("LastLoginAt") ? null : Convert.ToDateTime(rowUser["LastLoginAt"]),
+                FailedLoginAttempts = rowUser.IsNull("FailedLoginAttempts") ? 0 : Convert.ToInt32(rowUser["FailedLoginAttempts"]),
+                LockUntil = rowUser.IsNull("LockUntil") ? null : Convert.ToDateTime(rowUser["LockUntil"]),
+                StatusID = rowUser.IsNull("StatusID") ? null : Convert.ToInt32(rowUser["StatusID"]),
+                IsDeleted = !rowUser.IsNull("IsDeleted") && Convert.ToBoolean(rowUser["IsDeleted"])
+            };
         }
     }
 }
