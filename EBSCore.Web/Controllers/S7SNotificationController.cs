@@ -38,8 +38,15 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.ListStatus(ChannelID, NotificationTemplateID, Sent, Success, Convert.ToInt32(_currentUser?.UserID));
-                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "GetStatus",
+                    ChannelID: ChannelID?.ToString() ?? string.Empty,
+                    NotificationTemplateID: NotificationTemplateID?.ToString() ?? string.Empty,
+                    PageNumber: "1",
+                    PageSize: "100");
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -53,8 +60,14 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.RtvTemplates(ChannelID, IsActive, Convert.ToInt32(_currentUser?.UserID));
-                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplates",
+                    ChannelID: ChannelID?.ToString() ?? string.Empty,
+                    CompanyID: _currentUser?.CompanyID ?? string.Empty,
+                    IsActive: IsActive.HasValue ? IsActive.Value.ToString() : string.Empty);
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -68,8 +81,12 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.RtvTemplate(TemplateID, Convert.ToInt32(_currentUser?.UserID));
-                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplate",
+                    NotificationTemplateID: TemplateID.ToString());
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -83,8 +100,24 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.SaveTemplate(template, Convert.ToInt32(_currentUser?.UserID));
-                return Ok(JsonConvert.SerializeObject(ds.Tables.Count > 0 ? ds.Tables[0] : new DataTable()));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "SaveTemplate",
+                    NotificationTemplateID: template.NotificationTemplateID?.ToString() ?? string.Empty,
+                    TemplateKey: template.TemplateKey,
+                    Name: template.Name,
+                    ChannelID: template.ChannelID.ToString(),
+                    Subject: template.Subject,
+                    Body: template.Body,
+                    UseDesign: template.UseDesign.ToString(),
+                    Attachments: template.Attachments,
+                    Description: string.Empty,
+                    CompanyID: template.CompanyID?.ToString() ?? string.Empty,
+                    IsActive: template.IsActive.ToString(),
+                    CreatedBy: _currentUser?.UserID ?? string.Empty,
+                    UpdatedBy: _currentUser?.UserID ?? string.Empty);
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -98,7 +131,10 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                _notificationSP.DeleteTemplate(TemplateID, Convert.ToInt32(_currentUser?.UserID));
+                _notificationSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "DeleteTemplate",
+                    NotificationTemplateID: TemplateID.ToString(),
+                    UpdatedBy: _currentUser?.UserID ?? string.Empty);
                 return Ok("Deleted successfully");
             }
             catch (Exception ex)
@@ -113,8 +149,12 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.RtvChannels();
-                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplates",
+                    IsActive: true.ToString());
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -128,8 +168,12 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.RtvConnections(ChannelID);
-                return Ok(JsonConvert.SerializeObject(ds.Tables[0]));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "RtvTemplates",
+                    ChannelID: ChannelID?.ToString() ?? string.Empty);
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -143,8 +187,29 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                var ds = _notificationSP.SaveStatus(status, Convert.ToInt32(_currentUser?.UserID));
-                return Ok(JsonConvert.SerializeObject(ds.Tables.Count > 0 ? ds.Tables[0] : new DataTable()));
+                var ds = (DataSet)_notificationSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "SaveStatus",
+                    NotificationTemplateID: status.NotificationTemplateID.ToString(),
+                    Email: status.Email,
+                    CCEmails: status.CCEmails,
+                    BCCEmails: status.BCCEmails,
+                    CountryCode: status.CountryCode,
+                    MobileNo: status.MobileNo,
+                    ToUserID: status.ToUserID?.ToString() ?? string.Empty,
+                    ChannelID: status.ChannelID.ToString(),
+                    ConnectionID: status.ConnectionID?.ToString() ?? string.Empty,
+                    TryDate: status.TryDate?.ToString() ?? string.Empty,
+                    MaxTry: status.MaxTry.ToString(),
+                    Priority: status.Priority.ToString(),
+                    ScheduledAt: status.ScheduledAt?.ToString() ?? string.Empty,
+                    ExceptionID: status.ExceptionID?.ToString() ?? string.Empty,
+                    ErrorMessage: status.ErrorMessage,
+                    ErrorStack: status.ErrorStack,
+                    CreatedBy: _currentUser?.UserID ?? string.Empty,
+                    PayloadJson: status.PayloadJson ?? string.Empty);
+
+                var table = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                return Ok(JsonConvert.SerializeObject(table));
             }
             catch (Exception ex)
             {
@@ -158,7 +223,10 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                _notificationSP.MarkSent(NotificationStatusID, Convert.ToInt32(_currentUser?.UserID));
+                _notificationSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "MarkSent",
+                    NotificationStatusID: NotificationStatusID.ToString(),
+                    UpdatedBy: _currentUser?.UserID ?? string.Empty);
                 return Ok("Notification marked as sent");
             }
             catch (Exception ex)
@@ -179,7 +247,12 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                _notificationSP.MarkFailed(NotificationStatusID, request?.ErrorMessage ?? string.Empty, request?.ErrorStack ?? string.Empty, Convert.ToInt32(_currentUser?.UserID));
+                _notificationSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "MarkFailed",
+                    NotificationStatusID: NotificationStatusID.ToString(),
+                    ErrorMessage: request?.ErrorMessage ?? string.Empty,
+                    ErrorStack: request?.ErrorStack ?? string.Empty,
+                    UpdatedBy: _currentUser?.UserID ?? string.Empty);
                 return Ok("Notification marked as failed");
             }
             catch (Exception ex)

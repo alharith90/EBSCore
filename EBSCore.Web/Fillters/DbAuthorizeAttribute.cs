@@ -8,6 +8,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Fillters
 {
@@ -34,9 +35,20 @@ namespace EBSCore.Web.Fillters
             var targetMenuCode = ResolveMenuCode(httpContext, MenuCode);
             var targetActionCode = string.IsNullOrWhiteSpace(ActionCode) ? "View" : ActionCode;
 
-            DataTable menuTable = securitySP.RtvMenuItemList(currentUser.UserID);
-            DataTable actionTable = securitySP.RtvActionList(currentUser.UserID);
-            DataTable permissions = securitySP.RtvUserEffectivePermissions(currentUser.UserID, currentUser.UserID);
+            DataSet menuDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvMenuItemList",
+                CurrentUserID: currentUser.UserID);
+            DataSet actionDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvActionList",
+                CurrentUserID: currentUser.UserID);
+            DataSet permissionDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvUserEffectivePermissions",
+                CurrentUserID: currentUser.UserID,
+                UserID: currentUser.UserID);
+
+            DataTable menuTable = menuDs?.Tables.Count > 0 ? menuDs.Tables[0] : new DataTable();
+            DataTable actionTable = actionDs?.Tables.Count > 0 ? actionDs.Tables[0] : new DataTable();
+            DataTable permissions = permissionDs?.Tables.Count > 0 ? permissionDs.Tables[0] : new DataTable();
 
             var menuRow = menuTable.AsEnumerable().FirstOrDefault(r => string.Equals(r.Field<string>("MenuCode"), targetMenuCode, StringComparison.OrdinalIgnoreCase));
             var actionRow = actionTable.AsEnumerable().FirstOrDefault(r => string.Equals(r.Field<string>("ActionCode"), targetActionCode, StringComparison.OrdinalIgnoreCase));
