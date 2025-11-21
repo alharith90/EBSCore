@@ -1,4 +1,5 @@
-﻿namespace EBSCore.Web.Models
+using System;
+namespace EBSCore.Web.Models
 {
     public class User
     {
@@ -22,6 +23,12 @@
         public string? BirthDate { get; set; }
         public string? UserStatus { get; set; }
         public string? ExpiryDate { get; set; }
+
+        public DateTime? LastLoginAt { get; set; }
+        public int FailedLoginAttempts { get; set; }
+        public DateTime? LockUntil { get; set; }
+        public int? StatusID { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
     public enum UserType

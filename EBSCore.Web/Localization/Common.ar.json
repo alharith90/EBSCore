@@ -1,4 +1,5 @@
 {
+<<<<<<< ours
   "CreateNew": "إضافة",
   "DocumentLibraryTitle": "مكتبة المستندات",
   "DocumentReviewTitle": "مراجعة المستند",
@@ -14,3 +15,41 @@
   "Reviews": "المراجعات",
   "Approvals": "الموافقات"
 }
+=======
+  "AddRecord": "إضافة",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "Actions": "إجراءات",
+  "Search": "بحث",
+  "Processing": "الرجاء الانتظار",
+  "ZeroRecords": "لا يوجد سجلات",
+  "LengthMenu": "عرض _MENU_ سجلات",
+  "Info": "إظهار (_START_ إلى _END_) من _TOTAL_",
+  "Next": "التالي",
+  "Previous": "السابق",
+  "EmptyTable": "لا يوجد بيانات",
+  "InfoEmpty": " لا يوجد بيانات ",
+  "SignInTitle": "تسجيل الدخول",
+  "SignInSubtitle": "يرجى تسجيل الدخول إلى حسابك",
+  "SignIn": "تسجيل الدخول",
+  "UserName": "اسم المستخدم",
+  "KeepMeSignedIn": "تذكرني",
+  "ForgotPassword": "نسيت كلمة المرور؟",
+  "ResetPasswordTitle": "إعادة تعيين كلمة المرور",
+  "ResetPasswordSubtitle": "أرسل رابط إعادة التعيين إلى بريدك الإلكتروني",
+  "UserNameOrEmail": "اسم المستخدم أو البريد الإلكتروني",
+  "SendResetLink": "إرسال رابط إعادة التعيين",
+  "BackToLogin": "العودة لتسجيل الدخول",
+  "ResetEmailSent": "تم إنشاء رابط إعادة التعيين إن وجد حساب مطابق.",
+  "ResetEmailFailed": "فشل طلب إعادة التعيين. حاول مرة أخرى.",
+  "ResetPasswordConfirmTitle": "إنشاء كلمة مرور جديدة",
+  "ResetPasswordConfirmSubtitle": "أدخل كلمة مرور جديدة لتأمين حسابك",
+  "NewPassword": "كلمة المرور الجديدة",
+  "ConfirmPassword": "تأكيد كلمة المرور",
+  "PasswordResetSuccess": "تم تغيير كلمة المرور بنجاح. يمكنك تسجيل الدخول الآن.",
+  "PasswordResetFailed": "تعذر تغيير كلمة المرور. حاول مرة أخرى.",
+  "AccessDeniedTitle": "غير مصرح",
+  "AccessDeniedMessage": "ليس لديك صلاحية لعرض هذه الصفحة.",
+  "InvalidCredentials": "بيانات الدخول غير صحيحة"
+}
+>>>>>>> theirs

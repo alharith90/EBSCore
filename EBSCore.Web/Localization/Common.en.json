@@ -13,6 +13,7 @@
   "EmptyTable": " No Records Available ",
   "InfoEmpty": " No Records Available ",
 <<<<<<< ours
+<<<<<<< ours
   "BCM.ViewPlan": "View Plan",
   "BCM.EditPlan": "Edit Plan",
   "BCM.ApprovePlan": "Approve Plan",
@@ -22,6 +23,30 @@
   "BCM.PlanEditor": "Plan Editor",
   "BCM.ExerciseTracker": "Exercise Tracker",
   "BCM.PIRForm": "Post-Incident Report"
+=======
+  "SignInTitle": "Sign In",
+  "SignInSubtitle": "Please log in to your account",
+  "SignIn": "Sign in",
+  "UserName": "User Name",
+  "KeepMeSignedIn": "Keep me signed in",
+  "ForgotPassword": "Forgot Password?",
+  "ResetPasswordTitle": "Reset Password",
+  "ResetPasswordSubtitle": "Send a reset link to your email or username",
+  "UserNameOrEmail": "User name or email",
+  "SendResetLink": "Send Reset Link",
+  "BackToLogin": "Back to login",
+  "ResetEmailSent": "If the account exists, a reset link has been generated.",
+  "ResetEmailFailed": "Reset request failed. Please try again.",
+  "ResetPasswordConfirmTitle": "Create New Password",
+  "ResetPasswordConfirmSubtitle": "Enter a new password to secure your account",
+  "NewPassword": "New Password",
+  "ConfirmPassword": "Confirm Password",
+  "PasswordResetSuccess": "Password reset successfully. You may now sign in.",
+  "PasswordResetFailed": "Unable to reset password. Please try again.",
+  "AccessDeniedTitle": "Access Denied",
+  "AccessDeniedMessage": "You do not have permission to view this page.",
+  "InvalidCredentials": "Invalid credentials"
+>>>>>>> theirs
 
 =======
   "DocumentLibraryTitle": "Document Library",

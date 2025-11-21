@@ -30,6 +30,17 @@ namespace EBSCore.AdoClass
         public TableField UserStatus = new TableField("UserStatus", System.Data.SqlDbType.Int);
         public TableField ExpiryDate = new TableField("ExpiryDate", System.Data.SqlDbType.DateTime);
 
+        public TableField LastLoginAt = new TableField("LastLoginAt", System.Data.SqlDbType.DateTime);
+        public TableField FailedLoginAttempts = new TableField("FailedLoginAttempts", System.Data.SqlDbType.Int);
+        public TableField LockUntil = new TableField("LockUntil", System.Data.SqlDbType.DateTime);
+        public TableField StatusID = new TableField("StatusID", System.Data.SqlDbType.Int);
+        public TableField IsDeleted = new TableField("IsDeleted", System.Data.SqlDbType.Bit);
+
+        public TableField TokenID = new TableField("TokenID", System.Data.SqlDbType.Int);
+        public TableField Token = new TableField("Token", System.Data.SqlDbType.UniqueIdentifier);
+        public TableField ExpiresAt = new TableField("ExpiresAt", System.Data.SqlDbType.DateTime);
+        public TableField IsUsed = new TableField("IsUsed", System.Data.SqlDbType.Bit);
+
 
 
         public TableField FullLink = new TableField("FullLink", System.Data.SqlDbType.NVarChar);
@@ -59,7 +70,10 @@ namespace EBSCore.AdoClass
         string IPAddress = "", string ReferURL = "",
         string Browser = "", string DeviceType = "",
         string OperatingSystem = "", string IsMobile = "",
-        string SessionID = "", string ResetPasswordKey = "")
+        string SessionID = "", string ResetPasswordKey = "",
+        string LastLoginAt = "", string FailedLoginAttempts = "", string LockUntil = "",
+        string StatusID = "", string IsDeleted = "",
+        string TokenID = "", string Token = "", string ExpiresAt = "", string IsUsed = "")
         {
             FieldsArrayList = new ArrayList();
             this.Operation.SetValue(Operation, ref FieldsArrayList);
@@ -90,6 +104,15 @@ namespace EBSCore.AdoClass
             this.IsMobile.SetValue(IsMobile, ref FieldsArrayList);
             this.SessionID.SetValue(SessionID, ref FieldsArrayList);
             this.ResetPasswordKey.SetValue(ResetPasswordKey, ref FieldsArrayList);
+            this.LastLoginAt.SetValue(LastLoginAt, ref FieldsArrayList);
+            this.FailedLoginAttempts.SetValue(FailedLoginAttempts, ref FieldsArrayList);
+            this.LockUntil.SetValue(LockUntil, ref FieldsArrayList);
+            this.StatusID.SetValue(StatusID, ref FieldsArrayList);
+            this.IsDeleted.SetValue(IsDeleted, ref FieldsArrayList);
+            this.TokenID.SetValue(TokenID, ref FieldsArrayList);
+            this.Token.SetValue(Token, ref FieldsArrayList);
+            this.ExpiresAt.SetValue(ExpiresAt, ref FieldsArrayList);
+            this.IsUsed.SetValue(IsUsed, ref FieldsArrayList);
             return base.QueryDatabase(QueryType);
         }
     }

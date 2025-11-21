@@ -113,6 +113,8 @@ app.Use(async (ctx, next) =>
         path.StartsWithSegments("/images") ||
         path.StartsWithSegments("/favicon.ico") ||
         path.StartsWithSegments("/api/CurrentUser/Login") ||
+        path.StartsWithSegments("/api/CurrentUser/ResetPassword") ||
+        path.StartsWithSegments("/api/CurrentUser/ResetPasswordConfirm") ||
         path.StartsWithSegments("/api/workflows/webhook");
 
     if (!allow)
