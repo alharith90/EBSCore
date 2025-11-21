@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System;
 using System.Data;
 using System.Text.Json;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Controllers
 {
@@ -66,7 +67,17 @@ namespace EBSCore.Web.Controllers
                 var ip = common.getIPAddres(HttpContext);
                 common.LogInfo("Login POST", $"User:{request.UserName} Session:{HttpContext?.Session?.Id} IP:{ip}");
 
-                var loginTable = authSP.Login(request.UserName, request.Password, request.UserName, ip, userAgent, DefaultLockMinutes, DefaultMaxAttempts);
+                var loginDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "Login",
+                    UserName: request.UserName,
+                    Email: request.UserName,
+                    Password: request.Password,
+                    IPAddress: ip,
+                    UserAgent: userAgent,
+                    LockDurationMinutes: DefaultLockMinutes.ToString(),
+                    MaxFailedAttempts: DefaultMaxAttempts.ToString());
+
+                var loginTable = loginDs?.Tables.Count > 0 ? loginDs.Tables[0] : new DataTable();
                 if (loginTable.Rows.Count == 0)
                 {
                     return Unauthorized(LocalizerString("InvalidCredentials"));
@@ -118,9 +129,15 @@ namespace EBSCore.Web.Controllers
 
                 Response.Cookies.Append("AppAuth", encryptedTicket, options);
 
-                authSP.UpdateLastLogin(Convert.ToInt32(user.UserID));
+                authSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "UpdateLastLogin",
+                    UserID: user.UserID);
 
-                var permissions = securitySP.RtvUserEffectivePermissions(Convert.ToInt32(user.UserID), Convert.ToInt32(user.UserID));
+                var permissionsDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvUserEffectivePermissions",
+                    CurrentUserID: user.UserID,
+                    UserID: user.UserID);
+                var permissions = permissionsDs?.Tables.Count > 0 ? permissionsDs.Tables[0] : new DataTable();
                 HttpContext.Session.SetString("Permissions", JsonConvert.SerializeObject(permissions));
 
                 common.LogInfo("Login succeeded", $"User:{request.UserName} UserID:{user.UserID}");
@@ -176,10 +193,16 @@ namespace EBSCore.Web.Controllers
                 }
 
                 common.LogInfo("ResetPassword POST", $"Identifier:{request.UserNameOrEmail}");
-                var lookupTable = authSP.GetUserByUsername(request.UserNameOrEmail);
+                var lookupDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "GetUserByUsername",
+                    UserName: request.UserNameOrEmail);
+                var lookupTable = lookupDs?.Tables.Count > 0 ? lookupDs.Tables[0] : new DataTable();
                 if (lookupTable.Rows.Count == 0)
                 {
-                    lookupTable = authSP.GetUserByEmail(request.UserNameOrEmail);
+                    var emailLookupDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                        Operation: "GetUserByEmail",
+                        Email: request.UserNameOrEmail);
+                    lookupTable = emailLookupDs?.Tables.Count > 0 ? emailLookupDs.Tables[0] : new DataTable();
                 }
 
                 if (lookupTable.Rows.Count == 0)
@@ -189,7 +212,11 @@ namespace EBSCore.Web.Controllers
 
                 var row = lookupTable.Rows[0];
                 var userId = Convert.ToInt32(row["UserID"]);
-                var tokenTable = authSP.CreateResetToken(userId, 60);
+                var tokenDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "CreateResetToken",
+                    UserID: userId.ToString(),
+                    TokenExpiryMinutes: "60");
+                var tokenTable = tokenDs?.Tables.Count > 0 ? tokenDs.Tables[0] : new DataTable();
                 var token = tokenTable.Rows.Count > 0 ? tokenTable.Rows[0]["Token"].ToString() : string.Empty;
 
                 common.LogInfo("Reset token generated", $"UserID:{userId} Token:{token}");
@@ -208,7 +235,10 @@ namespace EBSCore.Web.Controllers
             try
             {
                 common.LogInfo("ResetPasswordConfirm GET", $"Token:{token}");
-                var tokenTable = authSP.ValidateResetToken(token);
+                var tokenDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "ValidateResetToken",
+                    Token: token.ToString());
+                var tokenTable = tokenDs?.Tables.Count > 0 ? tokenDs.Tables[0] : new DataTable();
                 if (tokenTable.Rows.Count == 0)
                 {
                     return BadRequest(LocalizerString("InvalidOrExpiredToken"));
@@ -234,7 +264,10 @@ namespace EBSCore.Web.Controllers
                 }
 
                 common.LogInfo("ResetPasswordConfirm POST", $"Token:{request.Token}");
-                var tokenTable = authSP.ValidateResetToken(request.Token);
+                var tokenDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "ValidateResetToken",
+                    Token: request.Token.ToString());
+                var tokenTable = tokenDs?.Tables.Count > 0 ? tokenDs.Tables[0] : new DataTable();
                 if (tokenTable.Rows.Count == 0)
                 {
                     return BadRequest(LocalizerString("InvalidOrExpiredToken"));
@@ -245,8 +278,16 @@ namespace EBSCore.Web.Controllers
                 var userName = tokenRow.Table.Columns.Contains("UserName") ? tokenRow["UserName"].ToString() : string.Empty;
                 var email = tokenRow.Table.Columns.Contains("Email") ? tokenRow["Email"].ToString() : string.Empty;
 
-                authSP.ResetPassword(userId, request.Token, request.NewPassword, string.IsNullOrWhiteSpace(userName) ? email : userName);
-                authSP.UpdateLastLogin(userId);
+                authSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "ResetPassword",
+                    UserID: userId.ToString(),
+                    Token: request.Token.ToString(),
+                    NewPassword: request.NewPassword,
+                    UserName: string.IsNullOrWhiteSpace(userName) ? email : userName);
+
+                authSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "UpdateLastLogin",
+                    UserID: userId.ToString());
 
                 common.LogInfo("Password reset", $"UserID:{userId}");
                 return Ok(LocalizerString("PasswordUpdatedSuccessfully"));

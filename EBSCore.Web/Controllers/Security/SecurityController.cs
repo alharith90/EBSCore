@@ -35,7 +35,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("IndexRoles requested", $"Controller:Security CurrentUser:{currentUser?.UserID}");
-                DataTable roles = securitySP.RtvRoleList(currentUser.UserID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvRoleList",
+                    CurrentUserID: currentUser.UserID);
+                DataTable roles = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(roles));
             }
             catch (Exception ex)
@@ -51,7 +54,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("MenuItems requested", $"Controller:Security CurrentUser:{currentUser?.UserID}");
-                DataTable menuItems = securitySP.RtvMenuItemList(currentUser.UserID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvMenuItemList",
+                    CurrentUserID: currentUser.UserID);
+                DataTable menuItems = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(menuItems));
             }
             catch (Exception ex)
@@ -67,7 +73,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("Actions requested", $"Controller:Security CurrentUser:{currentUser?.UserID}");
-                DataTable actions = securitySP.RtvActionList(currentUser.UserID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvActionList",
+                    CurrentUserID: currentUser.UserID);
+                DataTable actions = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(actions));
             }
             catch (Exception ex)
@@ -83,7 +92,19 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("SaveRole invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{role.RoleID} Code:{role.RoleCode}");
-                int roleId = securitySP.SaveRole(currentUser.UserID, role.RoleID, role.RoleName, role.RoleCode, role.Description, role.StatusID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "saveRole",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: role.RoleID.ToString(),
+                    RoleName: role.RoleName,
+                    RoleCode: role.RoleCode,
+                    RoleDescription: role.Description,
+                    StatusID: role.StatusID.ToString());
+
+                int roleId = ds?.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0
+                    ? Convert.ToInt32(ds.Tables[0].Rows[0]["RoleID"])
+                    : 0;
+
                 return Ok(roleId);
             }
             catch (Exception ex)
@@ -99,7 +120,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("DeleteRole invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{role.RoleID}");
-                securitySP.DeleteRole(currentUser.UserID, role.RoleID);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "deleteRole",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: role.RoleID.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -115,7 +139,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("IndexGroups requested", $"Controller:Security CurrentUser:{currentUser?.UserID}");
-                DataTable groups = securitySP.RtvGroupList(currentUser.UserID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvGroupList",
+                    CurrentUserID: currentUser.UserID);
+                DataTable groups = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(groups));
             }
             catch (Exception ex)
@@ -131,7 +158,19 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("SaveGroup invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Group:{group.GroupID} Code:{group.GroupCode}");
-                int groupId = securitySP.SaveGroup(currentUser.UserID, group.GroupID, group.GroupName, group.GroupCode, group.Description, group.StatusID);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "saveGroup",
+                    CurrentUserID: currentUser.UserID,
+                    GroupID: group.GroupID.ToString(),
+                    GroupName: group.GroupName,
+                    GroupCode: group.GroupCode,
+                    GroupDescription: group.Description,
+                    StatusID: group.StatusID.ToString());
+
+                int groupId = ds?.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0
+                    ? Convert.ToInt32(ds.Tables[0].Rows[0]["GroupID"])
+                    : 0;
+
                 return Ok(groupId);
             }
             catch (Exception ex)
@@ -147,7 +186,10 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("DeleteGroup invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Group:{group.GroupID}");
-                securitySP.DeleteGroup(currentUser.UserID, group.GroupID);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "deleteGroup",
+                    CurrentUserID: currentUser.UserID,
+                    GroupID: group.GroupID.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -163,7 +205,12 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("AssignRolesToGroup invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{model.RoleID} Group:{model.GroupID}");
-                securitySP.AssignRoleToGroup(currentUser.UserID, model.RoleID, model.GroupID, model.StatusID);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "assignRoleToGroup",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: model.RoleID.ToString(),
+                    GroupID: model.GroupID.ToString(),
+                    StatusID: model.StatusID.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -179,7 +226,12 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("AssignRolesToUser invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{model.RoleID} User:{model.UserID}");
-                securitySP.AssignRoleToUser(currentUser.UserID, model.RoleID, model.UserID, model.StatusID);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "assignRoleToUser",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: model.RoleID.ToString(),
+                    UserID: model.UserID.ToString(),
+                    StatusID: model.StatusID.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -195,7 +247,12 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("AssignUsersToGroup invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} User:{model.UserID} Group:{model.GroupID}");
-                securitySP.AssignUserToGroup(currentUser.UserID, model.UserID, model.GroupID, model.StatusID);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "assignUserToGroup",
+                    CurrentUserID: currentUser.UserID,
+                    UserID: model.UserID.ToString(),
+                    GroupID: model.GroupID.ToString(),
+                    StatusID: model.StatusID.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -211,7 +268,11 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("RolePermissions requested", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{roleId}");
-                DataTable permissions = securitySP.RtvMenuActionsForRole(currentUser.UserID, roleId);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvMenuActionsForRole",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: roleId.ToString());
+                DataTable permissions = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(permissions));
             }
             catch (Exception ex)
@@ -227,7 +288,13 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("SaveRolePermission invoked", $"Controller:Security CurrentUser:{currentUser?.UserID} Role:{roleId} Menu:{menuItemId} Action:{actionId} Allowed:{isAllowed}");
-                securitySP.SaveRolePermission(currentUser.UserID, roleId, menuItemId, actionId, isAllowed);
+                securitySP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "saveRolePermission",
+                    CurrentUserID: currentUser.UserID,
+                    RoleID: roleId.ToString(),
+                    MenuItemID: menuItemId.ToString(),
+                    ActionID: actionId.ToString(),
+                    IsAllowed: isAllowed.ToString());
                 return Ok();
             }
             catch (Exception ex)
@@ -243,7 +310,11 @@ namespace EBSCore.Web.Controllers.Security
             try
             {
                 common.LogInfo("UserPermissions requested", $"Controller:Security CurrentUser:{currentUser?.UserID} User:{userId}");
-                DataTable permissions = securitySP.RtvUserEffectivePermissions(currentUser.UserID, userId);
+                DataSet ds = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvUserEffectivePermissions",
+                    CurrentUserID: currentUser.UserID,
+                    UserID: userId.ToString());
+                DataTable permissions = ds?.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
                 return Ok(JsonConvert.SerializeObject(permissions));
             }
             catch (Exception ex)

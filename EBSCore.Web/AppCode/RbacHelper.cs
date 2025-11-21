@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Data;
 using System.Linq;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.AppCode
 {
@@ -20,9 +21,20 @@ namespace EBSCore.Web.AppCode
             }
 
             var securitySP = new DBSecuritySP(configuration);
-            var permissions = securitySP.RtvUserEffectivePermissions(user.UserID, user.UserID);
-            var menus = securitySP.RtvMenuItemList(user.UserID);
-            var actions = securitySP.RtvActionList(user.UserID);
+            var permissionsDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvUserEffectivePermissions",
+                CurrentUserID: user.UserID,
+                UserID: user.UserID);
+            var menusDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvMenuItemList",
+                CurrentUserID: user.UserID);
+            var actionsDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                Operation: "rtvActionList",
+                CurrentUserID: user.UserID);
+
+            var permissions = permissionsDs?.Tables.Count > 0 ? permissionsDs.Tables[0] : new DataTable();
+            var menus = menusDs?.Tables.Count > 0 ? menusDs.Tables[0] : new DataTable();
+            var actions = actionsDs?.Tables.Count > 0 ? actionsDs.Tables[0] : new DataTable();
 
             var menuRow = menus.AsEnumerable().FirstOrDefault(r => string.Equals(r.Field<string>("MenuCode"), menuCode, StringComparison.OrdinalIgnoreCase));
             var actionRow = actions.AsEnumerable().FirstOrDefault(r => string.Equals(r.Field<string>("ActionCode"), actionCode, StringComparison.OrdinalIgnoreCase));
