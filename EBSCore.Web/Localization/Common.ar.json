@@ -1,3 +1,16 @@
 {
-  "CreateNew": "إضافة"
+  "CreateNew": "إضافة",
+  "DocumentLibraryTitle": "مكتبة المستندات",
+  "DocumentReviewTitle": "مراجعة المستند",
+  "DocumentHistoryTitle": "سجل المستند",
+  "CommunicationLogsTitle": "سجلات الاتصالات",
+  "CommunicationLogsDescription": "طابور وتتبع إشعارات المستندات.",
+  "QueueNotifications": "طابور إشعارات المراجعة",
+  "Reference": "مرجع",
+  "Version": "الإصدار",
+  "NextReviewDate": "المراجعة القادمة",
+  "DocumentWorkflow": "تدفق عمل المستند",
+  "Versions": "الإصدارات",
+  "Reviews": "المراجعات",
+  "Approvals": "الموافقات"
 }

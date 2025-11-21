@@ -1,0 +1,43 @@
+@page "/Documents/Review/{DocumentId:int}"
+@using EBSCore.Web.Models.Document
+@using System.Net.Http.Json
+@using Microsoft.Extensions.Localization
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@Localizer["DocumentReviewTitle"]</h3>
+
+<EditForm Model="review" OnValidSubmit="SubmitReview">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label class="form-label">@Localizer["ReviewComments"]</label>
+        <InputTextArea class="form-control" @bind-Value="review.ReviewComments" />
+    </div>
+    <button class="btn btn-primary" type="submit">@Localizer["Submit"]</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int DocumentId { get; set; }
+
+    private S7SReview review = new();
+    private IStringLocalizer Localizer;
+
+    protected override void OnInitialized()
+    {
+        Localizer ??= LocalizerFactory.Create(typeof(App));
+    }
+
+    private async Task SubmitReview()
+    {
+        try
+        {
+            await Http.PostAsJsonAsync($"/api/S7SDocControl/{DocumentId}/review", review);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to submit review: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,59 @@
+@page "/Documents/Library"
+@using EBSCore.Web.Models.Document
+@using System.Net.Http.Json
+@using Microsoft.Extensions.Localization
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@Localizer["DocumentLibraryTitle"]</h3>
+
+@if (documents == null)
+{
+    <p>@Localizer["Loading"]...</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Localizer["Title"]</th>
+                <th>@Localizer["Reference"]</th>
+                <th>@Localizer["Owner"]</th>
+                <th>@Localizer["Version"]</th>
+                <th>@Localizer["Status"]</th>
+                <th>@Localizer["NextReviewDate"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doc in documents)
+            {
+                <tr>
+                    <td>@doc.Title</td>
+                    <td>@doc.ReferenceCode</td>
+                    <td>@doc.Owner</td>
+                    <td>@doc.VersionNumber</td>
+                    <td>@doc.Status</td>
+                    <td>@doc.NextReviewDate?.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<S7SDocument>? documents;
+    private IStringLocalizer Localizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Localizer ??= LocalizerFactory.Create(typeof(App));
+            documents = await Http.GetFromJsonAsync<List<S7SDocument>>("/api/S7SDocControl/GetLibrary");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to load document library: {ex.Message}");
+        }
+    }
+}

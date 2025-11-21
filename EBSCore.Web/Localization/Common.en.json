@@ -12,6 +12,7 @@
   "Previous": "Previous",
   "EmptyTable": " No Records Available ",
   "InfoEmpty": " No Records Available ",
+<<<<<<< ours
   "BCM.ViewPlan": "View Plan",
   "BCM.EditPlan": "Edit Plan",
   "BCM.ApprovePlan": "Approve Plan",
@@ -22,4 +23,19 @@
   "BCM.ExerciseTracker": "Exercise Tracker",
   "BCM.PIRForm": "Post-Incident Report"
 
+=======
+  "DocumentLibraryTitle": "Document Library",
+  "DocumentReviewTitle": "Document Review",
+  "DocumentHistoryTitle": "Document History",
+  "CommunicationLogsTitle": "Communication Logs",
+  "CommunicationLogsDescription": "Queue and track document-related notifications.",
+  "QueueNotifications": "Queue Review Notifications",
+  "Reference": "Reference",
+  "Version": "Version",
+  "NextReviewDate": "Next Review",
+  "DocumentWorkflow": "Document Workflow",
+  "Versions": "Versions",
+  "Reviews": "Reviews",
+  "Approvals": "Approvals"
+>>>>>>> theirs
 }

@@ -1,0 +1,61 @@
+@page "/Documents/History/{DocumentId:int}"
+@using EBSCore.Web.Models.Document
+@using System.Net.Http.Json
+@using Microsoft.Extensions.Localization
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+
+<h3>@Localizer["DocumentHistoryTitle"]</h3>
+
+@if (document == null)
+{
+    <p>@Localizer["Loading"]...</p>
+}
+else
+{
+    <h5>@document.Title (@document.ReferenceCode)</h5>
+    <h6>@Localizer["Versions"]</h6>
+    <ul>
+        @foreach (var version in document.Versions)
+        {
+            <li>@version.VersionNumber - @version.CreatedAt.ToString("u") - @version.ChangeSummary</li>
+        }
+    </ul>
+
+    <h6>@Localizer["Reviews"]</h6>
+    <ul>
+        @foreach (var review in document.Reviews)
+        {
+            <li>@review.ReviewDate?.ToString("u") - @review.ReviewedBy - @review.ReviewComments</li>
+        }
+    </ul>
+
+    <h6>@Localizer["Approvals"]</h6>
+    <ul>
+        @foreach (var approval in document.Approvals)
+        {
+            <li>@approval.ApprovalDate?.ToString("u") - @approval.ApprovedBy - @approval.ApprovalComments</li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public int DocumentId { get; set; }
+
+    private S7SDocument? document;
+    private IStringLocalizer Localizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Localizer ??= LocalizerFactory.Create(typeof(App));
+            document = await Http.GetFromJsonAsync<S7SDocument>($"/api/S7SDocControl/{DocumentId}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to load history: {ex.Message}");
+        }
+    }
+}
