@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data;
+using Microsoft.Extensions.Logging;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Controllers
@@ -15,67 +16,123 @@ namespace EBSCore.Web.Controllers
     public class S7SWorkflowController : ControllerBase
     {
         private readonly DBS7SWorkflowSP workflowSp;
-        private readonly Common common;
         private readonly User? currentUser;
+        private readonly ILogger<S7SWorkflowController> _logger;
 
-        public S7SWorkflowController(DBS7SWorkflowSP workflowSp, IHttpContextAccessor httpContextAccessor)
+        public S7SWorkflowController(DBS7SWorkflowSP workflowSp, IHttpContextAccessor httpContextAccessor, ILogger<S7SWorkflowController> logger)
         {
             this.workflowSp = workflowSp;
-            common = new Common();
             currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
+            _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Retrieve(int pageNumber = 1, int pageSize = 20)
         {
-            var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "Retrieve", currentUser?.UserID?.ToString() ?? string.Empty, currentUser?.CompanyID?.ToString() ?? string.Empty, currentUser?.UnitID?.ToString() ?? string.Empty, PageNumber: pageNumber.ToString(), PageSize: pageSize.ToString());
-            return Ok(data);
+            try
+            {
+                if (currentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                _logger.LogInformation("Retrieving workflows page {PageNumber} size {PageSize} for user {UserId}", pageNumber, pageSize, currentUser.UserID);
+                var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "Retrieve", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, PageNumber: pageNumber.ToString(), PageSize: pageSize.ToString());
+                return Ok(data);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving workflows list");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving workflows");
+            }
         }
 
         [HttpGet]
         [Route("{workflowId}")]
         public IActionResult RetrieveDetails(int workflowId)
         {
-            var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "RetrieveDetails", currentUser?.UserID?.ToString() ?? string.Empty, currentUser?.CompanyID?.ToString() ?? string.Empty, currentUser?.UnitID?.ToString() ?? string.Empty, WorkflowID: workflowId.ToString());
-            return Ok(data);
+            try
+            {
+                if (currentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                _logger.LogInformation("Retrieving workflow details for {WorkflowId}", workflowId);
+                var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "RetrieveDetails", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, WorkflowID: workflowId.ToString());
+                return Ok(data);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving workflow details for {WorkflowId}", workflowId);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving workflow details");
+            }
         }
 
         [HttpPost]
         public IActionResult Save([FromBody] WorkflowDefinition workflow)
         {
-            var nodes = System.Text.Json.JsonSerializer.Serialize(workflow.Nodes ?? new List<WorkflowNodeModel>());
-            var connections = System.Text.Json.JsonSerializer.Serialize(workflow.Connections ?? new List<WorkflowConnectionModel>());
-            var triggers = System.Text.Json.JsonSerializer.Serialize(workflow.Triggers ?? new List<WorkflowTriggerModel>());
+            try
+            {
+                if (currentUser == null)
+                {
+                    return Unauthorized();
+                }
 
-            var result = workflowSp.QueryDatabase(
-                SqlQueryType.ExecuteScalar,
-                "Save",
-                currentUser?.UserID?.ToString() ?? string.Empty,
-                currentUser?.CompanyID?.ToString() ?? string.Empty,
-                currentUser?.UnitID?.ToString() ?? string.Empty,
-                workflow.WorkflowID?.ToString() ?? string.Empty,
-                workflow.WorkflowCode ?? string.Empty,
-                workflow.WorkflowName ?? string.Empty,
-                workflow.WorkflowDescription ?? string.Empty,
-                workflow.Status ?? string.Empty,
-                workflow.Priority ?? string.Empty,
-                workflow.Frequency ?? string.Empty,
-                workflow.Notes ?? string.Empty,
-                workflow.IsActive.ToString(),
-                nodes,
-                connections,
-                triggers
-            );
+                _logger.LogInformation("Saving workflow {WorkflowCode} ({WorkflowId})", workflow.WorkflowCode, workflow.WorkflowID);
+                var nodes = System.Text.Json.JsonSerializer.Serialize(workflow.Nodes ?? new List<WorkflowNodeModel>());
+                var connections = System.Text.Json.JsonSerializer.Serialize(workflow.Connections ?? new List<WorkflowConnectionModel>());
+                var triggers = System.Text.Json.JsonSerializer.Serialize(workflow.Triggers ?? new List<WorkflowTriggerModel>());
 
-            return Ok(result);
+                var result = workflowSp.QueryDatabase(
+                    SqlQueryType.ExecuteScalar,
+                    "Save",
+                    currentUser.UserID ?? string.Empty,
+                    currentUser.CompanyID ?? string.Empty,
+                    currentUser.UnitID ?? string.Empty,
+                    workflow.WorkflowID?.ToString() ?? string.Empty,
+                    workflow.WorkflowCode ?? string.Empty,
+                    workflow.WorkflowName ?? string.Empty,
+                    workflow.WorkflowDescription ?? string.Empty,
+                    workflow.Status ?? string.Empty,
+                    workflow.Priority ?? string.Empty,
+                    workflow.Frequency ?? string.Empty,
+                    workflow.Notes ?? string.Empty,
+                    workflow.IsActive.ToString(),
+                    nodes,
+                    connections,
+                    triggers
+                );
+
+                return Ok(result);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "Error saving workflow {WorkflowId}", workflow.WorkflowID);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error saving workflow");
+            }
         }
 
         [HttpDelete]
         [Route("{workflowId}")]
         public IActionResult Delete(int workflowId)
         {
-            workflowSp.QueryDatabase(SqlQueryType.ExecuteNonQuery, "Delete", currentUser?.UserID?.ToString() ?? string.Empty, currentUser?.CompanyID?.ToString() ?? string.Empty, currentUser?.UnitID?.ToString() ?? string.Empty, WorkflowID: workflowId.ToString());
-            return Ok();
+            try
+            {
+                if (currentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                _logger.LogInformation("Deleting workflow {WorkflowId}", workflowId);
+                workflowSp.QueryDatabase(SqlQueryType.ExecuteNonQuery, "Delete", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, WorkflowID: workflowId.ToString());
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting workflow {WorkflowId}", workflowId);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting workflow");
+            }
         }
     }
 }

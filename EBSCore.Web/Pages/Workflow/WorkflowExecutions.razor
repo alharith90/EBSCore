@@ -1,17 +1,26 @@
-@page "/Workflow/Executions"
+@page "/Workflow/Executions/{WorkflowId:int?}"
 @using EBSCore.Web.Models.Workflow
+@using Microsoft.AspNetCore.Components
 @inject HttpClient Http
 @using System.Net.Http.Json
 
 <h3>Workflow Executions</h3>
 
-@if (executions == null)
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (isLoading)
 {
     <p>Loading...</p>
 }
+else if (executions.Count == 0)
+{
+    <p>No executions found.</p>
+}
 else
 {
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Execution</th>
@@ -35,11 +44,48 @@ else
 }
 
 @code {
-    private List<WorkflowExecutionModel>? executions;
+    [Parameter]
+    public int? WorkflowId { get; set; }
+
+    private List<WorkflowExecutionModel> executions = new();
+    private bool isLoading = true;
+    private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        var data = await Http.GetFromJsonAsync<object>("api/S7SWorkflowExecution/Retrieve?pageNumber=1&pageSize=50");
-        executions = new List<WorkflowExecutionModel>();
+        if (WorkflowId.HasValue)
+        {
+            await LoadAsync(WorkflowId.Value);
+        }
+        else
+        {
+            errorMessage = "WorkflowId is required to load executions.";
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadAsync(int workflowId)
+    {
+        isLoading = true;
+        errorMessage = null;
+        try
+        {
+            var response = await Http.GetFromJsonAsync<ExecutionListResponse>($"api/Execution/GetByWorkflow/{workflowId}?PageNumber=1&PageSize=50");
+            executions = response?.Data ?? new List<WorkflowExecutionModel>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private class ExecutionListResponse
+    {
+        public List<WorkflowExecutionModel>? Data { get; set; }
+        public int TotalCount { get; set; }
     }
 }

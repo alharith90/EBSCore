@@ -41,6 +41,8 @@ builder.Services.AddScoped<PageTitleService>();
 // *** 2. Register Custom Services ***
 builder.Services.AddScoped<LoggingService>(); // Logging service
 builder.Services.AddHttpContextAccessor(); // Access to HttpContext
+builder.Services.AddTransient<DBS7SWorkflowSP>();
+builder.Services.AddTransient<DBS7SWorkflowExecutionSP>();
 
 // Configure HttpClient for API calls
 builder.Services.AddHttpClient("EBSCoreAPI", client =>

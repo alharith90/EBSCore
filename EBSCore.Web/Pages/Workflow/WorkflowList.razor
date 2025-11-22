@@ -5,13 +5,21 @@
 
 <h3>Workflow List</h3>
 
-@if (workflows == null)
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (isLoading)
 {
     <p>Loading...</p>
 }
+else if (workflows.Count == 0)
+{
+    <p>No workflows found.</p>
+}
 else
 {
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Code</th>
@@ -37,11 +45,37 @@ else
 }
 
 @code {
-    private List<WorkflowModel>? workflows;
+    private List<WorkflowSummary> workflows = new();
+    private bool isLoading = true;
+    private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await Http.GetFromJsonAsync<object>("api/S7SWorkflow/Retrieve?pageNumber=1&pageSize=50");
-        workflows = new List<WorkflowModel>();
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+        try
+        {
+            var response = await Http.GetFromJsonAsync<WorkflowListResponse>("api/Workflow/Get?pageNumber=1&pageSize=50");
+            workflows = response?.Data ?? new List<WorkflowSummary>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private class WorkflowListResponse
+    {
+        public List<WorkflowSummary>? Data { get; set; }
+        public int TotalCount { get; set; }
     }
 }

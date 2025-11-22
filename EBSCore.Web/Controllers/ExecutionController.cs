@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Microsoft.Extensions.Logging;
 
 namespace EBSCore.Web.Controllers
 {
@@ -15,14 +16,14 @@ namespace EBSCore.Web.Controllers
     public class ExecutionController : ControllerBase
     {
         private readonly DBWorkflowExecutionSP _executionSP;
-        private readonly Common _common;
         private readonly User? _currentUser;
+        private readonly ILogger<ExecutionController> _logger;
 
-        public ExecutionController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public ExecutionController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<ExecutionController> logger)
         {
             _executionSP = new DBWorkflowExecutionSP(configuration);
-            _common = new Common();
             _currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
+            _logger = logger;
         }
 
         [HttpGet("{workflowId}")]
@@ -30,6 +31,7 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                _logger.LogInformation("Retrieving executions for workflow {WorkflowId} page {PageNumber} size {PageSize}", workflowId, PageNumber, PageSize);
                 var ds = (DataSet)_executionSP.QueryDatabase(
                     DBParentStoredProcedureClass.SqlQueryType.FillDataset,
                     Operation: "rtvExecutions",
@@ -64,7 +66,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving executions for workflow {WorkflowId}", workflowId);
                 return BadRequest("Error retrieving executions");
             }
         }
@@ -74,13 +76,14 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                _logger.LogInformation("Retrieving execution detail for {ExecutionId}", executionId);
                 var ds = (DataSet)_executionSP.QueryDatabase(
                     DBParentStoredProcedureClass.SqlQueryType.FillDataset,
                     Operation: "rtvExecution",
                     ExecutionID: executionId.ToString()
                 );
 
-                if (_common.IsEmptyDataSet(ds))
+                if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
                 {
                     return NotFound();
                 }
@@ -119,7 +122,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving execution detail for {ExecutionId}", executionId);
                 return BadRequest("Error retrieving execution");
             }
         }
@@ -129,6 +132,7 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                _logger.LogInformation("Starting manual execution for workflow {WorkflowId}", workflowId);
                 if (_currentUser == null)
                 {
                     return Unauthorized();
@@ -146,7 +150,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error starting execution for workflow {WorkflowId}", workflowId);
                 return BadRequest("Error starting execution");
             }
         }
