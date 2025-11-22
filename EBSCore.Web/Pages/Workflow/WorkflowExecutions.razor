@@ -1,0 +1,45 @@
+@page "/Workflow/Executions"
+@using EBSCore.Web.Models.Workflow
+@inject HttpClient Http
+@using System.Net.Http.Json
+
+<h3>Workflow Executions</h3>
+
+@if (executions == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Execution</th>
+                <th>Workflow</th>
+                <th>Status</th>
+                <th>Trigger</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in executions)
+            {
+                <tr>
+                    <td>@item.ExecutionID</td>
+                    <td>@item.WorkflowID</td>
+                    <td>@item.Status</td>
+                    <td>@item.TriggerType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<WorkflowExecutionModel>? executions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await Http.GetFromJsonAsync<object>("api/S7SWorkflowExecution/Retrieve?pageNumber=1&pageSize=50");
+        executions = new List<WorkflowExecutionModel>();
+    }
+}
