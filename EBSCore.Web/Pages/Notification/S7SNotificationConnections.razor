@@ -1,9 +1,17 @@
 @page "/Notification/Connections"
-@using EBSCore.Web.Models.Notification
-@using EBSCore.Web.Services
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
 @using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
 @inject HttpClient Http
+@inject NavigationManager Navigation
 @inject IStringLocalizerFactory LocalizerFactory
 @inject PageTitleService PageTitleService
 

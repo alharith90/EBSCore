@@ -1,8 +1,17 @@
 @page "/Workflow/Designer"
+@using EBSCore.Web.Models
 @using EBSCore.Web.Models.Workflow
-@using EBSCore.Web.Services
+@using ProcModel = EBSCore.Web.Models.Process
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
 @using System.Net.Http.Json
+@using System.Linq
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject IStringLocalizerFactory LocalizerFactory
@@ -451,9 +460,9 @@
                         <h6>@Localizer["CredentialDefaults"]</h6>
                         <p class="text-muted small">@Localizer["CredentialDefaultsHelp"]</p>
                         <div class="btn-group mb-3" role="group">
-                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"OpenAI\")">OpenAI</button>
-                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"Webhook\")">Webhook</button>
-                            <button class="btn btn-outline-primary" type="button" @onclick="() => ApplyCredentialTemplate(\"Database\")">Database</button>
+                            <button class="btn btn-outline-primary" type="button" @onclick='() => ApplyCredentialTemplate("OpenAI")'>OpenAI</button>
+                            <button class="btn btn-outline-primary" type="button" @onclick='() => ApplyCredentialTemplate("Webhook")'>Webhook</button>
+                            <button class="btn btn-outline-primary" type="button" @onclick='() => ApplyCredentialTemplate("Database")'>Database</button>
                         </div>
                         <div class="card card-body">
                             <div class="row g-2">

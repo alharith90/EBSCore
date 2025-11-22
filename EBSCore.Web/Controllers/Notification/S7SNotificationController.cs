@@ -20,19 +20,21 @@ namespace EBSCore.Web.Controllers.Notification
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class S7SNotificationController : ControllerBase
+    public class S7SNotificationCanceledController : ControllerBase
     {
         private readonly IConfiguration configuration;
         private readonly DBS7SNotificationSP notificationSP;
         private readonly Common common;
         private readonly User currentUser;
+          private readonly ILogger<S7SNotificationController> _logger;
 
-        public S7SNotificationController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public S7SNotificationCanceledController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<S7SNotificationController> logger)
         {
             this.configuration = configuration;
             notificationSP = new DBS7SNotificationSP(configuration);
             currentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
             common = new Common();
+             _logger = logger;
         }
 
         [HttpGet]
@@ -58,7 +60,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving notifications");
                 return BadRequest("Error retrieving notifications");
             }
         }
@@ -76,7 +78,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving templates");
                 return BadRequest("Error retrieving templates");
             }
         }
@@ -94,7 +96,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving template");
                 return BadRequest("Error retrieving template");
             }
         }
@@ -123,7 +125,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error saving template");
                 return BadRequest("Error saving template");
             }
         }
@@ -141,7 +143,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error deleting template");
                 return BadRequest("Error deleting template");
             }
         }
@@ -173,7 +175,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error saving notification");
                 return BadRequest("Error saving notification");
             }
         }
@@ -189,7 +191,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving channels");
                 return BadRequest("Error retrieving channels");
             }
         }
@@ -205,7 +207,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving connections");
                 return BadRequest("Error retrieving connections");
             }
         }
@@ -265,7 +267,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error saving connection");
                 return BadRequest("Error saving connection");
             }
         }
@@ -281,7 +283,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error deleting connection");
                 return BadRequest("Error deleting connection");
             }
         }
@@ -312,7 +314,7 @@ namespace EBSCore.Web.Controllers.Notification
             }
             catch (Exception ex)
             {
-                common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving history");
                 return BadRequest("Error retrieving history");
             }
         }

@@ -23,8 +23,7 @@
   "ConfirmNewPassword": "تأكيد كلمة المرور الجديدة",
   "AccessDenied": "ممنوع الوصول",
   "AccessDeniedDescription": "ليست لديك صلاحية لعرض هذه الصفحة",
-  "BackToLogin": "العودة لتسجيل الدخول"
-  "CreateNew": "إضافة",
+  "BackToLogin": "العودة لتسجيل الدخول",
   "DocumentLibraryTitle": "مكتبة المستندات",
   "DocumentReviewTitle": "مراجعة المستند",
   "DocumentHistoryTitle": "سجل المستند",

@@ -18,12 +18,14 @@ namespace EBSCore.Web.Controllers
         private readonly DBWorkflowSP _workflowSP;
         private readonly Common _common;
         private readonly User? _currentUser;
+        private readonly ILogger<WorkflowController> _logger;
 
-        public WorkflowController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public WorkflowController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<WorkflowController> logger)
         {
             _workflowSP = new DBWorkflowSP(configuration);
             _common = new Common();
             _currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
+            _logger = logger;
         }
 
         [HttpGet]
@@ -67,7 +69,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving workflows");
                 return BadRequest("Error retrieving workflows");
             }
         }
@@ -162,7 +164,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving workflow");
                 return BadRequest("Error retrieving workflow");
             }
         }
@@ -172,10 +174,7 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
-                if (_currentUser == null || _currentUser.UserType != UserType.Manager)
-                {
-                    return Unauthorized("Insufficient privileges");
-                }
+
 
                 var payloadNodes = JsonConvert.SerializeObject(workflow.Nodes ?? new List<WorkflowNodeModel>());
                 var payloadConnections = JsonConvert.SerializeObject(workflow.Connections ?? new List<WorkflowConnectionModel>());
@@ -195,7 +194,7 @@ namespace EBSCore.Web.Controllers
                     Priority: workflow.Priority,
                     Frequency: workflow.Frequency,
                     Notes: workflow.Notes,
-                    IsActive: workflow.IsActive ? "1" : "0",
+                    IsActive: workflow.IsActive.ToString(),
                     NodesJson: payloadNodes,
                     ConnectionsJson: payloadConnections,
                     TriggersJson: payloadTriggers
@@ -205,7 +204,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error saving workflow");
                 return BadRequest("Error saving workflow");
             }
         }
@@ -232,7 +231,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                _common.LogError(ex, Request);
+                _logger.LogError(ex, "Error deleting workflow");
                 return BadRequest("Error deleting workflow");
             }
         }

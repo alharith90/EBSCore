@@ -98,7 +98,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> SaveTemplate([FromBody] NotificationTemplate template)
+        public async Task<object> SaveTemplate(NotificationTemplate template)
         {
             try
             {
