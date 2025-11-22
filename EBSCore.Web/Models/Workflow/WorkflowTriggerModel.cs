@@ -2,7 +2,7 @@ namespace EBSCore.Web.Models.Workflow
 {
     public class WorkflowTriggerModel
     {
-        public int? TriggerID { get; set; }
+        public int? WorkflowTriggerID { get; set; }
         public int? WorkflowID { get; set; }
         public int? TriggerNodeID { get; set; }
         public string? TriggerType { get; set; }

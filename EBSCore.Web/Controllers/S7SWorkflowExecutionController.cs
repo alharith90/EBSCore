@@ -1,5 +1,6 @@
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
+using EBSCore.Web.Models;
 using EBSCore.Web.Models.Workflow;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

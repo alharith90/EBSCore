@@ -1,5 +1,6 @@
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
+using EBSCore.Web.Models;
 using EBSCore.Web.Models.Workflow;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save([FromBody] WorkflowDefinitionModel workflow)
+        public IActionResult Save([FromBody] WorkflowDefinition workflow)
         {
             var nodes = System.Text.Json.JsonSerializer.Serialize(workflow.Nodes ?? new List<WorkflowNodeModel>());
             var connections = System.Text.Json.JsonSerializer.Serialize(workflow.Connections ?? new List<WorkflowConnectionModel>());

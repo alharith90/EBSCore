@@ -102,7 +102,7 @@ namespace EBSCore.Web.Controllers
                 {
                     foreach (DataRow stepRow in ds.Tables[1].Rows)
                     {
-                        detail.Steps.Add(new WorkflowExecutionStepModel
+                        detail.Steps.Add(new ExecutionStepModel
                         {
                             ExecutionStepID = Convert.ToInt64(stepRow["ExecutionStepID"]),
                             ExecutionID = Convert.ToInt64(stepRow["ExecutionID"]),
