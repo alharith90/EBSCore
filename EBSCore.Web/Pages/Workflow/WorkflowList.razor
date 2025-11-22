@@ -1,0 +1,47 @@
+@page "/Workflow/List"
+@using EBSCore.Web.Models.Workflow
+@inject HttpClient Http
+@using System.Net.Http.Json
+
+<h3>Workflow List</h3>
+
+@if (workflows == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in workflows)
+            {
+                <tr>
+                    <td>@item.WorkflowCode</td>
+                    <td>@item.WorkflowName</td>
+                    <td>@item.Status</td>
+                    <td>@item.Priority</td>
+                    <td>@item.Frequency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<WorkflowModel>? workflows;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetFromJsonAsync<object>("api/S7SWorkflow/Retrieve?pageNumber=1&pageSize=50");
+        workflows = new List<WorkflowModel>();
+    }
+}
