@@ -3372,3 +3372,567 @@ System.InvalidOperationException: The AuthorizationPolicy named: 'ManageCommitte
 2025-11-22 14:30:35.435 +04:00 [INF] [Workflow] Polling for executions
 2025-11-22 14:30:40.471 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
 2025-11-22 14:30:40.471 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:03.839 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:03.839 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:09.074 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:09.074 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:14.087 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:14.087 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:19.086 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:19.086 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:24.090 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:24.090 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:29.101 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:29.101 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:34.102 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:34.102 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:39.118 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:39.118 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:44.164 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:44.164 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:49.184 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:49.184 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:54.224 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:54.224 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:01:59.250 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:01:59.250 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:04.271 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:04.271 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:09.293 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:09.293 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:14.309 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:14.309 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:19.336 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:19.336 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:24.443 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:24.443 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:47.690 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:47.690 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:47.818 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method163(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:02:47.818 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method163(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:02:53.536 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:53.536 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:02:55.315 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 44
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:02:55.315 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 44
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:02:58.541 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:02:58.541 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:03.544 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:03.544 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:08.612 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:08.612 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:13.618 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:13.618 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:18.627 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:18.627 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:23.630 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:23.630 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:28.646 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:28.646 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:33.658 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:33.658 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:38.660 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:38.660 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:43.668 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:43.668 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:48.681 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:48.681 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:53.683 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:53.683 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:03:58.694 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:03:58.694 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:03.711 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:03.711 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:08.715 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:08.715 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:13.727 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:13.727 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:18.750 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:18.750 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:37.126 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:37.126 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:41.572 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method143(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:04:41.572 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method143(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:04:43.944 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:43.944 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:52.262 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:52.262 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:04:52.264 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 50
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:04:52.264 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 50
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:04:57.269 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:04:57.269 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:02.286 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:02.286 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:07.299 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:07.299 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:12.302 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:12.302 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:17.312 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:17.312 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:22.391 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:22.391 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:27.421 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:27.421 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:32.432 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:32.432 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:37.446 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:37.446 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:42.450 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:42.450 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:47.472 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:47.472 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:52.485 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:52.485 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:05:57.493 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:05:57.493 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:02.502 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:02.502 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:07.522 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:07.522 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:12.531 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:12.531 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:17.537 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:17.537 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:22.545 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:22.545 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:27.577 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:27.577 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:32.602 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:32.602 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:37.605 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:37.605 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:46.358 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method143(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:06:46.358 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'EBSCore.AdoClass.DBS7SWorkflowSP' while attempting to activate 'EBSCore.Web.Controllers.S7SWorkflowController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method143(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:06:46.358 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:46.358 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:48.288 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 50
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:06:48.288 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at EBSCore.Web.Pages.Workflow.WorkflowList.OnInitializedAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowList.razor:line 50
+   at Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.<WaitForQuiescence>g__ProcessAsynchronousWork|62_0()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.WaitForQuiescence()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.WaitForResultReady(Boolean waitForQuiescence, PrerenderedComponentHtmlContent result)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultFilters>g__Awaited|28_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 145
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-22 18:06:51.363 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:51.363 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:06:56.376 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:06:56.376 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:01.385 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:01.385 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:06.403 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:06.403 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:11.416 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:11.416 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:16.419 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:16.419 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:21.424 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:21.424 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:26.440 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:26.440 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:31.506 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:31.506 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:36.520 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:36.520 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:41.529 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:41.529 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:46.531 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:46.531 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:51.534 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:51.534 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:07:56.543 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:07:56.543 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:01.549 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:01.549 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:06.551 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:06.551 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:11.554 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:11.554 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:16.568 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:16.568 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:21.582 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:21.582 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:26.588 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:26.588 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:31.592 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:31.592 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:36.600 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:36.600 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:41.638 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:41.638 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:46.654 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:46.654 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:51.661 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:51.661 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:08:56.676 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:08:56.676 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:01.681 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:01.681 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:06.693 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:06.693 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:11.702 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:11.702 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:16.708 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:16.708 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:21.718 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:21.718 +04:00 [INF] [Workflow] Polling for executions
+2025-11-22 18:09:26.720 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-22 18:09:26.720 +04:00 [INF] [Workflow] Polling for executions
