@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Workflow" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="Builder" xml:space="preserve">
+    <value>Builder</value>
+  </data>
+  <data name="Executions" xml:space="preserve">
+    <value>Executions</value>
+  </data>
+</root>

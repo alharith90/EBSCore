@@ -1,0 +1,81 @@
+@page "/Workflow/List"
+@using EBSCore.Web.Models.Workflow
+@inject HttpClient Http
+@using System.Net.Http.Json
+
+<h3>Workflow List</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (workflows.Count == 0)
+{
+    <p>No workflows found.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in workflows)
+            {
+                <tr>
+                    <td>@item.WorkflowCode</td>
+                    <td>@item.WorkflowName</td>
+                    <td>@item.Status</td>
+                    <td>@item.Priority</td>
+                    <td>@item.Frequency</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<WorkflowSummary> workflows = new();
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+        try
+        {
+            var response = await Http.GetFromJsonAsync<WorkflowListResponse>("api/Workflow/Get?pageNumber=1&pageSize=50");
+            workflows = response?.Data ?? new List<WorkflowSummary>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private class WorkflowListResponse
+    {
+        public List<WorkflowSummary>? Data { get; set; }
+        public int TotalCount { get; set; }
+    }
+}
