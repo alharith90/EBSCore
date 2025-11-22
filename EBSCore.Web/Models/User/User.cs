@@ -28,6 +28,8 @@ namespace EBSCore.Web.Models
         public int FailedLoginAttempts { get; set; }
         public string? LockUntil { get; set; }
 
+        public string? UnitID { get; set; }
+
     }
     public enum UserType
     {
