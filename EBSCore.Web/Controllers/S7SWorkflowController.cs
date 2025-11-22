@@ -1,5 +1,4 @@
 using EBSCore.AdoClass;
-using EBSCore.Web.AppCode;
 using EBSCore.Web.Models;
 using EBSCore.Web.Models.Workflow;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.Web.Controllers
@@ -18,10 +18,12 @@ namespace EBSCore.Web.Controllers
         private readonly DBS7SWorkflowSP workflowSp;
         private readonly User? currentUser;
         private readonly ILogger<S7SWorkflowController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public S7SWorkflowController(DBS7SWorkflowSP workflowSp, IHttpContextAccessor httpContextAccessor, ILogger<S7SWorkflowController> logger)
+        public S7SWorkflowController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<S7SWorkflowController> logger)
         {
-            this.workflowSp = workflowSp;
+            _configuration = configuration;
+            this.workflowSp = new DBS7SWorkflowSP(_configuration);
             currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
             _logger = logger;
         }
