@@ -21,13 +21,16 @@ namespace EBSCore.Web.Controllers
         private readonly DBProcessSP ProcessSP;
         private readonly Common Common;
         private readonly User CurrentUser;
+        private readonly ILogger<ProcessController> _logger;
 
-        public ProcessController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public ProcessController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor ,  ILogger<ProcessController> logger)
         {
             Configuration = configuration;
             ProcessSP = new DBProcessSP(Configuration);
             CurrentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
             Common = new Common();
+             _logger = logger;
+
         }
 
         [HttpGet]
@@ -44,7 +47,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                Common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving Processes");
                 return BadRequest("Error retrieving Processes");
             }
         }
@@ -79,7 +82,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                Common.LogError(ex, Request);
+                _logger.LogError(ex, "Error saving Process");
                 return BadRequest("Error saving Process");
             }
         }
@@ -99,7 +102,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                Common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving Process");
                 return BadRequest("Error retrieving Process");
             }
         }
@@ -119,7 +122,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                Common.LogError(ex, Request);
+                _logger.LogError(ex, "Error retrieving Process");
                 return BadRequest("Error retrieving Process");
             }
         }
@@ -139,7 +142,7 @@ namespace EBSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                Common.LogError(ex, Request);
+                _logger.LogError(ex, "Error deleting Process");
                 return BadRequest("Error deleting Process");
             }
         }
