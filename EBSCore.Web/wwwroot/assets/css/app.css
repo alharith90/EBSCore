@@ -3523,3 +3523,59 @@ input::placeholder {
         }
 
 /*End : Organisation Unit Selector*/
+
+
+/*Start : Workflow Builder*/
+    .workflow-container {
+        display: flex;
+        height: calc(100vh - 150px);
+    }
+
+    .workflow-palette {
+        width: 200px;
+        background: #f7f7f7;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .palette-item {
+        padding: 8px 12px;
+        margin-bottom: 6px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: grab;
+    }
+
+    .drawflow-canvas {
+        flex-grow: 1;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fafafa;
+        position: relative;
+    }
+
+    /* FIX: force drawflow canvas to be visible above Rocker template styles */
+    #drawflow_canvas.drawflow {
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: relative !important;
+        z-index: 10 !important;
+        display: block !important;
+    }
+
+    /* ensure parent is visible */
+    #drawflow {
+        position: relative !important;
+        z-index: 5 !important;
+    }
+
+    /* ensure inner precanvas is scrollable */
+    .drawflow .parent-drawflow {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+
+/*End :  Workflow Builder*/

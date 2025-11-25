@@ -153,3 +153,102 @@ $(function() {
 	
 	
 });
+window.WorkflowBuilder = {
+    editor: null,
+
+    init: function () {
+
+        // MUST use the inner canvas div, not the wrapper
+        const canvas = document.getElementById('drawflow_canvas');
+        if (!canvas) {
+            console.error("Drawflow canvas not found: #drawflow_canvas");
+            return;
+        }
+
+        const editor = new Drawflow(canvas);
+
+        // recommended settings
+        editor.reroute = true;
+        editor.reroute_fix_curvature = true;
+        editor.zoom = 1;
+        editor.zoom_max = 2;
+        editor.zoom_min = 0.5;
+        editor.start();
+
+        // enable drag and drop
+        canvas.addEventListener('drop', function (evt) {
+            evt.preventDefault();
+            const nodeType = evt.dataTransfer.getData('node');
+
+            if (nodeType) {
+                const rect = canvas.getBoundingClientRect();
+                const x = evt.clientX - rect.left;
+                const y = evt.clientY - rect.top;
+
+                editor.addNode(
+                    nodeType,
+                    1,                    // inputs
+                    1,                    // outputs
+                    x,
+                    y,
+                    nodeType,             // name
+                    { type: nodeType },   // data object stored in JSON
+                    `<div class='node-box'>${nodeType}</div>`,  // HTML content
+                    false                 // not a Vue/React component
+                );
+            }
+        });
+
+        // allow dragover for dropping nodes
+        canvas.addEventListener('dragover', evt => evt.preventDefault());
+
+        window.WorkflowBuilder.editor = editor;
+    },
+
+    load: function (nodesJson, connectionsJson) {
+        const editor = window.WorkflowBuilder.editor;
+        if (!editor) return;
+
+        try {
+            const nodes = nodesJson && nodesJson.trim().length > 0 ? JSON.parse(nodesJson) : {};
+            const data = {
+                drawflow: {
+                    Home: { data: nodes }
+                }
+            };
+
+            editor.clear();
+            editor.import(data);
+
+            // Load connections separately (Drawflow merges them internally)
+            if (connectionsJson) {
+                const parsedConnections = JSON.parse(connectionsJson);
+
+                parsedConnections.forEach(conn => {
+                    if (conn.output_id && conn.input_id) {
+                        editor.addConnection(
+                            conn.output_id,
+                            conn.output_class,
+                            conn.input_id,
+                            conn.input_class
+                        );
+                    }
+                });
+            }
+
+        } catch (err) {
+            console.error("Workflow load error:", err);
+        }
+    },
+
+    export: function () {
+        const editor = window.WorkflowBuilder.editor;
+        if (!editor) return "{}";
+
+        const exported = editor.export().drawflow.Home;
+        return JSON.stringify({
+            nodes: exported.data,
+            connections: exported.connections || []
+        });
+    }
+};

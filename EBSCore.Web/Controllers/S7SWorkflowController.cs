@@ -1,13 +1,12 @@
-using EBSCore.AdoClass;
-using EBSCore.Web.Models;
-using EBSCore.Web.Models.Workflow;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+
+using Newtonsoft.Json;
 using System.Data;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
+using EBSCore.Web.AppCode;
+using EBSCore.Web.Models;
+using EBSCore.AdoClass;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
+using EBSCore.Web.Models.Workflow;
 
 namespace EBSCore.Web.Controllers
 {
@@ -15,125 +14,145 @@ namespace EBSCore.Web.Controllers
     [Route("api/[controller]/[action]")]
     public class S7SWorkflowController : ControllerBase
     {
-        private readonly DBS7SWorkflowSP workflowSp;
-        private readonly User? currentUser;
+        private readonly IConfiguration Configuration;
+        private readonly DBS7SWorkflowSP WorkflowSP;
+        private readonly Common Common;
+        private readonly User CurrentUser;
         private readonly ILogger<S7SWorkflowController> _logger;
-        private readonly IConfiguration _configuration;
 
-        public S7SWorkflowController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<S7SWorkflowController> logger)
+        public S7SWorkflowController(
+            IConfiguration configuration,
+            IHttpContextAccessor httpContextAccessor,
+            ILogger<S7SWorkflowController> logger)
         {
-            _configuration = configuration;
-            this.workflowSp = new DBS7SWorkflowSP(_configuration);
-            currentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
+            Configuration = configuration;
+            WorkflowSP = new DBS7SWorkflowSP(configuration);
+            CurrentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
+            Common = new Common();
             _logger = logger;
         }
 
+        // --------------------------------------------------------------------
+        // Retrieve all workflows (Paged)
+        // --------------------------------------------------------------------
         [HttpGet]
-        public IActionResult Retrieve(int pageNumber = 1, int pageSize = 20)
+        public async Task<object> Get(int pageNumber = 1, int pageSize = 20)
         {
             try
             {
-                if (currentUser == null)
-                {
-                    return Unauthorized();
-                }
-
-                _logger.LogInformation("Retrieving workflows page {PageNumber} size {PageSize} for user {UserId}", pageNumber, pageSize, currentUser.UserID);
-                var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "Retrieve", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, PageNumber: pageNumber.ToString(), PageSize: pageSize.ToString());
-                return Ok(data);
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving workflows list");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving workflows");
-            }
-        }
-
-        [HttpGet]
-        [Route("{workflowId}")]
-        public IActionResult RetrieveDetails(int workflowId)
-        {
-            try
-            {
-                if (currentUser == null)
-                {
-                    return Unauthorized();
-                }
-
-                _logger.LogInformation("Retrieving workflow details for {WorkflowId}", workflowId);
-                var data = workflowSp.QueryDatabase(SqlQueryType.FillDataset, "RetrieveDetails", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, WorkflowID: workflowId.ToString());
-                return Ok(data);
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving workflow details for {WorkflowId}", workflowId);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving workflow details");
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Save([FromBody] WorkflowDefinition workflow)
-        {
-            try
-            {
-                if (currentUser == null)
-                {
-                    return Unauthorized();
-                }
-
-                _logger.LogInformation("Saving workflow {WorkflowCode} ({WorkflowId})", workflow.WorkflowCode, workflow.WorkflowID);
-                var nodes = System.Text.Json.JsonSerializer.Serialize(workflow.Nodes ?? new List<WorkflowNodeModel>());
-                var connections = System.Text.Json.JsonSerializer.Serialize(workflow.Connections ?? new List<WorkflowConnectionModel>());
-                var triggers = System.Text.Json.JsonSerializer.Serialize(workflow.Triggers ?? new List<WorkflowTriggerModel>());
-
-                var result = workflowSp.QueryDatabase(
-                    SqlQueryType.ExecuteScalar,
-                    "Save",
-                    currentUser.UserID ?? string.Empty,
-                    currentUser.CompanyID ?? string.Empty,
-                    currentUser.UnitID ?? string.Empty,
-                    workflow.WorkflowID?.ToString() ?? string.Empty,
-                    workflow.WorkflowCode ?? string.Empty,
-                    workflow.WorkflowName ?? string.Empty,
-                    workflow.WorkflowDescription ?? string.Empty,
-                    workflow.Status ?? string.Empty,
-                    workflow.Priority ?? string.Empty,
-                    workflow.Frequency ?? string.Empty,
-                    workflow.Notes ?? string.Empty,
-                    workflow.IsActive.ToString(),
-                    nodes,
-                    connections,
-                    triggers
+                DataSet dsResult = (DataSet)WorkflowSP.QueryDatabase(
+                    SqlQueryType.FillDataset,
+                    Operation: "rtvS7SWorkflows",
+                    UserID: CurrentUser.UserID,
+                    CompanyID: CurrentUser.CompanyID,
+                    UnitID: CurrentUser.UnitID,
+                    PageNumber: pageNumber.ToString(),
+                    PageSize: pageSize.ToString()
                 );
 
-                return Ok(result);
+                return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError(ex, "Error saving workflow {WorkflowId}", workflow.WorkflowID);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error saving workflow");
+                _logger.LogError(ex, "Error retrieving S7S Workflows");
+                return BadRequest("Error retrieving S7S Workflows");
             }
         }
 
-        [HttpDelete]
-        [Route("{workflowId}")]
-        public IActionResult Delete(int workflowId)
+        // --------------------------------------------------------------------
+        // Retrieve a single workflow
+        // --------------------------------------------------------------------
+        [HttpGet]
+        public object GetOne(long workflowID)
         {
             try
             {
-                if (currentUser == null)
-                {
-                    return Unauthorized();
-                }
+                DataSet dsResult = (DataSet)WorkflowSP.QueryDatabase(
+                    SqlQueryType.FillDataset,
+                    Operation: "rtvS7SWorkflow",
+                    UserID: CurrentUser.UserID,
+                    CompanyID: CurrentUser.CompanyID,
+                    UnitID: CurrentUser.UnitID,
+                    WorkflowID: workflowID.ToString()
+                );
 
-                _logger.LogInformation("Deleting workflow {WorkflowId}", workflowId);
-                workflowSp.QueryDatabase(SqlQueryType.ExecuteNonQuery, "Delete", currentUser.UserID ?? string.Empty, currentUser.CompanyID ?? string.Empty, currentUser.UnitID ?? string.Empty, WorkflowID: workflowId.ToString());
-                return Ok();
+                return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting workflow {WorkflowId}", workflowId);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting workflow");
+                _logger.LogError(ex, "Error retrieving S7S Workflow");
+                return BadRequest("Error retrieving S7S Workflow");
+            }
+        }
+
+        // --------------------------------------------------------------------
+        // Save Workflow
+        // --------------------------------------------------------------------
+        [HttpPost]
+        public async Task<object> Save(WorkflowDefinition workflow)
+        {
+            try
+            {
+                string nodesJson = JsonConvert.SerializeObject(workflow.Nodes);
+                string connectionsJson = JsonConvert.SerializeObject(workflow.Connections);
+                string triggersJson = JsonConvert.SerializeObject(workflow.Triggers);
+
+                WorkflowSP.QueryDatabase(
+                    SqlQueryType.ExecuteNonQuery,
+                    Operation: "SaveS7SWorkflow",
+                    UserID: CurrentUser.UserID,
+                    CompanyID: CurrentUser.CompanyID,
+                    UnitID: CurrentUser.UnitID,
+
+                    WorkflowID: workflow.WorkflowID.ToString(),
+                    WorkflowCode: workflow.WorkflowCode,
+                    WorkflowName: workflow.WorkflowName,
+                    WorkflowDescription: workflow.WorkflowDescription,
+                    Status: workflow.Status,
+                    Priority: workflow.Priority,
+                    Frequency: workflow.Frequency,
+                    Notes: workflow.Notes,
+                    IsActive: workflow.IsActive.ToString(),
+
+                    NodesJson: nodesJson,
+                    ConnectionsJson: connectionsJson,
+                    TriggersJson: triggersJson
+
+                   // CreatedBy: CurrentUser.UserID,
+                   // ModifiedBy: CurrentUser.UserID
+                );
+
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error saving S7S Workflow");
+                return BadRequest("Error saving S7S Workflow");
+            }
+        }
+
+        // --------------------------------------------------------------------
+        // Delete Workflow
+        // --------------------------------------------------------------------
+        [HttpDelete]
+        public object Delete(long workflowID)
+        {
+            try
+            {
+                WorkflowSP.QueryDatabase(
+                    SqlQueryType.ExecuteNonQuery,
+                    Operation: "Delete",
+                    UserID: CurrentUser.UserID,
+                    CompanyID: CurrentUser.CompanyID,
+                    WorkflowID: workflowID.ToString()
+                );
+
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting S7S Workflow");
+                return BadRequest("Error deleting S7S Workflow");
             }
         }
     }

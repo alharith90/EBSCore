@@ -97,7 +97,7 @@ namespace EBSCore.Web.Controllers
                 {
                     WorkflowID = workflowId,
                     CompanyID = workflowRow["CompanyID"] == DBNull.Value ? null : Convert.ToInt32(workflowRow["CompanyID"]),
-                    UnitID = workflowRow["UnitID"] == DBNull.Value ? null : Convert.ToInt64(workflowRow["UnitID"]),
+                    UnitID = workflowRow["UnitID"] == DBNull.Value ? null : workflowRow["UnitID"].ToString(),
                     WorkflowCode = workflowRow["WorkflowCode"].ToString(),
                     WorkflowName = workflowRow["Name"].ToString(),
                     WorkflowDescription = workflowRow["Description"].ToString(),

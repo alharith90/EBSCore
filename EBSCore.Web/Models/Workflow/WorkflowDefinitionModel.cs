@@ -9,3 +9,5 @@ namespace EBSCore.Web.Models.Workflow
         public List<WorkflowTriggerModel> Triggers { get; set; } = new List<WorkflowTriggerModel>();
     }
 }
+
+
