@@ -1,58 +1,29 @@
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
+using HtmlRenderer.PdfSharp;
+using PdfSharpCore;
+using PdfSharpCore.Pdf;
 
 namespace EBSCore.Web.Services
 {
     public class HtmlToPdfService
     {
-        private static bool _licenseApplied;
-
-        public HtmlToPdfService()
-        {
-            if (!_licenseApplied)
-            {
-                QuestPDF.Settings.License = LicenseType.Community;
-                _licenseApplied = true;
-            }
-        }
-
         public byte[] ConvertHtmlToPdf(string htmlContent, string? title = null)
         {
             var safeHtml = htmlContent ?? string.Empty;
-            var document = Document.Create(container =>
+            var pdfConfig = new PdfGenerateConfig
             {
-                container.Page(page =>
-                {
-                    page.Margin(30);
-                    page.Size(PageSizes.A4);
-                    page.PageColor(Colors.White);
-                    page.DefaultTextStyle(TextStyle.Default.Size(12));
+                PageSize = PageSize.A4,
+                MarginTop = 20,
+                MarginBottom = 20,
+                MarginLeft = 20,
+                MarginRight = 20,
+                Title = title ?? "HTML Report"
+            };
 
-                    page.Header()
-                        .Text(title ?? "HTML Report")
-                        .SemiBold()
-                        .FontSize(18)
-                        .FontColor(Colors.Blue.Darken3);
+            var pdfDocument = PdfGenerator.GeneratePdf(safeHtml, pdfConfig);
 
-                    page.Content()
-                        .Column(column =>
-                        {
-                            column.Item()
-                                .Background("#f9fafb")
-                                .Padding(10)
-                                .Border(1)
-                                .BorderColor("#e5e7eb");
-
-                            column.Item()
-                                .Text(text => text
-                                    .Span(safeHtml)
-                                    .FontSize(12));
-                        });
-                });
-            });
-
-            return document.GeneratePdf();
+            using var stream = new MemoryStream();
+            pdfDocument.Save(stream, false);
+            return stream.ToArray();
         }
     }
 }
