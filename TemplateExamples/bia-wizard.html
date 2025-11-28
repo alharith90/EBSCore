@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+    <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bs-stepper/css/bs-stepper.css" rel="stylesheet" />
+    <link href="assets/css/pace.min.css" rel="stylesheet" />
+    <script src="assets/js/pace.min.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-extended.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+    <link href="assets/css/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/dark-theme.css" />
+    <link rel="stylesheet" href="assets/css/semi-dark.css" />
+    <link rel="stylesheet" href="assets/css/header-colors.css" />
+    <title>BIA Wizard</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header">
+                <div><img src="assets/images/logo-icon.png" class="logo-icon" alt="logo"></div>
+                <div><h4 class="logo-text">Rocker</h4></div>
+                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i></div>
+            </div>
+            <ul class="metismenu" id="menu">
+                <li class="menu-label">BIA Templates</li>
+                <li><a href="form-wizard.html"><div class="parent-icon"><i class='bx bx-layer'></i></div><div class="menu-title">Form Wizard</div></a></li>
+                <li class="mm-active"><a href="bia-wizard.html"><div class="parent-icon"><i class='bx bx-shield-quarter'></i></div><div class="menu-title">BIA Wizard</div></a></li>
+            </ul>
+        </div>
+        <header>
+            <div class="topbar d-flex align-items-center">
+                <nav class="navbar navbar-expand gap-3">
+                    <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
+                    <div class="position-relative me-auto">
+                        <h5 class="mb-0">Business Impact Analysis</h5>
+                        <small class="text-secondary">Step-through template aligning with BIA best practice.</small>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="page-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5 class="mb-0">BIA Collection Wizard</h5>
+                                    <small class="text-muted">Capture unit and process context first, then impact, locations, and continuity strategy.</small>
+                                </div>
+                                <span class="badge bg-primary">Based on BIA Procedure</span>
+                            </div>
+                            <div class="card-body">
+                                <div id="biaStepper" class="bs-stepper linear">
+                                    <div class="bs-stepper-header" role="tablist">
+                                        <div class="step" data-target="#context-panel">
+                                            <button type="button" class="step-trigger" role="tab" id="context-trigger" aria-controls="context-panel">
+                                                <span class="bs-stepper-circle">1</span>
+                                                <span class="bs-stepper-label">Unit &amp; Process</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#impact-panel">
+                                            <button type="button" class="step-trigger" role="tab" id="impact-trigger" aria-controls="impact-panel">
+                                                <span class="bs-stepper-circle">2</span>
+                                                <span class="bs-stepper-label">Impact Analysis</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#locations-panel">
+                                            <button type="button" class="step-trigger" role="tab" id="locations-trigger" aria-controls="locations-panel">
+                                                <span class="bs-stepper-circle">3</span>
+                                                <span class="bs-stepper-label">Locations &amp; Dependencies</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#strategy-panel">
+                                            <button type="button" class="step-trigger" role="tab" id="strategy-trigger" aria-controls="strategy-panel">
+                                                <span class="bs-stepper-circle">4</span>
+                                                <span class="bs-stepper-label">Strategy &amp; Review</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="bs-stepper-content">
+                                        <form>
+                                            <div id="context-panel" class="content" role="tabpanel" aria-labelledby="context-trigger">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">BIA Code</label>
+                                                        <input type="text" class="form-control" placeholder="Auto or manual code" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Business Unit</label>
+                                                        <select class="form-select" required>
+                                                            <option value="" disabled selected>Select unit</option>
+                                                            <option>Manufacturing</option>
+                                                            <option>Finance</option>
+                                                            <option>Customer Support</option>
+                                                            <option>Technology</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Process</label>
+                                                        <select class="form-select" required>
+                                                            <option value="" disabled selected>Select process</option>
+                                                            <option>Order Fulfillment</option>
+                                                            <option>Payroll</option>
+                                                            <option>Service Desk</option>
+                                                            <option>Data Center Operations</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Process Owner</label>
+                                                        <input type="text" class="form-control" placeholder="Name / role" required>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Process Description</label>
+                                                        <textarea class="form-control" rows="3" placeholder="Scope, triggers, upstream/downstream interfaces"></textarea>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="button" class="btn btn-primary" onclick="biaStepper.next()">Continue to Impact</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="impact-panel" class="content" role="tabpanel" aria-labelledby="impact-trigger">
+                                                <div class="alert alert-info border-0">
+                                                    Capture time-based recovery parameters and financial exposure in alignment with your procedure (RTO, RPO, MAO, MTPD, MTD, MBCO).
+                                                </div>
+                                                <div class="row g-3">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Criticality</label>
+                                                        <select class="form-select" required>
+                                                            <option value="" disabled selected>Select level</option>
+                                                            <option>Critical</option>
+                                                            <option>High</option>
+                                                            <option>Medium</option>
+                                                            <option>Low</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Frequency</label>
+                                                        <select class="form-select">
+                                                            <option value="" disabled selected>Select cadence</option>
+                                                            <option>Continuous</option>
+                                                            <option>Daily</option>
+                                                            <option>Weekly</option>
+                                                            <option>Monthly</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">RTO (hrs)</label>
+                                                        <input type="number" class="form-control" placeholder="e.g., 4" min="0" step="1">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">RPO (hrs)</label>
+                                                        <input type="number" class="form-control" placeholder="e.g., 1" min="0" step="1">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">MAO (hrs)</label>
+                                                        <input type="number" class="form-control" placeholder="Max acceptable outage">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">MTPD (hrs)</label>
+                                                        <input type="number" class="form-control" placeholder="Maximum tolerable period">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">MTD (hrs)</label>
+                                                        <input type="number" class="form-control" placeholder="Maximum downtime">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">MBCO (%)</label>
+                                                        <input type="number" class="form-control" placeholder="Minimum business continuity objective" min="0" max="100">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Primary Staff</label>
+                                                        <input type="number" class="form-control" placeholder="Minimum operators" min="0">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Backup Staff</label>
+                                                        <input type="number" class="form-control" placeholder="Shadow staff" min="0">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Revenue Loss / Hour</label>
+                                                        <input type="number" class="form-control" placeholder="0.00" min="0" step="0.01">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Cost of Downtime</label>
+                                                        <input type="number" class="form-control" placeholder="0.00" min="0" step="0.01">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">RTO Justification</label>
+                                                        <textarea class="form-control" rows="2" placeholder="Why this RTO is required (regulatory, contractual, safety, financial)"></textarea>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">MBCO Details</label>
+                                                        <textarea class="form-control" rows="2" placeholder="Minimal viable product/service definition"></textarea>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-between">
+                                                        <button type="button" class="btn btn-outline-secondary" onclick="biaStepper.previous()">Back</button>
+                                                        <button type="button" class="btn btn-primary" onclick="biaStepper.next()">Continue to Locations</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="locations-panel" class="content" role="tabpanel" aria-labelledby="locations-trigger">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Primary Location</label>
+                                                        <input type="text" class="form-control" placeholder="Building / site / floor" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Alternate Location</label>
+                                                        <input type="text" class="form-control" placeholder="Hot site / remote / cloud">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Key Dependencies</label>
+                                                        <textarea class="form-control" rows="3" placeholder="Vendors, shared services, third-parties"></textarea>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Equipment &amp; Infrastructure</label>
+                                                        <div class="row g-2">
+                                                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Critical equipment (e.g., servers, network)" /></div>
+                                                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Facilities (power, HVAC, access controls)" /></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Systems &amp; Applications</label>
+                                                        <div class="row g-2">
+                                                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Core systems (ERP, CRM, DC tools)" /></div>
+                                                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Interfaces / integrations" /></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Recovery Dependencies</label>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-sm align-middle mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Category</th>
+                                                                        <th>Dependency</th>
+                                                                        <th>RTO Alignment</th>
+                                                                        <th>Owner</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Infrastructure</td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="Data center power" /></td>
+                                                                        <td><select class="form-select form-select-sm"><option>Meets</option><option>Gap</option></select></td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="Facilities" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Application</td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="ERP availability" /></td>
+                                                                        <td><select class="form-select form-select-sm"><option>Meets</option><option>Gap</option></select></td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="IT Ops" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Supplier</td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="Courier SLA" /></td>
+                                                                        <td><select class="form-select form-select-sm"><option>Meets</option><option>Gap</option></select></td>
+                                                                        <td><input type="text" class="form-control form-control-sm" placeholder="Vendor Mgmt" /></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-between">
+                                                        <button type="button" class="btn btn-outline-secondary" onclick="biaStepper.previous()">Back</button>
+                                                        <button type="button" class="btn btn-primary" onclick="biaStepper.next()">Continue to Strategy</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="strategy-panel" class="content" role="tabpanel" aria-labelledby="strategy-trigger">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Priority (Tier)</label>
+                                                        <select class="form-select">
+                                                            <option value="" disabled selected>Select priority</option>
+                                                            <option>Tier 0 - Life / Safety</option>
+                                                            <option>Tier 1 - Regulatory / Financial</option>
+                                                            <option>Tier 2 - Customer Commitments</option>
+                                                            <option>Tier 3 - Efficiency</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Required Competencies</label>
+                                                        <input type="text" class="form-control" placeholder="Certifications, skills" />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Business Continuity Strategy</label>
+                                                        <textarea class="form-control" rows="3" placeholder="Work-area recovery, cloud failover, manual workaround, supplier diversification"></textarea>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Remarks &amp; Latest Comment</label>
+                                                        <textarea class="form-control" rows="2" placeholder="Decisions, residual risks, approvals"></textarea>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Review Date</label>
+                                                        <input type="date" class="form-control" />
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="alert alert-success border-0 mb-2">
+                                                            <strong>Best practice recap:</strong> validate dependencies against RTO/RPO, document workarounds that achieve MBCO, and capture both primary and alternate staff counts. Ensure updates feed your <code>BIASP</code> procedure (SaveBIA / Retrieve / Delete) and history table.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-between">
+                                                        <button type="button" class="btn btn-outline-secondary" onclick="biaStepper.previous()">Back</button>
+                                                        <button type="submit" class="btn btn-success">Finish &amp; Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">Suggested Data Extensions</h6>
+                                <small class="text-muted">Optional relational tables to enrich dependency, equipment, infrastructure, system, and continuity strategy capture.</small>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle mb-3">
+                                        <thead>
+                                            <tr>
+                                                <th>Table</th>
+                                                <th>Purpose</th>
+                                                <th>Key Fields</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>BIA_Dependency</code></td>
+                                                <td>Stores supplier and internal service dependencies with SLA alignment to RTO/RPO.</td>
+                                                <td>BIAID (FK), DependencyName, Type (Supplier/Application/Infrastructure), RTOAlignment, Owner</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>BIA_Equipment</code></td>
+                                                <td>Captures critical equipment and quantities required during disruption.</td>
+                                                <td>BIAID (FK), EquipmentName, Quantity, RecoveryLocation, Notes</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>BIA_Infrastructure</code></td>
+                                                <td>Documents facility utilities such as power, HVAC, connectivity, access controls.</td>
+                                                <td>BIAID (FK), Service, Provider, RecoveryTime, GapFlag</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>BIA_System</code></td>
+                                                <td>Lists applications and integrations required for MBCO with interface details.</td>
+                                                <td>BIAID (FK), SystemName, DependencyType, RPOHours, RecoveryPlan</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>BIA_BCStrategy</code></td>
+                                                <td>Summarizes chosen continuity approach and testing cadence.</td>
+                                                <td>BIAID (FK), StrategyType, Description, TestDate, Owner</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="bg-light p-3 rounded">
+                                    <h6 class="fw-bold">Example: Dependency alignment query</h6>
+                                    <pre class="mb-0 small">-- Locate dependencies where recovery commitments exceed the process RTO
+SELECT d.DependencyName, d.Type, d.RTOAlignment, b.RTO, d.Owner
+FROM BIA AS b
+JOIN BIA_Dependency AS d ON b.BIAID = d.BIAID
+WHERE b.CompanyID = @CompanyID
+  AND b.IsDeleted = 0
+  AND d.RTOAlignment = 'Gap';
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay toggle-icon"></div>
+    <a href="javascript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            window.biaStepper = new Stepper(document.querySelector('#biaStepper'), {
+                linear: true,
+                animation: true
+            });
+        });
+    </script>
+</body>
+</html>
