@@ -1,5 +1,4 @@
 using QuestPDF.Fluent;
-using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
 namespace EBSCore.Web.Services
@@ -12,7 +11,7 @@ namespace EBSCore.Web.Services
         {
             if (!_licenseApplied)
             {
-                Settings.License = LicenseType.Community;
+                QuestPDF.Settings.License = LicenseType.Community;
                 _licenseApplied = true;
             }
         }
@@ -38,8 +37,16 @@ namespace EBSCore.Web.Services
                     page.Content()
                         .Column(column =>
                         {
-                            column.Item().Background("#f9fafb").Padding(10).Border(1).BorderColor("#e5e7eb").RoundCorners(4);
-                            column.Item().Html(safeHtml);
+                            column.Item()
+                                .Background("#f9fafb")
+                                .Padding(10)
+                                .Border(1)
+                                .BorderColor("#e5e7eb");
+
+                            column.Item()
+                                .Text(text => text
+                                    .Span(safeHtml)
+                                    .FontSize(12));
                         });
                 });
             });
