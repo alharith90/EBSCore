@@ -1,0 +1,17 @@
+{
+  "PageTitle": "BCM Positions & Responsibilities",
+  "ModalTitle": "Add / Update Position",
+  "UnitName": "Unit",
+  "PositionTitle": "Position Title",
+  "PositionCode": "Position Code",
+  "Responsibilities": "Responsibilities",
+  "AuthorityLevel": "Authority / Escalation",
+  "ContactDetails": "Contact Details",
+  "Status": "Status",
+  "SaveSuccess": "Position and responsibilities saved successfully",
+  "DeleteSuccess": "Position removed successfully",
+  "DeleteConfirmationTitle": "Are you sure?",
+  "DeleteConfirmationText": "Position ID {0} will be deleted.",
+  "PositionTitleRequired": "Position title is required",
+  "ResponsibilitiesRequired": "Responsibilities are required"
+}

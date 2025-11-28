@@ -1,0 +1,277 @@
+@page "/BCM/PositionsResponsibilities"
+@using EBSCore.Web.Models.BCM
+@using PRModel = EBSCore.Web.Models.BCM.BcmPositionResponsibility
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Positions.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["PositionTitle"]</th>
+                                    <th>@Localizer["PositionCode"]</th>
+                                    <th>@Localizer["Responsibilities"]</th>
+                                    <th>@Localizer["AuthorityLevel"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                }
+                                @foreach (var p in Positions)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@p.PositionTitle</td>
+                                        <td>@p.PositionCode</td>
+                                        <td class="text-wrap">@p.Responsibilities</td>
+                                        <td>@p.AuthorityLevel</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditPosition(p)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeletePosition(p)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SavePositionAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentPosition.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["PositionTitle"]</label>
+                            <input class="form-control" @bind-value="CurrentPosition.PositionTitle" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["PositionCode"]</label>
+                            <input class="form-control" @bind-value="CurrentPosition.PositionCode" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["AuthorityLevel"]</label>
+                            <input class="form-control" @bind-value="CurrentPosition.AuthorityLevel" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ContactDetails"]</label>
+                            <input class="form-control" @bind-value="CurrentPosition.ContactDetails" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <input class="form-control" @bind-value="CurrentPosition.Status" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Responsibilities"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentPosition.Responsibilities" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<PRModel> Positions = new();
+    PRModel CurrentPosition = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentPosition);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadPositionListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadPositionListAsync();
+    }
+
+    private async Task LoadPositionListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/PositionResponsibility/GetByUnit?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/PositionResponsibility/Get");
+            }
+            Positions = JsonConvert.DeserializeObject<List<PRModel>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentPosition = new PRModel { UnitID = SelectedUnitID };
+        EditContext = new EditContext(CurrentPosition);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SavePositionAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/PositionResponsibility/Save", CurrentPosition);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadPositionListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditPosition(PRModel position)
+    {
+        var response = await Http.GetStringAsync($"api/PositionResponsibility/GetOne?PositionID={position.PositionID}");
+        var data = JsonConvert.DeserializeObject<List<PRModel>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentPosition = data.First();
+            EditContext = new EditContext(CurrentPosition);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeletePosition(PRModel position)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteConfirmationTitle"],
+            text = string.Format(Localizer["DeleteConfirmationText"], position.PositionID),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = GLocalizer["ConfirmYes"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/PositionResponsibility/Delete")
+            {
+                Content = JsonContent.Create(new PRModel { PositionID = position.PositionID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadPositionListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}
