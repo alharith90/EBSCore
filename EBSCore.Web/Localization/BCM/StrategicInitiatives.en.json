@@ -1,0 +1,22 @@
+{
+  "PageTitle": "Strategic Initiatives",
+  "ModalTitle": "Add / Update Strategic Initiative",
+  "UnitName": "Unit",
+  "ObjectiveID": "Objective ID",
+  "Title": "Initiative Title",
+  "Description": "Description",
+  "OwnerID": "Owner",
+  "DepartmentID": "Department",
+  "Budget": "Budget",
+  "Progress": "Progress (%)",
+  "Status": "Status",
+  "StartDate": "Start Date",
+  "EndDate": "End Date",
+  "EscalationCriteria": "Escalation criteria",
+  "EscalationContact": "Escalation contact",
+  "ActivationCriteria": "Activation criteria",
+  "ActivationTrigger": "BCM activation triggers",
+  "ActivationStatus": "Activation status",
+  "SaveSuccess": "Strategic initiative saved successfully",
+  "DeleteSuccess": "Strategic initiative deleted successfully"
+}
