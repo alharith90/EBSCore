@@ -1,0 +1,286 @@
+@page "/BCM/Stakeholders"
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using EBSCore.Web.Pages.Controls
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Linq
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Stakeholders.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["StakeholderName"]</th>
+                                    <th>@Localizer["StakeholderType"]</th>
+                                    <th>@Localizer["Role"]</th>
+                                    <th>@Localizer["Contact"]</th>
+                                    <th>@Localizer["IsCritical"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var s in Stakeholders)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@s.StakeholderName</td>
+                                        <td>@s.StakeholderType</td>
+                                        <td>@s.Role</td>
+                                        <td>
+                                            <div>@s.ContactEmail</div>
+                                            <div class="text-muted">@s.ContactPhone</div>
+                                        </td>
+                                        <td>@(s.IsCritical == true ? GLocalizer["Yes"] : GLocalizer["No"])</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditStakeholder(s)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteStakeholder(s)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveStakeholderAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentStakeholder.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["StakeholderName"]</label>
+                            <input class="form-control" @bind-value="CurrentStakeholder.StakeholderName" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["StakeholderType"]</label>
+                            <input class="form-control" @bind-value="CurrentStakeholder.StakeholderType" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Role"]</label>
+                            <input class="form-control" @bind-value="CurrentStakeholder.Role" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ContactEmail"]</label>
+                            <input class="form-control" type="email" @bind-value="CurrentStakeholder.ContactEmail" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ContactPhone"]</label>
+                            <input class="form-control" @bind-value="CurrentStakeholder.ContactPhone" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["IsCritical"]</label>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" @bind="CurrentStakeholder.IsCritical" />
+                                <label class="form-check-label">@Localizer["CriticalHint"]</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Notes"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentStakeholder.Notes" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<Stakeholder> Stakeholders = new();
+    Stakeholder CurrentStakeholder = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentStakeholder);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadStakeholderListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadStakeholderListAsync();
+    }
+
+    private async Task LoadStakeholderListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/Stakeholder/GetByUnit?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/Stakeholder/Get");
+            }
+            Stakeholders = JsonConvert.DeserializeObject<List<Stakeholder>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentStakeholder = new Stakeholder { UnitID = SelectedUnitID, IsCritical = false };
+        EditContext = new EditContext(CurrentStakeholder);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveStakeholderAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/Stakeholder/Save", CurrentStakeholder);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadStakeholderListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditStakeholder(Stakeholder stakeholder)
+    {
+        var response = await Http.GetStringAsync($"api/Stakeholder/GetOne?StakeholderID={stakeholder.StakeholderID}");
+        var data = JsonConvert.DeserializeObject<List<Stakeholder>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentStakeholder = data.First();
+            EditContext = new EditContext(CurrentStakeholder);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteStakeholder(Stakeholder stakeholder)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteConfirmTitle"],
+            text = string.Format(Localizer["DeleteConfirmText"], stakeholder.StakeholderName),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = GLocalizer["Delete"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Stakeholder/Delete")
+            {
+                Content = JsonContent.Create(new Stakeholder { StakeholderID = stakeholder.StakeholderID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadStakeholderListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}

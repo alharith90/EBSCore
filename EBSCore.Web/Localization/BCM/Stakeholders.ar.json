@@ -1,0 +1,18 @@
+{
+  "PageTitle": "أصحاب المصلحة",
+  "ModalTitle": "إضافة / تعديل صاحب مصلحة",
+  "UnitName": "الوحدة",
+  "StakeholderName": "اسم صاحب المصلحة",
+  "StakeholderType": "نوع صاحب المصلحة",
+  "Role": "الدور",
+  "Contact": "بيانات التواصل",
+  "ContactEmail": "البريد الإلكتروني",
+  "ContactPhone": "رقم الهاتف",
+  "IsCritical": "حساس لاستمرارية الأعمال",
+  "CriticalHint": "حدد إذا كان صاحب المصلحة حرجًا للتعافي",
+  "Notes": "ملاحظات",
+  "SaveSuccess": "تم حفظ صاحب المصلحة بنجاح",
+  "DeleteSuccess": "تم حذف صاحب المصلحة بنجاح",
+  "DeleteConfirmTitle": "هل أنت متأكد؟",
+  "DeleteConfirmText": "سيتم حذف صاحب المصلحة {0}."
+}
