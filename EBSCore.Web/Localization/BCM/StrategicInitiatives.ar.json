@@ -1,0 +1,22 @@
+{
+  "PageTitle": "المبادرات الاستراتيجية",
+  "ModalTitle": "إضافة / تعديل مبادرة استراتيجية",
+  "UnitName": "الوحدة",
+  "ObjectiveID": "رقم الهدف",
+  "Title": "عنوان المبادرة",
+  "Description": "الوصف",
+  "OwnerID": "المالك",
+  "DepartmentID": "القسم",
+  "Budget": "الميزانية",
+  "Progress": "التقدم (%)",
+  "Status": "الحالة",
+  "StartDate": "تاريخ البداية",
+  "EndDate": "تاريخ النهاية",
+  "EscalationCriteria": "معايير التصعيد",
+  "EscalationContact": "مسؤول التصعيد",
+  "ActivationCriteria": "معايير تفعيل خطة استمرارية الأعمال",
+  "ActivationTrigger": "محفزات التفعيل",
+  "ActivationStatus": "حالة التفعيل",
+  "SaveSuccess": "تم حفظ المبادرة بنجاح",
+  "DeleteSuccess": "تم حذف المبادرة بنجاح"
+}

@@ -1,0 +1,413 @@
+@page "/GRC/Requirements"
+@using EBSCore.Web.Models
+@using ReqModel = EBSCore.Web.Models.Requirement
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <input class="form-control ms-2" style="max-width: 280px;" placeholder="@Localizer["SearchPlaceholder"]" @bind-value="SearchTerm" @bind-value:event="oninput" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (FilteredRequirements.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["RequirementNo"]</th>
+                                    <th>@Localizer["RequirementType"]</th>
+                                    <th>@Localizer["RequirementTitle"]</th>
+                                    <th>@Localizer["RiskCategory"]</th>
+                                    <th>@Localizer["BCMActivationType"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var requirement in FilteredRequirements)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@requirement.RequirementNo</td>
+                                        <td>@requirement.RequirementType</td>
+                                        <td>@requirement.RequirementTitle</td>
+                                        <td>@requirement.RiskCategory</td>
+                                        <td>@requirement.BCMActivationType</td>
+                                        <td>@requirement.Status</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditRequirement(requirement)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteRequirement(requirement)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveRequirementAsync">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                    <span class="text-muted">@Localizer["EscalationHint"]</span>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentRequirement.OrganizationUnitID" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RequirementNo"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.RequirementNo" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RequirementType"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.RequirementType">
+                                <option value="">@Localizer["SelectOption"]</option>
+                                @foreach (var type in RequirementTypes)
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RequirementTitle"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.RequirementTitle" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Subcategory"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.Subcategory" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["RequirementDescription"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentRequirement.RequirementDescription" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["RequirementDetails"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentRequirement.RequirementDetails" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RequirementTags"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.RequirementTags" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RequirementFrequency"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.RequirementFrequency">
+                                <option value="">@Localizer["SelectOption"]</option>
+                                @foreach (var freq in RequirementFrequencies)
+                                {
+                                    <option value="@freq">@freq</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ExternalAudit"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.ExternalAudit">
+                                @foreach (var flag in YesNoOptions)
+                                {
+                                    <option value="@flag">@flag</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["InternalAudit"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.InternalAudit">
+                                @foreach (var flag in YesNoOptions)
+                                {
+                                    <option value="@flag">@flag</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["AuditReference"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.AuditReference" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RiskCategory"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.RiskCategory">
+                                <option value="">@Localizer["SelectOption"]</option>
+                                @foreach (var category in RiskCategories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ControlOwner"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.ControlOwner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ControlOwnerFunction"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.ControlOwnerFunction" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EvidenceRequired"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.EvidenceRequired">
+                                <option value="">@Localizer["SelectOption"]</option>
+                                @foreach (var evidence in EvidenceTypes)
+                                {
+                                    <option value="@evidence">@evidence</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EvidenceDetails"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.EvidenceDetails" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ControlID"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.ControlID" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationProcess"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.EscalationProcess" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationThreshold"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.EscalationThreshold" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["BCMActivationType"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.BCMActivationType">
+                                <option value="">@Localizer["SelectOption"]</option>
+                                @foreach (var trigger in BCMActivationTypes)
+                                {
+                                    <option value="@trigger">@trigger</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["BCMActivationDecision"]</label>
+                            <input class="form-control" @bind-value="CurrentRequirement.BCMActivationDecision" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationContacts"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentRequirement.EscalationContacts" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <InputSelect class="form-select" @bind-Value="CurrentRequirement.Status">
+                                @foreach (var status in Statuses)
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<ReqModel> RequirementList = new();
+    ReqModel CurrentRequirement = new();
+    string? SelectedUnitID = null;
+    string? SearchTerm = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    readonly string[] RequirementTypes = new[] { "ISO 22301", "NCEMA 7000", "COSO", "Risk", "Policy", "Internal Audit" };
+    readonly string[] RequirementFrequencies = new[] { "Daily", "Weekly", "Monthly", "Quarterly", "Bi-Annually", "Annually", "Ad-hoc" };
+    readonly string[] YesNoOptions = new[] { "Yes", "No" };
+    readonly string[] RiskCategories = new[] { "Strategic", "Operational", "Compliance", "Cyber", "Audit", "BCM" };
+    readonly string[] EvidenceTypes = new[] { "SOP", "Logs", "Screenshot", "Review", "Training", "Testing" };
+    readonly string[] BCMActivationTypes = new[] { "Threat Scenario", "Impact Threshold", "Service Outage", "Facility Disruption", "Supplier Failure" };
+    readonly string[] Statuses = new[] { "Active", "Inactive", "Under Review" };
+
+    private IEnumerable<ReqModel> FilteredRequirements => string.IsNullOrWhiteSpace(SearchTerm)
+        ? RequirementList
+        : RequirementList.Where(r => (r.RequirementNo?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+            || (r.RequirementTitle?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+            || (r.RiskCategory?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false));
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentRequirement);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadRequirementListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadRequirementListAsync();
+    }
+
+    private async Task LoadRequirementListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/Requirement/Get?unitId={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/Requirement/Get");
+            }
+            RequirementList = JsonConvert.DeserializeObject<List<ReqModel>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentRequirement = new ReqModel
+        {
+            OrganizationUnitID = SelectedUnitID,
+            Status = Statuses.FirstOrDefault()
+        };
+        EditContext = new EditContext(CurrentRequirement);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveRequirementAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/Requirement/Save", CurrentRequirement);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadRequirementListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["Saved"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = Localizer["Error"], text = response.ReasonPhrase ?? Localizer["SaveFailed"] });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditRequirement(ReqModel requirement)
+    {
+        var response = await Http.GetStringAsync($"api/Requirement/GetOne?requirementCode={requirement.RequirementCode}");
+        var data = JsonConvert.DeserializeObject<List<ReqModel>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentRequirement = data.First();
+            EditContext = new EditContext(CurrentRequirement);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteRequirement(ReqModel requirement)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteConfirmTitle"],
+            text = string.Format(Localizer["DeleteConfirmText"], requirement.RequirementCode),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = Localizer["DeleteConfirm"],
+            cancelButtonText = Localizer["CancelConfirm"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Requirement/Delete")
+            {
+                Content = JsonContent.Create(new ReqModel { RequirementCode = requirement.RequirementCode })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadRequirementListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["Deleted"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = Localizer["Error"], text = response.ReasonPhrase ?? Localizer["DeleteFailed"] });
+            }
+        }
+    }
+}
