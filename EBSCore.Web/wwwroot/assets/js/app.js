@@ -165,6 +165,13 @@ window.WorkflowBuilder = {
             return;
         }
 
+        // Ensure the canvas has dimensions before initializing drawflow
+        const wrapper = canvas.parentElement;
+        if (wrapper) {
+            canvas.style.width = '100%';
+            canvas.style.height = `${wrapper.clientHeight || 500}px`;
+        }
+
         const editor = new Drawflow(canvas);
 
         // recommended settings
