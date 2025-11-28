@@ -40,8 +40,10 @@
                                     <th>#</th>
                                     <th>@Localizer["Title"]</th>
                                     <th>@Localizer["ObjectiveID"]</th>
+                                    <th>@Localizer["Category"]</th>
+                                    <th>@Localizer["Type"]</th>
                                     <th>@Localizer["Status"]</th>
-                                    <th>@Localizer["TargetValue"] / @Localizer["CurrentValue"]</th>
+                                    <th>@Localizer["Targets"]</th>
                                     <th>@Localizer["Owner"]</th>
                                     <th>@GLocalizer["Actions"]</th>
                                 </tr>
@@ -55,8 +57,14 @@
                                         <td>@idx</td>
                                         <td>@k.Title</td>
                                         <td>@k.ObjectiveID</td>
+                                        <td>@k.Category</td>
+                                        <td>@k.Type</td>
                                         <td>@k.Status</td>
-                                        <td>@k.TargetValue / @k.CurrentValue</td>
+                                        <td>
+                                            <div>@Localizer["TargetValue"]: @k.TargetValue</div>
+                                            <div>@Localizer["ThresholdGreen"]: @k.ThresholdGreen</div>
+                                            <div>@Localizer["ThresholdRed"]: @k.ThresholdRed</div>
+                                        </td>
                                         <td>@k.Owner</td>
                                         <td>
                                             <button class="btn btn-sm btn-info" @onclick="() => EditKpi(k)"><i class="fas fa-edit"></i></button>
@@ -96,6 +104,21 @@ else
                             <UnitTreeSelector @bind-Value="CurrentKpi.UnitID" />
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">@Localizer["Category"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.Category" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Type"]</label>
+                            <select class="form-select" @bind="CurrentKpi.Type">
+                                <option value="">@GLocalizer["SelectOption"]</option>
+                                <option>Strategic</option>
+                                <option>Operational</option>
+                                <option>Risk</option>
+                                <option>Compliance</option>
+                                <option>Quality</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">@Localizer["ObjectiveID"]</label>
                             <input class="form-control" @bind-value="CurrentKpi.ObjectiveID" @bind-value:event="oninput" />
                         </div>
@@ -112,8 +135,21 @@ else
                             <InputNumber class="form-control" @bind-Value="CurrentKpi.TargetValue" />
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">@Localizer["CurrentValue"]</label>
-                            <InputNumber class="form-control" @bind-Value="CurrentKpi.CurrentValue" />
+                            <label class="form-label">@Localizer["ThresholdGreen"]</label>
+                            <InputNumber class="form-control" @bind-Value="CurrentKpi.ThresholdGreen" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ThresholdRed"]</label>
+                            <InputNumber class="form-control" @bind-Value="CurrentKpi.ThresholdRed" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ThresholdMethod"]</label>
+                            <select class="form-select" @bind="CurrentKpi.ThresholdMethod">
+                                <option value="">@GLocalizer["SelectOption"]</option>
+                                <option>HigherIsBetter</option>
+                                <option>LowerIsBetter</option>
+                                <option>Range</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Unit"]</label>
@@ -127,6 +163,10 @@ else
                                 <option>Quarterly</option>
                                 <option>Annual</option>
                             </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["CalculationMethod"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.CalculationMethod" @bind-value:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Status"]</label>

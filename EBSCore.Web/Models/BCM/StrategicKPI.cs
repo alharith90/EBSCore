@@ -10,6 +10,10 @@ namespace EBSCore.Web.Models.BCM
 
         public string? KPIID { get; set; }
 
+        public string? Category { get; set; }
+
+        public string? Type { get; set; }
+
         [Required]
         public string ObjectiveID { get; set; } = string.Empty;
 
@@ -20,11 +24,17 @@ namespace EBSCore.Web.Models.BCM
 
         public decimal? TargetValue { get; set; }
 
-        public decimal? CurrentValue { get; set; }
+        public decimal? ThresholdGreen { get; set; }
+
+        public decimal? ThresholdRed { get; set; }
+
+        public string? ThresholdMethod { get; set; }
 
         public string? Unit { get; set; }
 
         public string? Frequency { get; set; }
+
+        public string? CalculationMethod { get; set; }
 
         public string? Status { get; set; }
 
