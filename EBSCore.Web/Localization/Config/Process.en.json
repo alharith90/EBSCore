@@ -17,5 +17,17 @@
   "Escalation": "Escalation (minutes)",
   "Activation": "Activation criteria",
   "NoSteps": "No steps have been defined for this process.",
-  "StepsSaved": "Process steps saved"
+  "StepsSaved": "Process steps saved",
+  "ProcessControls": "Process Controls",
+  "AddControl": "Add Control",
+  "SaveControls": "Save Controls",
+  "ControlStep": "Related Step",
+  "ControlType": "Type",
+  "EvidenceRequired": "Evidence required",
+  "RelatedStandards": "Related standards",
+  "NoControls": "No controls have been defined for this process.",
+  "ControlsSaved": "Process controls saved",
+  "SaveStepsFirst": "Add and save at least one step before managing controls.",
+  "SelectStep": "Select a step",
+  "ControlValidation": "Select a related step and title for each control."
 }

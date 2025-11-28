@@ -11,6 +11,7 @@
 @using System.Linq
 @using EBSCore.Web.Pages.Controls
 @using ProcessStepModel = EBSCore.Web.Models.ProcessStep
+@using ProcessControlModel = EBSCore.Web.Models.ProcessControl
 @inject IJSRuntime JS
 @inject HttpClient Http
 @inject NavigationManager Navigation
@@ -189,6 +190,87 @@ else
                             </button>
                         </div>
                     </div>
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">@Localizer["ProcessControls"]</h6>
+                            <button type="button" class="btn btn-outline-primary btn-sm" disabled="@(!CanManageControls)" @onclick="AddControl">
+                                <i class="fas fa-plus"></i> @Localizer["AddControl"]
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            @if (!CanManageControls)
+                            {
+                                <div class="alert alert-info mb-0">@Localizer["SaveStepsFirst"]</div>
+                            }
+                            else if (ControlsLoading)
+                            {
+                                <div class="text-muted">@GLocalizer["Loading"]...</div>
+                            }
+                            else if (CurrentControls.Any())
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>@Localizer["ControlStep"]</th>
+                                                <th>@Localizer["Title"]</th>
+                                                <th>@Localizer["ControlType"]</th>
+                                                <th>@Localizer["Description"]</th>
+                                                <th>@Localizer["EvidenceRequired"]</th>
+                                                <th>@Localizer["RelatedStandards"]</th>
+                                                <th style="width: 80px;">@GLocalizer["Actions"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var control in CurrentControls)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-select" @bind-value="control.StepID" @bind-value:event="onchange">
+                                                            <option value="">@Localizer["SelectStep"]</option>
+                                                            @foreach (var step in CurrentSteps.OrderBy(s => s.StepOrder))
+                                                            {
+                                                                <option value="@step.StepID">@step.Title</option>
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" @bind-value="control.Title" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" @bind-value="control.Type" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" rows="2" @bind-value="control.Description" @bind-value:event="oninput"></textarea>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input class="form-check-input" type="checkbox" @bind-value="control.EvidenceRequired" @bind-value:event="onchange" />
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" rows="2" @bind-value="control.RelatedStandards" @bind-value:event="oninput"></textarea>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-outline-danger btn-sm" title="@GLocalizer["Delete"]" @onclick="() => RemoveControl(control)">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0">@Localizer["NoControls"]</p>
+                            }
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="btn btn-primary" disabled="@(!CanManageControls || ControlsLoading)" @onclick="SaveControlsAsync">
+                                <i class="fas fa-save"></i> @Localizer["SaveControls"]
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
@@ -210,6 +292,8 @@ else
     string? SelectedUnitID = null;
     List<ProcessStepModel> CurrentSteps = new();
     bool StepsLoading = false;
+    List<ProcessControlModel> CurrentControls = new();
+    bool ControlsLoading = false;
 
     // Forms
     EditContext EditContext = default!;
@@ -219,6 +303,7 @@ else
     IStringLocalizer GLocalizer = default!;
 
     bool CanManageSteps => !string.IsNullOrEmpty(CurrentProcess.ProcessID);
+    bool CanManageControls => CanManageSteps && CurrentSteps.Any(s => s.StepID.HasValue);
 
     private bool _firstRenderDone = false;
     protected override async Task OnInitializedAsync()
@@ -277,6 +362,8 @@ else
         ShowInputScreen = true;
         CurrentSteps = new();
         StepsLoading = false;
+        CurrentControls = new();
+        ControlsLoading = false;
     }
 
     private async Task ShowDisplay()
@@ -284,6 +371,8 @@ else
         ShowInputScreen = false;
         CurrentSteps = new();
         StepsLoading = false;
+        CurrentControls = new();
+        ControlsLoading = false;
     }
 
     private async Task SaveProcessAsync()
@@ -318,6 +407,7 @@ else
             EditContext = new EditContext(CurrentProcess);
             ShowInputScreen = true;
             await LoadStepsForCurrentProcess();
+            await LoadControlsForCurrentProcess();
         }
     }
 
@@ -345,6 +435,33 @@ else
         }
     }
 
+    private async Task LoadControlsForCurrentProcess()
+    {
+        CurrentControls = new();
+        if (!CanManageControls)
+        {
+            return;
+        }
+
+        ControlsLoading = true;
+        try
+        {
+            var response = await Http.GetStringAsync($"api/ProcessControl/GetByProcess?processId={CurrentProcess.ProcessID}");
+            var controls = JsonConvert.DeserializeObject<List<ProcessControlModel>>(response) ?? new();
+            CurrentControls = controls
+                .Where(c => CurrentSteps.Any(s => s.StepID == c.StepID))
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Controls", text = ex.Message });
+        }
+        finally
+        {
+            ControlsLoading = false;
+        }
+    }
+
     private void AddStep()
     {
         if (!CanManageSteps)
@@ -366,6 +483,73 @@ else
     private void RemoveStep(ProcessStepModel step)
     {
         CurrentSteps.Remove(step);
+    }
+
+    private void AddControl()
+    {
+        if (!CanManageControls)
+        {
+            return;
+        }
+
+        var defaultStepId = CurrentSteps.OrderBy(s => s.StepOrder).FirstOrDefault()?.StepID;
+        CurrentControls.Add(new ProcessControlModel
+        {
+            ProcessID = int.TryParse(CurrentProcess.ProcessID, out var processId) ? processId : null,
+            StepID = defaultStepId,
+            Title = string.Empty,
+            EvidenceRequired = false
+        });
+    }
+
+    private void RemoveControl(ProcessControlModel control)
+    {
+        CurrentControls.Remove(control);
+    }
+
+    private async Task SaveControlsAsync()
+    {
+        if (!int.TryParse(CurrentProcess.ProcessID, out var processId))
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "info", title = Localizer["SaveProcessFirst"], text = Localizer["SaveProcessFirst"] });
+            return;
+        }
+
+        if (!CurrentSteps.Any())
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "info", title = Localizer["SaveStepsFirst"], text = Localizer["SaveStepsFirst"] });
+            return;
+        }
+
+        if (CurrentControls.Any(c => c.StepID == null || c.StepID <= 0 || string.IsNullOrWhiteSpace(c.Title)))
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "warning", title = Localizer["SaveControls"], text = Localizer["ControlValidation"] });
+            return;
+        }
+
+        var controls = CurrentControls
+            .Select(control =>
+            {
+                control.ProcessID = processId;
+                return control;
+            })
+            .ToList();
+
+        var response = await Http.PostAsJsonAsync("api/ProcessControl/Save", new ProcessControlSaveRequest
+        {
+            ProcessID = processId,
+            Controls = controls
+        });
+
+        if (response.IsSuccessStatusCode)
+        {
+            await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["ControlsSaved"] });
+            await LoadControlsForCurrentProcess();
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Failed to save controls" });
+        }
     }
 
     private async Task SaveStepsAsync()
@@ -396,6 +580,7 @@ else
         {
             await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["StepsSaved"] });
             await LoadStepsForCurrentProcess();
+            await LoadControlsForCurrentProcess();
         }
         else
         {

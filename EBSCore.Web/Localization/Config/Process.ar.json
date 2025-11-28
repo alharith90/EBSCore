@@ -17,5 +17,17 @@
   "Escalation": "التصعيد (بالدقائق)",
   "Activation": "معايير التفعيل",
   "NoSteps": "لا توجد خطوات معرفة لهذه العملية.",
-  "StepsSaved": "تم حفظ خطوات العملية"
+  "StepsSaved": "تم حفظ خطوات العملية",
+  "ProcessControls": "ضوابط العملية",
+  "AddControl": "إضافة ضابط",
+  "SaveControls": "حفظ الضوابط",
+  "ControlStep": "الخطوة المرتبطة",
+  "ControlType": "النوع",
+  "EvidenceRequired": "يتطلب دليل",
+  "RelatedStandards": "المعايير / المتطلبات ذات الصلة",
+  "NoControls": "لا توجد ضوابط معرفة لهذه العملية.",
+  "ControlsSaved": "تم حفظ ضوابط العملية",
+  "SaveStepsFirst": "أضف واحفظ خطوة واحدة على الأقل قبل إدارة الضوابط.",
+  "SelectStep": "اختر خطوة",
+  "ControlValidation": "يرجى اختيار الخطوة المرتبطة وإدخال عنوان لكل ضابط."
 }
