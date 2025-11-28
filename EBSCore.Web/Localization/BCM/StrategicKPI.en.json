@@ -1,0 +1,18 @@
+{
+  "PageTitle": "Strategic KPIs",
+  "ModalTitle": "Strategic KPI",
+  "UnitName": "Unit",
+  "ObjectiveID": "Objective ID",
+  "Title": "Title",
+  "Description": "Description",
+  "TargetValue": "Target value",
+  "CurrentValue": "Current value",
+  "Unit": "Unit of measure",
+  "Frequency": "Frequency",
+  "Status": "Status",
+  "Owner": "Owner",
+  "Escalation": "Escalation & reporting",
+  "Activation": "BCM activation criteria",
+  "SaveSuccess": "KPI saved successfully",
+  "DeleteSuccess": "KPI deleted successfully"
+}

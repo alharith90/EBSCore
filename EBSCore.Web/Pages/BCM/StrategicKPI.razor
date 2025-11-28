@@ -1,0 +1,306 @@
+@page "/BCM/StrategicKPI"
+@using EBSCore.Web.Models.BCM
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using EBSCore.Web.Pages.Controls
+@using System.Linq
+@using System.Net.Http.Json
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListKpis.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["Title"]</th>
+                                    <th>@Localizer["ObjectiveID"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@Localizer["TargetValue"] / @Localizer["CurrentValue"]</th>
+                                    <th>@Localizer["Owner"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var k in ListKpis)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@k.Title</td>
+                                        <td>@k.ObjectiveID</td>
+                                        <td>@k.Status</td>
+                                        <td>@k.TargetValue / @k.CurrentValue</td>
+                                        <td>@k.Owner</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditKpi(k)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteKpi(k)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveKpiAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentKpi.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ObjectiveID"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.ObjectiveID" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Title"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.Title" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Description"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentKpi.Description" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["TargetValue"]</label>
+                            <InputNumber class="form-control" @bind-Value="CurrentKpi.TargetValue" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["CurrentValue"]</label>
+                            <InputNumber class="form-control" @bind-Value="CurrentKpi.CurrentValue" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Unit"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.Unit" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Frequency"]</label>
+                            <select class="form-select" @bind="CurrentKpi.Frequency">
+                                <option value="">@GLocalizer["SelectOption"]</option>
+                                <option>Monthly</option>
+                                <option>Quarterly</option>
+                                <option>Annual</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <select class="form-select" @bind="CurrentKpi.Status">
+                                <option value="">@GLocalizer["SelectOption"]</option>
+                                <option>Achieved</option>
+                                <option>On Track</option>
+                                <option>Off Track</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Owner"]</label>
+                            <input class="form-control" @bind-value="CurrentKpi.Owner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Escalation"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentKpi.EscalationPlan" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Activation"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentKpi.ActivationCriteria" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<StrategicKPI> ListKpis = new();
+    StrategicKPI CurrentKpi = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentKpi);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadKpiListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadKpiListAsync();
+    }
+
+    private async Task LoadKpiListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/StrategicKPI/GetByUnit?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/StrategicKPI/Get");
+            }
+            ListKpis = JsonConvert.DeserializeObject<List<StrategicKPI>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentKpi = new StrategicKPI { UnitID = SelectedUnitID };
+        EditContext = new EditContext(CurrentKpi);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveKpiAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/StrategicKPI/Save", CurrentKpi);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadKpiListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditKpi(StrategicKPI kpi)
+    {
+        var response = await Http.GetStringAsync($"api/StrategicKPI/GetOne?KPIID={kpi.KPIID}");
+        var data = JsonConvert.DeserializeObject<List<StrategicKPI>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentKpi = data.First();
+            EditContext = new EditContext(CurrentKpi);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteKpi(StrategicKPI kpi)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"KPI ID {kpi.KPIID} will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/StrategicKPI/Delete")
+            {
+                Content = JsonContent.Create(new StrategicKPI { KPIID = kpi.KPIID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadKpiListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}
