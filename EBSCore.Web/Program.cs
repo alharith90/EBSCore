@@ -37,6 +37,7 @@ builder.Services.AddControllers(); // API controllers
 builder.Services.AddServerSideBlazor(); // Blazor Server
 builder.Services.AddRazorPages(); // Razor Pages hosting _Host
 builder.Services.AddScoped<PageTitleService>();
+builder.Services.AddSingleton<HtmlToPdfService>();
 
 // *** 2. Register Custom Services ***
 builder.Services.AddScoped<LoggingService>(); // Logging service
