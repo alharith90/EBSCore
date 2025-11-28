@@ -1,0 +1,285 @@
+@page "/Config/ManagementReviewReports"
+@using EBSCore.Web.Models
+@using ReportModel = EBSCore.Web.Models.ManagementReviewReport
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using System.Linq
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListReports.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["ReportTitle"]</th>
+                                    <th>@Localizer["MeetingDate"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@Localizer["NextReviewDate"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                }
+                                @foreach (var report in ListReports)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@report.ReportTitle</td>
+                                        <td>@report.MeetingDate</td>
+                                        <td>@report.Status</td>
+                                        <td>@report.NextReviewDate</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditReport(report)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteReport(report)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveReportAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentReport.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ReportTitle"]</label>
+                            <input class="form-control" @bind-value="CurrentReport.ReportTitle" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["MeetingDate"]</label>
+                            <input type="date" class="form-control" @bind-value="CurrentReport.MeetingDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <input class="form-control" @bind-value="CurrentReport.Status" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Summary"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentReport.Summary" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Decisions"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentReport.Decisions" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["FollowUpActions"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentReport.FollowUpActions" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["NextReviewDate"]</label>
+                            <input type="date" class="form-control" @bind-value="CurrentReport.NextReviewDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Notes"]</label>
+                            <input class="form-control" @bind-value="CurrentReport.Notes" @bind-value:event="oninput" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<ReportModel> ListReports = new();
+    ReportModel CurrentReport = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentReport);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadReportListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadReportListAsync();
+    }
+
+    private async Task LoadReportListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/ManagementReviewReport/GetByUnit?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/ManagementReviewReport/Get");
+            }
+            ListReports = JsonConvert.DeserializeObject<List<ReportModel>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentReport = new ReportModel { UnitID = SelectedUnitID };
+        EditContext = new EditContext(CurrentReport);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveReportAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/ManagementReviewReport/Save", CurrentReport);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadReportListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Report saved successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditReport(ReportModel report)
+    {
+        var response = await Http.GetStringAsync($"api/ManagementReviewReport/GetOne?ReportID={report.ReportID}");
+        var data = JsonConvert.DeserializeObject<List<ReportModel>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentReport = data.First();
+            EditContext = new EditContext(CurrentReport);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteReport(ReportModel report)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"Report ID {report.ReportID} will be deleted.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/ManagementReviewReport/Delete")
+            {
+                Content = JsonContent.Create(new ReportModel { ReportID = report.ReportID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadReportListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Report deleted successfully" });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}

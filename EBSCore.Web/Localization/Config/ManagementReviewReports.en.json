@@ -1,0 +1,13 @@
+{
+  "PageTitle": "Management Review Reports",
+  "ModalTitle": "Add / Update Management Review Report",
+  "UnitName": "Unit",
+  "ReportTitle": "Report Title",
+  "MeetingDate": "Meeting Date",
+  "Status": "Status",
+  "Summary": "Summary",
+  "Decisions": "Decisions",
+  "FollowUpActions": "Follow-up Actions",
+  "NextReviewDate": "Next Review Date",
+  "Notes": "Notes"
+}
