@@ -1,0 +1,17 @@
+{
+  "PageTitle": "Recovery Strategies",
+  "ModalTitle": "Add / Update Recovery Strategy",
+  "UnitName": "Unit",
+  "FailureScenario": "Failure Scenario",
+  "Strategy": "Recovery Strategy",
+  "CostImpact": "Cost Impact",
+  "ConfidenceLevel": "Confidence Level",
+  "ActivationSteps": "Activation and Validation Steps",
+  "StepDescription": "Step / Action",
+  "ValidationCheck": "Check / Evidence",
+  "NoSteps": "No activation steps added yet.",
+  "AddStep": "Add Step",
+  "SaveSuccess": "Recovery strategy saved successfully",
+  "DeleteSuccess": "Recovery strategy deleted successfully",
+  "DeleteConfirmation": "The selected recovery strategy will be deleted"
+}
