@@ -1,0 +1,17 @@
+{
+  "PageTitle": "المناصب والمسؤوليات لإدارة استمرارية الأعمال",
+  "ModalTitle": "إضافة / تحديث منصب",
+  "UnitName": "الوحدة",
+  "PositionTitle": "المسمى الوظيفي",
+  "PositionCode": "رمز الوظيفة",
+  "Responsibilities": "المسؤوليات",
+  "AuthorityLevel": "مستوى الصلاحية / التصعيد",
+  "ContactDetails": "بيانات التواصل",
+  "Status": "الحالة",
+  "SaveSuccess": "تم حفظ المناصب والمسؤوليات بنجاح",
+  "DeleteSuccess": "تم حذف السجل بنجاح",
+  "DeleteConfirmationTitle": "هل أنت متأكد؟",
+  "DeleteConfirmationText": "سيتم حذف السجل رقم {0}.",
+  "PositionTitleRequired": "المسمى الوظيفي مطلوب",
+  "ResponsibilitiesRequired": "حقل المسؤوليات مطلوب"
+}
