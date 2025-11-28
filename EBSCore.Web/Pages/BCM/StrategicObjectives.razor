@@ -1,0 +1,332 @@
+@page "/BCM/StrategicObjectives"
+@using EBSCore.Web.Models.BCM
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using System.Linq
+@using System.Net.Http
+@using System.Net.Http.Json
+@using EBSCore.Web.Services
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListObjectives.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["Title"]</th>
+                                    <th>@Localizer["ObjectiveCode"]</th>
+                                    <th>@Localizer["Strategy"]</th>
+                                    <th>@Localizer["Status"]</th>
+                                    <th>@Localizer["ActivationStatus"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var obj in ListObjectives)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@obj.Title</td>
+                                        <td>@obj.ObjectiveCode</td>
+                                        <td class="text-truncate" style="max-width: 240px;">@obj.Strategy</td>
+                                        <td>@obj.Status</td>
+                                        <td>@obj.ActivationStatus</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditObjective(obj)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteObjective(obj)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveObjectiveAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentObjective.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ObjectiveCode"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.ObjectiveCode" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Title"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.Title" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Strategy"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.Strategy" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Description"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentObjective.Description" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["OwnerID"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.OwnerID" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RiskLink"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.RiskLink" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ComplianceLink"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.ComplianceLink" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <select class="form-select" @bind-value="CurrentObjective.Status">
+                                @foreach (var status in StatusOptions)
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["StartDate"]</label>
+                            <input type="date" class="form-control" @bind-value="CurrentObjective.StartDate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EndDate"]</label>
+                            <input type="date" class="form-control" @bind-value="CurrentObjective.EndDate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationLevel"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.EscalationLevel" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationContact"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.EscalationContact" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ActivationStatus"]</label>
+                            <select class="form-select" @bind-value="CurrentObjective.ActivationStatus">
+                                @foreach (var status in ActivationStatuses)
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ActivationTrigger"]</label>
+                            <input class="form-control" @bind-value="CurrentObjective.ActivationTrigger" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">@Localizer["ActivationCriteria"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentObjective.ActivationCriteria" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<StrategicObjective> ListObjectives = new();
+    StrategicObjective CurrentObjective = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    readonly string[] StatusOptions = new[] { "On Track", "At Risk", "Delayed" };
+    readonly string[] ActivationStatuses = new[] { "Not Activated", "Monitoring", "Activated" };
+
+    private bool _firstRenderDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentObjective);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadObjectivesAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadObjectivesAsync();
+    }
+
+    private async Task LoadObjectivesAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/StrategicObjective/Get?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/StrategicObjective/Get");
+            }
+
+            ListObjectives = JsonConvert.DeserializeObject<List<StrategicObjective>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentObjective = new StrategicObjective
+        {
+            UnitID = SelectedUnitID,
+            Status = StatusOptions.First(),
+            ActivationStatus = ActivationStatuses.First()
+        };
+        EditContext = new EditContext(CurrentObjective);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveObjectiveAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/StrategicObjective/Save", CurrentObjective);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadObjectivesAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditObjective(StrategicObjective objective)
+    {
+        var response = await Http.GetStringAsync($"api/StrategicObjective/GetOne?objectiveID={objective.ObjectiveID}");
+        var data = JsonConvert.DeserializeObject<List<StrategicObjective>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentObjective = data.First();
+            EditContext = new EditContext(CurrentObjective);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteObjective(StrategicObjective objective)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteTitle"],
+            text = string.Format(Localizer["DeleteText"], objective.ObjectiveID),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = Localizer["ConfirmDelete"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/StrategicObjective/Delete")
+            {
+                Content = JsonContent.Create(new StrategicObjective { ObjectiveID = objective.ObjectiveID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadObjectivesAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}
