@@ -10,6 +10,7 @@
 @using System.Net.Http.Json
 @using System.Linq
 @using EBSCore.Web.Pages.Controls
+@using ProcessStepModel = EBSCore.Web.Models.ProcessStep
 @inject IJSRuntime JS
 @inject HttpClient Http
 @inject NavigationManager Navigation
@@ -60,6 +61,7 @@
                                         <td>@p.ProcessDescription</td>
                                         <td>
                                             <button class="btn btn-sm btn-info" @onclick="() => EditProcess(p)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-primary" title="@Localizer["ManageSteps"]" @onclick="() => ManageSteps(p)"><i class="fas fa-shoe-prints"></i></button>
                                             <button class="btn btn-sm btn-danger" @onclick="() => DeleteProcess(p)"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -108,6 +110,85 @@ else
                             <textarea class="form-control" rows="3" @bind-value="CurrentProcess.ProcessDescription" @bind-value:event="oninput"></textarea>
                         </div>
                     </div>
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">@Localizer["ProcessSteps"]</h6>
+                            <button type="button" class="btn btn-outline-primary btn-sm" disabled="@(!CanManageSteps)" @onclick="AddStep">
+                                <i class="fas fa-plus"></i> @Localizer["AddStep"]
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            @if (!CanManageSteps)
+                            {
+                                <div class="alert alert-info mb-0">@Localizer["SaveProcessFirst"]</div>
+                            }
+                            else if (StepsLoading)
+                            {
+                                <div class="text-muted">@GLocalizer["Loading"]...</div>
+                            }
+                            else if (CurrentSteps.Any())
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80px;">@Localizer["Sequence"]</th>
+                                                <th>@Localizer["Title"]</th>
+                                                <th>@Localizer["Description"]</th>
+                                                <th>@Localizer["Role"]</th>
+                                                <th>@Localizer["ExpectedOutput"]</th>
+                                                <th>@Localizer["Escalation"]</th>
+                                                <th>@Localizer["Activation"]</th>
+                                                <th style="width: 80px;">@GLocalizer["Actions"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var step in CurrentSteps.OrderBy(s => s.StepOrder))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="number" min="1" @bind-value="step.StepOrder" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" @bind-value="step.Title" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" rows="2" @bind-value="step.Description" @bind-value:event="oninput"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" @bind-value="step.RoleID" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" rows="2" @bind-value="step.ExpectedOutput" @bind-value:event="oninput"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" type="number" min="0" @bind-value="step.EscalationMinutes" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" @bind-value="step.ActivationCriteria" @bind-value:event="oninput" />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-outline-danger btn-sm" title="@GLocalizer["Delete"]" @onclick="() => RemoveStep(step)">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0">@Localizer["NoSteps"]</p>
+                            }
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="btn btn-primary" disabled="@(!CanManageSteps || StepsLoading)" @onclick="SaveStepsAsync">
+                                <i class="fas fa-save"></i> @Localizer["SaveSteps"]
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
@@ -127,6 +208,8 @@ else
     List<ProcModel> ListProcesses = new();
     ProcModel CurrentProcess = new();
     string? SelectedUnitID = null;
+    List<ProcessStepModel> CurrentSteps = new();
+    bool StepsLoading = false;
 
     // Forms
     EditContext EditContext = default!;
@@ -134,6 +217,8 @@ else
     // Localization
     IStringLocalizer Localizer = default!;
     IStringLocalizer GLocalizer = default!;
+
+    bool CanManageSteps => !string.IsNullOrEmpty(CurrentProcess.ProcessID);
 
     private bool _firstRenderDone = false;
     protected override async Task OnInitializedAsync()
@@ -190,11 +275,15 @@ else
         EditContext = new EditContext(CurrentProcess);
         ShowValidationMessage = false;
         ShowInputScreen = true;
+        CurrentSteps = new();
+        StepsLoading = false;
     }
 
     private async Task ShowDisplay()
     {
         ShowInputScreen = false;
+        CurrentSteps = new();
+        StepsLoading = false;
     }
 
     private async Task SaveProcessAsync()
@@ -228,7 +317,95 @@ else
             CurrentProcess = data.First();
             EditContext = new EditContext(CurrentProcess);
             ShowInputScreen = true;
+            await LoadStepsForCurrentProcess();
         }
+    }
+
+    private async Task LoadStepsForCurrentProcess()
+    {
+        CurrentSteps = new();
+        if (!CanManageSteps)
+        {
+            return;
+        }
+
+        StepsLoading = true;
+        try
+        {
+            var response = await Http.GetStringAsync($"api/ProcessStep/GetByProcess?processId={CurrentProcess.ProcessID}");
+            CurrentSteps = JsonConvert.DeserializeObject<List<ProcessStepModel>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Steps", text = ex.Message });
+        }
+        finally
+        {
+            StepsLoading = false;
+        }
+    }
+
+    private void AddStep()
+    {
+        if (!CanManageSteps)
+        {
+            return;
+        }
+
+        var nextOrder = CurrentSteps.Any() ? CurrentSteps.Max(s => s.StepOrder) + 1 : 1;
+        _ = int.TryParse(CurrentProcess.ProcessID, out var processId);
+        CurrentSteps.Add(new ProcessStepModel
+        {
+            ProcessID = processId,
+            StepOrder = nextOrder,
+            Title = string.Empty,
+            ActivationCriteria = string.Empty
+        });
+    }
+
+    private void RemoveStep(ProcessStepModel step)
+    {
+        CurrentSteps.Remove(step);
+    }
+
+    private async Task SaveStepsAsync()
+    {
+        if (!int.TryParse(CurrentProcess.ProcessID, out var processId))
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "info", title = Localizer["SaveProcessFirst"], text = Localizer["SaveProcessFirst"] });
+            return;
+        }
+
+        var orderedSteps = CurrentSteps
+            .OrderBy(s => s.StepOrder)
+            .Select((s, idx) =>
+            {
+                s.ProcessID = processId;
+                s.StepOrder = s.StepOrder <= 0 ? idx + 1 : s.StepOrder;
+                return s;
+            })
+            .ToList();
+
+        var response = await Http.PostAsJsonAsync("api/ProcessStep/Save", new ProcessStepSaveRequest
+        {
+            ProcessID = processId,
+            Steps = orderedSteps
+        });
+
+        if (response.IsSuccessStatusCode)
+        {
+            await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["StepsSaved"] });
+            await LoadStepsForCurrentProcess();
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Failed to save steps" });
+        }
+    }
+
+    private async Task ManageSteps(ProcModel process)
+    {
+        await EditProcess(process);
     }
 
     private async Task DeleteProcess(ProcModel process)
