@@ -4,5 +4,18 @@
   "UnitName": "معرّف الوحدة",
   "ProcessName": "اسم العملية",
   "ProcessCode": "رمز العملية",
-  "ProcessDescription": "وصف العملية"
+  "ProcessDescription": "وصف العملية",
+  "ProcessSteps": "خطوات العملية",
+  "ManageSteps": "إدارة الخطوات",
+  "AddStep": "إضافة خطوة",
+  "SaveSteps": "حفظ الخطوات",
+  "SaveProcessFirst": "يجب حفظ العملية أولاً لإدارة خطواتها.",
+  "Sequence": "التسلسل",
+  "Title": "العنوان",
+  "Role": "الدور",
+  "ExpectedOutput": "الناتج المتوقع",
+  "Escalation": "التصعيد (بالدقائق)",
+  "Activation": "معايير التفعيل",
+  "NoSteps": "لا توجد خطوات معرفة لهذه العملية.",
+  "StepsSaved": "تم حفظ خطوات العملية"
 }

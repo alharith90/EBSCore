@@ -4,5 +4,18 @@
   "UnitName": "Unit ID",
   "ProcessName": "Process Name",
   "ProcessCode": "Process Code",
-  "ProcessDescription": "Process Description"
+  "ProcessDescription": "Process Description",
+  "ProcessSteps": "Process Steps",
+  "ManageSteps": "Manage Steps",
+  "AddStep": "Add Step",
+  "SaveSteps": "Save Steps",
+  "SaveProcessFirst": "Save the process first to manage steps.",
+  "Sequence": "Sequence",
+  "Title": "Title",
+  "Role": "Role",
+  "ExpectedOutput": "Expected Output",
+  "Escalation": "Escalation (minutes)",
+  "Activation": "Activation criteria",
+  "NoSteps": "No steps have been defined for this process.",
+  "StepsSaved": "Process steps saved"
 }
