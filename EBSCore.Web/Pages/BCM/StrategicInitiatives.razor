@@ -97,63 +97,63 @@ else
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["ObjectiveID"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.ObjectiveID" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.ObjectiveID" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["Title"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.Title" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.Title" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["OwnerID"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.OwnerID" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.OwnerID" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["DepartmentID"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.DepartmentID" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.DepartmentID" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["Budget"]</label>
-                            <input type="number" step="0.01" class="form-control" @bind-value="CurrentInitiative.Budget" @bind-value:event="oninput" />
+                            <input type="number" step="0.01" class="form-control" @bind="CurrentInitiative.Budget" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["Progress"]</label>
-                            <input type="number" min="0" max="100" class="form-control" @bind-value="CurrentInitiative.Progress" @bind-value:event="oninput" />
+                            <input type="number" min="0" max="100" class="form-control" @bind="CurrentInitiative.Progress" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["Status"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.Status" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.Status" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["StartDate"]</label>
-                            <input type="date" class="form-control" @bind-value="CurrentInitiative.StartDate" />
+                            <input type="date" class="form-control" @bind="CurrentInitiative.StartDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EndDate"]</label>
-                            <input type="date" class="form-control" @bind-value="CurrentInitiative.EndDate" />
+                            <input type="date" class="form-control" @bind="CurrentInitiative.EndDate" />
                         </div>
                         <div class="col-12">
                             <label class="form-label">@Localizer["Description"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentInitiative.Description" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentInitiative.Description" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-12">
                             <label class="form-label">@Localizer["EscalationCriteria"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentInitiative.EscalationCriteria" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentInitiative.EscalationCriteria" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EscalationContact"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.EscalationContact" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.EscalationContact" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ActivationStatus"]</label>
-                            <input class="form-control" @bind-value="CurrentInitiative.ActivationStatus" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentInitiative.ActivationStatus" @bind:event="oninput" />
                         </div>
                         <div class="col-12">
                             <label class="form-label">@Localizer["ActivationCriteria"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentInitiative.ActivationCriteria" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentInitiative.ActivationCriteria" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-12">
                             <label class="form-label">@Localizer["ActivationTrigger"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentInitiative.ActivationTrigger" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentInitiative.ActivationTrigger" @bind:event="oninput"></textarea>
                         </div>
                     </div>
                 </div>

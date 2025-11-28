@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (Stakeholders.Any())
+                    @if (StakeholderList.Any())
                     {
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -49,7 +49,7 @@
                             </thead>
                             <tbody>
                                 @{ var idx = 0; }
-                                @foreach (var s in Stakeholders)
+                                @foreach (var s in StakeholderList)
                                 {
                                     idx++;
                                     <tr>
@@ -101,23 +101,23 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["StakeholderName"]</label>
-                            <input class="form-control" @bind-value="CurrentStakeholder.StakeholderName" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentStakeholder.StakeholderName" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["StakeholderType"]</label>
-                            <input class="form-control" @bind-value="CurrentStakeholder.StakeholderType" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentStakeholder.StakeholderType" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Role"]</label>
-                            <input class="form-control" @bind-value="CurrentStakeholder.Role" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentStakeholder.Role" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ContactEmail"]</label>
-                            <input class="form-control" type="email" @bind-value="CurrentStakeholder.ContactEmail" @bind-value:event="oninput" />
+                            <input class="form-control" type="email" @bind="CurrentStakeholder.ContactEmail" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ContactPhone"]</label>
-                            <input class="form-control" @bind-value="CurrentStakeholder.ContactPhone" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentStakeholder.ContactPhone" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["IsCritical"]</label>
@@ -128,7 +128,7 @@ else
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["Notes"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentStakeholder.Notes" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentStakeholder.Notes" @bind:event="oninput"></textarea>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<Stakeholder> Stakeholders = new();
+    List<Stakeholder> StakeholderList = new();
     Stakeholder CurrentStakeholder = new();
     string? SelectedUnitID = null;
 
@@ -191,7 +191,7 @@ else
             {
                 response = await Http.GetStringAsync("api/Stakeholder/Get");
             }
-            Stakeholders = JsonConvert.DeserializeObject<List<Stakeholder>>(response) ?? new();
+            StakeholderList = JsonConvert.DeserializeObject<List<Stakeholder>>(response) ?? new();
         }
         catch (Exception ex)
         {
