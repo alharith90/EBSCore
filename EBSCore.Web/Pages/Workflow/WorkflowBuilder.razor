@@ -2,6 +2,7 @@
 @using EBSCore.Web.Models.Workflow
 @using Microsoft.AspNetCore.Components
 @using Microsoft.JSInterop
+@using System
 @using System.Text.Json
 @using System.Net.Http.Json
 @inject IJSRuntime JS
@@ -45,8 +46,8 @@
     </div>
 
 <!-- DRAWFLOW CANVAS -->
-<div id="drawflow" class="drawflow-wrapper">
-    <div id="drawflow_canvas" class="drawflow"></div>
+<div id="drawflow" class="drawflow-wrapper flex-grow-1">
+    <div id="drawflow_canvas" class="drawflow drawflow-canvas"></div>
 </div>
 
 
@@ -68,14 +69,28 @@
     // ---------------------------------------------------------
     // INITIALIZATION
     // ---------------------------------------------------------
+    private bool _builderInitialized;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (_builderInitialized)
+            return;
+
+        try
         {
             await JS.InvokeVoidAsync("WorkflowBuilder.init");
+            _builderInitialized = true;
 
             if (WorkflowId.HasValue)
                 await LoadWorkflowAsync();
+        }
+        catch (JSException ex) when (ex.Message.Contains("prerender", StringComparison.OrdinalIgnoreCase))
+        {
+            // Ignore prerender phase; Blazor will re-render when the circuit is connected.
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("prerender", StringComparison.OrdinalIgnoreCase))
+        {
+            // Ignore prerender phase; Blazor will re-render when the circuit is connected.
         }
     }
 
