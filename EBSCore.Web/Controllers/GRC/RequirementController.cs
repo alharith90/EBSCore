@@ -9,6 +9,7 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
+using EBSCore.Web.AppCode;
 
 namespace EBSCore.Web.Controllers
 {

@@ -1,3 +1,5 @@
+using System;
+
 namespace EBSCore.Web.Models
 {
     public class ManagementReviewReport
@@ -6,11 +8,11 @@ namespace EBSCore.Web.Models
         public string? UnitID { get; set; }
         public string? ReportID { get; set; }
         public string? ReportTitle { get; set; }
-        public string? MeetingDate { get; set; }
+        public DateTime? MeetingDate { get; set; }
         public string? Summary { get; set; }
         public string? Decisions { get; set; }
         public string? FollowUpActions { get; set; }
-        public string? NextReviewDate { get; set; }
+        public DateTime? NextReviewDate { get; set; }
         public string? Status { get; set; }
         public string? Notes { get; set; }
         public string? CreatedBy { get; set; }

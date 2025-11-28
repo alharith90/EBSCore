@@ -1,5 +1,6 @@
 @page "/BCM/StrategicKPI"
 @using EBSCore.Web.Models.BCM
+@using StrategicKPIModel = EBSCore.Web.Models.BCM.StrategicKPI
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
@@ -204,8 +205,8 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<StrategicKPI> ListKpis = new();
-    StrategicKPI CurrentKpi = new();
+    List<StrategicKPIModel> ListKpis = new();
+    StrategicKPIModel CurrentKpi = new();
     string? SelectedUnitID = null;
 
     EditContext EditContext = default!;
@@ -251,7 +252,7 @@ else
             {
                 response = await Http.GetStringAsync("api/StrategicKPI/Get");
             }
-            ListKpis = JsonConvert.DeserializeObject<List<StrategicKPI>>(response) ?? new();
+            ListKpis = JsonConvert.DeserializeObject<List<StrategicKPIModel>>(response) ?? new();
         }
         catch (Exception ex)
         {
@@ -265,7 +266,7 @@ else
 
     private async Task ShowInput()
     {
-        CurrentKpi = new StrategicKPI { UnitID = SelectedUnitID };
+        CurrentKpi = new StrategicKPIModel { UnitID = SelectedUnitID };
         EditContext = new EditContext(CurrentKpi);
         ShowValidationMessage = false;
         ShowInputScreen = true;
@@ -298,10 +299,10 @@ else
         }
     }
 
-    private async Task EditKpi(StrategicKPI kpi)
+    private async Task EditKpi(StrategicKPIModel kpi)
     {
         var response = await Http.GetStringAsync($"api/StrategicKPI/GetOne?KPIID={kpi.KPIID}");
-        var data = JsonConvert.DeserializeObject<List<StrategicKPI>>(response);
+        var data = JsonConvert.DeserializeObject<List<StrategicKPIModel>>(response);
         if (data?.Any() == true)
         {
             CurrentKpi = data.First();
@@ -310,7 +311,7 @@ else
         }
     }
 
-    private async Task DeleteKpi(StrategicKPI kpi)
+    private async Task DeleteKpi(StrategicKPIModel kpi)
     {
         var result = await JS.InvokeAsync<object>("Swal.fire", new
         {
@@ -329,7 +330,7 @@ else
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "api/StrategicKPI/Delete")
             {
-                Content = JsonContent.Create(new StrategicKPI { KPIID = kpi.KPIID })
+                Content = JsonContent.Create(new StrategicKPIModel { KPIID = kpi.KPIID })
             };
             var response = await Http.SendAsync(request);
             if (response.IsSuccessStatusCode)
