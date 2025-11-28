@@ -1,0 +1,17 @@
+{
+  "PageTitle": "استراتيجيات التعافي",
+  "ModalTitle": "إضافة / تحديث استراتيجية التعافي",
+  "UnitName": "الوحدة",
+  "FailureScenario": "سيناريو الفشل",
+  "Strategy": "استراتيجية التعافي",
+  "CostImpact": "الأثر المالي",
+  "ConfidenceLevel": "مستوى الثقة",
+  "ActivationSteps": "خطوات التفعيل والتحقق",
+  "StepDescription": "الخطوة / الإجراء",
+  "ValidationCheck": "التحقق / الأدلة",
+  "NoSteps": "لا توجد خطوات تفعيل مضافة.",
+  "AddStep": "إضافة خطوة",
+  "SaveSuccess": "تم حفظ استراتيجية التعافي بنجاح",
+  "DeleteSuccess": "تم حذف استراتيجية التعافي بنجاح",
+  "DeleteConfirmation": "سيتم حذف استراتيجية التعافي المحددة"
+}

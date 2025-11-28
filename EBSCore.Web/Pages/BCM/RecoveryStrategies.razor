@@ -1,0 +1,336 @@
+@page "/BCM/RecoveryStrategies"
+@using EBSCore.Web.Models.BCM
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using System.Linq
+@using System.Net.Http.Json
+@using EBSCore.Web.Services
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListStrategies.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["FailureScenario"]</th>
+                                    <th>@Localizer["Strategy"]</th>
+                                    <th>@Localizer["ConfidenceLevel"]</th>
+                                    <th>@Localizer["CostImpact"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var strategy in ListStrategies)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@strategy.FailureScenario</td>
+                                        <td class="text-truncate" style="max-width: 280px;">@strategy.Strategy</td>
+                                        <td>@strategy.ConfidenceLevel</td>
+                                        <td>@(strategy.CostImpact?.ToString("N2"))</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditStrategy(strategy)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteStrategy(strategy)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveStrategyAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentStrategy.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["FailureScenario"]</label>
+                            <input class="form-control" @bind-value="CurrentStrategy.FailureScenario" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Strategy"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentStrategy.Strategy" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["CostImpact"]</label>
+                            <input type="number" step="0.01" class="form-control" @bind-value="CurrentStrategy.CostImpact" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">@Localizer["ConfidenceLevel"]</label>
+                            <input class="form-control" @bind-value="CurrentStrategy.ConfidenceLevel" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">@Localizer["ActivationSteps"]</label>
+                            <table class="table table-sm table-bordered align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 60px;">#</th>
+                                        <th>@Localizer["StepDescription"]</th>
+                                        <th style="width: 260px;">@Localizer["ValidationCheck"]</th>
+                                        <th style="width: 90px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (CurrentStrategy.Steps.Any())
+                                    {
+                                        @foreach (var step in CurrentStrategy.Steps)
+                                        {
+                                            <tr>
+                                                <td>@step.StepOrder</td>
+                                                <td>
+                                                    <input class="form-control" @bind-value="step.StepDescription" @bind-value:event="oninput" />
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" @bind-value="step.ValidationCheck" @bind-value:event="oninput" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-outline-danger btn-sm" title="@GLocalizer["Delete"]" @onclick="() => RemoveStep(step)">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">@Localizer["NoSteps"]</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-outline-primary btn-sm" @onclick="AddStep"><i class="fas fa-plus"></i> @Localizer["AddStep"]</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<RecoveryStrategy> ListStrategies = new();
+    RecoveryStrategy CurrentStrategy = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentStrategy);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadStrategiesAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadStrategiesAsync();
+    }
+
+    private async Task LoadStrategiesAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/RecoveryStrategy/Get?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/RecoveryStrategy/Get");
+            }
+            ListStrategies = JsonConvert.DeserializeObject<List<RecoveryStrategy>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentStrategy = new RecoveryStrategy { UnitID = SelectedUnitID };
+        EditContext = new EditContext(CurrentStrategy);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private void AddStep()
+    {
+        var nextOrder = CurrentStrategy.Steps.Count + 1;
+        CurrentStrategy.Steps.Add(new RecoveryStrategyStep { StepOrder = nextOrder });
+    }
+
+    private void RemoveStep(RecoveryStrategyStep step)
+    {
+        CurrentStrategy.Steps.Remove(step);
+        var order = 1;
+        foreach (var item in CurrentStrategy.Steps)
+        {
+            item.StepOrder = order++;
+        }
+    }
+
+    private async Task SaveStrategyAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/RecoveryStrategy/Save", CurrentStrategy);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadStrategiesAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditStrategy(RecoveryStrategy strategy)
+    {
+        var response = await Http.GetAsync($"api/RecoveryStrategy/GetOne?recoveryStrategyID={strategy.RecoveryStrategyID}");
+        if (response.IsSuccessStatusCode)
+        {
+            var payload = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<RecoveryStrategy>(payload);
+            if (data != null)
+            {
+                CurrentStrategy = data;
+                if (CurrentStrategy.Steps != null && CurrentStrategy.Steps.Any())
+                {
+                    var order = 1;
+                    foreach (var step in CurrentStrategy.Steps.OrderBy(s => s.StepOrder))
+                    {
+                        step.StepOrder = order++;
+                    }
+                }
+                EditContext = new EditContext(CurrentStrategy);
+                ShowInputScreen = true;
+            }
+        }
+    }
+
+    private async Task DeleteStrategy(RecoveryStrategy strategy)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = "Are you sure?",
+            text = $"{Localizer["DeleteConfirmation"]} {strategy.FailureScenario}.",
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = "Yes, delete it!",
+            cancelButtonText = "Cancel"
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/RecoveryStrategy/Delete")
+            {
+                Content = JsonContent.Create(new RecoveryStrategy { RecoveryStrategyID = strategy.RecoveryStrategyID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadStrategiesAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}
