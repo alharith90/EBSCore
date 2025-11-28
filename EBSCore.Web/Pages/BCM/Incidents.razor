@@ -1,0 +1,350 @@
+@page "/BCM/Incidents"
+@using EBSCore.Web.Models
+@using IncidentModel = EBSCore.Web.Models.Incident
+@using System
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http.Json
+@using EBSCore.Web.Pages.Controls
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (ListIncidents.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["Title"]</th>
+                                    <th>@Localizer["IncidentDate"]</th>
+                                    <th>@Localizer["EscalationLevel"]</th>
+                                    <th>@Localizer["EscalatedToBC"]</th>
+                                    <th>@Localizer["BCPActivated"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                }
+                                @foreach (var incident in ListIncidents)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@incident.Title</td>
+                                        <td>@incident.IncidentDate?.ToString("yyyy-MM-dd HH:mm")</td>
+                                        <td>@incident.EscalationLevel</td>
+                                        <td>@(incident.EscalatedToBC ? Localizer["Yes"] : Localizer["No"])</td>
+                                        <td>@(incident.BCPActivated ? Localizer["Yes"] : Localizer["No"])</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditIncident(incident)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteIncident(incident)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveIncidentAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer[CurrentIncident.IncidentID.HasValue ? "EditIncident" : "AddIncident"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentIncident.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Title"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.Title" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Description"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.Description" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["IncidentDate"]</label>
+                            <input class="form-control" type="datetime-local" @bind-value="CurrentIncident.IncidentDate" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ReportedBy"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.ReportedBy" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.Status" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["AffectedAssets"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIncident.AffectedAssets" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ImpactedActivities"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIncident.ImpactedActivities" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RelatedRiskIDs"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.RelatedRiskIDs" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["EscalationLevel"]</label>
+                            <select class="form-select" @bind-value="CurrentIncident.EscalationLevel" @bind-value:event="oninput">
+                                <option value="">@Localizer["SelectEscalation"]</option>
+                                <option value="Inform">@Localizer["Inform"]</option>
+                                <option value="Alert">@Localizer["Alert"]</option>
+                                <option value="Activate">@Localizer["Activate"]</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["EscalationNotes"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIncident.EscalationNotes" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4 form-check">
+                            <input class="form-check-input" type="checkbox" id="EscalatedToBC" @bind="CurrentIncident.EscalatedToBC" />
+                            <label class="form-check-label" for="EscalatedToBC">@Localizer["EscalatedToBC"]</label>
+                        </div>
+                        <div class="col-md-4 form-check">
+                            <input class="form-check-input" type="checkbox" id="BCPActivated" @bind="CurrentIncident.BCPActivated" @onchange="OnBCPActivationChanged" />
+                            <label class="form-check-label" for="BCPActivated">@Localizer["BCPActivated"]</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["ActivationTime"]</label>
+                            <input class="form-control" type="datetime-local" @bind-value="CurrentIncident.ActivationTime" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ActivationReason"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIncident.ActivationReason" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RecoveryStartTime"]</label>
+                            <input class="form-control" type="datetime-local" @bind-value="CurrentIncident.RecoveryStartTime" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Notes"]</label>
+                            <textarea class="form-control" rows="2" @bind-value="CurrentIncident.Notes" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    // UI state
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    // Data
+    List<IncidentModel> ListIncidents = new();
+    IncidentModel CurrentIncident = new();
+    string? SelectedUnitID = null;
+
+    // Forms
+    EditContext EditContext = default!;
+
+    // Localization
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentIncident);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadIncidentListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadIncidentListAsync();
+    }
+
+    private async Task LoadIncidentListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/Incident/Get?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/Incident/Get");
+            }
+            ListIncidents = JsonConvert.DeserializeObject<List<IncidentModel>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentIncident = new IncidentModel { UnitID = SelectedUnitID, IncidentDate = DateTime.UtcNow };
+        EditContext = new EditContext(CurrentIncident);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveIncidentAsync()
+    {
+        if (CurrentIncident.BCPActivated && !CurrentIncident.EscalatedToBC)
+        {
+            CurrentIncident.EscalatedToBC = true;
+        }
+
+        if (CurrentIncident.BCPActivated && CurrentIncident.ActivationTime == null)
+        {
+            CurrentIncident.ActivationTime = DateTime.UtcNow;
+        }
+
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/Incident/Save", CurrentIncident);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadIncidentListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditIncident(IncidentModel incident)
+    {
+        var response = await Http.GetStringAsync($"api/Incident/GetOne?IncidentID={incident.IncidentID}");
+        var data = JsonConvert.DeserializeObject<List<IncidentModel>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentIncident = data.First();
+            EditContext = new EditContext(CurrentIncident);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteIncident(IncidentModel incident)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteConfirmTitle"],
+            text = string.Format(Localizer["DeleteConfirmText"], incident.Title),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = Localizer["ConfirmDelete"],
+            cancelButtonText = Localizer["CancelDelete"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Incident/Delete")
+            {
+                Content = JsonContent.Create(new IncidentModel { IncidentID = incident.IncidentID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+
+    private void OnBCPActivationChanged(ChangeEventArgs args)
+    {
+        if (bool.TryParse(args.Value?.ToString(), out var activated) && activated)
+        {
+            CurrentIncident.EscalatedToBC = true;
+            if (CurrentIncident.ActivationTime == null)
+            {
+                CurrentIncident.ActivationTime = DateTime.UtcNow;
+            }
+        }
+    }
+}
