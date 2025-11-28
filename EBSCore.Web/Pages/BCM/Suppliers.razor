@@ -1,0 +1,311 @@
+@page "/BCM/Suppliers"
+@using EBSCore.Web.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using EBSCore.Web.Pages.Controls
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Linq
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="card-tools w-100 d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+                        </div>
+                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
+                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Suppliers.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@Localizer["SupplierName"]</th>
+                                    <th>@Localizer["SupplierType"]</th>
+                                    <th>@Localizer["Services"]</th>
+                                    <th>@Localizer["MainContact"]</th>
+                                    <th>@Localizer["SLAInPlace"]</th>
+                                    <th>@GLocalizer["Actions"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ var idx = 0; }
+                                @foreach (var s in Suppliers)
+                                {
+                                    idx++;
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@s.SupplierName</td>
+                                        <td>@s.SupplierType</td>
+                                        <td>@s.Services</td>
+                                        <td>
+                                            <div>@s.MainContactName</div>
+                                            <div class="text-muted">@s.MainContactEmail</div>
+                                            <div class="text-muted">@s.MainContactPhone</div>
+                                        </td>
+                                        <td>@(s.SLAInPlace == true ? GLocalizer["Yes"] : GLocalizer["No"])</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @onclick="() => EditSupplier(s)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteSupplier(s)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveSupplierAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["UnitName"]</label>
+                            <UnitTreeSelector @bind-Value="CurrentSupplier.UnitID" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["SupplierName"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.SupplierName" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["SupplierType"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.SupplierType" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["SLAInPlace"]</label>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" @bind="CurrentSupplier.SLAInPlace" />
+                                <label class="form-check-label">@Localizer["SLAHint"]</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Services"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentSupplier.Services" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["MainContactName"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.MainContactName" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["MainContactEmail"]</label>
+                            <input class="form-control" type="email" @bind-value="CurrentSupplier.MainContactEmail" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["MainContactPhone"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.MainContactPhone" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["SecondaryContactName"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.SecondaryContactName" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["SecondaryContactEmail"]</label>
+                            <input class="form-control" type="email" @bind-value="CurrentSupplier.SecondaryContactEmail" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["SecondaryContactPhone"]</label>
+                            <input class="form-control" @bind-value="CurrentSupplier.SecondaryContactPhone" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RTOHours"]</label>
+                            <input class="form-control" type="number" min="0" step="1" @bind-value="CurrentSupplier.RTOHours" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">@Localizer["RPOHours"]</label>
+                            <input class="form-control" type="number" min="0" step="1" @bind-value="CurrentSupplier.RPOHours" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">@Localizer["Notes"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentSupplier.Notes" @bind-value:event="oninput"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<Supplier> Suppliers = new();
+    Supplier CurrentSupplier = new();
+    string? SelectedUnitID = null;
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    private bool _firstRenderDone = false;
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentSupplier);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadSupplierListAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task ApplySearch()
+    {
+        await LoadSupplierListAsync();
+    }
+
+    private async Task LoadSupplierListAsync()
+    {
+        try
+        {
+            string response;
+            if (!string.IsNullOrEmpty(SelectedUnitID))
+            {
+                response = await Http.GetStringAsync($"api/Supplier/GetByUnit?UnitID={SelectedUnitID}");
+            }
+            else
+            {
+                response = await Http.GetStringAsync("api/Supplier/Get");
+            }
+            Suppliers = JsonConvert.DeserializeObject<List<Supplier>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentSupplier = new Supplier { UnitID = SelectedUnitID, SLAInPlace = true };
+        EditContext = new EditContext(CurrentSupplier);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveSupplierAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/Supplier/Save", CurrentSupplier);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadSupplierListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditSupplier(Supplier supplier)
+    {
+        var response = await Http.GetStringAsync($"api/Supplier/GetOne?SupplierID={supplier.SupplierID}");
+        var data = JsonConvert.DeserializeObject<List<Supplier>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentSupplier = data.First();
+            EditContext = new EditContext(CurrentSupplier);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteSupplier(Supplier supplier)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteConfirmTitle"],
+            text = string.Format(Localizer["DeleteConfirmText"], supplier.SupplierName),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = GLocalizer["Delete"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/Supplier/Delete")
+            {
+                Content = JsonContent.Create(new Supplier { SupplierID = supplier.SupplierID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadSupplierListAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}
