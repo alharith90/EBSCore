@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @if (Suppliers.Any())
+                    @if (SupplierList.Any())
                     {
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -49,7 +49,7 @@
                             </thead>
                             <tbody>
                                 @{ var idx = 0; }
-                                @foreach (var s in Suppliers)
+                                @foreach (var s in SupplierList)
                                 {
                                     idx++;
                                     <tr>
@@ -102,11 +102,11 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["SupplierName"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.SupplierName" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.SupplierName" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["SupplierType"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.SupplierType" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.SupplierType" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["SLAInPlace"]</label>
@@ -117,43 +117,43 @@ else
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["Services"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentSupplier.Services" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentSupplier.Services" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["MainContactName"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.MainContactName" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.MainContactName" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["MainContactEmail"]</label>
-                            <input class="form-control" type="email" @bind-value="CurrentSupplier.MainContactEmail" @bind-value:event="oninput" />
+                            <input class="form-control" type="email" @bind="CurrentSupplier.MainContactEmail" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["MainContactPhone"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.MainContactPhone" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.MainContactPhone" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["SecondaryContactName"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.SecondaryContactName" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.SecondaryContactName" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["SecondaryContactEmail"]</label>
-                            <input class="form-control" type="email" @bind-value="CurrentSupplier.SecondaryContactEmail" @bind-value:event="oninput" />
+                            <input class="form-control" type="email" @bind="CurrentSupplier.SecondaryContactEmail" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["SecondaryContactPhone"]</label>
-                            <input class="form-control" @bind-value="CurrentSupplier.SecondaryContactPhone" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentSupplier.SecondaryContactPhone" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["RTOHours"]</label>
-                            <input class="form-control" type="number" min="0" step="1" @bind-value="CurrentSupplier.RTOHours" @bind-value:event="oninput" />
+                            <input class="form-control" type="number" min="0" step="1" @bind="CurrentSupplier.RTOHours" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["RPOHours"]</label>
-                            <input class="form-control" type="number" min="0" step="1" @bind-value="CurrentSupplier.RPOHours" @bind-value:event="oninput" />
+                            <input class="form-control" type="number" min="0" step="1" @bind="CurrentSupplier.RPOHours" @bind:event="oninput" />
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["Notes"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentSupplier.Notes" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentSupplier.Notes" @bind:event="oninput"></textarea>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<Supplier> Suppliers = new();
+    List<Supplier> SupplierList = new();
     Supplier CurrentSupplier = new();
     string? SelectedUnitID = null;
 
@@ -216,7 +216,7 @@ else
             {
                 response = await Http.GetStringAsync("api/Supplier/Get");
             }
-            Suppliers = JsonConvert.DeserializeObject<List<Supplier>>(response) ?? new();
+            SupplierList = JsonConvert.DeserializeObject<List<Supplier>>(response) ?? new();
         }
         catch (Exception ex)
         {

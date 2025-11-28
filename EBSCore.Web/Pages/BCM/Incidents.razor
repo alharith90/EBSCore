@@ -149,7 +149,7 @@ else
                             <label class="form-check-label" for="EscalatedToBC">@Localizer["EscalatedToBC"]</label>
                         </div>
                         <div class="col-md-4 form-check">
-                            <input class="form-check-input" type="checkbox" id="BCPActivated" @bind="CurrentIncident.BCPActivated" @onchange="OnBCPActivationChanged" />
+                            <input class="form-check-input" type="checkbox" id="BCPActivated" @bind="CurrentIncident.BCPActivated" @bind:event="oninput" @onchange="OnBCPActivationChanged" />
                             <label class="form-check-label" for="BCPActivated">@Localizer["BCPActivated"]</label>
                         </div>
                         <div class="col-md-4">
