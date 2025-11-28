@@ -1,0 +1,13 @@
+{
+  "PageTitle": "تقارير المراجعة الإدارية",
+  "ModalTitle": "إضافة / تعديل تقرير مراجعة إدارية",
+  "UnitName": "الوحدة",
+  "ReportTitle": "عنوان التقرير",
+  "MeetingDate": "تاريخ الاجتماع",
+  "Status": "الحالة",
+  "Summary": "الملخص",
+  "Decisions": "القرارات",
+  "FollowUpActions": "إجراءات المتابعة",
+  "NextReviewDate": "تاريخ المراجعة القادم",
+  "Notes": "ملاحظات"
+}
