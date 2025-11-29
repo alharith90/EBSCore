@@ -1,6 +1,7 @@
 using QuestPDF;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
+using QuestPDF.Html;
 using QuestPDF.Infrastructure;
 
 namespace EBSCore.Web.Services
@@ -30,7 +31,7 @@ namespace EBSCore.Web.Services
 
                     page.Content()
                         .PaddingVertical(10)
-                        .Text(safeHtml);
+                        .Html(safeHtml);
                 });
             });
 
