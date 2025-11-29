@@ -1,0 +1,422 @@
+2025-11-29 02:10:06.591 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:06.591 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:11.858 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:11.858 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:16.890 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:16.890 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:21.973 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:21.973 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:27.007 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:27.007 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:32.024 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:32.024 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:37.039 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:37.039 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:42.042 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:42.042 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:42.700 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:a5e5e4ad-4908-4907-8e1e-47ce7c772d12
+Error Number:2812,State:62,Class:16
+2025-11-29 02:10:42.700 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:a5e5e4ad-4908-4907-8e1e-47ce7c772d12
+Error Number:2812,State:62,Class:16
+2025-11-29 02:10:46.919 +04:00 [Error] EBSCore.Web.Controllers.StrategicInitiativeController Error retrieving strategic initiatives
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'StrategicInitiativeSP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategicInitiativeSP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String InitiativeID, String ObjectiveID, String Title, String Description, String OwnerID, String DepartmentID, String Budget, String Progress, String StartDate, String EndDate, String Status, String EscalationCriteria, String EscalationContact, String ActivationCriteria, String ActivationTrigger, String ActivationStatus, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategicInitiativeSP.cs:line 93
+   at EBSCore.Web.Controllers.StrategicInitiativeController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategicInitiativeController.cs:line 48
+ClientConnectionId:a5e5e4ad-4908-4907-8e1e-47ce7c772d12
+Error Number:2812,State:62,Class:16
+2025-11-29 02:10:46.919 +04:00 [ERR] Error retrieving strategic initiatives
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'StrategicInitiativeSP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategicInitiativeSP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String InitiativeID, String ObjectiveID, String Title, String Description, String OwnerID, String DepartmentID, String Budget, String Progress, String StartDate, String EndDate, String Status, String EscalationCriteria, String EscalationContact, String ActivationCriteria, String ActivationTrigger, String ActivationStatus, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategicInitiativeSP.cs:line 93
+   at EBSCore.Web.Controllers.StrategicInitiativeController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategicInitiativeController.cs:line 48
+ClientConnectionId:a5e5e4ad-4908-4907-8e1e-47ce7c772d12
+Error Number:2812,State:62,Class:16
+2025-11-29 02:10:47.107 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:47.107 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:52.110 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:52.110 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:10:57.139 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:10:57.139 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:02.172 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:02.172 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:07.191 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:07.191 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:12.191 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:12.191 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:17.192 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:17.192 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:22.193 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:22.193 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:27.221 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:27.221 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:32.238 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:32.238 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:37.245 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:37.245 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:42.266 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:42.266 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:47.271 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:47.271 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:52.279 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:52.279 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:11:57.289 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:11:57.289 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:02.303 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:02.303 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:07.305 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:07.305 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:12.321 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:12.321 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:17.337 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:17.337 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:22.354 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:22.354 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:27.387 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:27.387 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:32.404 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:32.404 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:37.420 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:37.420 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:42.437 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:42.437 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:47.469 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:47.469 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:52.486 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:52.486 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:12:57.488 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:12:57.488 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:02.505 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:02.505 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:07.519 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:07.519 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:12.535 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:12.535 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:17.552 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:17.552 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:22.557 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:22.557 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:27.573 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:27.573 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:13:59.988 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:13:59.988 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:00.138 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type."
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:00.138 +04:00 [WRN] Unhandled exception rendering component: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:00.216 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"qcJ0gLg_ciprpGJl9jgm38atPODK9nmxmkRpCO8OH9w"'.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:00.216 +04:00 [ERR] Unhandled exception in circuit 'qcJ0gLg_ciprpGJl9jgm38atPODK9nmxmkRpCO8OH9w'.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:02.611 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Object reference not set to an instance of an object."
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 17
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:02.611 +04:00 [WRN] Unhandled exception rendering component: Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 17
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:02.611 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"qcJ0gLg_ciprpGJl9jgm38atPODK9nmxmkRpCO8OH9w"'.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 17
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:02.611 +04:00 [ERR] Unhandled exception in circuit 'qcJ0gLg_ciprpGJl9jgm38atPODK9nmxmkRpCO8OH9w'.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 17
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:04.808 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToRenderQueue(Int32 componentId, RenderFragment renderFragment)
+   at Microsoft.AspNetCore.Components.Endpoints.SSRRenderModeBoundary.SetParametersAsync(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.BeginRenderingComponent(IComponent component, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.<>c__DisplayClass40_0.<PrerenderComponentAsync>b__0()
+   at Microsoft.AspNetCore.Components.Rendering.RendererSynchronizationContext.<InvokeAsync>g__Execute|9_0[TResult](ValueTuple`3 state)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 148
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-29 02:14:04.808 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.ProcessRenderQueue()
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.AddToRenderQueue(Int32 componentId, RenderFragment renderFragment)
+   at Microsoft.AspNetCore.Components.Endpoints.SSRRenderModeBoundary.SetParametersAsync(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SupplyCombinedParameters(ParameterView directAndCascadingParameters)
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.SetDirectParameters(ParameterView parameters)
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(Int32 componentId, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.BeginRenderingComponent(IComponent component, ParameterView initialParameters)
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.<>c__DisplayClass40_0.<PrerenderComponentAsync>b__0()
+   at Microsoft.AspNetCore.Components.Rendering.RendererSynchronizationContext.<InvokeAsync>g__Execute|9_0[TResult](ValueTuple`3 state)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Components.Endpoints.EndpointHtmlRenderer.PrerenderComponentAsync(HttpContext httpContext, Type componentType, IComponentRenderMode prerenderMode, ParameterView parameters, Boolean waitForQuiescence)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at EBSCore.Web.Pages__Host.<>c__DisplayClass13_0.<<ExecuteAsync>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.SetOutputContentAsync()
+   at EBSCore.Web.Pages__Host.ExecuteAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\_Host.cshtml:line 7
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Program.<>c.<<<Main>$>b__0_5>d.MoveNext() in d:\Dev\EBSCore\EBSCore.Web\Program.cs:line 148
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-29 02:14:05.496 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:05.496 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:10.582 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:10.582 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:17.554 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:17.554 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:17.556 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type."
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:17.556 +04:00 [WRN] Unhandled exception rendering component: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:17.558 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"b-nAVI2IO9OBhGN3Fm3s20Aj2V-OOO9LirKCxpgbntw"'.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:17.558 +04:00 [ERR] Unhandled exception in circuit 'b-nAVI2IO9OBhGN3Fm3s20Aj2V-OOO9LirKCxpgbntw'.
+System.InvalidCastException: Cannot cast DBNull. Value to type 'System.Int32'. Please use a nullable type.
+   at System.Data.DataRowExtensions.UnboxT`1.NonNullableField(Object value)
+   at System.Data.DataRowExtensions.Field[T](DataRow row, String columnName)
+   at EBSCore.Web.AppCode.RbacHelper.<>c__DisplayClass0_0.<HasPermission>b__2(DataRow r) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at EBSCore.Web.AppCode.RbacHelper.HasPermission(IHttpContextAccessor accessor, IConfiguration configuration, String menuCode, String actionCode) in d:\Dev\EBSCore\EBSCore.Web\AppCode\RbacHelper.cs:line 50
+   at EBSCore.Web.Pages.Security.Groups.get_CanAdd() in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 19
+   at EBSCore.Web.Pages.Security.Groups.BuildRenderTree(RenderTreeBuilder __builder) in d:\Dev\EBSCore\EBSCore.Web\Pages\Security\Groups.razor:line 27
+   at Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, Exception& renderFragmentException)
+2025-11-29 02:14:22.630 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:22.630 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:27.674 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:27.674 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:32.722 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:32.722 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:37.786 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:37.786 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:42.933 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:42.933 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:47.956 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:47.956 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:53.004 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:53.004 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:14:58.133 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:14:58.133 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:03.180 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:03.180 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:08.233 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:08.233 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:13.296 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:13.296 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:18.333 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:18.333 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:23.391 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:23.391 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:28.478 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:28.478 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:33.511 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:33.511 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:38.599 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:38.599 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:43.649 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:43.649 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:48.715 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:48.715 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:53.783 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:53.783 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:15:58.831 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:15:58.831 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:03.900 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:03.900 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:08.905 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:08.905 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:13.932 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:13.932 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:18.933 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:18.933 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:23.948 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:23.948 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:28.958 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:28.958 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:33.980 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:33.980 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:38.995 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:38.995 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:43.999 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:43.999 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:49.015 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:49.015 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:54.032 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:54.032 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:16:59.047 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:16:59.047 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:04.048 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:04.048 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:09.051 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:09.051 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:14.078 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:14.078 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:19.098 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:19.098 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:24.125 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:24.125 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:29.133 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:29.133 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:34.148 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:34.148 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:39.168 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:39.168 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:44.173 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:44.173 +04:00 [INF] [Workflow] Polling for executions
+2025-11-29 02:17:49.195 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-29 02:17:49.195 +04:00 [INF] [Workflow] Polling for executions
