@@ -1,3 +1,4 @@
+using QuestPDF;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -8,7 +9,7 @@ namespace EBSCore.Web.Services
     {
         public byte[] ConvertHtmlToPdf(string htmlContent, string? title = null)
         {
-            Settings.License = LicenseType.Community;
+            QuestPDF.Settings.License = LicenseType.Community;
 
             var safeHtml = htmlContent ?? string.Empty;
             var documentTitle = string.IsNullOrWhiteSpace(title) ? "HTML Report" : title.Trim();
@@ -29,7 +30,7 @@ namespace EBSCore.Web.Services
 
                     page.Content()
                         .PaddingVertical(10)
-                        .Html(safeHtml);
+                        .Text(safeHtml);
                 });
             });
 
