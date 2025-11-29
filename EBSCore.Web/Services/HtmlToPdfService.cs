@@ -1,6 +1,6 @@
-using HtmlRenderer.PdfSharp;
-using PdfSharpCore;
-using PdfSharpCore.Pdf;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 
 namespace EBSCore.Web.Services
 {
@@ -8,22 +8,32 @@ namespace EBSCore.Web.Services
     {
         public byte[] ConvertHtmlToPdf(string htmlContent, string? title = null)
         {
+            Settings.License = LicenseType.Community;
+
             var safeHtml = htmlContent ?? string.Empty;
-            var pdfConfig = new PdfGenerateConfig
+            var documentTitle = string.IsNullOrWhiteSpace(title) ? "HTML Report" : title.Trim();
+
+            var document = Document.Create(container =>
             {
-                PageSize = PageSize.A4,
-                MarginTop = 20,
-                MarginBottom = 20,
-                MarginLeft = 20,
-                MarginRight = 20,
-                Title = title ?? "HTML Report"
-            };
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(20);
+                    page.DefaultTextStyle(TextStyle.Default.FontSize(11));
 
-            var pdfDocument = PdfGenerator.GeneratePdf(safeHtml, pdfConfig);
+                    page.Header()
+                        .Text(documentTitle)
+                        .SemiBold()
+                        .FontSize(16)
+                        .FontColor(Colors.Blue.Medium);
 
-            using var stream = new MemoryStream();
-            pdfDocument.Save(stream, false);
-            return stream.ToArray();
+                    page.Content()
+                        .PaddingVertical(10)
+                        .Html(safeHtml);
+                });
+            });
+
+            return document.GeneratePdf();
         }
     }
 }
