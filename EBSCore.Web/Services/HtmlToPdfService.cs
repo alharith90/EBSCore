@@ -1,8 +1,8 @@
 using QuestPDF;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using QuestPDF.Html;
 using QuestPDF.Infrastructure;
+using HTMLQuestPDF.Extensions;
 
 namespace EBSCore.Web.Services
 {
@@ -31,7 +31,7 @@ namespace EBSCore.Web.Services
 
                     page.Content()
                         .PaddingVertical(10)
-                        .Html(safeHtml);
+                        .HTML(safeHtml);
                 });
             });
 
