@@ -1,0 +1,4995 @@
+{
+  "pillar": {
+    "pillar_code": "BCM",
+    "pillar_en": "Business Continuity Management",
+    "pillar_ar": "إدارة استمرارية الأعمال",
+    "related_iso": [
+      "ISO 22301",
+      "ISO 22313",
+      "ISO 27031"
+    ],
+    "categories": [
+      {
+        "category_code": "BIA",
+        "category_en": "Business Impact Analysis",
+        "category_ar": "تحليل التأثير على الأعمال",
+        "modules": [
+          {
+            "module_code": "BIAProcessRegister",
+            "module_en": "BIA Process Register",
+            "module_ar": "سجل عمليات تحليل الأثر",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAProcess",
+                "description_en": "Register of business processes in scope of BIA.",
+                "description_ar": "سجل عمليات الأعمال الواقعة ضمن نطاق تحليل الأثر.",
+                "fields": [
+                  {
+                    "code": "BIAProcessID",
+                    "label_en": "BIA Process ID",
+                    "label_ar": "معرف عملية تحليل الأثر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessCode",
+                    "label_en": "Process Code",
+                    "label_ar": "كود العملية",
+                    "data_type": "string",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessNameEN",
+                    "label_en": "Process Name (English)",
+                    "label_ar": "اسم العملية (إنجليزي)",
+                    "data_type": "string",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessNameAR",
+                    "label_en": "Process Name (Arabic)",
+                    "label_ar": "اسم العملية (عربي)",
+                    "data_type": "string",
+                    "required": true
+                  },
+                  {
+                    "code": "OrgUnitID",
+                    "label_en": "Owning Organizational Unit ID",
+                    "label_ar": "معرف الوحدة التنظيمية المالكة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessOwnerUserID",
+                    "label_en": "Process Owner User ID",
+                    "label_ar": "معرف مالك العملية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessDescriptionEN",
+                    "label_en": "Process Description (English)",
+                    "label_ar": "وصف العملية (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcessDescriptionAR",
+                    "label_en": "Process Description (Arabic)",
+                    "label_ar": "وصف العملية (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CriticalityLevel",
+                    "label_en": "Criticality Level",
+                    "label_ar": "مستوى الأهمية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "BCMCategory",
+                    "label_en": "BCM Category",
+                    "label_ar": "فئة استمرارية الأعمال",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IsTimeCritical",
+                    "label_en": "Time-Critical Process?",
+                    "label_ar": "عملية حساسة للوقت؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "IsRegulatory",
+                    "label_en": "Regulatory Requirement Related?",
+                    "label_ar": "مرتبطة بمتطلبات تنظيمية؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAServiceCatalog",
+            "module_en": "Critical Service Catalog",
+            "module_ar": "دليل الخدمات الحرجة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAServiceCatalog",
+                "description_en": "Critical Service Catalog",
+                "description_ar": "دليل الخدمات الحرجة",
+                "fields": [
+                  {
+                    "code": "BIAServiceCatalogID",
+                    "label_en": "Critical Service Catalog ID",
+                    "label_ar": "معرف دليل الخدمات الحرجة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAImpactCriteria",
+            "module_en": "Impact Criteria Configuration",
+            "module_ar": "إعداد معايير التأثير",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAImpactCriteria",
+                "description_en": "Impact Criteria Configuration",
+                "description_ar": "إعداد معايير التأثير",
+                "fields": [
+                  {
+                    "code": "BIAImpactCriteriaID",
+                    "label_en": "Impact Criteria Configuration ID",
+                    "label_ar": "معرف إعداد معايير التأثير",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAProcessImpact",
+            "module_en": "Process Impact Assessment",
+            "module_ar": "تقييم الأثر على مستوى العملية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAProcessImpact",
+                "description_en": "Process Impact Assessment",
+                "description_ar": "تقييم الأثر على مستوى العملية",
+                "fields": [
+                  {
+                    "code": "BIAProcessImpactID",
+                    "label_en": "Process Impact Assessment ID",
+                    "label_ar": "معرف تقييم الأثر على مستوى العملية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAResourcePeople",
+            "module_en": "BIA Resources - People",
+            "module_ar": "موارد تحليل الأثر - الموارد البشرية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAResourcePeople",
+                "description_en": "BIA Resources - People",
+                "description_ar": "موارد تحليل الأثر - الموارد البشرية",
+                "fields": [
+                  {
+                    "code": "BIAResourcePeopleID",
+                    "label_en": "BIA Resources - People ID",
+                    "label_ar": "معرف موارد تحليل الأثر - الموارد البشرية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAResourceIT",
+            "module_en": "BIA Resources - IT Systems",
+            "module_ar": "موارد تحليل الأثر - الأنظمة التقنية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAResourceIT",
+                "description_en": "BIA Resources - IT Systems",
+                "description_ar": "موارد تحليل الأثر - الأنظمة التقنية",
+                "fields": [
+                  {
+                    "code": "BIAResourceITID",
+                    "label_en": "BIA Resources - IT Systems ID",
+                    "label_ar": "معرف موارد تحليل الأثر - الأنظمة التقنية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAResourceFacilities",
+            "module_en": "BIA Resources - Facilities & Locations",
+            "module_ar": "موارد تحليل الأثر - المواقع والمرافق",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAResourceFacilities",
+                "description_en": "BIA Resources - Facilities & Locations",
+                "description_ar": "موارد تحليل الأثر - المواقع والمرافق",
+                "fields": [
+                  {
+                    "code": "BIAResourceFacilitiesID",
+                    "label_en": "BIA Resources - Facilities & Locations ID",
+                    "label_ar": "معرف موارد تحليل الأثر - المواقع والمرافق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAResourceEquipment",
+            "module_en": "BIA Resources - Equipment",
+            "module_ar": "موارد تحليل الأثر - المعدات",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAResourceEquipment",
+                "description_en": "BIA Resources - Equipment",
+                "description_ar": "موارد تحليل الأثر - المعدات",
+                "fields": [
+                  {
+                    "code": "BIAResourceEquipmentID",
+                    "label_en": "BIA Resources - Equipment ID",
+                    "label_ar": "معرف موارد تحليل الأثر - المعدات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAResourceSuppliers",
+            "module_en": "BIA Resources - External Suppliers",
+            "module_ar": "موارد تحليل الأثر - المورّدون الخارجيون",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAResourceSuppliers",
+                "description_en": "BIA Resources - External Suppliers",
+                "description_ar": "موارد تحليل الأثر - المورّدون الخارجيون",
+                "fields": [
+                  {
+                    "code": "BIAResourceSuppliersID",
+                    "label_en": "BIA Resources - External Suppliers ID",
+                    "label_ar": "معرف موارد تحليل الأثر - المورّدون الخارجيون",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAInternalDependencies",
+            "module_en": "Internal Dependencies",
+            "module_ar": "الاعتمادية الداخلية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAInternalDependencies",
+                "description_en": "Internal Dependencies",
+                "description_ar": "الاعتمادية الداخلية",
+                "fields": [
+                  {
+                    "code": "BIAInternalDependenciesID",
+                    "label_en": "Internal Dependencies ID",
+                    "label_ar": "معرف الاعتمادية الداخلية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAExternalDependencies",
+            "module_en": "External Dependencies",
+            "module_ar": "الاعتمادية الخارجية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAExternalDependencies",
+                "description_en": "External Dependencies",
+                "description_ar": "الاعتمادية الخارجية",
+                "fields": [
+                  {
+                    "code": "BIAExternalDependenciesID",
+                    "label_en": "External Dependencies ID",
+                    "label_ar": "معرف الاعتمادية الخارجية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIARecoveryRequirements",
+            "module_en": "Recovery Requirements Summary",
+            "module_ar": "متطلبات الاستعادة الملخصة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIARecoveryRequirements",
+                "description_en": "Recovery Requirements Summary",
+                "description_ar": "متطلبات الاستعادة الملخصة",
+                "fields": [
+                  {
+                    "code": "BIARecoveryRequirementsID",
+                    "label_en": "Recovery Requirements Summary ID",
+                    "label_ar": "معرف متطلبات الاستعادة الملخصة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAScenarioAssumptions",
+            "module_en": "BIA Scenario Assumptions",
+            "module_ar": "افتراضات سيناريوهات تحليل الأثر",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAScenarioAssumptions",
+                "description_en": "BIA Scenario Assumptions",
+                "description_ar": "افتراضات سيناريوهات تحليل الأثر",
+                "fields": [
+                  {
+                    "code": "BIAScenarioAssumptionsID",
+                    "label_en": "BIA Scenario Assumptions ID",
+                    "label_ar": "معرف افتراضات سيناريوهات تحليل الأثر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAApprovalWorkflow",
+            "module_en": "BIA Approval Workflow",
+            "module_ar": "مسار اعتماد تحليل الأثر",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAApprovalWorkflow",
+                "description_en": "BIA Approval Workflow",
+                "description_ar": "مسار اعتماد تحليل الأثر",
+                "fields": [
+                  {
+                    "code": "BIAApprovalWorkflowID",
+                    "label_en": "BIA Approval Workflow ID",
+                    "label_ar": "معرف مسار اعتماد تحليل الأثر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BIAHistorySnapshot",
+            "module_en": "BIA Snapshot History",
+            "module_ar": "سجل إصدارات تحليل الأثر",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BIAHistorySnapshot",
+                "description_en": "BIA Snapshot History",
+                "description_ar": "سجل إصدارات تحليل الأثر",
+                "fields": [
+                  {
+                    "code": "BIAHistorySnapshotID",
+                    "label_en": "BIA Snapshot History ID",
+                    "label_ar": "معرف سجل إصدارات تحليل الأثر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "PGM",
+        "category_en": "BCM Program & Governance",
+        "category_ar": "برنامج واستراتيجية استمرارية الأعمال",
+        "modules": [
+          {
+            "module_code": "BCMProgramRegister",
+            "module_en": "BCM Program Register",
+            "module_ar": "سجل برنامج استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMProgramRegister",
+                "description_en": "BCM Program Register",
+                "description_ar": "سجل برنامج استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMProgramRegisterID",
+                    "label_en": "BCM Program Register ID",
+                    "label_ar": "معرف سجل برنامج استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMPolicy",
+            "module_en": "BCM Policies",
+            "module_ar": "سياسات استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMPolicy",
+                "description_en": "BCM Policies",
+                "description_ar": "سياسات استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMPolicyID",
+                    "label_en": "BCM Policies ID",
+                    "label_ar": "معرف سياسات استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMProcedure",
+            "module_en": "BCM Procedures",
+            "module_ar": "إجراءات استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMProcedure",
+                "description_en": "BCM Procedures",
+                "description_ar": "إجراءات استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMProcedureID",
+                    "label_en": "BCM Procedures ID",
+                    "label_ar": "معرف إجراءات استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMRoleResponsibility",
+            "module_en": "BCM Roles & Responsibilities",
+            "module_ar": "الأدوار والمسؤوليات في استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMRoleResponsibility",
+                "description_en": "BCM Roles & Responsibilities",
+                "description_ar": "الأدوار والمسؤوليات في استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMRoleResponsibilityID",
+                    "label_en": "BCM Roles & Responsibilities ID",
+                    "label_ar": "معرف الأدوار والمسؤوليات في استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMCalendar",
+            "module_en": "BCM Master Calendar",
+            "module_ar": "الجدول الزمني لاستمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMCalendar",
+                "description_en": "BCM Master Calendar",
+                "description_ar": "الجدول الزمني لاستمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMCalendarID",
+                    "label_en": "BCM Master Calendar ID",
+                    "label_ar": "معرف الجدول الزمني لاستمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMMetric",
+            "module_en": "BCM KPIs & KRIs",
+            "module_ar": "مؤشرات الأداء والمخاطر لاستمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMMetric",
+                "description_en": "BCM KPIs & KRIs",
+                "description_ar": "مؤشرات الأداء والمخاطر لاستمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMMetricID",
+                    "label_en": "BCM KPIs & KRIs ID",
+                    "label_ar": "معرف مؤشرات الأداء والمخاطر لاستمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "PLN",
+        "category_en": "Plans & Recovery Strategies",
+        "category_ar": "الخطط واستراتيجيات الاستعادة",
+        "modules": [
+          {
+            "module_code": "BCPPlanRegister",
+            "module_en": "Business Continuity Plan Register",
+            "module_ar": "سجل خطط استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPPlanRegister",
+                "description_en": "Business Continuity Plan Register",
+                "description_ar": "سجل خطط استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCPPlanRegisterID",
+                    "label_en": "Business Continuity Plan Register ID",
+                    "label_ar": "معرف سجل خطط استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPPlanSection",
+            "module_en": "BCP Plan Sections",
+            "module_ar": "أقسام خطة استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPPlanSection",
+                "description_en": "BCP Plan Sections",
+                "description_ar": "أقسام خطة استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCPPlanSectionID",
+                    "label_en": "BCP Plan Sections ID",
+                    "label_ar": "معرف أقسام خطة استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPContactList",
+            "module_en": "BCP Contact Lists",
+            "module_ar": "قوائم الاتصال لخطط الاستمرارية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPContactList",
+                "description_en": "BCP Contact Lists",
+                "description_ar": "قوائم الاتصال لخطط الاستمرارية",
+                "fields": [
+                  {
+                    "code": "BCPContactListID",
+                    "label_en": "BCP Contact Lists ID",
+                    "label_ar": "معرف قوائم الاتصال لخطط الاستمرارية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPTeamRoster",
+            "module_en": "BCP Teams & Rosters",
+            "module_ar": "فرق الاستمرارية وقوائم الأعضاء",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPTeamRoster",
+                "description_en": "BCP Teams & Rosters",
+                "description_ar": "فرق الاستمرارية وقوائم الأعضاء",
+                "fields": [
+                  {
+                    "code": "BCPTeamRosterID",
+                    "label_en": "BCP Teams & Rosters ID",
+                    "label_ar": "معرف فرق الاستمرارية وقوائم الأعضاء",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPAlternateSite",
+            "module_en": "Alternate Sites & Work Areas",
+            "module_ar": "المواقع البديلة ومناطق العمل",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPAlternateSite",
+                "description_en": "Alternate Sites & Work Areas",
+                "description_ar": "المواقع البديلة ومناطق العمل",
+                "fields": [
+                  {
+                    "code": "BCPAlternateSiteID",
+                    "label_en": "Alternate Sites & Work Areas ID",
+                    "label_ar": "معرف المواقع البديلة ومناطق العمل",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPWorkaround",
+            "module_en": "Manual Workaround Procedures",
+            "module_ar": "إجراءات العمل اليدوي البديلة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPWorkaround",
+                "description_en": "Manual Workaround Procedures",
+                "description_ar": "إجراءات العمل اليدوي البديلة",
+                "fields": [
+                  {
+                    "code": "BCPWorkaroundID",
+                    "label_en": "Manual Workaround Procedures ID",
+                    "label_ar": "معرف إجراءات العمل اليدوي البديلة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPStrategyLibrary",
+            "module_en": "Recovery Strategy Library",
+            "module_ar": "مكتبة استراتيجيات الاستعادة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPStrategyLibrary",
+                "description_en": "Recovery Strategy Library",
+                "description_ar": "مكتبة استراتيجيات الاستعادة",
+                "fields": [
+                  {
+                    "code": "BCPStrategyLibraryID",
+                    "label_en": "Recovery Strategy Library ID",
+                    "label_ar": "معرف مكتبة استراتيجيات الاستعادة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCPPlanMaintenance",
+            "module_en": "BCP Maintenance Log",
+            "module_ar": "سجل صيانة وتحديث خطط الاستمرارية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCPPlanMaintenance",
+                "description_en": "BCP Maintenance Log",
+                "description_ar": "سجل صيانة وتحديث خطط الاستمرارية",
+                "fields": [
+                  {
+                    "code": "BCPPlanMaintenanceID",
+                    "label_en": "BCP Maintenance Log ID",
+                    "label_ar": "معرف سجل صيانة وتحديث خطط الاستمرارية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "EXE",
+        "category_en": "Exercises & Testing",
+        "category_ar": "التمارين والاختبارات",
+        "modules": [
+          {
+            "module_code": "BCMExerciseProgram",
+            "module_en": "Exercise & Test Program",
+            "module_ar": "برنامج التمارين والاختبارات",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseProgram",
+                "description_en": "Exercise & Test Program",
+                "description_ar": "برنامج التمارين والاختبارات",
+                "fields": [
+                  {
+                    "code": "BCMExerciseProgramID",
+                    "label_en": "Exercise & Test Program ID",
+                    "label_ar": "معرف برنامج التمارين والاختبارات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMExerciseScenario",
+            "module_en": "Exercise Scenario Library",
+            "module_ar": "مكتبة سيناريوهات التمارين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseScenario",
+                "description_en": "Exercise Scenario Library",
+                "description_ar": "مكتبة سيناريوهات التمارين",
+                "fields": [
+                  {
+                    "code": "BCMExerciseScenarioID",
+                    "label_en": "Exercise Scenario Library ID",
+                    "label_ar": "معرف مكتبة سيناريوهات التمارين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMExerciseEvent",
+            "module_en": "Exercise Events",
+            "module_ar": "فعاليات التمرين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseEvent",
+                "description_en": "Exercise Events",
+                "description_ar": "فعاليات التمرين",
+                "fields": [
+                  {
+                    "code": "BCMExerciseEventID",
+                    "label_en": "Exercise Events ID",
+                    "label_ar": "معرف فعاليات التمرين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMExerciseParticipant",
+            "module_en": "Exercise Participants",
+            "module_ar": "مشاركو التمرين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseParticipant",
+                "description_en": "Exercise Participants",
+                "description_ar": "مشاركو التمرين",
+                "fields": [
+                  {
+                    "code": "BCMExerciseParticipantID",
+                    "label_en": "Exercise Participants ID",
+                    "label_ar": "معرف مشاركو التمرين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMExerciseFinding",
+            "module_en": "Exercise Findings",
+            "module_ar": "ملاحظات التمرين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseFinding",
+                "description_en": "Exercise Findings",
+                "description_ar": "ملاحظات التمرين",
+                "fields": [
+                  {
+                    "code": "BCMExerciseFindingID",
+                    "label_en": "Exercise Findings ID",
+                    "label_ar": "معرف ملاحظات التمرين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMExerciseAction",
+            "module_en": "Exercise Actions & Follow-up",
+            "module_ar": "إجراءات ومتابعة التمرين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMExerciseAction",
+                "description_en": "Exercise Actions & Follow-up",
+                "description_ar": "إجراءات ومتابعة التمرين",
+                "fields": [
+                  {
+                    "code": "BCMExerciseActionID",
+                    "label_en": "Exercise Actions & Follow-up ID",
+                    "label_ar": "معرف إجراءات ومتابعة التمرين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "INC",
+        "category_en": "Incidents & Crisis Management",
+        "category_ar": "الحوادث وإدارة الأزمات",
+        "modules": [
+          {
+            "module_code": "BCMIncidentRegister",
+            "module_en": "BCM Incident Register",
+            "module_ar": "سجل حوادث استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMIncidentRegister",
+                "description_en": "BCM Incident Register",
+                "description_ar": "سجل حوادث استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMIncidentRegisterID",
+                    "label_en": "BCM Incident Register ID",
+                    "label_ar": "معرف سجل حوادث استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMIncidentTimeline",
+            "module_en": "Incident Timeline",
+            "module_ar": "الخط الزمني للحادث",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMIncidentTimeline",
+                "description_en": "Incident Timeline",
+                "description_ar": "الخط الزمني للحادث",
+                "fields": [
+                  {
+                    "code": "BCMIncidentTimelineID",
+                    "label_en": "Incident Timeline ID",
+                    "label_ar": "معرف الخط الزمني للحادث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMIncidentCommunication",
+            "module_en": "Incident Communications Log",
+            "module_ar": "سجل الاتصالات أثناء الحادث",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMIncidentCommunication",
+                "description_en": "Incident Communications Log",
+                "description_ar": "سجل الاتصالات أثناء الحادث",
+                "fields": [
+                  {
+                    "code": "BCMIncidentCommunicationID",
+                    "label_en": "Incident Communications Log ID",
+                    "label_ar": "معرف سجل الاتصالات أثناء الحادث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMIncidentDecisionLog",
+            "module_en": "Incident Decision Log",
+            "module_ar": "سجل القرارات أثناء الحادث",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMIncidentDecisionLog",
+                "description_en": "Incident Decision Log",
+                "description_ar": "سجل القرارات أثناء الحادث",
+                "fields": [
+                  {
+                    "code": "BCMIncidentDecisionLogID",
+                    "label_en": "Incident Decision Log ID",
+                    "label_ar": "معرف سجل القرارات أثناء الحادث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMIncidentStatus",
+            "module_en": "Incident Situation Reports",
+            "module_ar": "تقارير الموقف للحوادث",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMIncidentStatus",
+                "description_en": "Incident Situation Reports",
+                "description_ar": "تقارير الموقف للحوادث",
+                "fields": [
+                  {
+                    "code": "BCMIncidentStatusID",
+                    "label_en": "Incident Situation Reports ID",
+                    "label_ar": "معرف تقارير الموقف للحوادث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "DR",
+        "category_en": "IT Disaster Recovery",
+        "category_ar": "التعافي من الكوارث التقنية",
+        "modules": [
+          {
+            "module_code": "DRPlanRegister",
+            "module_en": "IT DR Plan Register",
+            "module_ar": "سجل خطط التعافي من الكوارث التقنية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRPlanRegister",
+                "description_en": "IT DR Plan Register",
+                "description_ar": "سجل خطط التعافي من الكوارث التقنية",
+                "fields": [
+                  {
+                    "code": "DRPlanRegisterID",
+                    "label_en": "IT DR Plan Register ID",
+                    "label_ar": "معرف سجل خطط التعافي من الكوارث التقنية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "DRRunbook",
+            "module_en": "DR Runbooks",
+            "module_ar": "إرشادات التشغيل للتعافي من الكوارث",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRRunbook",
+                "description_en": "DR Runbooks",
+                "description_ar": "إرشادات التشغيل للتعافي من الكوارث",
+                "fields": [
+                  {
+                    "code": "DRRunbookID",
+                    "label_en": "DR Runbooks ID",
+                    "label_ar": "معرف إرشادات التشغيل للتعافي من الكوارث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "DRTestEvent",
+            "module_en": "DR Test Events",
+            "module_ar": "فعاليات اختبار التعافي",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRTestEvent",
+                "description_en": "DR Test Events",
+                "description_ar": "فعاليات اختبار التعافي",
+                "fields": [
+                  {
+                    "code": "DRTestEventID",
+                    "label_en": "DR Test Events ID",
+                    "label_ar": "معرف فعاليات اختبار التعافي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "DRTestResult",
+            "module_en": "DR Test Results",
+            "module_ar": "نتائج اختبارات التعافي",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRTestResult",
+                "description_en": "DR Test Results",
+                "description_ar": "نتائج اختبارات التعافي",
+                "fields": [
+                  {
+                    "code": "DRTestResultID",
+                    "label_en": "DR Test Results ID",
+                    "label_ar": "معرف نتائج اختبارات التعافي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "DRSystemRecoveryRecord",
+            "module_en": "System Recovery Records",
+            "module_ar": "سجلات استعادة الأنظمة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRSystemRecoveryRecord",
+                "description_en": "System Recovery Records",
+                "description_ar": "سجلات استعادة الأنظمة",
+                "fields": [
+                  {
+                    "code": "DRSystemRecoveryRecordID",
+                    "label_en": "System Recovery Records ID",
+                    "label_ar": "معرف سجلات استعادة الأنظمة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "DRAlternateProcessing",
+            "module_en": "Alternate Processing Arrangements",
+            "module_ar": "ترتيبات المعالجة البديلة",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "DRAlternateProcessing",
+                "description_en": "Alternate Processing Arrangements",
+                "description_ar": "ترتيبات المعالجة البديلة",
+                "fields": [
+                  {
+                    "code": "DRAlternateProcessingID",
+                    "label_en": "Alternate Processing Arrangements ID",
+                    "label_ar": "معرف ترتيبات المعالجة البديلة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "TRN",
+        "category_en": "Training & Competency",
+        "category_ar": "التدريب والكفاءات",
+        "modules": [
+          {
+            "module_code": "BCMTrainingCourse",
+            "module_en": "BCM Training Courses",
+            "module_ar": "دورات تدريب استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMTrainingCourse",
+                "description_en": "BCM Training Courses",
+                "description_ar": "دورات تدريب استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMTrainingCourseID",
+                    "label_en": "BCM Training Courses ID",
+                    "label_ar": "معرف دورات تدريب استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMTrainingSession",
+            "module_en": "BCM Training Sessions",
+            "module_ar": "جلسات تدريب استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMTrainingSession",
+                "description_en": "BCM Training Sessions",
+                "description_ar": "جلسات تدريب استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMTrainingSessionID",
+                    "label_en": "BCM Training Sessions ID",
+                    "label_ar": "معرف جلسات تدريب استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMTrainingAttendance",
+            "module_en": "BCM Training Attendance",
+            "module_ar": "الحضور في تدريبات الاستمرارية",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMTrainingAttendance",
+                "description_en": "BCM Training Attendance",
+                "description_ar": "الحضور في تدريبات الاستمرارية",
+                "fields": [
+                  {
+                    "code": "BCMTrainingAttendanceID",
+                    "label_en": "BCM Training Attendance ID",
+                    "label_ar": "معرف الحضور في تدريبات الاستمرارية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMCompetencyMatrix",
+            "module_en": "BCM Competency Matrix",
+            "module_ar": "مصفوفة كفاءات استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMCompetencyMatrix",
+                "description_en": "BCM Competency Matrix",
+                "description_ar": "مصفوفة كفاءات استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMCompetencyMatrixID",
+                    "label_en": "BCM Competency Matrix ID",
+                    "label_ar": "معرف مصفوفة كفاءات استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMUserCompetencyAssessment",
+            "module_en": "User Competency Assessments",
+            "module_ar": "تقييمات كفاءة المستخدمين",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMUserCompetencyAssessment",
+                "description_en": "User Competency Assessments",
+                "description_ar": "تقييمات كفاءة المستخدمين",
+                "fields": [
+                  {
+                    "code": "BCMUserCompetencyAssessmentID",
+                    "label_en": "User Competency Assessments ID",
+                    "label_ar": "معرف تقييمات كفاءة المستخدمين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "IMP",
+        "category_en": "Maintenance & Improvement",
+        "category_ar": "الصيانة والتحسين",
+        "modules": [
+          {
+            "module_code": "BCMAuditReview",
+            "module_en": "BCM Audit & Management Reviews",
+            "module_ar": "مراجعات التدقيق والإدارة لاستمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMAuditReview",
+                "description_en": "BCM Audit & Management Reviews",
+                "description_ar": "مراجعات التدقيق والإدارة لاستمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMAuditReviewID",
+                    "label_en": "BCM Audit & Management Reviews ID",
+                    "label_ar": "معرف مراجعات التدقيق والإدارة لاستمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMNonConformity",
+            "module_en": "BCM Non-Conformities",
+            "module_ar": "عدم المطابقة في استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMNonConformity",
+                "description_en": "BCM Non-Conformities",
+                "description_ar": "عدم المطابقة في استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMNonConformityID",
+                    "label_en": "BCM Non-Conformities ID",
+                    "label_ar": "معرف عدم المطابقة في استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMCorrectiveAction",
+            "module_en": "BCM Corrective Actions",
+            "module_ar": "الإجراءات التصحيحية في استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMCorrectiveAction",
+                "description_en": "BCM Corrective Actions",
+                "description_ar": "الإجراءات التصحيحية في استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMCorrectiveActionID",
+                    "label_en": "BCM Corrective Actions ID",
+                    "label_ar": "معرف الإجراءات التصحيحية في استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMLessonsLearned",
+            "module_en": "BCM Lessons Learned",
+            "module_ar": "الدروس المستفادة في استمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMLessonsLearned",
+                "description_en": "BCM Lessons Learned",
+                "description_ar": "الدروس المستفادة في استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMLessonsLearnedID",
+                    "label_en": "BCM Lessons Learned ID",
+                    "label_ar": "معرف الدروس المستفادة في استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMImprovementPlan",
+            "module_en": "BCM Improvement Plans",
+            "module_ar": "خطط التحسين لاستمرارية الأعمال",
+            "related_iso": [
+              "ISO 22301"
+            ],
+            "tables": [
+              {
+                "table_name": "BCMImprovementPlan",
+                "description_en": "BCM Improvement Plans",
+                "description_ar": "خطط التحسين لاستمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMImprovementPlanID",
+                    "label_en": "BCM Improvement Plans ID",
+                    "label_ar": "معرف خطط التحسين لاستمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "module_count": 56,
+    "table_count": 56
+  }
+}
