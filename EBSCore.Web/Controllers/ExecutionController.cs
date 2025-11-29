@@ -133,7 +133,7 @@ namespace EBSCore.Web.Controllers
             try
             {
                 _logger.LogInformation("Starting manual execution for workflow {WorkflowId}", workflowId);
-                if (_currentUser == null)
+                if (_currentUser?.UserID == null)
                 {
                     return Unauthorized();
                 }
