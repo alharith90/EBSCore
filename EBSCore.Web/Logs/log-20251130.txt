@@ -1,0 +1,634 @@
+2025-11-30 00:00:04.789 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:04.789 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:09.807 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:09.807 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:14.808 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:14.808 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:19.827 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:19.827 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:24.826 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:24.826 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:29.841 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:29.841 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:34.843 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:34.843 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:39.857 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:39.857 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:44.858 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:44.858 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:49.858 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:49.858 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:54.874 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:54.874 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:00:59.875 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:00:59.875 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:04.889 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:04.889 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:09.891 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:09.891 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:13.473 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:ccd91f60-364e-450f-95e1-f7855c5fffb3
+Error Number:2812,State:62,Class:16
+2025-11-30 00:01:13.473 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:ccd91f60-364e-450f-95e1-f7855c5fffb3
+Error Number:2812,State:62,Class:16
+2025-11-30 00:01:14.907 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:14.907 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:19.917 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:19.917 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:24.930 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:24.930 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:29.939 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:29.939 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:34.972 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:34.972 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:40.005 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:40.005 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:45.027 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:45.027 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:50.028 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:50.028 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:01:55.056 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:01:55.056 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:00.089 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:00.089 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:05.112 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:05.112 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:10.139 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:10.139 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:15.155 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:15.155 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:45.500 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:45.500 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:50.705 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:50.705 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:02:53.395 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:f72d0cf9-c605-4786-adee-23c95208a1cb
+Error Number:2812,State:62,Class:16
+2025-11-30 00:02:53.395 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:f72d0cf9-c605-4786-adee-23c95208a1cb
+Error Number:2812,State:62,Class:16
+2025-11-30 00:02:55.723 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:02:55.723 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:00.746 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:00.746 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:03.529 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:03.529 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:04.748 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:04.748 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:05.755 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:05.755 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:10.771 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:10.771 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:15.772 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:15.772 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:20.787 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:20.787 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:25.829 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:25.829 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:25.879 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error saving strategy
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.ExecuteNonQuery(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 46
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 51
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Save(Strategy model) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 150
+ClientConnectionId:080ff5a4-49de-4aa1-8009-748e46032416
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:25.879 +04:00 [ERR] Error saving strategy
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.ExecuteNonQuery(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 46
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 51
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Save(Strategy model) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 150
+ClientConnectionId:080ff5a4-49de-4aa1-8009-748e46032416
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:30.882 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:30.882 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:34.828 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:080ff5a4-49de-4aa1-8009-748e46032416
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:34.828 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:080ff5a4-49de-4aa1-8009-748e46032416
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:34.830 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)"
+Microsoft.JSInterop.JSException: Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 40
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.830 +04:00 [WRN] Unhandled exception rendering component: Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+Microsoft.JSInterop.JSException: Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 40
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.839 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U"'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 40
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.839 +04:00 [ERR] Unhandled exception in circuit '3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.init' ('unitTree' was undefined).
+Error: Could not find 'unitTree.init' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 40
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.931 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)"
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.931 +04:00 [WRN] Unhandled exception rendering component: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.932 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U"'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.932 +04:00 [ERR] Unhandled exception in circuit '3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.973 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)"
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.973 +04:00 [WRN] Unhandled exception rendering component: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.974 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U"'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:34.974 +04:00 [ERR] Unhandled exception in circuit '3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U'.
+Microsoft.JSInterop.JSException: Could not find 'unitTree.update' ('unitTree' was undefined).
+Error: Could not find 'unitTree.update' ('unitTree' was undefined).
+    at http://localhost:1490/_framework/blazor.server.js:1:374
+    at Array.forEach (<anonymous>)
+    at l.findFunction (http://localhost:1490/_framework/blazor.server.js:1:342)
+    at b (http://localhost:1490/_framework/blazor.server.js:1:5091)
+    at http://localhost:1490/_framework/blazor.server.js:1:2884
+    at new Promise (<anonymous>)
+    at w.beginInvokeJSFromDotNet (http://localhost:1490/_framework/blazor.server.js:1:2847)
+    at Jt._invokeClientMethod (http://localhost:1490/_framework/blazor.server.js:1:63689)
+    at Jt._processIncomingData (http://localhost:1490/_framework/blazor.server.js:1:61078)
+    at Jt.connection.onreceive (http://localhost:1490/_framework/blazor.server.js:1:54719)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.Controls.UnitTreeSelector.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\Controls\UnitTreeSelector.razor:line 49
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:35.038 +04:00 [Warning] Microsoft.AspNetCore.Components.Server.Circuits.RemoteRenderer Unhandled exception rendering component: "JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed."
+Microsoft.JSInterop.JSDisconnectedException: JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed.
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.BCM.Strategies.LoadStrategiesAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 212
+   at EBSCore.Web.Pages.BCM.Strategies.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 183
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:35.038 +04:00 [WRN] Unhandled exception rendering component: JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed.
+Microsoft.JSInterop.JSDisconnectedException: JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed.
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.BCM.Strategies.LoadStrategiesAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 212
+   at EBSCore.Web.Pages.BCM.Strategies.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 183
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:35.039 +04:00 [Error] Microsoft.AspNetCore.Components.Server.Circuits.CircuitHost Unhandled exception in circuit '"3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U"'.
+Microsoft.JSInterop.JSDisconnectedException: JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed.
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.BCM.Strategies.LoadStrategiesAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 212
+   at EBSCore.Web.Pages.BCM.Strategies.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 183
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:35.039 +04:00 [ERR] Unhandled exception in circuit '3MjiwKCAUBG-WLTfft9x_YJb5P5_7nXWYFD6vEi141U'.
+Microsoft.JSInterop.JSDisconnectedException: JavaScript interop calls cannot be issued at this time. This is because the circuit has disconnected and is being disposed.
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at EBSCore.Web.Pages.BCM.Strategies.LoadStrategiesAsync() in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 212
+   at EBSCore.Web.Pages.BCM.Strategies.OnAfterRenderAsync(Boolean firstRender) in d:\Dev\EBSCore\EBSCore.Web\Pages\BCM\Strategies.razor:line 183
+   at Microsoft.AspNetCore.Components.RenderTree.Renderer.GetErrorHandledTask(Task taskToHandle, ComponentState owningComponentState)
+2025-11-30 00:03:35.887 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:35.887 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:38.500 +04:00 [Error] EBSCore.Web.Controllers.StrategyController Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:38.500 +04:00 [ERR] Error retrieving strategies
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'BCMStrategySP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in d:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 61
+   at EBSCore.AdoClass.DBStrategySP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String StrategyID, String Title, String TitleAr, String Vision, String Mission, String EscalationCriteria, String ActivationCriteria, String StartDate, String EndDate, String OwnerID, String Status, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in d:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategySP.cs:line 78
+   at EBSCore.Web.Controllers.StrategyController.Get(String UnitID) in d:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategyController.cs:line 49
+ClientConnectionId:53b41640-d4f7-41be-b3af-9cf2437644df
+Error Number:2812,State:62,Class:16
+2025-11-30 00:03:40.903 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:40.903 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:45.912 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:45.912 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:50.913 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:50.913 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:03:55.931 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:03:55.931 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:00.945 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:00.945 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:05.961 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:05.961 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:10.973 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:10.973 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:15.990 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:15.990 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:21.003 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:21.003 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:26.016 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:26.016 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:31.038 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:31.038 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:36.052 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:36.052 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:41.058 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:41.058 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:46.070 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:46.070 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:51.082 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:51.082 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:04:56.090 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:04:56.090 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:01.097 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:01.097 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:06.099 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:06.099 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:11.440 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:11.440 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:16.457 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:16.457 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:21.462 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:21.462 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:26.473 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:26.473 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:31.475 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:31.475 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:36.490 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:36.490 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:41.497 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:41.497 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:46.498 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:46.498 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:51.511 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:51.511 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:05:56.513 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:05:56.513 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:01.522 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:01.522 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:06.534 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:06.534 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:11.540 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:11.540 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:16.552 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:16.552 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:21.566 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:21.566 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:26.577 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:26.577 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:31.590 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:31.590 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:36.600 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:36.600 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:41.617 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:41.617 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:46.621 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:46.621 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:51.654 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:51.654 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:06:56.660 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:06:56.660 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:01.668 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:01.668 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:06.679 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:06.679 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:11.683 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:11.683 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:16.687 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:16.687 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:21.735 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:21.735 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:26.754 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:26.754 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:31.772 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:31.772 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:36.776 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:36.776 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:41.789 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:41.789 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:46.809 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:46.809 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:51.826 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:51.826 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:07:56.837 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:07:56.837 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:01.844 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:01.844 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:06.853 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:06.853 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:11.861 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:11.861 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:16.873 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:16.873 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:21.886 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:21.886 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:26.898 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:26.898 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:31.910 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:31.910 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:36.921 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:36.921 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:41.933 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:41.933 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:46.945 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:46.945 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:51.957 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:51.957 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:08:56.969 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:08:56.969 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:01.978 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:01.978 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:06.985 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:06.985 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:11.993 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:11.993 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:16.996 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:16.996 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:22.014 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:22.014 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:27.030 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:27.030 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:32.035 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:32.035 +04:00 [INF] [Workflow] Polling for executions
+2025-11-30 00:09:37.063 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2025-11-30 00:09:37.063 +04:00 [INF] [Workflow] Polling for executions
