@@ -29,7 +29,7 @@ namespace EBSCore.Web.Controllers
 
             try
             {
-                var bytes = _htmlToPdfService.ConvertHtmlToPdf(request.Html, request.Title);
+                var bytes = _htmlToPdfService.ConvertHtmlToPdf(request);
                 var fileName = string.IsNullOrWhiteSpace(request.FileName) ? "report.pdf" : request.FileName;
 
                 if (!fileName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
