@@ -1,7 +1,7 @@
+using HTMLQuestPDF.Extensions;
 using QuestPDF;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using QuestPDF.Html;
 using QuestPDF.Infrastructure;
 
 namespace EBSCore.Web.Services
@@ -31,9 +31,13 @@ namespace EBSCore.Web.Services
 
                     page.Content()
                         .PaddingVertical(10)
-                        .Html(html =>
+                        .Column(col =>
                         {
-                            html.SetContent(safeHtml);
+                            col.Item().HTML(handler =>
+                            {
+                                // This is the correct call for QuestPDF.HTML 1.4.2
+                                handler.SetHtml(safeHtml);
+                            });
                         });
                 });
             });
