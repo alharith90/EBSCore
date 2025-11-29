@@ -9,6 +9,8 @@
 @using Microsoft.AspNetCore.Components.Web
 @using System.Net.Http.Json
 @using System.Linq
+@using System.Net
+@using System.Text
 @using EBSCore.Web.Pages.Controls
 @using ProcessStepModel = EBSCore.Web.Models.ProcessStep
 @using ProcessControlModel = EBSCore.Web.Models.ProcessControl
@@ -73,6 +75,38 @@
                     else
                     {
                         <p>@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["ProcessName"] @GLocalizer["Report"]</h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" @onclick="BuildReportHtml" disabled="@(!ListProcesses.Any())">
+                            <i class="fas fa-sync"></i> @GLocalizer["Refresh"]
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" @onclick="ExportReportToPdfAsync" disabled="@(!ListProcesses.Any() || IsExportingPdf)">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" hidden="@(IsExportingPdf == false)"></span>
+                            <i class="fas fa-file-pdf" hidden="@IsExportingPdf"></i>
+                            @Localizer["ExportToPdf"]
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (string.IsNullOrWhiteSpace(ReportHtml))
+                    {
+                        <p class="text-muted mb-0">@GLocalizer["EmptyTable"]</p>
+                    }
+                    else
+                    {
+                        <div class="report-preview" style="max-height: 500px; overflow:auto; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 6px; padding: 16px;">
+                            @((MarkupString)ReportHtml)
+                        </div>
                     }
                 </div>
             </div>
@@ -294,6 +328,8 @@ else
     bool StepsLoading = false;
     List<ProcessControlModel> CurrentControls = new();
     bool ControlsLoading = false;
+    string ReportHtml = string.Empty;
+    bool IsExportingPdf = false;
 
     // Forms
     EditContext EditContext = default!;
@@ -343,6 +379,7 @@ else
                 response = await Http.GetStringAsync("api/Process/Get");
             }
             ListProcesses = JsonConvert.DeserializeObject<List<ProcModel>>(response) ?? new();
+            BuildReportHtml();
         }
         catch (Exception ex)
         {
@@ -373,6 +410,7 @@ else
         StepsLoading = false;
         CurrentControls = new();
         ControlsLoading = false;
+        BuildReportHtml();
     }
 
     private async Task SaveProcessAsync()
@@ -505,6 +543,100 @@ else
     private void RemoveControl(ProcessControlModel control)
     {
         CurrentControls.Remove(control);
+    }
+
+    private void BuildReportHtml()
+    {
+        if (!ListProcesses.Any())
+        {
+            ReportHtml = string.Empty;
+            return;
+        }
+
+        var builder = new StringBuilder();
+        builder.Append("<style>");
+        builder.Append(".process-report{font-family:'Segoe UI',Arial,sans-serif;}");
+        builder.Append(".process-card{border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);background:#fff;}");
+        builder.Append(".process-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}");
+        builder.Append(".process-title{font-size:16px;font-weight:600;color:#0f172a;}");
+        builder.Append(".process-meta{font-size:12px;color:#6b7280;}");
+        builder.Append(".process-description{margin:6px 0;color:#334155;font-size:13px;}");
+        builder.Append(".process-badge{display:inline-block;padding:4px 8px;border-radius:4px;background:#e0f2fe;color:#075985;font-size:12px;}");
+        builder.Append("</style>");
+        builder.Append("<div class='process-report'>");
+        builder.Append($"<div class='process-meta' style='text-align:right;'>Generated on {DateTime.Now:yyyy-MM-dd HH:mm}</div>");
+
+        var index = 1;
+        foreach (var process in ListProcesses)
+        {
+            builder.Append("<div class='process-card'>");
+            builder.Append("<div class='process-header'>");
+            builder.Append($"<div class='process-title'>#{index}. {WebUtility.HtmlEncode(process.ProcessName ?? string.Empty)}</div>");
+
+            var code = string.IsNullOrWhiteSpace(process.ProcessCode)
+                ? string.Empty
+                : $"<span class='process-badge'>Code: {WebUtility.HtmlEncode(process.ProcessCode)}</span>";
+
+            builder.Append($"<div class='process-meta'>{code}</div>");
+            builder.Append("</div>");
+
+            if (!string.IsNullOrWhiteSpace(process.ProcessDescription))
+            {
+                builder.Append($"<div class='process-description'>{WebUtility.HtmlEncode(process.ProcessDescription)}</div>");
+            }
+
+            builder.Append("<div class='process-meta'>");
+            builder.Append($"ID: {WebUtility.HtmlEncode(process.ProcessID ?? "-")} | Unit: {WebUtility.HtmlEncode(process.UnitID ?? "-")}");
+            builder.Append("</div>");
+            builder.Append("</div>");
+
+            index++;
+        }
+
+        builder.Append("</div>");
+        ReportHtml = builder.ToString();
+    }
+
+    private async Task ExportReportToPdfAsync()
+    {
+        if (!ListProcesses.Any() || string.IsNullOrWhiteSpace(ReportHtml))
+        {
+            return;
+        }
+
+        IsExportingPdf = true;
+        try
+        {
+            var payload = new HtmlToPdfRequest
+            {
+                Html = ReportHtml,
+                Title = Localizer["PageTitle"],
+                FileName = "process-report.pdf"
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+            var response = await Http.PostAsync("api/Pdf/FromHtml", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var bytes = await response.Content.ReadAsByteArrayAsync();
+                var base64 = Convert.ToBase64String(bytes);
+                await JS.InvokeVoidAsync("downloadFileFromBytes", "process-report.pdf", "application/pdf", base64);
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["ExportToPdf"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = Localizer["ExportToPdf"], text = response.ReasonPhrase ?? "Failed to export" });
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = Localizer["ExportToPdf"], text = ex.Message });
+        }
+        finally
+        {
+            IsExportingPdf = false;
+        }
     }
 
     private async Task SaveControlsAsync()
