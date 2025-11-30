@@ -1,3 +1,12 @@
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
 @page "/bcm/plans/{PlanId:int}/pir"
 @using EBSCore.Web.Models.BCM
 
