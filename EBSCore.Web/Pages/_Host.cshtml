@@ -1,7 +1,14 @@
 @page "/"
 @namespace EBSCore.Web
 @using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
 @inject IStringLocalizerFactory LocalizerFactory
 @{
     var GLocalizer = LocalizerFactory.Create("Common", "");
