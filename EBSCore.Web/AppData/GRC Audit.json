@@ -1,0 +1,4540 @@
+{
+  "pillar": {
+    "pillar_code": "AUDIT",
+    "pillar_en": "Audit, Assurance & Assessment",
+    "pillar_ar": "التدقيق والضمان والتقييم",
+    "related_iso": [
+      "ISO 19011 (Guidelines for auditing management systems)",
+      "IIA IPPF (International Professional Practices Framework)",
+      "ISO 9001 (Internal audit)",
+      "ISO 27001 (Internal audit)",
+      "ISO 22301 (BCM audits & exercises)"
+    ],
+    "categories": [
+      {
+        "category_code": "AUN",
+        "category_en": "Audit Universe & Scoping",
+        "category_ar": "كون التدقيق ونطاقه",
+        "modules": [
+          {
+            "module_code": "AuditUniverseRegister",
+            "module_en": "Audit Universe Register",
+            "module_ar": "سجل كون التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditUniverse",
+                "description_en": "Master audit universe across all GRC pillars (entities, processes, themes).",
+                "description_ar": "كون التدقيق الرئيسي عبر جميع أعمدة الحوكمة والمخاطر والالتزام واستمرارية الأعمال.",
+                "fields": [
+                  {
+                    "code": "AuditUniverseID",
+                    "label_en": "Audit Universe ID",
+                    "label_ar": "معرف كون التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "UniverseItemCode",
+                    "label_en": "Universe Item Code",
+                    "label_ar": "كود عنصر الكون",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "UniverseItemNameEN",
+                    "label_en": "Universe Item Name (English)",
+                    "label_ar": "اسم عنصر الكون (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "UniverseItemNameAR",
+                    "label_en": "Universe Item Name (Arabic)",
+                    "label_ar": "اسم عنصر الكون (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "UniverseItemType",
+                    "label_en": "Universe Item Type (Entity/Process/Risk/Control/BCM/Compliance/IT System)",
+                    "label_ar": "نوع عنصر الكون",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CriticalityLevel",
+                    "label_en": "Business Criticality Level",
+                    "label_ar": "مستوى الأهمية للأعمال",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "LastAuditDate",
+                    "label_en": "Last Audit Date",
+                    "label_ar": "تاريخ آخر تدقيق",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "NextPlannedAuditDate",
+                    "label_en": "Next Planned Audit Date",
+                    "label_ar": "تاريخ التدقيق المخطط التالي",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditEntityRegister",
+            "module_en": "Auditable Entity Register",
+            "module_ar": "سجل الكيانات القابلة للتدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditEntity",
+                "description_en": "Register of auditable entities (business units, subsidiaries, locations).",
+                "description_ar": "سجل الكيانات القابلة للتدقيق (وحدات الأعمال، الشركات التابعة، المواقع).",
+                "fields": [
+                  {
+                    "code": "AuditEntityID",
+                    "label_en": "Audit Entity ID",
+                    "label_ar": "معرف الكيان القابل للتدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "EntityRefID",
+                    "label_en": "Linked Entity ID (from GRC master)",
+                    "label_ar": "معرف الكيان المرتبط (من النظام الرئيسي)",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "EntityNameEN",
+                    "label_en": "Entity Name (English)",
+                    "label_ar": "اسم الكيان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EntityNameAR",
+                    "label_en": "Entity Name (Arabic)",
+                    "label_ar": "اسم الكيان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EntityType",
+                    "label_en": "Entity Type",
+                    "label_ar": "نوع الكيان",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RegionEN",
+                    "label_en": "Region (English)",
+                    "label_ar": "المنطقة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RegionAR",
+                    "label_en": "Region (Arabic)",
+                    "label_ar": "المنطقة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditProcessRegister",
+            "module_en": "Auditable Process Register",
+            "module_ar": "سجل العمليات القابلة للتدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditProcess",
+                "description_en": "Register of auditable processes mapped to GRC process catalog.",
+                "description_ar": "سجل العمليات القابلة للتدقيق والمربوطة بدليل العمليات في نظام الحوكمة والمخاطر والالتزام.",
+                "fields": [
+                  {
+                    "code": "AuditProcessID",
+                    "label_en": "Audit Process ID",
+                    "label_ar": "معرف العملية القابلة للتدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcessRefID",
+                    "label_en": "Linked Process ID (GRC)",
+                    "label_ar": "معرف العملية المرتبطة (في نظام GRC)",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcessNameEN",
+                    "label_en": "Process Name (English)",
+                    "label_ar": "اسم العملية (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcessNameAR",
+                    "label_en": "Process Name (Arabic)",
+                    "label_ar": "اسم العملية (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcessOwnerUserID",
+                    "label_en": "Process Owner User ID",
+                    "label_ar": "معرف مالك العملية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "InScopeYN",
+                    "label_en": "In Scope for Current Cycle?",
+                    "label_ar": "ضمن نطاق دورة التدقيق الحالية؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditControlUniverse",
+            "module_en": "Audit Control Universe",
+            "module_ar": "كون ضوابط التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditControlUniverse",
+                "description_en": "Universe of controls to be tested or monitored by audit/assurance.",
+                "description_ar": "كون الضوابط التي سيتم اختبارها أو متابعتها من قبل التدقيق/الضمان.",
+                "fields": [
+                  {
+                    "code": "AuditControlUniverseID",
+                    "label_en": "Audit Control Universe ID",
+                    "label_ar": "معرف كون ضوابط التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ControlRefID",
+                    "label_en": "Linked Control ID (from control library)",
+                    "label_ar": "معرف الضابط المرتبط (من مكتبة الضوابط)",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlCode",
+                    "label_en": "Control Code",
+                    "label_ar": "كود الضابط",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlNameEN",
+                    "label_en": "Control Name (English)",
+                    "label_ar": "اسم الضابط (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlNameAR",
+                    "label_en": "Control Name (Arabic)",
+                    "label_ar": "اسم الضابط (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlType",
+                    "label_en": "Control Type (Preventive/Detective/Corrective)",
+                    "label_ar": "نوع الضابط",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KeyControlYN",
+                    "label_en": "Key Control?",
+                    "label_ar": "هل ضابط رئيسي؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "AutoControlYN",
+                    "label_en": "Automated Control?",
+                    "label_ar": "هل ضابط آلي؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditUniverseLinkGRC",
+            "module_en": "Universe Link to GRC Objects",
+            "module_ar": "ربط الكون مع كائنات الحوكمة والمخاطر والالتزام",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditUniverseLink",
+                "description_en": "Links between audit universe items and underlying GRC objects (risk, BCM, compliance, etc.).",
+                "description_ar": "روابط بين عناصر كون التدقيق وكائنات نظام GRC الأساسية (المخاطر، استمرارية الأعمال، الالتزام، وغيرها).",
+                "fields": [
+                  {
+                    "code": "AuditUniverseLinkID",
+                    "label_en": "Audit Universe Link ID",
+                    "label_ar": "معرف رابط كون التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditUniverseID",
+                    "label_en": "Audit Universe ID",
+                    "label_ar": "معرف كون التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "GrcObjectType",
+                    "label_en": "GRC Object Type (Risk/BCM/Compliance/Governance/Issue)",
+                    "label_ar": "نوع كائن GRC",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "GrcObjectID",
+                    "label_en": "GRC Object ID",
+                    "label_ar": "معرف كائن GRC",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "LinkPurposeEN",
+                    "label_en": "Link Purpose (English)",
+                    "label_ar": "غرض الربط (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LinkPurposeAR",
+                    "label_en": "Link Purpose (Arabic)",
+                    "label_ar": "غرض الربط (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "APL",
+        "category_en": "Risk-Based Audit Planning & Programs",
+        "category_ar": "تخطيط التدقيق القائم على المخاطر والبرامج",
+        "modules": [
+          {
+            "module_code": "AuditRiskAssessment",
+            "module_en": "Audit Risk Assessment (for planning)",
+            "module_ar": "تقييم مخاطر التدقيق (لأغراض التخطيط)",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditRiskAssessment",
+                "description_en": "Risk assessment at entity/process level to prioritize audit coverage.",
+                "description_ar": "تقييم المخاطر على مستوى الكيانات/العمليات لتحديد أولويات تغطية التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditRiskAssessmentID",
+                    "label_en": "Audit Risk Assessment ID",
+                    "label_ar": "معرف تقييم مخاطر التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditEntityID",
+                    "label_en": "Audit Entity ID",
+                    "label_ar": "معرف الكيان القابل للتدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditProcessID",
+                    "label_en": "Audit Process ID",
+                    "label_ar": "معرف العملية القابلة للتدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "InherentRiskScore",
+                    "label_en": "Inherent Risk Score",
+                    "label_ar": "درجة المخاطر المتأصلة",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlEffectivenessScore",
+                    "label_en": "Control Effectiveness Score",
+                    "label_ar": "درجة فعالية الضوابط",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "ResidualRiskScore",
+                    "label_en": "Residual Risk Score",
+                    "label_ar": "درجة المخاطر المتبقية",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "PriorityRank",
+                    "label_en": "Priority Rank",
+                    "label_ar": "الترتيب حسب الأولوية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditPlanAnnual",
+            "module_en": "Annual Audit Plan",
+            "module_ar": "الخطة السنوية للتدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditPlan",
+                "description_en": "Approved annual audit plan with engagements and scope.",
+                "description_ar": "الخطة السنوية المعتمدة للتدقيق بما في ذلك المهام والنطاق.",
+                "fields": [
+                  {
+                    "code": "AuditPlanID",
+                    "label_en": "Audit Plan ID",
+                    "label_ar": "معرف خطة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "PlanYear",
+                    "label_en": "Plan Year",
+                    "label_ar": "سنة الخطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "PlanVersion",
+                    "label_en": "Plan Version",
+                    "label_ar": "إصدار الخطة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ApprovalDate",
+                    "label_en": "Approval Date",
+                    "label_ar": "تاريخ الاعتماد",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ApprovedByRoleID",
+                    "label_en": "Approved By Role ID",
+                    "label_ar": "معرف الدور المعتمد",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditPlanMultiYear",
+            "module_en": "Multi-Year Audit Plan",
+            "module_ar": "خطة التدقيق متعددة السنوات",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditPlanMultiYear",
+                "description_en": "Multi-Year Audit Plan",
+                "description_ar": "خطة التدقيق متعددة السنوات",
+                "fields": [
+                  {
+                    "code": "AuditPlanMultiYearID",
+                    "label_en": "Multi-Year Audit Plan ID",
+                    "label_ar": "معرف خطة التدقيق متعددة السنوات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditCoverageMap",
+            "module_en": "Audit Coverage Map",
+            "module_ar": "خريطة تغطية التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditCoverageMap",
+                "description_en": "Matrix showing coverage of GRC objects by internal audit over time.",
+                "description_ar": "مصفوفة توضح تغطية كائنات GRC بواسطة التدقيق الداخلي عبر الزمن.",
+                "fields": [
+                  {
+                    "code": "AuditCoverageMapID",
+                    "label_en": "Audit Coverage Map ID",
+                    "label_ar": "معرف خريطة تغطية التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditUniverseID",
+                    "label_en": "Audit Universe ID",
+                    "label_ar": "معرف كون التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "LastAuditYear",
+                    "label_en": "Last Audit Year",
+                    "label_ar": "سنة آخر تدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "PlannedAuditYear",
+                    "label_en": "Planned Audit Year",
+                    "label_ar": "سنة التدقيق المخطط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CoverageStatus",
+                    "label_en": "Coverage Status (Covered/Planned/Not Covered)",
+                    "label_ar": "حالة التغطية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "ENG",
+        "category_en": "Audit Engagements & Workpapers",
+        "category_ar": "مهام التدقيق وأوراق العمل",
+        "modules": [
+          {
+            "module_code": "AuditEngagementRegister",
+            "module_en": "Audit Engagement Register",
+            "module_ar": "سجل مهام التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditEngagement",
+                "description_en": "Individual audit engagements linked to the audit plan and universe.",
+                "description_ar": "مهام التدقيق الفردية المرتبطة بخطة التدقيق وكون التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditPlanID",
+                    "label_en": "Audit Plan ID",
+                    "label_ar": "معرف خطة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "EngagementCode",
+                    "label_en": "Engagement Code",
+                    "label_ar": "كود المهمة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EngagementTitleEN",
+                    "label_en": "Engagement Title (English)",
+                    "label_ar": "عنوان المهمة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EngagementTitleAR",
+                    "label_en": "Engagement Title (Arabic)",
+                    "label_ar": "عنوان المهمة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LeadAuditorUserID",
+                    "label_en": "Lead Auditor User ID",
+                    "label_ar": "معرف المدقق الرئيسي",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "PlannedStartDate",
+                    "label_en": "Planned Start Date",
+                    "label_ar": "تاريخ البدء المخطط",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "PlannedEndDate",
+                    "label_en": "Planned End Date",
+                    "label_ar": "تاريخ الانتهاء المخطط",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ActualStartDate",
+                    "label_en": "Actual Start Date",
+                    "label_ar": "تاريخ البدء الفعلي",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ActualEndDate",
+                    "label_en": "Actual End Date",
+                    "label_ar": "تاريخ الانتهاء الفعلي",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditObjectiveScope",
+            "module_en": "Audit Objectives & Scope",
+            "module_ar": "أهداف ونطاق مهمة التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditObjectiveScope",
+                "description_en": "Objectives and scope definition for audit engagements.",
+                "description_ar": "تعريف الأهداف والنطاق لمهام التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditObjectiveScopeID",
+                    "label_en": "Audit Objective & Scope ID",
+                    "label_ar": "معرف الأهداف والنطاق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ObjectiveTextEN",
+                    "label_en": "Objectives (English)",
+                    "label_ar": "الأهداف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ObjectiveTextAR",
+                    "label_en": "Objectives (Arabic)",
+                    "label_ar": "الأهداف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ScopeTextEN",
+                    "label_en": "Scope (English)",
+                    "label_ar": "النطاق (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ScopeTextAR",
+                    "label_en": "Scope (Arabic)",
+                    "label_ar": "النطاق (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExclusionsEN",
+                    "label_en": "Exclusions (English)",
+                    "label_ar": "الاستثناءات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExclusionsAR",
+                    "label_en": "Exclusions (Arabic)",
+                    "label_ar": "الاستثناءات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditWorkpaperHeader",
+            "module_en": "Audit Workpaper Header",
+            "module_ar": "رؤوس أوراق عمل التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditWorkpaper",
+                "description_en": "Workpapers documenting procedures performed, evidence and conclusions.",
+                "description_ar": "أوراق عمل توثق الإجراءات المنفذة والأدلة والاستنتاجات.",
+                "fields": [
+                  {
+                    "code": "AuditWorkpaperID",
+                    "label_en": "Audit Workpaper ID",
+                    "label_ar": "معرف ورقة العمل",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditProcedureID",
+                    "label_en": "Audit Procedure ID",
+                    "label_ar": "معرف إجراء التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UniverseItemID",
+                    "label_en": "Related Audit Universe Item ID",
+                    "label_ar": "معرف عنصر الكون المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "PreparedByUserID",
+                    "label_en": "Prepared By User ID",
+                    "label_ar": "معرف من أعد الورقة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ReviewedByUserID",
+                    "label_en": "Reviewed By User ID",
+                    "label_ar": "معرف من راجع الورقة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ConclusionEN",
+                    "label_en": "Conclusion (English)",
+                    "label_ar": "الاستنتاج (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ConclusionAR",
+                    "label_en": "Conclusion (Arabic)",
+                    "label_ar": "الاستنتاج (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditProcedureLibrary",
+            "module_en": "Audit Procedure Library",
+            "module_ar": "مكتبة إجراءات التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditProcedure",
+                "description_en": "Library of standard audit procedures mapped to risks and controls.",
+                "description_ar": "مكتبة إجراءات التدقيق القياسية المرتبطة بالمخاطر والضوابط.",
+                "fields": [
+                  {
+                    "code": "AuditProcedureID",
+                    "label_en": "Audit Procedure ID",
+                    "label_ar": "معرف إجراء التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProcedureCode",
+                    "label_en": "Procedure Code",
+                    "label_ar": "كود الإجراء",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcedureNameEN",
+                    "label_en": "Procedure Name (English)",
+                    "label_ar": "اسم الإجراء (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcedureNameAR",
+                    "label_en": "Procedure Name (Arabic)",
+                    "label_ar": "اسم الإجراء (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedRiskID",
+                    "label_en": "Related Risk ID",
+                    "label_ar": "معرف الخطر المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedControlID",
+                    "label_en": "Related Control ID",
+                    "label_ar": "معرف الضابط المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditProcedureStep",
+            "module_en": "Audit Procedure Step",
+            "module_ar": "خطوات إجراءات التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditProcedureStep",
+                "description_en": "Detailed steps for each audit procedure.",
+                "description_ar": "الخطوات التفصيلية لكل إجراء تدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditProcedureStepID",
+                    "label_en": "Audit Procedure Step ID",
+                    "label_ar": "معرف خطوة إجراء التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditProcedureID",
+                    "label_en": "Audit Procedure ID",
+                    "label_ar": "معرف إجراء التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StepOrder",
+                    "label_en": "Step Order",
+                    "label_ar": "ترتيب الخطوة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StepDescriptionEN",
+                    "label_en": "Step Description (English)",
+                    "label_ar": "وصف الخطوة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StepDescriptionAR",
+                    "label_en": "Step Description (Arabic)",
+                    "label_ar": "وصف الخطوة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "TST",
+        "category_en": "Testing, Sampling & Automated Controls",
+        "category_ar": "الاختبار وأخذ العينات والضوابط الآلية",
+        "modules": [
+          {
+            "module_code": "AuditTestDefinition",
+            "module_en": "Audit Test Definition",
+            "module_ar": "تعريف اختبارات التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditTestDefinition",
+                "description_en": "Definition of audit tests including population, criteria and method.",
+                "description_ar": "تعريف اختبارات التدقيق بما في ذلك مجتمع البيانات والمعايير والمنهجية.",
+                "fields": [
+                  {
+                    "code": "AuditTestDefinitionID",
+                    "label_en": "Audit Test Definition ID",
+                    "label_ar": "معرف تعريف اختبار التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditProcedureID",
+                    "label_en": "Audit Procedure ID",
+                    "label_ar": "معرف إجراء التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "TestNameEN",
+                    "label_en": "Test Name (English)",
+                    "label_ar": "اسم الاختبار (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TestNameAR",
+                    "label_en": "Test Name (Arabic)",
+                    "label_ar": "اسم الاختبار (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PopulationDescriptionEN",
+                    "label_en": "Population Description (English)",
+                    "label_ar": "وصف مجتمع البيانات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PopulationDescriptionAR",
+                    "label_en": "Population Description (Arabic)",
+                    "label_ar": "وصف مجتمع البيانات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SamplingMethod",
+                    "label_en": "Sampling Method",
+                    "label_ar": "منهجية أخذ العينات",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CriteriaEN",
+                    "label_en": "Test Criteria (English)",
+                    "label_ar": "معايير الاختبار (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CriteriaAR",
+                    "label_en": "Test Criteria (Arabic)",
+                    "label_ar": "معايير الاختبار (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditSampleSelection",
+            "module_en": "Sample Selection",
+            "module_ar": "اختيار العينات",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditSample",
+                "description_en": "Selected audit samples for tests.",
+                "description_ar": "العينات المختارة لاختبارات التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditSampleID",
+                    "label_en": "Audit Sample ID",
+                    "label_ar": "معرف عينة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditTestDefinitionID",
+                    "label_en": "Audit Test Definition ID",
+                    "label_ar": "معرف تعريف اختبار التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "SampleItemKey",
+                    "label_en": "Sample Item Key",
+                    "label_ar": "مفتاح عنصر العينة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SampleSelectionReasonEN",
+                    "label_en": "Selection Reason (English)",
+                    "label_ar": "سبب الاختيار (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SampleSelectionReasonAR",
+                    "label_en": "Selection Reason (Arabic)",
+                    "label_ar": "سبب الاختيار (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditTestExecution",
+            "module_en": "Audit Test Execution",
+            "module_ar": "تنفيذ اختبارات التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditTestExecution",
+                "description_en": "Execution results for audit tests, including exceptions.",
+                "description_ar": "نتائج تنفيذ اختبارات التدقيق بما في ذلك الاستثناءات.",
+                "fields": [
+                  {
+                    "code": "AuditTestExecutionID",
+                    "label_en": "Audit Test Execution ID",
+                    "label_ar": "معرف تنفيذ اختبار التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditSampleID",
+                    "label_en": "Audit Sample ID",
+                    "label_ar": "معرف عينة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ResultStatus",
+                    "label_en": "Result Status (Pass/Fail/Exception)",
+                    "label_ar": "حالة النتيجة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExceptionDescriptionEN",
+                    "label_en": "Exception Description (English)",
+                    "label_ar": "وصف الاستثناء (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExceptionDescriptionAR",
+                    "label_en": "Exception Description (Arabic)",
+                    "label_ar": "وصف الاستثناء (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AutomatedControlMonitoringConfig",
+            "module_en": "Automated Control Monitoring Config",
+            "module_ar": "تهيئة المراقبة الآلية للضوابط",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AutomatedControlMonitoringConfig",
+                "description_en": "Configuration for automated monitoring of key controls pulling data from source systems.",
+                "description_ar": "تهيئة المراقبة الآلية للضوابط الرئيسية بسحب البيانات من الأنظمة المصدر.",
+                "fields": [
+                  {
+                    "code": "AutomatedControlMonitoringConfigID",
+                    "label_en": "Automated Control Monitoring Config ID",
+                    "label_ar": "معرف تهيئة المراقبة الآلية للضوابط",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditControlUniverseID",
+                    "label_en": "Audit Control Universe ID",
+                    "label_ar": "معرف كون ضوابط التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "DataSourceSystemEN",
+                    "label_en": "Data Source System (English)",
+                    "label_ar": "النظام المصدر للبيانات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DataSourceSystemAR",
+                    "label_en": "Data Source System (Arabic)",
+                    "label_ar": "النظام المصدر للبيانات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "QueryDefinition",
+                    "label_en": "Query / Rule Definition",
+                    "label_ar": "تعريف الاستعلام/القاعدة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ThresholdCondition",
+                    "label_en": "Threshold Condition for Exception",
+                    "label_ar": "شرط العتبة لحدوث الاستثناء",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AutomatedExceptionCapture",
+            "module_en": "Automated Exception Capture",
+            "module_ar": "التقاط الاستثناءات آليًا",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AutomatedException",
+                "description_en": "Exceptions automatically captured by continuous audit rules.",
+                "description_ar": "الاستثناءات التي يتم التقاطها تلقائيًا بواسطة قواعد التدقيق المستمر.",
+                "fields": [
+                  {
+                    "code": "AutomatedExceptionID",
+                    "label_en": "Automated Exception ID",
+                    "label_ar": "معرف الاستثناء الآلي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AutomatedControlMonitoringConfigID",
+                    "label_en": "Automated Control Monitoring Config ID",
+                    "label_ar": "معرف تهيئة المراقبة الآلية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CaptureDateTime",
+                    "label_en": "Capture Date/Time",
+                    "label_ar": "تاريخ/وقت الالتقاط",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "ExceptionDetails",
+                    "label_en": "Exception Details",
+                    "label_ar": "تفاصيل الاستثناء",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LinkedAuditIssueID",
+                    "label_en": "Linked Audit Issue ID",
+                    "label_ar": "معرف قضية التدقيق المرتبطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "FND",
+        "category_en": "Findings, Issues & Action Tracking",
+        "category_ar": "النتائج والقضايا وتتبع الإجراءات",
+        "modules": [
+          {
+            "module_code": "AuditFindingRegister",
+            "module_en": "Audit Findings Register",
+            "module_ar": "سجل نتائج التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditFinding",
+                "description_en": "Findings identified during audit work, before grouping into issues.",
+                "description_ar": "النتائج التي يتم تحديدها أثناء أعمال التدقيق، قبل تجميعها كقضايا.",
+                "fields": [
+                  {
+                    "code": "AuditFindingID",
+                    "label_en": "Audit Finding ID",
+                    "label_ar": "معرف نتيجة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UniverseItemID",
+                    "label_en": "Related Universe Item ID",
+                    "label_ar": "معرف عنصر الكون المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "FindingTextEN",
+                    "label_en": "Finding (English)",
+                    "label_ar": "النتيجة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "FindingTextAR",
+                    "label_en": "Finding (Arabic)",
+                    "label_ar": "النتيجة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Severity",
+                    "label_en": "Severity",
+                    "label_ar": "الخطورة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RootCausePrelimEN",
+                    "label_en": "Preliminary Root Cause (English)",
+                    "label_ar": "السبب الجذري المبدئي (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RootCausePrelimAR",
+                    "label_en": "Preliminary Root Cause (Arabic)",
+                    "label_ar": "السبب الجذري المبدئي (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditIssueRegister",
+            "module_en": "Audit Issues Register",
+            "module_ar": "سجل قضايا التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditIssue",
+                "description_en": "Consolidated audit issues mapped to risks, controls and GRC pillars.",
+                "description_ar": "قضايا التدقيق الموحدة المرتبطة بالمخاطر والضوابط وأعمدة نظام GRC.",
+                "fields": [
+                  {
+                    "code": "AuditIssueID",
+                    "label_en": "Audit Issue ID",
+                    "label_ar": "معرف قضية التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "IssueCode",
+                    "label_en": "Issue Code",
+                    "label_ar": "كود القضية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PrimaryFindingID",
+                    "label_en": "Primary Finding ID",
+                    "label_ar": "معرف النتيجة الرئيسية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedRiskID",
+                    "label_en": "Related Risk ID",
+                    "label_ar": "معرف الخطر المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedControlID",
+                    "label_en": "Related Control ID",
+                    "label_ar": "معرف الضابط المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedComplianceObligationID",
+                    "label_en": "Related Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedBCMProcessID",
+                    "label_en": "Related BCM Process ID",
+                    "label_ar": "معرف عملية استمرارية الأعمال المرتبطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueTitleEN",
+                    "label_en": "Issue Title (English)",
+                    "label_ar": "عنوان القضية (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueTitleAR",
+                    "label_en": "Issue Title (Arabic)",
+                    "label_ar": "عنوان القضية (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueSeverity",
+                    "label_en": "Issue Severity",
+                    "label_ar": "خطورة القضية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueStatus",
+                    "label_en": "Issue Status",
+                    "label_ar": "حالة القضية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditActionPlanRegister",
+            "module_en": "Audit Action Plans",
+            "module_ar": "سجل خطط الإجراءات الناتجة عن التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditActionPlan",
+                "description_en": "Action plans raised to address audit issues and findings.",
+                "description_ar": "خطط الإجراءات لمعالجة قضايا ونتائج التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditActionPlanID",
+                    "label_en": "Audit Action Plan ID",
+                    "label_ar": "معرف خطة إجراء التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditIssueID",
+                    "label_en": "Audit Issue ID",
+                    "label_ar": "معرف قضية التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionOwnerUserID",
+                    "label_en": "Action Owner User ID",
+                    "label_ar": "معرف مسؤول الإجراء",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionDescriptionEN",
+                    "label_en": "Action Description (English)",
+                    "label_ar": "وصف الإجراء (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionDescriptionAR",
+                    "label_en": "Action Description (Arabic)",
+                    "label_ar": "وصف الإجراء (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TargetCompletionDate",
+                    "label_en": "Target Completion Date",
+                    "label_ar": "تاريخ الإكمال المستهدف",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "CompletionPercent",
+                    "label_en": "Completion %",
+                    "label_ar": "نسبة الإنجاز",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditIssueRootCause",
+            "module_en": "Audit Issue Root Cause Analysis",
+            "module_ar": "تحليل الأسباب الجذرية لقضايا التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditIssueRootCause",
+                "description_en": "Detailed root cause analysis for audit issues.",
+                "description_ar": "تحليل الأسباب الجذرية لقضايا التدقيق.",
+                "fields": [
+                  {
+                    "code": "AuditIssueRootCauseID",
+                    "label_en": "Audit Issue Root Cause ID",
+                    "label_ar": "معرف سبب قضية التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditIssueID",
+                    "label_en": "Audit Issue ID",
+                    "label_ar": "معرف قضية التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RootCauseCategory",
+                    "label_en": "Root Cause Category",
+                    "label_ar": "فئة السبب الجذري",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RootCauseDescriptionEN",
+                    "label_en": "Root Cause Description (English)",
+                    "label_ar": "وصف السبب الجذري (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RootCauseDescriptionAR",
+                    "label_en": "Root Cause Description (Arabic)",
+                    "label_ar": "وصف السبب الجذري (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditIssueFollowUp",
+            "module_en": "Audit Issue Follow-up",
+            "module_ar": "متابعة قضايا التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditIssueFollowUp",
+                "description_en": "Follow-up checks on audit issues and action plans.",
+                "description_ar": "عمليات المتابعة على قضايا التدقيق وخطط الإجراءات.",
+                "fields": [
+                  {
+                    "code": "AuditIssueFollowUpID",
+                    "label_en": "Audit Issue Follow-up ID",
+                    "label_ar": "معرف متابعة قضية التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditIssueID",
+                    "label_en": "Audit Issue ID",
+                    "label_ar": "معرف قضية التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "FollowUpDate",
+                    "label_en": "Follow-up Date",
+                    "label_ar": "تاريخ المتابعة",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "FollowUpResultEN",
+                    "label_en": "Follow-up Result (English)",
+                    "label_ar": "نتيجة المتابعة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "FollowUpResultAR",
+                    "label_en": "Follow-up Result (Arabic)",
+                    "label_ar": "نتيجة المتابعة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ClosedYN",
+                    "label_en": "Issue Closed?",
+                    "label_ar": "هل تم إغلاق القضية؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "SAS",
+        "category_en": "Self-Assessments & Control Assessments",
+        "category_ar": "التقييمات الذاتية وتقييم الضوابط",
+        "modules": [
+          {
+            "module_code": "ControlSelfAssessmentCampaign",
+            "module_en": "Control Self-Assessment Campaign",
+            "module_ar": "حملات التقييم الذاتي للضوابط",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ControlSelfAssessmentCampaign",
+                "description_en": "Campaigns for periodic control self-assessments across entities/processes.",
+                "description_ar": "حملات دورية للتقييم الذاتي للضوابط عبر الكيانات والعمليات.",
+                "fields": [
+                  {
+                    "code": "ControlSelfAssessmentCampaignID",
+                    "label_en": "CSA Campaign ID",
+                    "label_ar": "معرف حملة التقييم الذاتي للضوابط",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CampaignNameEN",
+                    "label_en": "Campaign Name (English)",
+                    "label_ar": "اسم الحملة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CampaignNameAR",
+                    "label_en": "Campaign Name (Arabic)",
+                    "label_ar": "اسم الحملة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PeriodStart",
+                    "label_en": "Period Start",
+                    "label_ar": "بداية الفترة",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "PeriodEnd",
+                    "label_en": "Period End",
+                    "label_ar": "نهاية الفترة",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "TargetUniverseScope",
+                    "label_en": "Target Universe Scope",
+                    "label_ar": "نطاق الكون المستهدف",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ControlSelfAssessmentResponse",
+            "module_en": "Control Self-Assessment Responses",
+            "module_ar": "استجابات التقييم الذاتي للضوابط",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ControlSelfAssessmentResponse",
+                "description_en": "Control self-assessment responses by control owners.",
+                "description_ar": "استجابات التقييم الذاتي للضوابط من قبل مالكي الضوابط.",
+                "fields": [
+                  {
+                    "code": "ControlSelfAssessmentResponseID",
+                    "label_en": "CSA Response ID",
+                    "label_ar": "معرف استجابة التقييم الذاتي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ControlSelfAssessmentCampaignID",
+                    "label_en": "CSA Campaign ID",
+                    "label_ar": "معرف حملة التقييم الذاتي",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditControlUniverseID",
+                    "label_en": "Audit Control Universe ID",
+                    "label_ar": "معرف كون ضوابط التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlOwnerUserID",
+                    "label_en": "Control Owner User ID",
+                    "label_ar": "معرف مالك الضابط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "DesignEffectivenessScore",
+                    "label_en": "Design Effectiveness Score",
+                    "label_ar": "درجة فعالية التصميم",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "OperatingEffectivenessScore",
+                    "label_en": "Operating Effectiveness Score",
+                    "label_ar": "درجة فعالية التشغيل",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "SelfAssessmentCommentEN",
+                    "label_en": "Self-Assessment Comment (English)",
+                    "label_ar": "تعليق التقييم الذاتي (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SelfAssessmentCommentAR",
+                    "label_en": "Self-Assessment Comment (Arabic)",
+                    "label_ar": "تعليق التقييم الذاتي (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceSelfAssessment",
+            "module_en": "Compliance Self-Assessment",
+            "module_ar": "التقييم الذاتي للالتزام",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceSelfAssessment",
+                "description_en": "Self-assessment of compliance per obligation or requirement.",
+                "description_ar": "تقييم ذاتي للالتزام لكل التزام أو متطلب.",
+                "fields": [
+                  {
+                    "code": "ComplianceSelfAssessmentID",
+                    "label_en": "Compliance Self-Assessment ID",
+                    "label_ar": "معرف التقييم الذاتي للالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessedByUserID",
+                    "label_en": "Assessed By User ID",
+                    "label_ar": "معرف المقيم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentDate",
+                    "label_en": "Assessment Date",
+                    "label_ar": "تاريخ التقييم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ComplianceLevel",
+                    "label_en": "Compliance Level (%)",
+                    "label_ar": "مستوى الالتزام (%)",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "EvidenceSummaryEN",
+                    "label_en": "Evidence Summary (English)",
+                    "label_ar": "ملخص الأدلة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EvidenceSummaryAR",
+                    "label_en": "Evidence Summary (Arabic)",
+                    "label_ar": "ملخص الأدلة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BcmSelfAssessment",
+            "module_en": "BCM Self-Assessment",
+            "module_ar": "التقييم الذاتي لاستمرارية الأعمال",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "BcmSelfAssessment",
+                "description_en": "Self-assessment of BCM capability per entity/process.",
+                "description_ar": "تقييم ذاتي لقدرات استمرارية الأعمال لكل كيان/عملية.",
+                "fields": [
+                  {
+                    "code": "BcmSelfAssessmentID",
+                    "label_en": "BCM Self-Assessment ID",
+                    "label_ar": "معرف التقييم الذاتي لاستمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "BCMProcessID",
+                    "label_en": "BCM Process ID",
+                    "label_ar": "معرف عملية استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentDate",
+                    "label_en": "Assessment Date",
+                    "label_ar": "تاريخ التقييم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "MaturityScore",
+                    "label_en": "Maturity Score",
+                    "label_ar": "درجة النضج",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "GapsSummaryEN",
+                    "label_en": "Gaps Summary (English)",
+                    "label_ar": "ملخص الفجوات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "GapsSummaryAR",
+                    "label_en": "Gaps Summary (Arabic)",
+                    "label_ar": "ملخص الفجوات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RiskManagementSelfAssessment",
+            "module_en": "Risk Management Self-Assessment",
+            "module_ar": "التقييم الذاتي لإدارة المخاطر",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "RiskManagementSelfAssessment",
+                "description_en": "Self-assessment of risk management practices against a framework.",
+                "description_ar": "تقييم ذاتي لممارسات إدارة المخاطر مقابل إطار معياري.",
+                "fields": [
+                  {
+                    "code": "RiskManagementSelfAssessmentID",
+                    "label_en": "Risk Management Self-Assessment ID",
+                    "label_ar": "معرف التقييم الذاتي لإدارة المخاطر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "EntityID",
+                    "label_en": "Entity ID",
+                    "label_ar": "معرف الكيان",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentFrameworkEN",
+                    "label_en": "Assessment Framework (English)",
+                    "label_ar": "إطار التقييم (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentFrameworkAR",
+                    "label_en": "Assessment Framework (Arabic)",
+                    "label_ar": "إطار التقييم (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OverallScore",
+                    "label_en": "Overall Score",
+                    "label_ar": "الدرجة الكلية",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "PolicyComplianceChecklist",
+            "module_en": "Policy Compliance Checklist",
+            "module_ar": "قوائم التحقق من الالتزام بالسياسات",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "PolicyComplianceChecklist",
+                "description_en": "Detailed checklist questions to assess policy compliance.",
+                "description_ar": "أسئلة قوائم تفقد تفصيلية لتقييم الالتزام بالسياسات.",
+                "fields": [
+                  {
+                    "code": "PolicyComplianceChecklistID",
+                    "label_en": "Policy Compliance Checklist ID",
+                    "label_ar": "معرف قائمة التحقق من التزام السياسة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "PolicyID",
+                    "label_en": "Policy ID",
+                    "label_ar": "معرف السياسة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ChecklistItemOrder",
+                    "label_en": "Checklist Item Order",
+                    "label_ar": "ترتيب بند قائمة التحقق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ChecklistQuestionEN",
+                    "label_en": "Checklist Question (English)",
+                    "label_ar": "سؤال قائمة التحقق (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ChecklistQuestionAR",
+                    "label_en": "Checklist Question (Arabic)",
+                    "label_ar": "سؤال قائمة التحقق (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExpectedEvidenceEN",
+                    "label_en": "Expected Evidence (English)",
+                    "label_ar": "الدليل المتوقع (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExpectedEvidenceAR",
+                    "label_en": "Expected Evidence (Arabic)",
+                    "label_ar": "الدليل المتوقع (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "CAA",
+        "category_en": "Continuous Auditing & Analytics",
+        "category_ar": "التدقيق المستمر والتحليلات",
+        "modules": [
+          {
+            "module_code": "ContinuousAuditRule",
+            "module_en": "Continuous Audit Rule",
+            "module_ar": "قاعدة التدقيق المستمر",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ContinuousAuditRule",
+                "description_en": "Rules for continuous auditing mapped to data sources, controls, KRIs and thresholds.",
+                "description_ar": "قواعد التدقيق المستمر المرتبطة بمصادر البيانات والضوابط ومؤشرات المخاطر والعتبات.",
+                "fields": [
+                  {
+                    "code": "ContinuousAuditRuleID",
+                    "label_en": "Continuous Audit Rule ID",
+                    "label_ar": "معرف قاعدة التدقيق المستمر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "RuleCode",
+                    "label_en": "Rule Code",
+                    "label_ar": "كود القاعدة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RuleNameEN",
+                    "label_en": "Rule Name (English)",
+                    "label_ar": "اسم القاعدة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RuleNameAR",
+                    "label_en": "Rule Name (Arabic)",
+                    "label_ar": "اسم القاعدة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditControlUniverseID",
+                    "label_en": "Audit Control Universe ID",
+                    "label_ar": "معرف كون ضوابط التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "LinkedKRIID",
+                    "label_en": "Linked KRI ID",
+                    "label_ar": "معرف مؤشر المخاطر المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "DataSourceDefinition",
+                    "label_en": "Data Source Definition",
+                    "label_ar": "تعريف مصدر البيانات",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LogicDefinition",
+                    "label_en": "Logic / Query Definition",
+                    "label_ar": "تعريف المنطق/الاستعلام",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ThresholdDefinition",
+                    "label_en": "Threshold Definition",
+                    "label_ar": "تعريف العتبة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ContinuousAuditRun",
+            "module_en": "Continuous Audit Run",
+            "module_ar": "تشغيل التدقيق المستمر",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ContinuousAuditRun",
+                "description_en": "Execution instances of continuous audit rules and summary results.",
+                "description_ar": "حالات تنفيذ قواعد التدقيق المستمر والنتائج الموجزة.",
+                "fields": [
+                  {
+                    "code": "ContinuousAuditRunID",
+                    "label_en": "Continuous Audit Run ID",
+                    "label_ar": "معرف تشغيل التدقيق المستمر",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ContinuousAuditRuleID",
+                    "label_en": "Continuous Audit Rule ID",
+                    "label_ar": "معرف قاعدة التدقيق المستمر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RunDateTime",
+                    "label_en": "Run Date/Time",
+                    "label_ar": "تاريخ/وقت التشغيل",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "RecordsScanned",
+                    "label_en": "Records Scanned",
+                    "label_ar": "عدد السجلات المفحوصة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ExceptionsFound",
+                    "label_en": "Exceptions Found",
+                    "label_ar": "عدد الاستثناءات المكتشفة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ExceptionAnalyticsResult",
+            "module_en": "Exception Analytics Result",
+            "module_ar": "نتائج تحليلات الاستثناءات",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ExceptionAnalyticsResult",
+                "description_en": "Analytics outputs over exceptions, trends and root patterns.",
+                "description_ar": "مخرجات التحليلات المتعلقة بالاستثناءات والاتجاهات والأنماط الجذرية.",
+                "fields": [
+                  {
+                    "code": "ExceptionAnalyticsResultID",
+                    "label_en": "Exception Analytics Result ID",
+                    "label_ar": "معرف نتيجة تحليلات الاستثناءات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ContinuousAuditRuleID",
+                    "label_en": "Continuous Audit Rule ID",
+                    "label_ar": "معرف قاعدة التدقيق المستمر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AnalysisPeriod",
+                    "label_en": "Analysis Period",
+                    "label_ar": "فترة التحليل",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KeyInsightsEN",
+                    "label_en": "Key Insights (English)",
+                    "label_ar": "أهم النتائج (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KeyInsightsAR",
+                    "label_en": "Key Insights (Arabic)",
+                    "label_ar": "أهم النتائج (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "KRIControlMonitor",
+            "module_en": "KRI & Control Monitor",
+            "module_ar": "مراقبة مؤشرات المخاطر والضوابط",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "KRIControlMonitor",
+                "description_en": "Monitoring of KRIs in relation to control performance and audit triggers.",
+                "description_ar": "مراقبة مؤشرات المخاطر الرئيسية فيما يتعلق بأداء الضوابط ومسببات التدقيق.",
+                "fields": [
+                  {
+                    "code": "KRIControlMonitorID",
+                    "label_en": "KRI Control Monitor ID",
+                    "label_ar": "معرف مراقبة مؤشر المخاطر والضابط",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "KRIID",
+                    "label_en": "KRI ID",
+                    "label_ar": "معرف مؤشر المخاطر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditControlUniverseID",
+                    "label_en": "Audit Control Universe ID",
+                    "label_ar": "معرف كون ضوابط التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "Period",
+                    "label_en": "Period",
+                    "label_ar": "الفترة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KRIValue",
+                    "label_en": "KRI Value",
+                    "label_ar": "قيمة مؤشر المخاطر",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "ControlEffectivenessIndicator",
+                    "label_en": "Control Effectiveness Indicator",
+                    "label_ar": "مؤشر فعالية الضابط",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "MAT",
+        "category_en": "Maturity, Conformance & Readiness",
+        "category_ar": "النضج والامتثال والجاهزية",
+        "modules": [
+          {
+            "module_code": "AssuranceMaturityModel",
+            "module_en": "Assurance Maturity Model",
+            "module_ar": "نموذج نضج الضمان",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AssuranceMaturityModel",
+                "description_en": "Maturity model for assurance function aligned to IIA/ISO practices.",
+                "description_ar": "نموذج نضج لوظيفة الضمان متوافق مع ممارسات IIA وISO.",
+                "fields": [
+                  {
+                    "code": "AssuranceMaturityModelID",
+                    "label_en": "Assurance Maturity Model ID",
+                    "label_ar": "معرف نموذج نضج الضمان",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ModelNameEN",
+                    "label_en": "Model Name (English)",
+                    "label_ar": "اسم النموذج (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ModelNameAR",
+                    "label_en": "Model Name (Arabic)",
+                    "label_ar": "اسم النموذج (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DimensionEN",
+                    "label_en": "Dimension (English)",
+                    "label_ar": "البعد (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DimensionAR",
+                    "label_en": "Dimension (Arabic)",
+                    "label_ar": "البعد (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LevelCount",
+                    "label_en": "Number of Levels",
+                    "label_ar": "عدد المستويات",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AssuranceMaturityAssessment",
+            "module_en": "Assurance Maturity Assessment",
+            "module_ar": "تقييم نضج الضمان",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AssuranceMaturityAssessment",
+                "description_en": "Assessment results against the assurance maturity model.",
+                "description_ar": "نتائج التقييم مقابل نموذج نضج الضمان.",
+                "fields": [
+                  {
+                    "code": "AssuranceMaturityAssessmentID",
+                    "label_en": "Assurance Maturity Assessment ID",
+                    "label_ar": "معرف تقييم نضج الضمان",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AssuranceMaturityModelID",
+                    "label_en": "Assurance Maturity Model ID",
+                    "label_ar": "معرف نموذج نضج الضمان",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentDate",
+                    "label_en": "Assessment Date",
+                    "label_ar": "تاريخ التقييم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "OverallLevel",
+                    "label_en": "Overall Level",
+                    "label_ar": "المستوى الكلي",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DimensionScoresJSON",
+                    "label_en": "Dimension Scores (JSON)",
+                    "label_ar": "درجات الأبعاد (JSON)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ConformanceAssessmentRegister",
+            "module_en": "Conformance Assessment Register",
+            "module_ar": "سجل تقييمات الامتثال",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ConformanceAssessment",
+                "description_en": "Conformance assessment of GRC pillars against standards (e.g. ISO, IIA).",
+                "description_ar": "تقييم الامتثال لأعمدة GRC مقابل المعايير (مثل ISO وIIA).",
+                "fields": [
+                  {
+                    "code": "ConformanceAssessmentID",
+                    "label_en": "Conformance Assessment ID",
+                    "label_ar": "معرف تقييم الامتثال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "PillarCode",
+                    "label_en": "Pillar Code (GOV/RISK/BCM/COMP/etc.)",
+                    "label_ar": "رمز العمود",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StandardRef",
+                    "label_en": "Standard Reference",
+                    "label_ar": "مرجع المعيار",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentDate",
+                    "label_en": "Assessment Date",
+                    "label_ar": "تاريخ التقييم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ConformanceScore",
+                    "label_en": "Conformance Score (%)",
+                    "label_ar": "درجة الامتثال (%)",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "SummaryEN",
+                    "label_en": "Summary (English)",
+                    "label_ar": "الملخص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SummaryAR",
+                    "label_en": "Summary (Arabic)",
+                    "label_ar": "الملخص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ReadinessAssessmentRegister",
+            "module_en": "Readiness Assessment Register",
+            "module_ar": "سجل تقييمات الجاهزية",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "ReadinessAssessment",
+                "description_en": "Readiness assessments before external certification or regulatory reviews.",
+                "description_ar": "تقييمات الجاهزية قبل شهادات خارجية أو مراجعات تنظيمية.",
+                "fields": [
+                  {
+                    "code": "ReadinessAssessmentID",
+                    "label_en": "Readiness Assessment ID",
+                    "label_ar": "معرف تقييم الجاهزية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AssessmentType",
+                    "label_en": "Assessment Type (ISO/Regulator/Internal)",
+                    "label_ar": "نوع التقييم",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TargetStandardRef",
+                    "label_en": "Target Standard Reference",
+                    "label_ar": "مرجع المعيار المستهدف",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "AssessmentDate",
+                    "label_en": "Assessment Date",
+                    "label_ar": "تاريخ التقييم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ReadinessScore",
+                    "label_en": "Readiness Score (%)",
+                    "label_ar": "درجة الجاهزية (%)",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "RES",
+        "category_en": "Audit Resources, Skills & Independence",
+        "category_ar": "موارد التدقيق والمهارات والاستقلالية",
+        "modules": [
+          {
+            "module_code": "AuditorRegister",
+            "module_en": "Auditor Register",
+            "module_ar": "سجل المدققين",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "Auditor",
+                "description_en": "Register of internal and external auditors.",
+                "description_ar": "سجل المدققين الداخليين والخارجيين.",
+                "fields": [
+                  {
+                    "code": "AuditorID",
+                    "label_en": "Auditor ID",
+                    "label_ar": "معرف المدقق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "UserID",
+                    "label_en": "User ID",
+                    "label_ar": "معرف المستخدم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AuditorType",
+                    "label_en": "Auditor Type (Internal/External)",
+                    "label_ar": "نوع المدقق",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PrimaryExpertiseEN",
+                    "label_en": "Primary Expertise (English)",
+                    "label_ar": "مجال الخبرة الرئيسي (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PrimaryExpertiseAR",
+                    "label_en": "Primary Expertise (Arabic)",
+                    "label_ar": "مجال الخبرة الرئيسي (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditCompetencyMatrix",
+            "module_en": "Audit Competency Matrix",
+            "module_ar": "مصفوفة كفاءات التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditCompetencyMatrix",
+                "description_en": "Competency matrix for auditors across skills and domains.",
+                "description_ar": "مصفوفة الكفاءات للمدققين عبر المهارات والمجالات.",
+                "fields": [
+                  {
+                    "code": "AuditCompetencyMatrixID",
+                    "label_en": "Audit Competency Matrix ID",
+                    "label_ar": "معرف مصفوفة كفاءات التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditorID",
+                    "label_en": "Auditor ID",
+                    "label_ar": "معرف المدقق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "SkillEN",
+                    "label_en": "Skill (English)",
+                    "label_ar": "المهارة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SkillAR",
+                    "label_en": "Skill (Arabic)",
+                    "label_ar": "المهارة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SkillLevel",
+                    "label_en": "Skill Level",
+                    "label_ar": "مستوى المهارة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditorIndependenceDeclaration",
+            "module_en": "Auditor Independence Declarations",
+            "module_ar": "تصريحات استقلالية المدققين",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditorIndependenceDeclaration",
+                "description_en": "Independence and conflict-of-interest declarations by auditors.",
+                "description_ar": "تصريحات الاستقلالية وتعارض المصالح من قبل المدققين.",
+                "fields": [
+                  {
+                    "code": "AuditorIndependenceDeclarationID",
+                    "label_en": "Auditor Independence Declaration ID",
+                    "label_ar": "معرف تصريح استقلالية المدقق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditorID",
+                    "label_en": "Auditor ID",
+                    "label_ar": "معرف المدقق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "Period",
+                    "label_en": "Period",
+                    "label_ar": "الفترة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "HasConflict",
+                    "label_en": "Has Conflict?",
+                    "label_ar": "هل يوجد تعارض؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationTextEN",
+                    "label_en": "Declaration Text (English)",
+                    "label_ar": "نص التصريح (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationTextAR",
+                    "label_en": "Declaration Text (Arabic)",
+                    "label_ar": "نص التصريح (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditTrainingRegister",
+            "module_en": "Audit Training Register",
+            "module_ar": "سجل تدريب التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditTraining",
+                "description_en": "Training completed by auditors (IIA, ISO, technical).",
+                "description_ar": "التدريبات التي أكملها المدققون (IIA، ISO، فنية).",
+                "fields": [
+                  {
+                    "code": "AuditTrainingID",
+                    "label_en": "Audit Training ID",
+                    "label_ar": "معرف تدريب التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditorID",
+                    "label_en": "Auditor ID",
+                    "label_ar": "معرف المدقق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "TrainingTitleEN",
+                    "label_en": "Training Title (English)",
+                    "label_ar": "عنوان التدريب (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TrainingTitleAR",
+                    "label_en": "Training Title (Arabic)",
+                    "label_ar": "عنوان التدريب (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TrainingProviderEN",
+                    "label_en": "Training Provider (English)",
+                    "label_ar": "مقدم التدريب (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TrainingProviderAR",
+                    "label_en": "Training Provider (Arabic)",
+                    "label_ar": "مقدم التدريب (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CompletionDate",
+                    "label_en": "Completion Date",
+                    "label_ar": "تاريخ الإكمال",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "RPT",
+        "category_en": "Audit Reporting, Opinion & Follow-up",
+        "category_ar": "تقارير التدقيق والرأي والمتابعة",
+        "modules": [
+          {
+            "module_code": "AuditReportRegister",
+            "module_en": "Audit Report Register",
+            "module_ar": "سجل تقارير التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditReport",
+                "description_en": "Issued audit reports with linkage to engagements and universe items.",
+                "description_ar": "تقارير التدقيق الصادرة مع الربط بالمهام وعناصر الكون.",
+                "fields": [
+                  {
+                    "code": "AuditReportID",
+                    "label_en": "Audit Report ID",
+                    "label_ar": "معرف تقرير التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ReportRef",
+                    "label_en": "Report Reference",
+                    "label_ar": "مرجع التقرير",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ReportTitleEN",
+                    "label_en": "Report Title (English)",
+                    "label_ar": "عنوان التقرير (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ReportTitleAR",
+                    "label_en": "Report Title (Arabic)",
+                    "label_ar": "عنوان التقرير (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueDate",
+                    "label_en": "Issue Date",
+                    "label_ar": "تاريخ الإصدار",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditOpinionRegister",
+            "module_en": "Audit Opinion Register",
+            "module_ar": "سجل آراء التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditOpinion",
+                "description_en": "Audit opinions (overall and per pillar/process) including rating.",
+                "description_ar": "آراء التدقيق (على المستوى الكلي أو لكل عمود/عملية) بما في ذلك التصنيف.",
+                "fields": [
+                  {
+                    "code": "AuditOpinionID",
+                    "label_en": "Audit Opinion ID",
+                    "label_ar": "معرف رأي التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "AuditReportID",
+                    "label_en": "Audit Report ID",
+                    "label_ar": "معرف تقرير التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ScopeLevel",
+                    "label_en": "Scope Level (Entity/Process/Pillar)",
+                    "label_ar": "مستوى النطاق",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PillarCode",
+                    "label_en": "Pillar Code (if applicable)",
+                    "label_ar": "رمز العمود عند الاقتضاء",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OpinionRating",
+                    "label_en": "Opinion Rating",
+                    "label_ar": "تصنيف الرأي",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OpinionTextEN",
+                    "label_en": "Opinion Text (English)",
+                    "label_ar": "نص الرأي (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OpinionTextAR",
+                    "label_en": "Opinion Text (Arabic)",
+                    "label_ar": "نص الرأي (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditCommitteePack",
+            "module_en": "Audit Committee Pack",
+            "module_ar": "حزمة لجنة التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditCommitteePack",
+                "description_en": "Packs prepared for the audit committee (agendas, dashboards, key messages).",
+                "description_ar": "الحزم المعدة للجنة التدقيق (جداول أعمال، لوحات مؤشرات، رسائل رئيسية).",
+                "fields": [
+                  {
+                    "code": "AuditCommitteePackID",
+                    "label_en": "Audit Committee Pack ID",
+                    "label_ar": "معرف حزمة لجنة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "MeetingDate",
+                    "label_en": "Meeting Date",
+                    "label_ar": "تاريخ الاجتماع",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "PackTitleEN",
+                    "label_en": "Pack Title (English)",
+                    "label_ar": "عنوان الحزمة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PackTitleAR",
+                    "label_en": "Pack Title (Arabic)",
+                    "label_ar": "عنوان الحزمة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SummaryEN",
+                    "label_en": "Summary (English)",
+                    "label_ar": "الملخص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SummaryAR",
+                    "label_en": "Summary (Arabic)",
+                    "label_ar": "الملخص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AuditKPIDashboardConfig",
+            "module_en": "Audit KPI Dashboard Config",
+            "module_ar": "تهيئة لوحة مؤشرات أداء التدقيق",
+            "related_iso": [
+              "ISO 19011"
+            ],
+            "tables": [
+              {
+                "table_name": "AuditKPIDashboardConfig",
+                "description_en": "Configuration for audit KPI dashboards and automated status views.",
+                "description_ar": "تهيئة لوحات مؤشرات أداء التدقيق وعروض الحالة الآلية.",
+                "fields": [
+                  {
+                    "code": "AuditKPIDashboardConfigID",
+                    "label_en": "Audit KPI Dashboard Config ID",
+                    "label_ar": "معرف تهيئة لوحة مؤشرات أداء التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "DashboardNameEN",
+                    "label_en": "Dashboard Name (English)",
+                    "label_ar": "اسم لوحة المؤشرات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DashboardNameAR",
+                    "label_en": "Dashboard Name (Arabic)",
+                    "label_ar": "اسم لوحة المؤشرات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IncludedKPIsJSON",
+                    "label_en": "Included KPIs (JSON)",
+                    "label_ar": "مؤشرات الأداء المضمنة (JSON)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "module_count": 46,
+    "table_count": 46
+  }
+}
