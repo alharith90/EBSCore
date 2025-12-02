@@ -1,0 +1,5138 @@
+{
+  "pillar": {
+    "pillar_code": "COMP",
+    "pillar_en": "Compliance Management",
+    "pillar_ar": "إدارة الالتزام",
+    "related_iso": [
+      "ISO 37301 (Compliance Management Systems)",
+      "ISO 19600 (legacy compliance guidance)",
+      "ISO 37001 (Anti-bribery)",
+      "ISO 9001 (Compliance & requirements)",
+      "ISO 27001 (Information security compliance)"
+    ],
+    "categories": [
+      {
+        "category_code": "OBL",
+        "category_en": "Compliance Obligations & Requirements",
+        "category_ar": "الالتزامات والمتطلبات",
+        "modules": [
+          {
+            "module_code": "ComplianceObligationRegister",
+            "module_en": "Compliance Obligations Register",
+            "module_ar": "سجل الالتزامات والمتطلبات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceObligation",
+                "description_en": "Master register of all compliance obligations and requirements.",
+                "description_ar": "السجل الرئيسي لجميع الالتزامات والمتطلبات التنظيمية والداخلية.",
+                "fields": [
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ObligationCode",
+                    "label_en": "Obligation Code",
+                    "label_ar": "كود الالتزام",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ObligationTitleEN",
+                    "label_en": "Obligation Title (English)",
+                    "label_ar": "عنوان الالتزام (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ObligationTitleAR",
+                    "label_en": "Obligation Title (Arabic)",
+                    "label_ar": "عنوان الالتزام (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceType",
+                    "label_en": "Source Type (Law/Regulation/Contract/Policy)",
+                    "label_ar": "نوع المصدر",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceRefEN",
+                    "label_en": "Source Reference (English)",
+                    "label_ar": "مرجع المصدر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceRefAR",
+                    "label_en": "Source Reference (Arabic)",
+                    "label_ar": "مرجع المصدر (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RequirementTextEN",
+                    "label_en": "Requirement Text (English)",
+                    "label_ar": "نص المتطلب (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RequirementTextAR",
+                    "label_en": "Requirement Text (Arabic)",
+                    "label_ar": "نص المتطلب (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ObligationCategory",
+                    "label_en": "Obligation Category",
+                    "label_ar": "فئة الالتزام",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RiskLevel",
+                    "label_en": "Risk Level if Breached",
+                    "label_ar": "مستوى المخاطر عند عدم الالتزام",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EnforcementAuthorityEN",
+                    "label_en": "Enforcement Authority (English)",
+                    "label_ar": "جهة الإشراف/الرقابة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EnforcementAuthorityAR",
+                    "label_en": "Enforcement Authority (Arabic)",
+                    "label_ar": "جهة الإشراف/الرقابة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationSourceLibrary",
+            "module_en": "Obligation Source Library",
+            "module_ar": "مكتبة مصادر الالتزامات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationSourceLibrary",
+                "description_en": "Obligation Source Library",
+                "description_ar": "مكتبة مصادر الالتزامات",
+                "fields": [
+                  {
+                    "code": "ObligationSourceLibraryID",
+                    "label_en": "Obligation Source Library ID",
+                    "label_ar": "معرف مكتبة مصادر الالتزامات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationRequirementDetail",
+            "module_en": "Requirement Details",
+            "module_ar": "تفاصيل المتطلبات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationRequirementDetail",
+                "description_en": "Requirement Details",
+                "description_ar": "تفاصيل المتطلبات",
+                "fields": [
+                  {
+                    "code": "ObligationRequirementDetailID",
+                    "label_en": "Requirement Details ID",
+                    "label_ar": "معرف تفاصيل المتطلبات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationApplicabilityMatrix",
+            "module_en": "Obligation Applicability Matrix",
+            "module_ar": "مصفوفة انطباق الالتزامات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationApplicability",
+                "description_en": "Matrix mapping obligations to entities, processes, jurisdictions.",
+                "description_ar": "مصفوفة تربط الالتزامات بالكيانات والعمليات والاختصاصات.",
+                "fields": [
+                  {
+                    "code": "ObligationApplicabilityID",
+                    "label_en": "Obligation Applicability ID",
+                    "label_ar": "معرف انطباق الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "EntityID",
+                    "label_en": "Entity ID",
+                    "label_ar": "معرف الكيان",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "OrgUnitID",
+                    "label_en": "Org Unit ID",
+                    "label_ar": "معرف الوحدة التنظيمية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ProcessID",
+                    "label_en": "Process ID",
+                    "label_ar": "معرف العملية",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "JurisdictionEN",
+                    "label_en": "Jurisdiction (English)",
+                    "label_ar": "الاختصاص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "JurisdictionAR",
+                    "label_en": "Jurisdiction (Arabic)",
+                    "label_ar": "الاختصاص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ApplicabilityStatus",
+                    "label_en": "Applicability Status (Applicable/Not Applicable/Partial)",
+                    "label_ar": "حالة الانطباق",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RationaleEN",
+                    "label_en": "Rationale (English)",
+                    "label_ar": "المبررات (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RationaleAR",
+                    "label_en": "Rationale (Arabic)",
+                    "label_ar": "المبررات (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationImpactAssessment",
+            "module_en": "Obligation Impact Assessment",
+            "module_ar": "تقييم أثر الالتزامات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationImpactAssessment",
+                "description_en": "Assessment of the impact of each obligation on the organization.",
+                "description_ar": "تقييم أثر كل التزام على المنظمة.",
+                "fields": [
+                  {
+                    "code": "ObligationImpactAssessmentID",
+                    "label_en": "Obligation Impact Assessment ID",
+                    "label_ar": "معرف تقييم أثر الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactAreaEN",
+                    "label_en": "Impact Area (English)",
+                    "label_ar": "مجال الأثر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactAreaAR",
+                    "label_en": "Impact Area (Arabic)",
+                    "label_ar": "مجال الأثر (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactLevel",
+                    "label_en": "Impact Level",
+                    "label_ar": "مستوى الأثر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ComplexityLevel",
+                    "label_en": "Implementation Complexity Level",
+                    "label_ar": "مستوى تعقيد التنفيذ",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CostImpactEstimate",
+                    "label_en": "Cost Impact Estimate",
+                    "label_ar": "تقدير الأثر المالي",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "REG",
+        "category_en": "Laws, Regulations & Policies Mapping",
+        "category_ar": "القوانين واللوائح وربط السياسات",
+        "modules": [
+          {
+            "module_code": "LawLibrary",
+            "module_en": "Law Library",
+            "module_ar": "مكتبة القوانين",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "Law",
+                "description_en": "Library of applicable laws.",
+                "description_ar": "مكتبة القوانين المطبقة.",
+                "fields": [
+                  {
+                    "code": "LawID",
+                    "label_en": "Law ID",
+                    "label_ar": "معرف القانون",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "LawCode",
+                    "label_en": "Law Code",
+                    "label_ar": "كود القانون",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LawNameEN",
+                    "label_en": "Law Name (English)",
+                    "label_ar": "اسم القانون (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LawNameAR",
+                    "label_en": "Law Name (Arabic)",
+                    "label_ar": "اسم القانون (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "JurisdictionEN",
+                    "label_en": "Jurisdiction (English)",
+                    "label_ar": "الاختصاص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "JurisdictionAR",
+                    "label_en": "Jurisdiction (Arabic)",
+                    "label_ar": "الاختصاص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssuingAuthorityEN",
+                    "label_en": "Issuing Authority (English)",
+                    "label_ar": "الجهة المصدرة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssuingAuthorityAR",
+                    "label_en": "Issuing Authority (Arabic)",
+                    "label_ar": "الجهة المصدرة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EffectiveDate",
+                    "label_en": "Effective Date",
+                    "label_ar": "تاريخ السريان",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulationLibrary",
+            "module_en": "Regulation Library",
+            "module_ar": "مكتبة اللوائح",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "Regulation",
+                "description_en": "Library of applicable regulations.",
+                "description_ar": "مكتبة اللوائح والأنظمة المطبقة.",
+                "fields": [
+                  {
+                    "code": "RegulationID",
+                    "label_en": "Regulation ID",
+                    "label_ar": "معرف اللائحة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "RegulationCode",
+                    "label_en": "Regulation Code",
+                    "label_ar": "كود اللائحة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RegulationNameEN",
+                    "label_en": "Regulation Name (English)",
+                    "label_ar": "اسم اللائحة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RegulationNameAR",
+                    "label_en": "Regulation Name (Arabic)",
+                    "label_ar": "اسم اللائحة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedLawID",
+                    "label_en": "Related Law ID",
+                    "label_ar": "معرف القانون المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "StandardLibrary",
+            "module_en": "Standard & Code Library",
+            "module_ar": "مكتبة المعايير والأكواد",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "StandardLibrary",
+                "description_en": "Standard & Code Library",
+                "description_ar": "مكتبة المعايير والأكواد",
+                "fields": [
+                  {
+                    "code": "StandardLibraryID",
+                    "label_en": "Standard & Code Library ID",
+                    "label_ar": "معرف مكتبة المعايير والأكواد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ArticleClauseRegister",
+            "module_en": "Articles & Clauses Register",
+            "module_ar": "سجل المواد والبنود",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ArticleClause",
+                "description_en": "Articles and clauses under each law/regulation.",
+                "description_ar": "المواد والبنود تحت كل قانون/لائحة.",
+                "fields": [
+                  {
+                    "code": "ArticleClauseID",
+                    "label_en": "Article/Clause ID",
+                    "label_ar": "معرف المادة/البند",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ParentType",
+                    "label_en": "Parent Type (Law/Regulation)",
+                    "label_ar": "نوع الأصل (قانون/لائحة)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ParentID",
+                    "label_en": "Parent ID",
+                    "label_ar": "معرف الأصل",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ArticleNumber",
+                    "label_en": "Article Number",
+                    "label_ar": "رقم المادة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ClauseNumber",
+                    "label_en": "Clause Number",
+                    "label_ar": "رقم البند",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TextEN",
+                    "label_en": "Text (English)",
+                    "label_ar": "النص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TextAR",
+                    "label_en": "Text (Arabic)",
+                    "label_ar": "النص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "PolicyRequirementMapping",
+            "module_en": "Policy-Requirement Mapping",
+            "module_ar": "ربط السياسات بالمتطلبات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "PolicyRequirementMapping",
+                "description_en": "Policy-Requirement Mapping",
+                "description_ar": "ربط السياسات بالمتطلبات",
+                "fields": [
+                  {
+                    "code": "PolicyRequirementMappingID",
+                    "label_en": "Policy-Requirement Mapping ID",
+                    "label_ar": "معرف ربط السياسات بالمتطلبات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ControlRequirementMapping",
+            "module_en": "Control-Requirement Mapping",
+            "module_ar": "ربط الضوابط بالمتطلبات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ControlRequirementMapping",
+                "description_en": "Mapping between controls and compliance requirements.",
+                "description_ar": "ربط بين الضوابط والمتطلبات التنظيمية.",
+                "fields": [
+                  {
+                    "code": "ControlRequirementMappingID",
+                    "label_en": "Control-Requirement Mapping ID",
+                    "label_ar": "معرف ربط الضابط بالمتطلب",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ControlID",
+                    "label_en": "Control ID",
+                    "label_ar": "معرف الضابط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CoverageLevel",
+                    "label_en": "Coverage Level (Full/Partial/None)",
+                    "label_ar": "مستوى التغطية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "GapDescriptionEN",
+                    "label_en": "Gap Description (English)",
+                    "label_ar": "وصف الفجوة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "GapDescriptionAR",
+                    "label_en": "Gap Description (Arabic)",
+                    "label_ar": "وصف الفجوة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationControlCoverage",
+            "module_en": "Obligation Control Coverage",
+            "module_ar": "تغطية الالتزامات بالضوابط",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationControlCoverage",
+                "description_en": "Obligation Control Coverage",
+                "description_ar": "تغطية الالتزامات بالضوابط",
+                "fields": [
+                  {
+                    "code": "ObligationControlCoverageID",
+                    "label_en": "Obligation Control Coverage ID",
+                    "label_ar": "معرف تغطية الالتزامات بالضوابط",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "LIC",
+        "category_en": "Licenses, Permits & Certifications",
+        "category_ar": "التراخيص والتصاريح والشهادات",
+        "modules": [
+          {
+            "module_code": "LicenseRegister",
+            "module_en": "License Register",
+            "module_ar": "سجل التراخيص",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "License",
+                "description_en": "Register of licenses held by the organization.",
+                "description_ar": "سجل التراخيص التي تملكها المنظمة.",
+                "fields": [
+                  {
+                    "code": "LicenseID",
+                    "label_en": "License ID",
+                    "label_ar": "معرف الترخيص",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "LicenseNumber",
+                    "label_en": "License Number",
+                    "label_ar": "رقم الترخيص",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LicenseNameEN",
+                    "label_en": "License Name (English)",
+                    "label_ar": "اسم الترخيص (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LicenseNameAR",
+                    "label_en": "License Name (Arabic)",
+                    "label_ar": "اسم الترخيص (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssuingAuthorityEN",
+                    "label_en": "Issuing Authority (English)",
+                    "label_ar": "الجهة المصدرة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssuingAuthorityAR",
+                    "label_en": "Issuing Authority (Arabic)",
+                    "label_ar": "الجهة المصدرة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IssueDate",
+                    "label_en": "Issue Date",
+                    "label_ar": "تاريخ الإصدار",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "ExpiryDate",
+                    "label_en": "Expiry Date",
+                    "label_ar": "تاريخ الانتهاء",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "PermitRegister",
+            "module_en": "Permit Register",
+            "module_ar": "سجل التصاريح",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "PermitRegister",
+                "description_en": "Permit Register",
+                "description_ar": "سجل التصاريح",
+                "fields": [
+                  {
+                    "code": "PermitRegisterID",
+                    "label_en": "Permit Register ID",
+                    "label_ar": "معرف سجل التصاريح",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "CertificationRegister",
+            "module_en": "Certification Register",
+            "module_ar": "سجل الشهادات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "CertificationRegister",
+                "description_en": "Certification Register",
+                "description_ar": "سجل الشهادات",
+                "fields": [
+                  {
+                    "code": "CertificationRegisterID",
+                    "label_en": "Certification Register ID",
+                    "label_ar": "معرف سجل الشهادات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "LicenseConditionRegister",
+            "module_en": "License Conditions",
+            "module_ar": "سجل شروط الترخيص",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "LicenseCondition",
+                "description_en": "Conditions attached to licenses.",
+                "description_ar": "الشروط المرتبطة بالتراخيص.",
+                "fields": [
+                  {
+                    "code": "LicenseConditionID",
+                    "label_en": "License Condition ID",
+                    "label_ar": "معرف شرط الترخيص",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "LicenseID",
+                    "label_en": "License ID",
+                    "label_ar": "معرف الترخيص",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ConditionTextEN",
+                    "label_en": "Condition (English)",
+                    "label_ar": "الشرط (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ConditionTextAR",
+                    "label_en": "Condition (Arabic)",
+                    "label_ar": "الشرط (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IsCritical",
+                    "label_en": "Is Critical Condition?",
+                    "label_ar": "هل شرط حرج؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "LicenseRenewalSchedule",
+            "module_en": "License Renewal Schedule",
+            "module_ar": "جدول تجديد التراخيص",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "LicenseRenewalSchedule",
+                "description_en": "License Renewal Schedule",
+                "description_ar": "جدول تجديد التراخيص",
+                "fields": [
+                  {
+                    "code": "LicenseRenewalScheduleID",
+                    "label_en": "License Renewal Schedule ID",
+                    "label_ar": "معرف جدول تجديد التراخيص",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "MON",
+        "category_en": "Compliance Monitoring & Testing",
+        "category_ar": "مراقبة واختبار الالتزام",
+        "modules": [
+          {
+            "module_code": "ComplianceMonitoringPlan",
+            "module_en": "Monitoring Plan",
+            "module_ar": "خطة مراقبة الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceMonitoringPlan",
+                "description_en": "Overall plan for compliance monitoring activities.",
+                "description_ar": "الخطة العامة لأنشطة مراقبة الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceMonitoringPlanID",
+                    "label_en": "Monitoring Plan ID",
+                    "label_ar": "معرف خطة المراقبة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "PlanNameEN",
+                    "label_en": "Plan Name (English)",
+                    "label_ar": "اسم الخطة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PlanNameAR",
+                    "label_en": "Plan Name (Arabic)",
+                    "label_ar": "اسم الخطة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PlanYear",
+                    "label_en": "Plan Year",
+                    "label_ar": "سنة الخطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceMonitoringActivity",
+            "module_en": "Monitoring Activities",
+            "module_ar": "أنشطة مراقبة الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceMonitoringActivity",
+                "description_en": "Individual monitoring activities under the plan.",
+                "description_ar": "أنشطة المراقبة الفردية ضمن الخطة.",
+                "fields": [
+                  {
+                    "code": "ComplianceMonitoringActivityID",
+                    "label_en": "Monitoring Activity ID",
+                    "label_ar": "معرف نشاط المراقبة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceMonitoringPlanID",
+                    "label_en": "Monitoring Plan ID",
+                    "label_ar": "معرف خطة المراقبة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ActivityTitleEN",
+                    "label_en": "Activity Title (English)",
+                    "label_ar": "عنوان النشاط (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ActivityTitleAR",
+                    "label_en": "Activity Title (Arabic)",
+                    "label_ar": "عنوان النشاط (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Frequency",
+                    "label_en": "Frequency",
+                    "label_ar": "التكرار",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OwnerOrgUnitID",
+                    "label_en": "Owner Org Unit ID",
+                    "label_ar": "معرف الوحدة المالكة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceTestingPlan",
+            "module_en": "Testing Plan",
+            "module_ar": "خطة اختبار الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceTestingPlan",
+                "description_en": "Testing Plan",
+                "description_ar": "خطة اختبار الالتزام",
+                "fields": [
+                  {
+                    "code": "ComplianceTestingPlanID",
+                    "label_en": "Testing Plan ID",
+                    "label_ar": "معرف خطة اختبار الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceTestExecution",
+            "module_en": "Test Execution & Results",
+            "module_ar": "تنفيذ الاختبارات ونتائجها",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceTestExecution",
+                "description_en": "Execution and results of compliance tests.",
+                "description_ar": "تنفيذ ونتائج اختبارات الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceTestExecutionID",
+                    "label_en": "Test Execution ID",
+                    "label_ar": "معرف تنفيذ الاختبار",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TestNameEN",
+                    "label_en": "Test Name (English)",
+                    "label_ar": "اسم الاختبار (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TestNameAR",
+                    "label_en": "Test Name (Arabic)",
+                    "label_ar": "اسم الاختبار (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExecutionDate",
+                    "label_en": "Execution Date",
+                    "label_ar": "تاريخ التنفيذ",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "TesterUserID",
+                    "label_en": "Tester User ID",
+                    "label_ar": "معرف منفذ الاختبار",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ResultStatus",
+                    "label_en": "Result Status",
+                    "label_ar": "حالة النتيجة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExceptionCount",
+                    "label_en": "Number of Exceptions",
+                    "label_ar": "عدد الاستثناءات",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "KeyComplianceControlLibrary",
+            "module_en": "Key Compliance Controls",
+            "module_ar": "مكتبة ضوابط الالتزام الرئيسية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "KeyComplianceControlLibrary",
+                "description_en": "Key Compliance Controls",
+                "description_ar": "مكتبة ضوابط الالتزام الرئيسية",
+                "fields": [
+                  {
+                    "code": "KeyComplianceControlLibraryID",
+                    "label_en": "Key Compliance Controls ID",
+                    "label_ar": "معرف مكتبة ضوابط الالتزام الرئيسية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ContinuousControlMonitoring",
+            "module_en": "Continuous Control Monitoring",
+            "module_ar": "المراقبة المستمرة للضوابط",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ContinuousControlMonitoring",
+                "description_en": "Continuous Control Monitoring",
+                "description_ar": "المراقبة المستمرة للضوابط",
+                "fields": [
+                  {
+                    "code": "ContinuousControlMonitoringID",
+                    "label_en": "Continuous Control Monitoring ID",
+                    "label_ar": "معرف المراقبة المستمرة للضوابط",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "AUD",
+        "category_en": "Compliance Audits & Reviews",
+        "category_ar": "تدقيق ومراجعة الالتزام",
+        "modules": [
+          {
+            "module_code": "ComplianceAuditProgram",
+            "module_en": "Compliance Audit Program",
+            "module_ar": "برنامج تدقيق الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAuditProgram",
+                "description_en": "High-level compliance audit program schedule.",
+                "description_ar": "البرنامج عالي المستوى لتدقيق الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceAuditProgramID",
+                    "label_en": "Audit Program ID",
+                    "label_ar": "معرف برنامج التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ProgramYear",
+                    "label_en": "Program Year",
+                    "label_ar": "سنة البرنامج",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ProgramNameEN",
+                    "label_en": "Program Name (English)",
+                    "label_ar": "اسم البرنامج (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ProgramNameAR",
+                    "label_en": "Program Name (Arabic)",
+                    "label_ar": "اسم البرنامج (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAuditEngagement",
+            "module_en": "Audit Engagements",
+            "module_ar": "مهام التدقيق",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAuditEngagement",
+                "description_en": "Individual compliance audit engagements.",
+                "description_ar": "مهام تدقيق الالتزام الفردية.",
+                "fields": [
+                  {
+                    "code": "ComplianceAuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceAuditProgramID",
+                    "label_en": "Audit Program ID",
+                    "label_ar": "معرف برنامج التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "EngagementTitleEN",
+                    "label_en": "Engagement Title (English)",
+                    "label_ar": "عنوان المهمة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EngagementTitleAR",
+                    "label_en": "Engagement Title (Arabic)",
+                    "label_ar": "عنوان المهمة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ScopeEN",
+                    "label_en": "Scope (English)",
+                    "label_ar": "النطاق (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ScopeAR",
+                    "label_en": "Scope (Arabic)",
+                    "label_ar": "النطاق (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PlannedStartDate",
+                    "label_en": "Planned Start Date",
+                    "label_ar": "تاريخ البدء المخطط",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "PlannedEndDate",
+                    "label_en": "Planned End Date",
+                    "label_ar": "تاريخ الانتهاء المخطط",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAuditWorkpaper",
+            "module_en": "Audit Workpapers",
+            "module_ar": "أوراق عمل التدقيق",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAuditWorkpaper",
+                "description_en": "Audit Workpapers",
+                "description_ar": "أوراق عمل التدقيق",
+                "fields": [
+                  {
+                    "code": "ComplianceAuditWorkpaperID",
+                    "label_en": "Audit Workpapers ID",
+                    "label_ar": "معرف أوراق عمل التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAuditFinding",
+            "module_en": "Audit Findings",
+            "module_ar": "نتائج التدقيق",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAuditFinding",
+                "description_en": "Findings raised during compliance audits.",
+                "description_ar": "النتائج التي تثار أثناء تدقيق الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceAuditFindingID",
+                    "label_en": "Audit Finding ID",
+                    "label_ar": "معرف نتيجة التدقيق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceAuditEngagementID",
+                    "label_en": "Audit Engagement ID",
+                    "label_ar": "معرف مهمة التدقيق",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "FindingCategory",
+                    "label_en": "Finding Category",
+                    "label_ar": "فئة النتيجة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "FindingTitleEN",
+                    "label_en": "Finding Title (English)",
+                    "label_ar": "عنوان النتيجة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "FindingTitleAR",
+                    "label_en": "Finding Title (Arabic)",
+                    "label_ar": "عنوان النتيجة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Severity",
+                    "label_en": "Severity",
+                    "label_ar": "الخطورة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RecommendationEN",
+                    "label_en": "Recommendation (English)",
+                    "label_ar": "التوصية (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RecommendationAR",
+                    "label_en": "Recommendation (Arabic)",
+                    "label_ar": "التوصية (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceReviewRegister",
+            "module_en": "Compliance Reviews",
+            "module_ar": "سجل مراجعات الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceReviewRegister",
+                "description_en": "Compliance Reviews",
+                "description_ar": "سجل مراجعات الالتزام",
+                "fields": [
+                  {
+                    "code": "ComplianceReviewRegisterID",
+                    "label_en": "Compliance Reviews ID",
+                    "label_ar": "معرف سجل مراجعات الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "ISS",
+        "category_en": "Issues, Non-Conformities & Actions",
+        "category_ar": "القضايا وعدم المطابقة والإجراءات التصحيحية",
+        "modules": [
+          {
+            "module_code": "NonConformityRegister",
+            "module_en": "Non-Conformities Register",
+            "module_ar": "سجل حالات عدم المطابقة",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "NonConformity",
+                "description_en": "Register of non-conformities vs standards & policies.",
+                "description_ar": "سجل حالات عدم المطابقة مع المعايير والسياسات.",
+                "fields": [
+                  {
+                    "code": "NonConformityID",
+                    "label_en": "Non-Conformity ID",
+                    "label_ar": "معرف حالة عدم المطابقة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "SourceType",
+                    "label_en": "Source Type (Audit/Inspection/Test/etc.)",
+                    "label_ar": "نوع المصدر",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceID",
+                    "label_en": "Source ID",
+                    "label_ar": "معرف المصدر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RelatedComplianceObligationID",
+                    "label_en": "Related Obligation ID",
+                    "label_ar": "معرف الالتزام المرتبط",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Severity",
+                    "label_en": "Severity",
+                    "label_ar": "الخطورة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DetectionDate",
+                    "label_en": "Detection Date",
+                    "label_ar": "تاريخ الاكتشاف",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceIssueRegister",
+            "module_en": "Compliance Issues Register",
+            "module_ar": "سجل قضايا الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceIssueRegister",
+                "description_en": "Compliance Issues Register",
+                "description_ar": "سجل قضايا الالتزام",
+                "fields": [
+                  {
+                    "code": "ComplianceIssueRegisterID",
+                    "label_en": "Compliance Issues Register ID",
+                    "label_ar": "معرف سجل قضايا الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "CorrectiveActionRegister",
+            "module_en": "Corrective Actions",
+            "module_ar": "سجل الإجراءات التصحيحية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "CorrectiveAction",
+                "description_en": "Corrective actions to address issues and non-conformities.",
+                "description_ar": "الإجراءات التصحيحية لمعالجة القضايا وحالات عدم المطابقة.",
+                "fields": [
+                  {
+                    "code": "CorrectiveActionID",
+                    "label_en": "Corrective Action ID",
+                    "label_ar": "معرف الإجراء التصحيحي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "SourceType",
+                    "label_en": "Source Type (NC/Finding/Issue)",
+                    "label_ar": "نوع المصدر",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceID",
+                    "label_en": "Source ID",
+                    "label_ar": "معرف المصدر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionTitleEN",
+                    "label_en": "Action Title (English)",
+                    "label_ar": "عنوان الإجراء (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionTitleAR",
+                    "label_en": "Action Title (Arabic)",
+                    "label_ar": "عنوان الإجراء (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ActionOwnerUserID",
+                    "label_en": "Action Owner User ID",
+                    "label_ar": "معرف مسؤول الإجراء",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "TargetCompletionDate",
+                    "label_en": "Target Completion Date",
+                    "label_ar": "تاريخ الإكمال المستهدف",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "CompletionPercent",
+                    "label_en": "Completion %",
+                    "label_ar": "نسبة الإنجاز",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "PreventiveActionRegister",
+            "module_en": "Preventive Actions",
+            "module_ar": "سجل الإجراءات الوقائية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "PreventiveActionRegister",
+                "description_en": "Preventive Actions",
+                "description_ar": "سجل الإجراءات الوقائية",
+                "fields": [
+                  {
+                    "code": "PreventiveActionRegisterID",
+                    "label_en": "Preventive Actions ID",
+                    "label_ar": "معرف سجل الإجراءات الوقائية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RootCauseAnalysisRegister",
+            "module_en": "Root Cause Analysis",
+            "module_ar": "سجل تحليل الأسباب الجذرية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RootCauseAnalysisRegister",
+                "description_en": "Root Cause Analysis",
+                "description_ar": "سجل تحليل الأسباب الجذرية",
+                "fields": [
+                  {
+                    "code": "RootCauseAnalysisRegisterID",
+                    "label_en": "Root Cause Analysis ID",
+                    "label_ar": "معرف سجل تحليل الأسباب الجذرية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceExceptionWaiverRegister",
+            "module_en": "Exceptions & Waivers",
+            "module_ar": "سجل الاستثناءات والتجاوزات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceExceptionWaiver",
+                "description_en": "Approved exceptions or waivers against compliance requirements.",
+                "description_ar": "الاستثناءات أو التجاوزات المعتمدة ضد المتطلبات.",
+                "fields": [
+                  {
+                    "code": "ComplianceExceptionWaiverID",
+                    "label_en": "Exception/Waiver ID",
+                    "label_ar": "معرف الاستثناء/التجاوز",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RequestingOrgUnitID",
+                    "label_en": "Requesting Org Unit ID",
+                    "label_ar": "معرف الوحدة الطالبة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ReasonEN",
+                    "label_en": "Reason (English)",
+                    "label_ar": "السبب (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ReasonAR",
+                    "label_en": "Reason (Arabic)",
+                    "label_ar": "السبب (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ApprovalStatus",
+                    "label_en": "Approval Status",
+                    "label_ar": "حالة الموافقة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ExpiryDate",
+                    "label_en": "Expiry Date",
+                    "label_ar": "تاريخ الانتهاء",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "TRN",
+        "category_en": "Training, Awareness & Declarations",
+        "category_ar": "التدريب والتوعية والتصريحات",
+        "modules": [
+          {
+            "module_code": "ComplianceTrainingCatalog",
+            "module_en": "Training Catalog",
+            "module_ar": "كتالوج التدريب على الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceTrainingCourse",
+                "description_en": "Catalog of compliance-related training courses.",
+                "description_ar": "كتالوج الدورات التدريبية المتعلقة بالالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceTrainingCourseID",
+                    "label_en": "Training Course ID",
+                    "label_ar": "معرف دورة التدريب",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CourseCode",
+                    "label_en": "Course Code",
+                    "label_ar": "كود الدورة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CourseTitleEN",
+                    "label_en": "Course Title (English)",
+                    "label_ar": "عنوان الدورة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CourseTitleAR",
+                    "label_en": "Course Title (Arabic)",
+                    "label_ar": "عنوان الدورة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DurationHours",
+                    "label_en": "Duration (hours)",
+                    "label_ar": "المدة (ساعات)",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceTrainingEvent",
+            "module_en": "Training Events",
+            "module_ar": "فعاليات التدريب على الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceTrainingEvent",
+                "description_en": "Scheduled training events for compliance topics.",
+                "description_ar": "فعاليات تدريبية مجدولة لمواضيع الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceTrainingEventID",
+                    "label_en": "Training Event ID",
+                    "label_ar": "معرف فعالية التدريب",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceTrainingCourseID",
+                    "label_en": "Training Course ID",
+                    "label_ar": "معرف دورة التدريب",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "EventDate",
+                    "label_en": "Event Date",
+                    "label_ar": "تاريخ الفعالية",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "LocationEN",
+                    "label_en": "Location (English)",
+                    "label_ar": "الموقع (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LocationAR",
+                    "label_en": "Location (Arabic)",
+                    "label_ar": "الموقع (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TrainerUserID",
+                    "label_en": "Trainer User ID",
+                    "label_ar": "معرف المدرب",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "TrainingAttendanceRegister",
+            "module_en": "Training Attendance Register",
+            "module_ar": "سجل حضور التدريب",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceTrainingAttendance",
+                "description_en": "Attendance for compliance training events.",
+                "description_ar": "سجلات الحضور لفعاليات التدريب على الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceTrainingAttendanceID",
+                    "label_en": "Training Attendance ID",
+                    "label_ar": "معرف حضور التدريب",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceTrainingEventID",
+                    "label_en": "Training Event ID",
+                    "label_ar": "معرف فعالية التدريب",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UserID",
+                    "label_en": "User ID",
+                    "label_ar": "معرف المستخدم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AttendanceStatus",
+                    "label_en": "Attendance Status",
+                    "label_ar": "حالة الحضور",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAwarenessCampaign",
+            "module_en": "Awareness Campaigns",
+            "module_ar": "حملات التوعية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAwarenessCampaign",
+                "description_en": "Awareness Campaigns",
+                "description_ar": "حملات التوعية",
+                "fields": [
+                  {
+                    "code": "ComplianceAwarenessCampaignID",
+                    "label_en": "Awareness Campaigns ID",
+                    "label_ar": "معرف حملات التوعية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceDeclarationRegister",
+            "module_en": "Compliance Declarations",
+            "module_ar": "سجل التصريحات",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceDeclaration",
+                "description_en": "Declarations by staff confirming awareness/commitment to compliance.",
+                "description_ar": "تصريحات الموظفين التي تؤكد الوعي والالتزام بالمتطلبات.",
+                "fields": [
+                  {
+                    "code": "ComplianceDeclarationID",
+                    "label_en": "Compliance Declaration ID",
+                    "label_ar": "معرف تصريح الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "UserID",
+                    "label_en": "User ID",
+                    "label_ar": "معرف المستخدم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationType",
+                    "label_en": "Declaration Type",
+                    "label_ar": "نوع التصريح",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationDate",
+                    "label_en": "Declaration Date",
+                    "label_ar": "تاريخ التصريح",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationTextEN",
+                    "label_en": "Declaration Text (English)",
+                    "label_ar": "نص التصريح (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DeclarationTextAR",
+                    "label_en": "Declaration Text (Arabic)",
+                    "label_ar": "نص التصريح (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ConflictOfInterestDeclaration",
+            "module_en": "Conflict of Interest Declarations",
+            "module_ar": "تصريحات تعارض المصالح",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ConflictOfInterestDeclaration",
+                "description_en": "Annual declarations of conflicts of interest (compliance view).",
+                "description_ar": "التصريحات السنوية لتعارض المصالح (من منظور الالتزام).",
+                "fields": [
+                  {
+                    "code": "ConflictOfInterestDeclarationID",
+                    "label_en": "Conflict of Interest Declaration ID",
+                    "label_ar": "معرف تصريح تعارض المصالح",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "UserID",
+                    "label_en": "User ID",
+                    "label_ar": "معرف المستخدم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "Period",
+                    "label_en": "Period",
+                    "label_ar": "الفترة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "HasConflict",
+                    "label_en": "Has Conflict?",
+                    "label_ar": "هل يوجد تعارض؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "DetailsEN",
+                    "label_en": "Details (English)",
+                    "label_ar": "التفاصيل (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DetailsAR",
+                    "label_en": "Details (Arabic)",
+                    "label_ar": "التفاصيل (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "CodeOfConductAcknowledgement",
+            "module_en": "Code of Conduct Acknowledgement",
+            "module_ar": "إقرار مدونة السلوك",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "CodeOfConductAcknowledgement",
+                "description_en": "Acknowledgements of the code of conduct by staff.",
+                "description_ar": "إقرارات الموظفين بمدونة السلوك.",
+                "fields": [
+                  {
+                    "code": "CodeOfConductAcknowledgementID",
+                    "label_en": "Code of Conduct Ack ID",
+                    "label_ar": "معرف إقرار مدونة السلوك",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "UserID",
+                    "label_en": "User ID",
+                    "label_ar": "معرف المستخدم",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "AcknowledgementDate",
+                    "label_en": "Acknowledgement Date",
+                    "label_ar": "تاريخ الإقرار",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "VersionNumber",
+                    "label_en": "Code Version Number",
+                    "label_ar": "رقم إصدار المدونة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "RCM",
+        "category_en": "Regulatory Change Management",
+        "category_ar": "إدارة التغيير التنظيمي",
+        "modules": [
+          {
+            "module_code": "RegulatoryChangeRegister",
+            "module_en": "Regulatory Change Register",
+            "module_ar": "سجل التغييرات التنظيمية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryChange",
+                "description_en": "Register of regulatory changes impacting the organization.",
+                "description_ar": "سجل التغييرات التنظيمية التي تؤثر على المنظمة.",
+                "fields": [
+                  {
+                    "code": "RegulatoryChangeID",
+                    "label_en": "Regulatory Change ID",
+                    "label_ar": "معرف التغيير التنظيمي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ChangeRef",
+                    "label_en": "Change Reference",
+                    "label_ar": "مرجع التغيير",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceEN",
+                    "label_en": "Source (English)",
+                    "label_ar": "المصدر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "SourceAR",
+                    "label_en": "Source (Arabic)",
+                    "label_ar": "المصدر (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "AnnouncementDate",
+                    "label_en": "Announcement Date",
+                    "label_ar": "تاريخ الإعلان",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "EffectiveDate",
+                    "label_en": "Effective Date",
+                    "label_ar": "تاريخ السريان",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "HighLevelSummaryEN",
+                    "label_en": "High Level Summary (English)",
+                    "label_ar": "ملخص عالي المستوى (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "HighLevelSummaryAR",
+                    "label_en": "High Level Summary (Arabic)",
+                    "label_ar": "ملخص عالي المستوى (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulatoryChangeImpactAssessment",
+            "module_en": "Change Impact Assessment",
+            "module_ar": "تقييم أثر التغيير التنظيمي",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryChangeImpactAssessment",
+                "description_en": "Assessment of impact for each regulatory change.",
+                "description_ar": "تقييم أثر كل تغيير تنظيمي.",
+                "fields": [
+                  {
+                    "code": "RegulatoryChangeImpactAssessmentID",
+                    "label_en": "Change Impact Assessment ID",
+                    "label_ar": "معرف تقييم أثر التغيير",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "RegulatoryChangeID",
+                    "label_en": "Regulatory Change ID",
+                    "label_ar": "معرف التغيير التنظيمي",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactAreaEN",
+                    "label_en": "Impact Area (English)",
+                    "label_ar": "مجال الأثر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactAreaAR",
+                    "label_en": "Impact Area (Arabic)",
+                    "label_ar": "مجال الأثر (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ImpactLevel",
+                    "label_en": "Impact Level",
+                    "label_ar": "مستوى الأثر",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RequiredActionsEN",
+                    "label_en": "Required Actions (English)",
+                    "label_ar": "الإجراءات المطلوبة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RequiredActionsAR",
+                    "label_en": "Required Actions (Arabic)",
+                    "label_ar": "الإجراءات المطلوبة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulatoryChangeActionPlan",
+            "module_en": "Change Action Plans",
+            "module_ar": "خطط الإجراءات للتغيير",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryChangeActionPlan",
+                "description_en": "Change Action Plans",
+                "description_ar": "خطط الإجراءات للتغيير",
+                "fields": [
+                  {
+                    "code": "RegulatoryChangeActionPlanID",
+                    "label_en": "Change Action Plans ID",
+                    "label_ar": "معرف خطط الإجراءات للتغيير",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulatoryWatchList",
+            "module_en": "Regulatory Watch List",
+            "module_ar": "قائمة مراقبة التغييرات المحتملة",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryWatchList",
+                "description_en": "Regulatory Watch List",
+                "description_ar": "قائمة مراقبة التغييرات المحتملة",
+                "fields": [
+                  {
+                    "code": "RegulatoryWatchListID",
+                    "label_en": "Regulatory Watch List ID",
+                    "label_ar": "معرف قائمة مراقبة التغييرات المحتملة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "RPT",
+        "category_en": "Compliance Reporting & Dashboards",
+        "category_ar": "تقارير ولوحات متابعة الالتزام",
+        "modules": [
+          {
+            "module_code": "ComplianceKPIRegister",
+            "module_en": "Compliance KPI Register",
+            "module_ar": "سجل مؤشرات أداء الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceKPI",
+                "description_en": "Compliance-specific KPIs (e.g. number of breaches, % coverage).",
+                "description_ar": "مؤشرات أداء خاصة بالالتزام (مثل عدد حالات عدم الالتزام، نسبة التغطية).",
+                "fields": [
+                  {
+                    "code": "ComplianceKPIID",
+                    "label_en": "Compliance KPI ID",
+                    "label_ar": "معرف مؤشر أداء الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "KPICode",
+                    "label_en": "KPI Code",
+                    "label_ar": "كود المؤشر",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KPINameEN",
+                    "label_en": "KPI Name (English)",
+                    "label_ar": "اسم المؤشر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "KPINameAR",
+                    "label_en": "KPI Name (Arabic)",
+                    "label_ar": "اسم المؤشر (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TargetValue",
+                    "label_en": "Target Value",
+                    "label_ar": "القيمة المستهدفة",
+                    "data_type": "float",
+                    "required": false
+                  },
+                  {
+                    "code": "Unit",
+                    "label_en": "Unit",
+                    "label_ar": "الوحدة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceDashboardConfig",
+            "module_en": "Compliance Dashboard Config",
+            "module_ar": "تهيئة لوحة مؤشرات الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceDashboardConfig",
+                "description_en": "Compliance Dashboard Config",
+                "description_ar": "تهيئة لوحة مؤشرات الالتزام",
+                "fields": [
+                  {
+                    "code": "ComplianceDashboardConfigID",
+                    "label_en": "Compliance Dashboard Config ID",
+                    "label_ar": "معرف تهيئة لوحة مؤشرات الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulatoryReportingCalendar",
+            "module_en": "Regulatory Reporting Calendar",
+            "module_ar": "تقويم التقارير التنظيمية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryReportingCalendar",
+                "description_en": "Calendar of regulatory reports and due dates.",
+                "description_ar": "تقويم التقارير التنظيمية والتواريخ المستحقة.",
+                "fields": [
+                  {
+                    "code": "RegulatoryReportingCalendarID",
+                    "label_en": "Reporting Calendar ID",
+                    "label_ar": "معرف تقويم التقارير",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ReportNameEN",
+                    "label_en": "Report Name (English)",
+                    "label_ar": "اسم التقرير (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ReportNameAR",
+                    "label_en": "Report Name (Arabic)",
+                    "label_ar": "اسم التقرير (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Frequency",
+                    "label_en": "Frequency",
+                    "label_ar": "التكرار",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "ResponsibleOrgUnitID",
+                    "label_en": "Responsible Org Unit ID",
+                    "label_ar": "معرف الوحدة المسؤولة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RegulatoryReportSubmission",
+            "module_en": "Regulatory Report Submission",
+            "module_ar": "تقديم التقارير التنظيمية",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "RegulatoryReportSubmission",
+                "description_en": "Actual submissions against the regulatory reporting calendar.",
+                "description_ar": "عمليات تقديم التقارير التنظيمية وفق التقويم.",
+                "fields": [
+                  {
+                    "code": "RegulatoryReportSubmissionID",
+                    "label_en": "Report Submission ID",
+                    "label_ar": "معرف تقديم التقرير",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "RegulatoryReportingCalendarID",
+                    "label_en": "Reporting Calendar ID",
+                    "label_ar": "معرف تقويم التقرير",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "SubmissionDate",
+                    "label_en": "Submission Date",
+                    "label_ar": "تاريخ التقديم",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "SubmittedByUserID",
+                    "label_en": "Submitted By User ID",
+                    "label_ar": "معرف مقدم التقرير",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "OnTimeYN",
+                    "label_en": "Submitted On Time?",
+                    "label_ar": "هل تم التقديم في الوقت المحدد؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAttestationCycle",
+            "module_en": "Compliance Attestation Cycle",
+            "module_ar": "دورات إقرارات الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceAttestationCycle",
+                "description_en": "Cycles of attestations (e.g. quarterly compliance confirmations).",
+                "description_ar": "دورات الإقرارات (مثل إقرارات الالتزام ربع السنوية).",
+                "fields": [
+                  {
+                    "code": "ComplianceAttestationCycleID",
+                    "label_en": "Attestation Cycle ID",
+                    "label_ar": "معرف دورة الإقرارات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "CycleNameEN",
+                    "label_en": "Cycle Name (English)",
+                    "label_ar": "اسم الدورة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "CycleNameAR",
+                    "label_en": "Cycle Name (Arabic)",
+                    "label_ar": "اسم الدورة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "PeriodStart",
+                    "label_en": "Period Start",
+                    "label_ar": "بداية الفترة",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "PeriodEnd",
+                    "label_en": "Period End",
+                    "label_ar": "نهاية الفترة",
+                    "data_type": "date",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "EVD",
+        "category_en": "Compliance Evidence & Documentation",
+        "category_ar": "أدلة ووثائق الالتزام",
+        "modules": [
+          {
+            "module_code": "ComplianceEvidenceRegister",
+            "module_en": "Compliance Evidence Register",
+            "module_ar": "سجل أدلة الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceEvidence",
+                "description_en": "Evidence items used to demonstrate compliance.",
+                "description_ar": "عناصر الأدلة المستخدمة لإثبات الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceEvidenceID",
+                    "label_en": "Compliance Evidence ID",
+                    "label_ar": "معرف دليل الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "EvidenceCode",
+                    "label_en": "Evidence Code",
+                    "label_ar": "كود الدليل",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EvidenceTitleEN",
+                    "label_en": "Evidence Title (English)",
+                    "label_ar": "عنوان الدليل (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EvidenceTitleAR",
+                    "label_en": "Evidence Title (Arabic)",
+                    "label_ar": "عنوان الدليل (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "EvidenceType",
+                    "label_en": "Evidence Type",
+                    "label_ar": "نوع الدليل",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StorageLocationEN",
+                    "label_en": "Storage Location (English)",
+                    "label_ar": "مكان التخزين (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StorageLocationAR",
+                    "label_en": "Storage Location (Arabic)",
+                    "label_ar": "مكان التخزين (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ObligationEvidenceLink",
+            "module_en": "Obligation-Evidence Links",
+            "module_ar": "ربط الالتزامات بالأدلة",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ObligationEvidenceLink",
+                "description_en": "Links between obligations and evidence items.",
+                "description_ar": "روابط بين الالتزامات وعناصر الأدلة.",
+                "fields": [
+                  {
+                    "code": "ObligationEvidenceLinkID",
+                    "label_en": "Obligation-Evidence Link ID",
+                    "label_ar": "معرف رابط الالتزام بالدليل",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "ComplianceObligationID",
+                    "label_en": "Compliance Obligation ID",
+                    "label_ar": "معرف الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ComplianceEvidenceID",
+                    "label_en": "Compliance Evidence ID",
+                    "label_ar": "معرف دليل الالتزام",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CoverageLevel",
+                    "label_en": "Coverage Level",
+                    "label_ar": "مستوى التغطية",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceDocumentRegister",
+            "module_en": "Compliance Document Register",
+            "module_ar": "سجل وثائق الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceDocument",
+                "description_en": "Documents specific to compliance (guides, manuals, etc.).",
+                "description_ar": "وثائق خاصة بالالتزام (أدلة، كتيبات، إلخ).",
+                "fields": [
+                  {
+                    "code": "ComplianceDocumentID",
+                    "label_en": "Compliance Document ID",
+                    "label_ar": "معرف وثيقة الالتزام",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "DocumentCode",
+                    "label_en": "Document Code",
+                    "label_ar": "كود الوثيقة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DocumentTitleEN",
+                    "label_en": "Document Title (English)",
+                    "label_ar": "عنوان الوثيقة (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DocumentTitleAR",
+                    "label_en": "Document Title (Arabic)",
+                    "label_ar": "عنوان الوثيقة (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DocumentType",
+                    "label_en": "Document Type",
+                    "label_ar": "نوع الوثيقة",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "OwnerOrgUnitID",
+                    "label_en": "Owner Org Unit ID",
+                    "label_ar": "معرف الوحدة المالكة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceRecordRetentionSchedule",
+            "module_en": "Compliance Record Retention",
+            "module_ar": "جدول الاحتفاظ بسجلات الالتزام",
+            "related_iso": [
+              "ISO 37301"
+            ],
+            "tables": [
+              {
+                "table_name": "ComplianceRecordRetentionSchedule",
+                "description_en": "Retention rules for compliance-related records.",
+                "description_ar": "قواعد الاحتفاظ بسجلات الالتزام.",
+                "fields": [
+                  {
+                    "code": "ComplianceRecordRetentionScheduleID",
+                    "label_en": "Record Retention Schedule ID",
+                    "label_ar": "معرف جدول الاحتفاظ بالسجلات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "RecordTypeEN",
+                    "label_en": "Record Type (English)",
+                    "label_ar": "نوع السجل (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RecordTypeAR",
+                    "label_en": "Record Type (Arabic)",
+                    "label_ar": "نوع السجل (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RetentionPeriodYears",
+                    "label_en": "Retention Period (years)",
+                    "label_ar": "فترة الاحتفاظ (سنوات)",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "LegalRequirementEN",
+                    "label_en": "Legal Requirement (English)",
+                    "label_ar": "المتطلبات القانونية (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "LegalRequirementAR",
+                    "label_en": "Legal Requirement (Arabic)",
+                    "label_ar": "المتطلبات القانونية (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "module_count": 54,
+    "table_count": 54
+  }
+}
