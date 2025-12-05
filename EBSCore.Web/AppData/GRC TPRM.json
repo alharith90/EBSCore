@@ -1,0 +1,3159 @@
+{
+  "pillar": {
+    "pillar_code": "TPRM",
+    "pillar_en": "Third-Party & Vendor Risk Management",
+    "pillar_ar": "إدارة مخاطر الطرف الثالث والموردين",
+    "related_standards": [
+      "ISO 27036",
+      "ISO 9001 Supplier Management",
+      "NIST SP 800-171",
+      "NIST CSF PR.3 Supply Chain",
+      "SOC2 Vendor Requirements",
+      "SIG Questionnaire",
+      "Shared Assessments"
+    ],
+    "categories": [
+      {
+        "category_code": "ONB",
+        "category_en": "Vendor Onboarding",
+        "category_ar": "تشغيل الموردين",
+        "modules": [
+          {
+            "module_code": "VendorRegister",
+            "module_en": "Vendor Master Register",
+            "module_ar": "السجل الرئيسي للموردين",
+            "tables": [
+              {
+                "table_name": "Vendor",
+                "description_en": "Master vendor record.",
+                "description_ar": "السجل الرئيسي للمورد.",
+                "fields": [
+                  {
+                    "code": "VendorID",
+                    "label_en": "Vendor ID",
+                    "label_ar": "معرف المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "VendorNameEN",
+                    "label_en": "Vendor Name (English)",
+                    "label_ar": "اسم المورد (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "VendorNameAR",
+                    "label_en": "Vendor Name (Arabic)",
+                    "label_ar": "اسم المورد (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "VendorType",
+                    "label_en": "Vendor Type",
+                    "label_ar": "نوع المورد",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "VendorCategory",
+                    "label_en": "Vendor Category",
+                    "label_ar": "فئة المورد",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "Country",
+                    "label_en": "Country",
+                    "label_ar": "البلد",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RegistrationNumber",
+                    "label_en": "Registration Number",
+                    "label_ar": "رقم التسجيل",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "IsCritical",
+                    "label_en": "Is Critical Vendor?",
+                    "label_ar": "هل المورد حرج؟",
+                    "data_type": "bool",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorProfile",
+            "module_en": "Vendor Profile",
+            "module_ar": "ملف تعريف المورد",
+            "tables": [
+              {
+                "table_name": "VendorProfile",
+                "description_en": "Vendor Profile",
+                "description_ar": "ملف تعريف المورد",
+                "fields": [
+                  {
+                    "code": "VendorProfileID",
+                    "label_en": "Vendor Profile ID",
+                    "label_ar": "معرف ملف تعريف المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorOwner",
+            "module_en": "Business & Technical Owner Mapping",
+            "module_ar": "تعيين المالكين التجاريين والفنيين",
+            "tables": [
+              {
+                "table_name": "VendorOwner",
+                "description_en": "Business & Technical Owner Mapping",
+                "description_ar": "تعيين المالكين التجاريين والفنيين",
+                "fields": [
+                  {
+                    "code": "VendorOwnerID",
+                    "label_en": "Business & Technical Owner Mapping ID",
+                    "label_ar": "معرف تعيين المالكين التجاريين والفنيين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "DD",
+        "category_en": "Due Diligence & Assessments",
+        "category_ar": "العناية الواجبة والتقييمات",
+        "modules": [
+          {
+            "module_code": "SecurityAssessment",
+            "module_en": "Security Due Diligence Assessment",
+            "module_ar": "تقييم العناية الواجبة الأمنية",
+            "tables": [
+              {
+                "table_name": "SecurityAssessment",
+                "description_en": "Security Due Diligence Assessment",
+                "description_ar": "تقييم العناية الواجبة الأمنية",
+                "fields": [
+                  {
+                    "code": "SecurityAssessmentID",
+                    "label_en": "Security Due Diligence Assessment ID",
+                    "label_ar": "معرف تقييم العناية الواجبة الأمنية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ComplianceAssessment",
+            "module_en": "Compliance Due Diligence",
+            "module_ar": "تقييم امتثال الطرف الثالث",
+            "tables": [
+              {
+                "table_name": "ComplianceAssessment",
+                "description_en": "Compliance Due Diligence",
+                "description_ar": "تقييم امتثال الطرف الثالث",
+                "fields": [
+                  {
+                    "code": "ComplianceAssessmentID",
+                    "label_en": "Compliance Due Diligence ID",
+                    "label_ar": "معرف تقييم امتثال الطرف الثالث",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "PrivacyAssessment",
+            "module_en": "Privacy & Data Protection Assessment",
+            "module_ar": "تقييم الخصوصية وحماية البيانات",
+            "tables": [
+              {
+                "table_name": "PrivacyAssessment",
+                "description_en": "Privacy & Data Protection Assessment",
+                "description_ar": "تقييم الخصوصية وحماية البيانات",
+                "fields": [
+                  {
+                    "code": "PrivacyAssessmentID",
+                    "label_en": "Privacy & Data Protection Assessment ID",
+                    "label_ar": "معرف تقييم الخصوصية وحماية البيانات",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "CON",
+        "category_en": "Contracts & SLAs",
+        "category_ar": "العقود واتفاقيات مستوى الخدمة",
+        "modules": [
+          {
+            "module_code": "ContractRegister",
+            "module_en": "Contract Register",
+            "module_ar": "سجل العقود",
+            "tables": [
+              {
+                "table_name": "ContractRegister",
+                "description_en": "Contract Register",
+                "description_ar": "سجل العقود",
+                "fields": [
+                  {
+                    "code": "ContractRegisterID",
+                    "label_en": "Contract Register ID",
+                    "label_ar": "معرف سجل العقود",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "SlaRegister",
+            "module_en": "SLA Register",
+            "module_ar": "سجل اتفاقيات مستوى الخدمة",
+            "tables": [
+              {
+                "table_name": "SlaRegister",
+                "description_en": "SLA Register",
+                "description_ar": "سجل اتفاقيات مستوى الخدمة",
+                "fields": [
+                  {
+                    "code": "SlaRegisterID",
+                    "label_en": "SLA Register ID",
+                    "label_ar": "معرف سجل اتفاقيات مستوى الخدمة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ContractObligation",
+            "module_en": "Contractual Obligations",
+            "module_ar": "الالتزامات التعاقدية",
+            "tables": [
+              {
+                "table_name": "ContractObligation",
+                "description_en": "Contractual Obligations",
+                "description_ar": "الالتزامات التعاقدية",
+                "fields": [
+                  {
+                    "code": "ContractObligationID",
+                    "label_en": "Contractual Obligations ID",
+                    "label_ar": "معرف الالتزامات التعاقدية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "RISK",
+        "category_en": "Vendor Risk Register",
+        "category_ar": "سجل مخاطر الموردين",
+        "modules": [
+          {
+            "module_code": "VendorRiskRegister",
+            "module_en": "Vendor Risk Register",
+            "module_ar": "سجل مخاطر المورد",
+            "tables": [
+              {
+                "table_name": "VendorRisk",
+                "description_en": "Vendor-related risks.",
+                "description_ar": "مخاطر المورد.",
+                "fields": [
+                  {
+                    "code": "VendorRiskID",
+                    "label_en": "Vendor Risk ID",
+                    "label_ar": "معرف مخاطر المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "VendorID",
+                    "label_en": "Vendor ID",
+                    "label_ar": "معرف المورد",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "RiskCategory",
+                    "label_en": "Risk Category",
+                    "label_ar": "فئة الخطر",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "RiskDescriptionEN",
+                    "label_en": "Risk Description (EN)",
+                    "label_ar": "وصف الخطر (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "InherentImpact",
+                    "label_en": "Inherent Impact",
+                    "label_ar": "الأثر المتأصل",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "ResidualImpact",
+                    "label_en": "Residual Impact",
+                    "label_ar": "الأثر المتبقي",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorRiskAssessment",
+            "module_en": "Vendor Risk Assessment",
+            "module_ar": "تقييم مخاطر المورد",
+            "tables": [
+              {
+                "table_name": "VendorRiskAssessment",
+                "description_en": "Vendor Risk Assessment",
+                "description_ar": "تقييم مخاطر المورد",
+                "fields": [
+                  {
+                    "code": "VendorRiskAssessmentID",
+                    "label_en": "Vendor Risk Assessment ID",
+                    "label_ar": "معرف تقييم مخاطر المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RiskTreatment",
+            "module_en": "Vendor Risk Treatment",
+            "module_ar": "معالجة مخاطر المورد",
+            "tables": [
+              {
+                "table_name": "RiskTreatment",
+                "description_en": "Vendor Risk Treatment",
+                "description_ar": "معالجة مخاطر المورد",
+                "fields": [
+                  {
+                    "code": "RiskTreatmentID",
+                    "label_en": "Vendor Risk Treatment ID",
+                    "label_ar": "معرف معالجة مخاطر المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "MON",
+        "category_en": "Performance & SLA Monitoring",
+        "category_ar": "مراقبة الأداء واتفاقيات SLA",
+        "modules": [
+          {
+            "module_code": "SlaPerformance",
+            "module_en": "SLA Performance & KPI Tracking",
+            "module_ar": "أداء SLA وتتبع مؤشرات الأداء",
+            "tables": [
+              {
+                "table_name": "SlaPerformance",
+                "description_en": "SLA Performance & KPI Tracking",
+                "description_ar": "أداء SLA وتتبع مؤشرات الأداء",
+                "fields": [
+                  {
+                    "code": "SlaPerformanceID",
+                    "label_en": "SLA Performance & KPI Tracking ID",
+                    "label_ar": "معرف أداء SLA وتتبع مؤشرات الأداء",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ServiceIssue",
+            "module_en": "Service Issues",
+            "module_ar": "مشاكل الخدمة",
+            "tables": [
+              {
+                "table_name": "ServiceIssue",
+                "description_en": "Service Issues",
+                "description_ar": "مشاكل الخدمة",
+                "fields": [
+                  {
+                    "code": "ServiceIssueID",
+                    "label_en": "Service Issues ID",
+                    "label_ar": "معرف مشاكل الخدمة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "ServiceAvailability",
+            "module_en": "Service Availability Monitoring",
+            "module_ar": "مراقبة توفر الخدمة",
+            "tables": [
+              {
+                "table_name": "ServiceAvailability",
+                "description_en": "Service Availability Monitoring",
+                "description_ar": "مراقبة توفر الخدمة",
+                "fields": [
+                  {
+                    "code": "ServiceAvailabilityID",
+                    "label_en": "Service Availability Monitoring ID",
+                    "label_ar": "معرف مراقبة توفر الخدمة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "SEC",
+        "category_en": "Security & Compliance Requirements",
+        "category_ar": "متطلبات الأمن والامتثال",
+        "modules": [
+          {
+            "module_code": "SecurityRequirement",
+            "module_en": "Security Requirement Register",
+            "module_ar": "سجل متطلبات الأمن",
+            "tables": [
+              {
+                "table_name": "SecurityRequirement",
+                "description_en": "Security Requirement Register",
+                "description_ar": "سجل متطلبات الأمن",
+                "fields": [
+                  {
+                    "code": "SecurityRequirementID",
+                    "label_en": "Security Requirement Register ID",
+                    "label_ar": "معرف سجل متطلبات الأمن",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "SecurityControlMapping",
+            "module_en": "Vendor Control Mapping",
+            "module_ar": "ربط ضوابط المورد",
+            "tables": [
+              {
+                "table_name": "SecurityControlMapping",
+                "description_en": "Vendor Control Mapping",
+                "description_ar": "ربط ضوابط المورد",
+                "fields": [
+                  {
+                    "code": "SecurityControlMappingID",
+                    "label_en": "Vendor Control Mapping ID",
+                    "label_ar": "معرف ربط ضوابط المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AssessmentEvidence",
+            "module_en": "Assessment Evidence",
+            "module_ar": "أدلة التقييم",
+            "tables": [
+              {
+                "table_name": "AssessmentEvidence",
+                "description_en": "Assessment Evidence",
+                "description_ar": "أدلة التقييم",
+                "fields": [
+                  {
+                    "code": "AssessmentEvidenceID",
+                    "label_en": "Assessment Evidence ID",
+                    "label_ar": "معرف أدلة التقييم",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "FIN",
+        "category_en": "Financial Evaluation",
+        "category_ar": "التقييم المالي",
+        "modules": [
+          {
+            "module_code": "FinancialStatement",
+            "module_en": "Financial Statement Review",
+            "module_ar": "مراجعة البيانات المالية",
+            "tables": [
+              {
+                "table_name": "FinancialStatement",
+                "description_en": "Financial Statement Review",
+                "description_ar": "مراجعة البيانات المالية",
+                "fields": [
+                  {
+                    "code": "FinancialStatementID",
+                    "label_en": "Financial Statement Review ID",
+                    "label_ar": "معرف مراجعة البيانات المالية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "CreditScore",
+            "module_en": "Credit Score",
+            "module_ar": "تقييم الائتمان",
+            "tables": [
+              {
+                "table_name": "CreditScore",
+                "description_en": "Credit Score",
+                "description_ar": "تقييم الائتمان",
+                "fields": [
+                  {
+                    "code": "CreditScoreID",
+                    "label_en": "Credit Score ID",
+                    "label_ar": "معرف تقييم الائتمان",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "FinancialRisk",
+            "module_en": "Financial Risk Assessment",
+            "module_ar": "تقييم المخاطر المالية",
+            "tables": [
+              {
+                "table_name": "FinancialRisk",
+                "description_en": "Financial Risk Assessment",
+                "description_ar": "تقييم المخاطر المالية",
+                "fields": [
+                  {
+                    "code": "FinancialRiskID",
+                    "label_en": "Financial Risk Assessment ID",
+                    "label_ar": "معرف تقييم المخاطر المالية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "BCM",
+        "category_en": "Business Continuity & Dependency",
+        "category_ar": "استمرارية الأعمال والاعتمادية",
+        "modules": [
+          {
+            "module_code": "DependencyMapping",
+            "module_en": "Dependency Mapping",
+            "module_ar": "خريطة الاعتمادية",
+            "tables": [
+              {
+                "table_name": "DependencyMapping",
+                "description_en": "Dependency Mapping",
+                "description_ar": "خريطة الاعتمادية",
+                "fields": [
+                  {
+                    "code": "DependencyMappingID",
+                    "label_en": "Dependency Mapping ID",
+                    "label_ar": "معرف خريطة الاعتمادية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "BCMReadiness",
+            "module_en": "BCM Readiness",
+            "module_ar": "جاهزية استمرارية الأعمال",
+            "tables": [
+              {
+                "table_name": "BCMReadiness",
+                "description_en": "BCM Readiness",
+                "description_ar": "جاهزية استمرارية الأعمال",
+                "fields": [
+                  {
+                    "code": "BCMReadinessID",
+                    "label_en": "BCM Readiness ID",
+                    "label_ar": "معرف جاهزية استمرارية الأعمال",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AlternateSupplier",
+            "module_en": "Alternate Supplier Register",
+            "module_ar": "سجل الموردين البدلاء",
+            "tables": [
+              {
+                "table_name": "AlternateSupplier",
+                "description_en": "Alternate Supplier Register",
+                "description_ar": "سجل الموردين البدلاء",
+                "fields": [
+                  {
+                    "code": "AlternateSupplierID",
+                    "label_en": "Alternate Supplier Register ID",
+                    "label_ar": "معرف سجل الموردين البدلاء",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "OPS",
+        "category_en": "Operational Management",
+        "category_ar": "الإدارة التشغيلية",
+        "modules": [
+          {
+            "module_code": "OperationalKpi",
+            "module_en": "Operational KPIs",
+            "module_ar": "مؤشرات الأداء التشغيلية",
+            "tables": [
+              {
+                "table_name": "OperationalKpi",
+                "description_en": "Operational KPIs",
+                "description_ar": "مؤشرات الأداء التشغيلية",
+                "fields": [
+                  {
+                    "code": "OperationalKpiID",
+                    "label_en": "Operational KPIs ID",
+                    "label_ar": "معرف مؤشرات الأداء التشغيلية",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorCommunication",
+            "module_en": "Vendor Communication Log",
+            "module_ar": "سجل تواصل المورد",
+            "tables": [
+              {
+                "table_name": "VendorCommunication",
+                "description_en": "Vendor Communication Log",
+                "description_ar": "سجل تواصل المورد",
+                "fields": [
+                  {
+                    "code": "VendorCommunicationID",
+                    "label_en": "Vendor Communication Log ID",
+                    "label_ar": "معرف سجل تواصل المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "OperationalChange",
+            "module_en": "Operational Change Management",
+            "module_ar": "إدارة التغيير التشغيلي",
+            "tables": [
+              {
+                "table_name": "OperationalChange",
+                "description_en": "Operational Change Management",
+                "description_ar": "إدارة التغيير التشغيلي",
+                "fields": [
+                  {
+                    "code": "OperationalChangeID",
+                    "label_en": "Operational Change Management ID",
+                    "label_ar": "معرف إدارة التغيير التشغيلي",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "ISS",
+        "category_en": "Issues, Findings & Actions",
+        "category_ar": "القضايا والنتائج والإجراءات",
+        "modules": [
+          {
+            "module_code": "VendorIssue",
+            "module_en": "Vendor Issues",
+            "module_ar": "قضايا المورد",
+            "tables": [
+              {
+                "table_name": "VendorIssue",
+                "description_en": "Vendor Issues",
+                "description_ar": "قضايا المورد",
+                "fields": [
+                  {
+                    "code": "VendorIssueID",
+                    "label_en": "Vendor Issues ID",
+                    "label_ar": "معرف قضايا المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorFinding",
+            "module_en": "Vendor Findings",
+            "module_ar": "نتائج المورد",
+            "tables": [
+              {
+                "table_name": "VendorFinding",
+                "description_en": "Vendor Findings",
+                "description_ar": "نتائج المورد",
+                "fields": [
+                  {
+                    "code": "VendorFindingID",
+                    "label_en": "Vendor Findings ID",
+                    "label_ar": "معرف نتائج المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorAction",
+            "module_en": "Vendor Action Plans",
+            "module_ar": "خطط إجراءات المورد",
+            "tables": [
+              {
+                "table_name": "VendorAction",
+                "description_en": "Vendor Action Plans",
+                "description_ar": "خطط إجراءات المورد",
+                "fields": [
+                  {
+                    "code": "VendorActionID",
+                    "label_en": "Vendor Action Plans ID",
+                    "label_ar": "معرف خطط إجراءات المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "REL",
+        "category_en": "Relationship & Vendor Scoring",
+        "category_ar": "علاقة المورد والتقييم",
+        "modules": [
+          {
+            "module_code": "VendorScorecard",
+            "module_en": "Vendor Scorecard",
+            "module_ar": "بطاقة تقييم المورد",
+            "tables": [
+              {
+                "table_name": "VendorScorecard",
+                "description_en": "Vendor Scorecard",
+                "description_ar": "بطاقة تقييم المورد",
+                "fields": [
+                  {
+                    "code": "VendorScorecardID",
+                    "label_en": "Vendor Scorecard ID",
+                    "label_ar": "معرف بطاقة تقييم المورد",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "RelationshipSurvey",
+            "module_en": "Relationship Survey",
+            "module_ar": "استبيان العلاقة",
+            "tables": [
+              {
+                "table_name": "RelationshipSurvey",
+                "description_en": "Relationship Survey",
+                "description_ar": "استبيان العلاقة",
+                "fields": [
+                  {
+                    "code": "RelationshipSurveyID",
+                    "label_en": "Relationship Survey ID",
+                    "label_ar": "معرف استبيان العلاقة",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "VendorTier",
+            "module_en": "Vendor Tiering",
+            "module_ar": "تصنيف الموردين",
+            "tables": [
+              {
+                "table_name": "VendorTier",
+                "description_en": "Vendor Tiering",
+                "description_ar": "تصنيف الموردين",
+                "fields": [
+                  {
+                    "code": "VendorTierID",
+                    "label_en": "Vendor Tiering ID",
+                    "label_ar": "معرف تصنيف الموردين",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category_code": "OFF",
+        "category_en": "Offboarding & Termination",
+        "category_ar": "إنهاء التعامل",
+        "modules": [
+          {
+            "module_code": "OffboardingRegister",
+            "module_en": "Vendor Offboarding Register",
+            "module_ar": "سجل إنهاء التعامل",
+            "tables": [
+              {
+                "table_name": "OffboardingRegister",
+                "description_en": "Vendor Offboarding Register",
+                "description_ar": "سجل إنهاء التعامل",
+                "fields": [
+                  {
+                    "code": "OffboardingRegisterID",
+                    "label_en": "Vendor Offboarding Register ID",
+                    "label_ar": "معرف سجل إنهاء التعامل",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AssetReturn",
+            "module_en": "Asset Return & Validation",
+            "module_ar": "إرجاع الأصول والتحقق",
+            "tables": [
+              {
+                "table_name": "AssetReturn",
+                "description_en": "Asset Return & Validation",
+                "description_ar": "إرجاع الأصول والتحقق",
+                "fields": [
+                  {
+                    "code": "AssetReturnID",
+                    "label_en": "Asset Return & Validation ID",
+                    "label_ar": "معرف إرجاع الأصول والتحقق",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "module_code": "AccessRevoke",
+            "module_en": "Access Revocation",
+            "module_ar": "إلغاء الوصول",
+            "tables": [
+              {
+                "table_name": "AccessRevoke",
+                "description_en": "Access Revocation",
+                "description_ar": "إلغاء الوصول",
+                "fields": [
+                  {
+                    "code": "AccessRevokeID",
+                    "label_en": "Access Revocation ID",
+                    "label_ar": "معرف إلغاء الوصول",
+                    "data_type": "int",
+                    "required": true
+                  },
+                  {
+                    "code": "TitleEN",
+                    "label_en": "Title (English)",
+                    "label_ar": "العنوان (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "TitleAR",
+                    "label_en": "Title (Arabic)",
+                    "label_ar": "العنوان (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionEN",
+                    "label_en": "Description (English)",
+                    "label_ar": "الوصف (إنجليزي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "DescriptionAR",
+                    "label_en": "Description (Arabic)",
+                    "label_ar": "الوصف (عربي)",
+                    "data_type": "string",
+                    "required": false
+                  },
+                  {
+                    "code": "StatusID",
+                    "label_en": "Status ID",
+                    "label_ar": "معرف الحالة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedBy",
+                    "label_en": "Created By",
+                    "label_ar": "أُنشئ بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "CreatedAt",
+                    "label_en": "Created At",
+                    "label_ar": "تاريخ الإنشاء",
+                    "data_type": "datetime",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedBy",
+                    "label_en": "Updated By",
+                    "label_ar": "تم التحديث بواسطة",
+                    "data_type": "int",
+                    "required": false
+                  },
+                  {
+                    "code": "UpdatedAt",
+                    "label_en": "Updated At",
+                    "label_ar": "تاريخ التحديث",
+                    "data_type": "datetime",
+                    "required": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "category_count": 12,
+    "module_count": 36,
+    "table_count": 36
+  }
+}
