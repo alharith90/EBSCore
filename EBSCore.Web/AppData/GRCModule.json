@@ -1,0 +1,515 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "GOV",
+      "pillar_en": "Governance & Strategy",
+      "pillar_ar": "الحوكمة والاستراتيجية",
+      "categories": [
+        {
+          "category_code": "STR",
+          "category_en": "Strategy",
+          "category_ar": "الاستراتيجية",
+          "modules": [
+            {
+              "module_code": "StrategicObjective",
+              "module_en": "Strategic Objectives",
+              "module_ar": "الأهداف الاستراتيجية",
+              "tables": [
+                {
+                  "table_name": "StrategicObjective",
+                  "fields": [
+                    { "code": "ObjectiveID", "label_en": "Objective ID", "label_ar": "معرف الهدف" },
+                    { "code": "ObjectiveCode", "label_en": "Objective Code", "label_ar": "كود الهدف" },
+                    { "code": "ObjectiveNameEN", "label_en": "Objective Name", "label_ar": "اسم الهدف" },
+                    { "code": "ObjectiveNameAR", "label_en": "Objective Name (Arabic)", "label_ar": "اسم الهدف عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "Category", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "Perspective", "label_en": "Perspective", "label_ar": "المنظور الاستراتيجي" },
+                    { "code": "OwnerUserID", "label_en": "Objective Owner", "label_ar": "مالك الهدف" },
+                    { "code": "DepartmentID", "label_en": "Department", "label_ar": "الإدارة" },
+                    { "code": "StartDate", "label_en": "Start Date", "label_ar": "تاريخ البدء" },
+                    { "code": "EndDate", "label_en": "End Date", "label_ar": "تاريخ الانتهاء" },
+                    { "code": "TargetValue", "label_en": "Target Value", "label_ar": "القيمة المستهدفة" },
+                    { "code": "UnitEN", "label_en": "Unit", "label_ar": "وحدة القياس" },
+                    { "code": "UnitAR", "label_en": "Unit (Arabic)", "label_ar": "وحدة القياس عربي" },
+                    { "code": "RiskAppetiteThreshold", "label_en": "Risk Appetite Threshold", "label_ar": "حد شهية المخاطر" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "StrategicKPI",
+                  "fields": [
+                    { "code": "KPIID", "label_en": "KPI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "ObjectiveID", "label_en": "Objective ID", "label_ar": "معرف الهدف" },
+                    { "code": "KPINameEN", "label_en": "KPI Name", "label_ar": "اسم المؤشر" },
+                    { "code": "KPINameAR", "label_en": "KPI Name (Arabic)", "label_ar": "اسم المؤشر عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "FormulaEN", "label_en": "Formula", "label_ar": "المعادلة" },
+                    { "code": "FormulaAR", "label_en": "Formula (Arabic)", "label_ar": "المعادلة عربي" },
+                    { "code": "TargetValue", "label_en": "Target Value", "label_ar": "القيمة المستهدفة" },
+                    { "code": "BaselineValue", "label_en": "Baseline Value", "label_ar": "القيمة الأساسية" },
+                    { "code": "Direction", "label_en": "Direction", "label_ar": "اتجاه المؤشر" },
+                    { "code": "Frequency", "label_en": "Frequency", "label_ar": "التكرار" },
+                    { "code": "OwnerUserID", "label_en": "Owner", "label_ar": "المالك" },
+                    { "code": "DataSourceEN", "label_en": "Data Source", "label_ar": "مصدر البيانات" },
+                    { "code": "DataSourceAR", "label_en": "Data Source (Arabic)", "label_ar": "مصدر البيانات عربي" },
+                    { "code": "ThresholdGreen", "label_en": "Green Threshold", "label_ar": "حد الأخضر" },
+                    { "code": "ThresholdAmber", "label_en": "Amber Threshold", "label_ar": "حد الأصفر" },
+                    { "code": "ThresholdRed", "label_en": "Red Threshold", "label_ar": "حد الأحمر" },
+                    { "code": "IsLeadingIndicator", "label_en": "Is Leading Indicator", "label_ar": "مؤشر قيادي" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "Policy",
+              "module_en": "Policy Management",
+              "module_ar": "إدارة السياسات",
+              "tables": [
+                {
+                  "table_name": "Policy",
+                  "fields": [
+                    { "code": "PolicyID", "label_en": "Policy ID", "label_ar": "معرف السياسة" },
+                    { "code": "PolicyCode", "label_en": "Policy Code", "label_ar": "كود السياسة" },
+                    { "code": "PolicyNameEN", "label_en": "Policy Name", "label_ar": "اسم السياسة" },
+                    { "code": "PolicyNameAR", "label_en": "Policy Name (Arabic)", "label_ar": "اسم السياسة عربي" },
+                    { "code": "PolicyType", "label_en": "Policy Type", "label_ar": "نوع السياسة" },
+                    { "code": "CategoryEN", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "CategoryAR", "label_en": "Category (Arabic)", "label_ar": "الفئة عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "EffectiveDate", "label_en": "Effective Date", "label_ar": "تاريخ السريان" },
+                    { "code": "ReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                    { "code": "OwnerUserID", "label_en": "Policy Owner", "label_ar": "مالك السياسة" },
+                    { "code": "ApproverUserID", "label_en": "Approver", "label_ar": "الموافق" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "RelatedRegulationIDs", "label_en": "Related Regulations", "label_ar": "التشريعات ذات الصلة" },
+                    { "code": "RelatedControlIDs", "label_en": "Related Controls", "label_ar": "الضوابط المرتبطة" },
+                    { "code": "VersionNumber", "label_en": "Version", "label_ar": "الإصدار" },
+                    { "code": "DocumentPath", "label_en": "Document Path", "label_ar": "مسار المستند" },
+                    { "code": "IsMandatory", "label_en": "Mandatory?", "label_ar": "إلزامي؟" },
+                    { "code": "AppliesToRoles", "label_en": "Applies To Roles", "label_ar": "تنطبق على الأدوار" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "آخر تحديث بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ آخر تحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "pillar_code": "RISK",
+      "pillar_en": "Risk Management",
+      "pillar_ar": "إدارة المخاطر",
+      "categories": [
+        {
+          "category_code": "REG",
+          "category_en": "Risk Register & Assessment",
+          "category_ar": "سجل وتقييم المخاطر",
+          "modules": [
+            {
+              "module_code": "RiskCore",
+              "module_en": "Risk Core & Assessments",
+              "module_ar": "المخاطر والتقييمات",
+              "tables": [
+                {
+                  "table_name": "RiskCategory",
+                  "fields": [
+                    { "code": "CategoryID", "label_en": "Category ID", "label_ar": "معرف الفئة" },
+                    { "code": "CategoryNameEN", "label_en": "Category Name", "label_ar": "اسم الفئة" },
+                    { "code": "CategoryNameAR", "label_en": "Category Name (Arabic)", "label_ar": "اسم الفئة عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "ParentCategoryID", "label_en": "Parent Category", "label_ar": "الفئة الرئيسية" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskTemplate",
+                  "fields": [
+                    { "code": "TemplateID", "label_en": "Template ID", "label_ar": "معرف القالب" },
+                    { "code": "TemplateNameEN", "label_en": "Template Name", "label_ar": "اسم القالب" },
+                    { "code": "TemplateNameAR", "label_en": "Template Name (Arabic)", "label_ar": "اسم القالب عربي" },
+                    { "code": "DefaultCategoryID", "label_en": "Default Category", "label_ar": "الفئة الافتراضية" },
+                    { "code": "DefaultImpact", "label_en": "Default Impact", "label_ar": "التأثير الافتراضي" },
+                    { "code": "DefaultLikelihood", "label_en": "Default Likelihood", "label_ar": "الاحتمالية الافتراضية" },
+                    { "code": "DefaultRiskLevel", "label_en": "Default Risk Level", "label_ar": "مستوى المخاطر الافتراضي" },
+                    { "code": "GuidanceEN", "label_en": "Guidance", "label_ar": "إرشادات" },
+                    { "code": "GuidanceAR", "label_en": "Guidance (Arabic)", "label_ar": "إرشادات عربي" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "Risk",
+                  "fields": [
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "RiskCode", "label_en": "Risk Code", "label_ar": "كود المخاطر" },
+                    { "code": "RiskNameEN", "label_en": "Risk Name", "label_ar": "اسم المخاطر" },
+                    { "code": "RiskNameAR", "label_en": "Risk Name (Arabic)", "label_ar": "اسم المخاطر عربي" },
+                    { "code": "RiskDescriptionEN", "label_en": "Risk Description", "label_ar": "وصف المخاطر" },
+                    { "code": "RiskDescriptionAR", "label_en": "Risk Description (Arabic)", "label_ar": "وصف المخاطر عربي" },
+                    { "code": "CategoryID", "label_en": "Risk Category", "label_ar": "تصنيف المخاطر" },
+                    { "code": "OwnerUserID", "label_en": "Risk Owner", "label_ar": "مالك المخاطر" },
+                    { "code": "Source", "label_en": "Risk Source", "label_ar": "مصدر المخاطر" },
+                    { "code": "PotentialImpact", "label_en": "Potential Impact", "label_ar": "الأثر المحتمل" },
+                    { "code": "InherentLikelihood", "label_en": "Inherent Likelihood", "label_ar": "الاحتمالية المتأصلة" },
+                    { "code": "InherentImpact", "label_en": "Inherent Impact", "label_ar": "التأثير المتأصل" },
+                    { "code": "InherentRiskLevel", "label_en": "Inherent Risk Level", "label_ar": "مستوى المخاطر المتأصلة" },
+                    { "code": "ExistingControls", "label_en": "Existing Controls", "label_ar": "الضوابط الحالية" },
+                    { "code": "ControlEffectiveness", "label_en": "Control Effectiveness", "label_ar": "فعالية الضوابط" },
+                    { "code": "ResidualLikelihood", "label_en": "Residual Likelihood", "label_ar": "الاحتمالية المتبقية" },
+                    { "code": "ResidualImpact", "label_en": "Residual Impact", "label_ar": "التأثير المتبقي" },
+                    { "code": "ResidualRiskLevel", "label_en": "Residual Risk Level", "label_ar": "مستوى المخاطر المتبقية" },
+                    { "code": "RiskAppetiteThreshold", "label_en": "Risk Appetite Threshold", "label_ar": "عتبة شهية المخاطر" },
+                    { "code": "TreatmentDecision", "label_en": "Treatment Decision", "label_ar": "قرار المعالجة" },
+                    { "code": "TreatmentPlanID", "label_en": "Risk Treatment Plan", "label_ar": "خطة معالجة المخاطر" },
+                    { "code": "NextReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                    { "code": "RelatedObjectiveID", "label_en": "Related Objective", "label_ar": "الهدف المرتبط" },
+                    { "code": "RelatedObligationID", "label_en": "Related Compliance Obligation", "label_ar": "الالتزام التنظيمي المرتبط" },
+                    { "code": "RelatedIncidentID", "label_en": "Related Incident/Event", "label_ar": "الحادث/الواقعة المرتبطة" },
+                    { "code": "UpdatedBy", "label_en": "Last Update By", "label_ar": "آخر تحديث بواسطة" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskAssessmentSnapshot",
+                  "fields": [
+                    { "code": "SnapshotID", "label_en": "Snapshot ID", "label_ar": "معرف اللقطة" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "AssessmentDate", "label_en": "Assessment Date", "label_ar": "تاريخ التقييم" },
+                    { "code": "AssessorUserID", "label_en": "Assessor", "label_ar": "المقيم" },
+                    { "code": "Likelihood", "label_en": "Likelihood", "label_ar": "الاحتمالية" },
+                    { "code": "Impact", "label_en": "Impact", "label_ar": "التأثير" },
+                    { "code": "RiskLevel", "label_en": "Risk Level", "label_ar": "مستوى المخاطر" },
+                    { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+                  ]
+                },
+                {
+                  "table_name": "LossEvent",
+                  "fields": [
+                    { "code": "LossEventID", "label_en": "Loss Event ID", "label_ar": "معرف حادث الخسارة" },
+                    { "code": "RiskID", "label_en": "Related Risk", "label_ar": "الخطر المرتبط" },
+                    { "code": "EventDate", "label_en": "Event Date", "label_ar": "تاريخ الحدث" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "ImpactAmount", "label_en": "Impact Amount", "label_ar": "مقدار الأثر" },
+                    { "code": "Currency", "label_en": "Currency", "label_ar": "العملة" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "RiskControlKRI",
+              "module_en": "Control & KRI Engine",
+              "module_ar": "محرك الضوابط ومؤشرات المخاطر",
+              "tables": [
+                {
+                  "table_name": "ControlLibrary",
+                  "fields": [
+                    { "code": "ControlID", "label_en": "Control ID", "label_ar": "معرف الضابط" },
+                    { "code": "ControlName", "label_en": "Control Name", "label_ar": "اسم الضابط" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "ControlType", "label_en": "Control Type", "label_ar": "نوع الضابط" },
+                    { "code": "ControlCategory", "label_en": "Control Category", "label_ar": "فئة الضابط" },
+                    { "code": "ControlOwner", "label_en": "Control Owner", "label_ar": "مالك الضابط" },
+                    { "code": "Frequency", "label_en": "Frequency", "label_ar": "تكرار التنفيذ" },
+                    { "code": "IsKeyControl", "label_en": "Key Control?", "label_ar": "هل الضابط رئيسي؟" },
+                    { "code": "RelatedRiskIDs", "label_en": "Related Risks", "label_ar": "المخاطر المرتبطة" },
+                    { "code": "RelatedObligationIDs", "label_en": "Related Obligations", "label_ar": "الالتزامات المرتبطة" },
+                    { "code": "ImplementationStatus", "label_en": "Implementation Status", "label_ar": "حالة التنفيذ" },
+                    { "code": "LastTestDate", "label_en": "Last Test Date", "label_ar": "تاريخ آخر اختبار" },
+                    { "code": "LastTestResult", "label_en": "Last Test Result", "label_ar": "نتيجة آخر اختبار" },
+                    { "code": "DocumentationRef", "label_en": "Documentation Reference", "label_ar": "مرجع التوثيق" }
+                  ]
+                },
+                {
+                  "table_name": "RiskControlMap",
+                  "fields": [
+                    { "code": "MapID", "label_en": "Map ID", "label_ar": "معرف الربط" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "ControlID", "label_en": "Control ID", "label_ar": "معرف الضابط" },
+                    { "code": "Effectiveness", "label_en": "Effectiveness", "label_ar": "الفعالية" }
+                  ]
+                },
+                {
+                  "table_name": "KRILibrary",
+                  "fields": [
+                    { "code": "KRILibraryID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "KRIName", "label_en": "KRI Name", "label_ar": "اسم مؤشر المخاطر" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "MeasurementFrequency", "label_en": "Measurement Frequency", "label_ar": "تواتر القياس" },
+                    { "code": "DataSource", "label_en": "Data Source", "label_ar": "مصدر البيانات" },
+                    { "code": "ThresholdValue", "label_en": "Threshold Value", "label_ar": "القيمة الحدية" },
+                    { "code": "OwnerUserID", "label_en": "Owner/Monitor", "label_ar": "المالك/المراقب" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskKRILink",
+                  "fields": [
+                    { "code": "LinkID", "label_en": "Link ID", "label_ar": "معرف الربط" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "KRILibraryID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "ThresholdValue", "label_en": "Threshold", "label_ar": "الحد" },
+                    { "code": "MonitoringFrequency", "label_en": "Monitoring Frequency", "label_ar": "تواتر المراقبة" }
+                  ]
+                },
+                {
+                  "table_name": "KRIValue",
+                  "fields": [
+                    { "code": "KRIValueID", "label_en": "KRI Value ID", "label_ar": "معرف قيمة المؤشر" },
+                    { "code": "KRILibraryID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "ValueDate", "label_en": "Measurement Date", "label_ar": "تاريخ القياس" },
+                    { "code": "CurrentValue", "label_en": "Current Value", "label_ar": "القيمة الحالية" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "pillar_code": "BCM",
+      "pillar_en": "Business Continuity Management",
+      "pillar_ar": "إدارة استمرارية الأعمال",
+      "categories": [
+        {
+          "category_code": "BIA",
+          "category_en": "Business Impact Analysis",
+          "category_ar": "تحليل التأثير على الأعمال",
+          "modules": [
+            {
+              "module_code": "BIAProcess",
+              "module_en": "BIA Process",
+              "module_ar": "تحليل الأثر على مستوى العملية",
+              "tables": [
+                {
+                  "table_name": "BIAProcess",
+                  "fields": [
+                    { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" },
+                    { "code": "ProcessName", "label_en": "Process/Function Name", "label_ar": "اسم العملية/الوظيفة" },
+                    { "code": "Department", "label_en": "Department", "label_ar": "الإدارة/القسم" },
+                    { "code": "ProcessOwner", "label_en": "Process Owner", "label_ar": "مالك العملية" },
+                    { "code": "CriticalityLevel", "label_en": "Criticality Level", "label_ar": "مستوى الأهمية" },
+                    { "code": "MAO", "label_en": "Maximum Acceptable Outage (MAO)", "label_ar": "أقصى مدة انقطاع مقبولة" },
+                    { "code": "Impact1Hour", "label_en": "Impact if 1 Hour Outage", "label_ar": "التأثير لانقطاع ساعة واحدة" },
+                    { "code": "Impact1Day", "label_en": "Impact if 1 Day Outage", "label_ar": "التأثير لانقطاع يوم واحد" },
+                    { "code": "Impact1Week", "label_en": "Impact if 1 Week Outage", "label_ar": "التأثير لانقطاع أسبوع" },
+                    { "code": "ImpactDimensions", "label_en": "Impact Dimensions Assessed", "label_ar": "أبعاد التأثير المقيمة" },
+                    { "code": "RTO", "label_en": "Recovery Time Objective (RTO)", "label_ar": "هدف زمن الاستعادة" },
+                    { "code": "RPO", "label_en": "Recovery Point Objective (RPO)", "label_ar": "هدف نقطة الاستعادة" },
+                    { "code": "MinimumResources", "label_en": "Minimum Resources Required", "label_ar": "الحد الأدنى من الموارد" },
+                    { "code": "InternalDependencies", "label_en": "Dependencies (Internal)", "label_ar": "الاعتماديات الداخلية" },
+                    { "code": "ExternalDependencies", "label_en": "Dependencies (External - Suppliers)", "label_ar": "الاعتماديات الخارجية" },
+                    { "code": "RecoveryStrategies", "label_en": "Preferred Recovery Strategies", "label_ar": "استراتيجيات الاستعادة المفضلة" },
+                    { "code": "StrategyLibraryRef", "label_en": "Recovery Strategy Library Ref", "label_ar": "مرجع مكتبة الاستراتيجيات" },
+                    { "code": "AllowableDataLoss", "label_en": "Allowable Data Loss", "label_ar": "كمية فقدان البيانات المقبولة" },
+                    { "code": "BackupAvailability", "label_en": "Backup Availability", "label_ar": "توفر النسخ الاحتياطية" },
+                    { "code": "HasAlternateWorkaround", "label_en": "Alternate Workaround Available", "label_ar": "وجود حل بديل" },
+                    { "code": "BCPLink", "label_en": "BCP Link", "label_ar": "رابط إلى خطة الاستمرارية" },
+                    { "code": "LastReviewDate", "label_en": "Last BIA Review Date", "label_ar": "تاريخ آخر مراجعة" }
+                  ]
+                },
+                {
+                  "table_name": "BIAImpactScaleConfig",
+                  "fields": [
+                    { "code": "ScaleID", "label_en": "Scale ID", "label_ar": "معرف المقياس" },
+                    { "code": "Dimension", "label_en": "Impact Dimension", "label_ar": "بُعد التأثير" },
+                    { "code": "Level", "label_en": "Level", "label_ar": "المستوى" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "Threshold", "label_en": "Threshold", "label_ar": "الحد" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "BIAResources",
+              "module_en": "BIA Resources",
+              "module_ar": "موارد تحليل الأثر",
+              "tables": [
+                { "table_name": "BIAResourceLocation", "fields": [ { "code": "LocationID", "label_en": "Location ID", "label_ar": "معرف الموقع" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "LocationName", "label_en": "Location Name", "label_ar": "اسم الموقع" }, { "code": "Address", "label_en": "Address", "label_ar": "العنوان" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourcePeople", "fields": [ { "code": "PeopleID", "label_en": "People ID", "label_ar": "معرف الأفراد" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "Role", "label_en": "Role", "label_ar": "الدور" }, { "code": "Count", "label_en": "Headcount", "label_ar": "عدد الأفراد" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceEquipment", "fields": [ { "code": "EquipmentID", "label_en": "Equipment ID", "label_ar": "معرف المعدات" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "EquipmentName", "label_en": "Equipment Name", "label_ar": "اسم المعدات" }, { "code": "Quantity", "label_en": "Quantity", "label_ar": "الكمية" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceITSystem", "fields": [ { "code": "ITSystemID", "label_en": "IT System ID", "label_ar": "معرف نظام تقنية المعلومات" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "SystemName", "label_en": "System Name", "label_ar": "اسم النظام" }, { "code": "RTO", "label_en": "RTO", "label_ar": "هدف زمن الاستعادة" }, { "code": "RPO", "label_en": "RPO", "label_ar": "هدف نقطة الاستعادة" } ] },
+                { "table_name": "BIAResourceApplication", "fields": [ { "code": "ApplicationID", "label_en": "Application ID", "label_ar": "معرف التطبيق" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "ApplicationName", "label_en": "Application Name", "label_ar": "اسم التطبيق" }, { "code": "Owner", "label_en": "Owner", "label_ar": "المالك" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceDatabase", "fields": [ { "code": "DatabaseID", "label_en": "Database ID", "label_ar": "معرف قاعدة البيانات" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "DatabaseName", "label_en": "Database Name", "label_ar": "اسم قاعدة البيانات" }, { "code": "BackupAvailability", "label_en": "Backup Availability", "label_ar": "توفر النسخ الاحتياطية" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceNetwork", "fields": [ { "code": "NetworkID", "label_en": "Network ID", "label_ar": "معرف الشبكة" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "NetworkName", "label_en": "Network Name", "label_ar": "اسم الشبكة" }, { "code": "Criticality", "label_en": "Criticality", "label_ar": "الأهمية" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceDocument", "fields": [ { "code": "DocumentID", "label_en": "Document ID", "label_ar": "معرف المستند" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "DocumentName", "label_en": "Document Name", "label_ar": "اسم المستند" }, { "code": "StorageLocation", "label_en": "Storage Location", "label_ar": "مكان التخزين" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAResourceExternalDependency", "fields": [ { "code": "DependencyID", "label_en": "External Dependency ID", "label_ar": "معرف الاعتماد الخارجي" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "SupplierName", "label_en": "Supplier Name", "label_ar": "اسم المورد" }, { "code": "ServiceDescription", "label_en": "Service Description", "label_ar": "وصف الخدمة" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] },
+                { "table_name": "BIAInternalDependency", "fields": [ { "code": "InternalDependencyID", "label_en": "Internal Dependency ID", "label_ar": "معرف الاعتماد الداخلي" }, { "code": "BIAID", "label_en": "BIA ID", "label_ar": "معرف تحليل الأثر" }, { "code": "DependencyDescription", "label_en": "Description", "label_ar": "الوصف" }, { "code": "Owner", "label_en": "Owner", "label_ar": "المالك" }, { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" } ] }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "BCP",
+          "category_en": "BCP & Recovery",
+          "category_ar": "خطط استمرارية الأعمال والاستعادة",
+          "modules": [
+            {
+              "module_code": "BCP",
+              "module_en": "Business Continuity Plans",
+              "module_ar": "خطط استمرارية الأعمال",
+              "tables": [
+                { "table_name": "BCMRecoveryStrategyLibrary", "fields": [ { "code": "StrategyID", "label_en": "Strategy ID", "label_ar": "معرف الاستراتيجية" }, { "code": "StrategyName", "label_en": "Strategy Name", "label_ar": "اسم الاستراتيجية" }, { "code": "Description", "label_en": "Description", "label_ar": "الوصف" }, { "code": "ApplicableScenario", "label_en": "Applicable Scenario", "label_ar": "السيناريو المطبق" }, { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" } ] },
+                { "table_name": "BCPPlan", "fields": [ { "code": "BCPID", "label_en": "BCP ID", "label_ar": "معرف الخطة" }, { "code": "PlanName", "label_en": "BCP Name", "label_ar": "اسم الخطة" }, { "code": "Scope", "label_en": "Scope (Processes Covered)", "label_ar": "النطاق" }, { "code": "RecoveryTeamRoles", "label_en": "Recovery Team Roles", "label_ar": "أدوار فريق التعافي" }, { "code": "ContactList", "label_en": "Contact List", "label_ar": "قائمة الاتصال" }, { "code": "InvocationCriteria", "label_en": "Invocation Criteria", "label_ar": "معايير التفعيل" }, { "code": "RecoveryLocations", "label_en": "Recovery Locations", "label_ar": "مواقع التعافي" }, { "code": "RecoveryStrategyDetails", "label_en": "Recovery Strategy Details", "label_ar": "تفاصيل استراتيجية الاستعادة" }, { "code": "KeySteps", "label_en": "Key Steps & Procedures", "label_ar": "الخطوات والإجراءات الرئيسية" }, { "code": "RequiredResources", "label_en": "Required Resources & Assets", "label_ar": "الموارد والأصول المطلوبة" }, { "code": "DependentSystems", "label_en": "Dependent on Systems/Apps", "label_ar": "معتمد على الأنظمة/التطبيقات" }, { "code": "PlanRTO", "label_en": "RTO (for this plan)", "label_ar": "هدف الاستعادة الزمني" }, { "code": "PlanRPO", "label_en": "RPO (for data recovery)", "label_ar": "هدف نقطة الاستعادة" }, { "code": "BackupSource", "label_en": "Backup Source", "label_ar": "مصدر النسخ الاحتياطية" }, { "code": "AlternateSupplier", "label_en": "Alternate Supplier Arrangements", "label_ar": "ترتيبات المورد البديل" }, { "code": "LastTestDate", "label_en": "Last Test Date", "label_ar": "تاريخ آخر اختبار" }, { "code": "TestResultSummary", "label_en": "Test Results Summary", "label_ar": "ملخص نتائج الاختبار" }, { "code": "PlanOwner", "label_en": "Plan Owner", "label_ar": "مالك الخطة" }, { "code": "PlanStatusID", "label_en": "Plan Status", "label_ar": "حالة الخطة" } ] },
+                { "table_name": "BCPTeamMember", "fields": [ { "code": "TeamMemberID", "label_en": "Team Member ID", "label_ar": "معرف عضو الفريق" }, { "code": "BCPID", "label_en": "BCP ID", "label_ar": "معرف الخطة" }, { "code": "UserID", "label_en": "User", "label_ar": "المستخدم" }, { "code": "Role", "label_en": "Role", "label_ar": "الدور" }, { "code": "Contact", "label_en": "Contact", "label_ar": "الاتصال" } ] },
+                { "table_name": "BCPActionStep", "fields": [ { "code": "ActionStepID", "label_en": "Action Step ID", "label_ar": "معرف خطوة الإجراء" }, { "code": "BCPID", "label_en": "BCP ID", "label_ar": "معرف الخطة" }, { "code": "StepOrder", "label_en": "Step Order", "label_ar": "ترتيب الخطوة" }, { "code": "StepDescription", "label_en": "Key Step", "label_ar": "الخطوة" }, { "code": "Owner", "label_en": "Owner", "label_ar": "المالك" }, { "code": "ExpectedOutcome", "label_en": "Expected Outcome", "label_ar": "النتيجة المتوقعة" } ] }
+              ]
+            },
+            {
+              "module_code": "BCMOperations",
+              "module_en": "BCM Operations (Incidents, Drills, Training)",
+              "module_ar": "تشغيل استمرارية الأعمال (حوادث، تمارين، تدريب)",
+              "tables": [
+                { "table_name": "BCMIncident", "fields": [ { "code": "BCMIncidentID", "label_en": "Incident ID", "label_ar": "معرف الحادث" }, { "code": "Title", "label_en": "Incident Title", "label_ar": "عنوان الحادث" }, { "code": "IncidentDate", "label_en": "Date", "label_ar": "التاريخ" }, { "code": "Location", "label_en": "Location", "label_ar": "الموقع" }, { "code": "IncidentType", "label_en": "Incident Type", "label_ar": "نوع الحادث" }, { "code": "Impact", "label_en": "Impact", "label_ar": "الأثر" }, { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" } ] },
+                { "table_name": "BCMScenarioLibrary", "fields": [ { "code": "ScenarioID", "label_en": "Scenario ID", "label_ar": "معرف السيناريو" }, { "code": "ScenarioName", "label_en": "Scenario Name", "label_ar": "اسم السيناريو" }, { "code": "Description", "label_en": "Description", "label_ar": "الوصف" }, { "code": "Category", "label_en": "Category", "label_ar": "الفئة" } ] },
+                { "table_name": "BCMDrill", "fields": [ { "code": "DrillID", "label_en": "Drill ID", "label_ar": "معرف التمرين" }, { "code": "ScenarioID", "label_en": "Scenario ID", "label_ar": "معرف السيناريو" }, { "code": "PlannedDate", "label_en": "Planned Date", "label_ar": "التاريخ المخطط" }, { "code": "ActualDate", "label_en": "Actual Date", "label_ar": "التاريخ الفعلي" }, { "code": "ResultSummary", "label_en": "Result Summary", "label_ar": "ملخص النتائج" } ] },
+                { "table_name": "DRDrill", "fields": [ { "code": "DRDrillID", "label_en": "Disaster Recovery Drill ID", "label_ar": "معرف تمرين التعافي" }, { "code": "System", "label_en": "System", "label_ar": "النظام" }, { "code": "DrillDate", "label_en": "Drill Date", "label_ar": "تاريخ التمرين" }, { "code": "Outcome", "label_en": "Outcome", "label_ar": "النتيجة" } ] },
+                { "table_name": "BCMTrainingCourse", "fields": [ { "code": "CourseID", "label_en": "Course ID", "label_ar": "معرف الدورة" }, { "code": "CourseName", "label_en": "Course Name", "label_ar": "اسم الدورة" }, { "code": "Description", "label_en": "Description", "label_ar": "الوصف" } ] },
+                { "table_name": "BCMTrainingSession", "fields": [ { "code": "SessionID", "label_en": "Session ID", "label_ar": "معرف الجلسة" }, { "code": "CourseID", "label_en": "Course ID", "label_ar": "معرف الدورة" }, { "code": "SessionDate", "label_en": "Session Date", "label_ar": "تاريخ الجلسة" }, { "code": "Location", "label_en": "Location", "label_ar": "الموقع" }, { "code": "Trainer", "label_en": "Trainer", "label_ar": "المدرب" } ] },
+                { "table_name": "BCMTrainingAttendance", "fields": [ { "code": "AttendanceID", "label_en": "Attendance ID", "label_ar": "معرف الحضور" }, { "code": "SessionID", "label_en": "Session ID", "label_ar": "معرف الجلسة" }, { "code": "UserID", "label_en": "User", "label_ar": "المستخدم" }, { "code": "Completed", "label_en": "Completed", "label_ar": "مكتمل" } ] },
+                { "table_name": "CompetencyMatrix", "fields": [ { "code": "CompetencyID", "label_en": "Competency ID", "label_ar": "معرف الكفاءة" }, { "code": "Role", "label_en": "Role", "label_ar": "الدور" }, { "code": "RequiredLevel", "label_en": "Required Level", "label_ar": "المستوى المطلوب" } ] },
+                { "table_name": "UserCompetencyAssessment", "fields": [ { "code": "AssessmentID", "label_en": "Assessment ID", "label_ar": "معرف التقييم" }, { "code": "UserID", "label_en": "User", "label_ar": "المستخدم" }, { "code": "CompetencyID", "label_en": "Competency", "label_ar": "الكفاءة" }, { "code": "AssessedLevel", "label_en": "Assessed Level", "label_ar": "المستوى المقيم" }, { "code": "AssessmentDate", "label_en": "Assessment Date", "label_ar": "تاريخ التقييم" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "pillar_code": "XISSUE",
+      "pillar_en": "Cross-Pillar Issues & Actions",
+      "pillar_ar": "قضايا وإجراءات مشتركة",
+      "categories": [
+        {
+          "category_code": "ISS",
+          "category_en": "Issues & Actions",
+          "category_ar": "القضايا والإجراءات",
+          "modules": [
+            {
+              "module_code": "IssueEngine",
+              "module_en": "Unified Issue & CAPA Engine",
+              "module_ar": "محرك موحد للملاحظات والإجراءات التصحيحية",
+              "tables": [
+                {
+                  "table_name": "IssueRegister",
+                  "fields": [
+                    { "code": "IssueID", "label_en": "Issue ID", "label_ar": "معرف القضية" },
+                    { "code": "Title", "label_en": "Issue Title", "label_ar": "عنوان القضية" },
+                    { "code": "SourceModule", "label_en": "Source Module", "label_ar": "الوحدة المصدر" },
+                    { "code": "LinkedRecordID", "label_en": "Linked Record", "label_ar": "السجل المرتبط" },
+                    { "code": "Severity", "label_en": "Severity", "label_ar": "الخطورة" },
+                    { "code": "OwnerUserID", "label_en": "Owner", "label_ar": "المالك" },
+                    { "code": "DueDate", "label_en": "Due Date", "label_ar": "تاريخ الاستحقاق" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "RootCause", "label_en": "Root Cause", "label_ar": "السبب الجذري" },
+                    { "code": "ActionRequired", "label_en": "Action Required", "label_ar": "الإجراء المطلوب" }
+                  ]
+                },
+                {
+                  "table_name": "IssueLink",
+                  "fields": [
+                    { "code": "IssueLinkID", "label_en": "Issue Link ID", "label_ar": "معرف ارتباط القضية" },
+                    { "code": "IssueID", "label_en": "Issue ID", "label_ar": "معرف القضية" },
+                    { "code": "LinkedEntity", "label_en": "Linked Entity", "label_ar": "الكيان المرتبط" },
+                    { "code": "LinkedEntityID", "label_en": "Linked Entity ID", "label_ar": "معرف الكيان" },
+                    { "code": "LinkType", "label_en": "Link Type", "label_ar": "نوع الارتباط" }
+                  ]
+                },
+                {
+                  "table_name": "ActionPlan",
+                  "fields": [
+                    { "code": "ActionPlanID", "label_en": "Action Plan ID", "label_ar": "معرف خطة الإجراء" },
+                    { "code": "IssueID", "label_en": "Issue ID", "label_ar": "معرف القضية" },
+                    { "code": "ActionDescription", "label_en": "Action Description", "label_ar": "وصف الإجراء" },
+                    { "code": "ActionOwner", "label_en": "Action Owner", "label_ar": "مالك الإجراء" },
+                    { "code": "DueDate", "label_en": "Due Date", "label_ar": "تاريخ الاستحقاق" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "CompletionDate", "label_en": "Completion Date", "label_ar": "تاريخ الإكمال" },
+                    { "code": "EvidencePath", "label_en": "Evidence Path", "label_ar": "مسار الدليل" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    ,
+
+    {
+      "pillar_code": "INFOSEC",
+      "pillar_en": "Information Security",
+      "pillar_ar": "أمن المعلومات",
+      "categories": [
+        {
+          "category_code": "AST",
+          "category_en": "Asset & System Inventory",
+          "category_ar": "جرد الأصول والأنظمة",
+          "modules": [
+            {
+              "module_code": "InformationSystem",
+              "module_en": "Information Systems",
+              "module_ar": "أنظمة المعلومات",
+              "tables": [
+                {
+                  "table_name": "InformationSystem",
+                  "fields": [
+                    { "code": "SystemID", "label_en": "System ID", "label_ar": "معرف النظام" },
+                    { "code": "SystemName", "label_en": "System Name", "label_ar": "اسم النظام" },
+                    { "code": "RPO", "label_en": "Recovery Point Objective (RPO)", "label_ar": "هدف نقطة الاستعادة" },
+                    { "code": "ApplicationLifecycleStatus", "label_en": "Lifecycle Status", "label_ar": "حالة دورة الحياة" },
+                    { "code": "Type", "label_en": "Type", "label_ar": "النوع" },
+                    { "code": "RequiredFor", "label_en": "Required For", "label_ar": "مطلوب لأجل" },
+                    { "code": "SystemDescription", "label_en": "System Description", "label_ar": "وصف النظام" },
+                    { "code": "PrimaryOwnerId", "label_en": "Primary Owner", "label_ar": "المالك الأساسي" },
+                    { "code": "SecondaryOwner", "label_en": "Secondary Owner", "label_ar": "مالك ثانوي" },
+                    { "code": "BusinessOwner", "label_en": "Business Owner", "label_ar": "مالك الأعمال" },
+                    { "code": "InternetFacing", "label_en": "Internet Facing", "label_ar": "يواجه الإنترنت" },
+                    { "code": "ThirdPartyAccess", "label_en": "Third-Party Access", "label_ar": "وصول طرف ثالث" },
+                    { "code": "NumberOfUsers", "label_en": "Number of Users", "label_ar": "عدد المستخدمين" },
+                    { "code": "LicenseType", "label_en": "License Type", "label_ar": "نوع الترخيص" },
+                    { "code": "Infrastructure", "label_en": "Infrastructure Hosted", "label_ar": "البنية التحتية" },
+                    { "code": "MFAEnabled", "label_en": "MFA Enabled", "label_ar": "تفعيل المصادقة متعددة العوامل" },
+                    { "code": "MFAStatusDetails", "label_en": "MFA Status Details", "label_ar": "تفاصيل حالة MFA" },
+                    { "code": "AssociatedInformationSystems", "label_en": "Associated Information Systems", "label_ar": "الأنظمة المرتبطة" },
+                    { "code": "Confidentiality", "label_en": "Confidentiality Rating", "label_ar": "تصنيف السرية" },
+                    { "code": "Integrity", "label_en": "Integrity Rating", "label_ar": "تصنيف السلامة" },
+                    { "code": "Availability", "label_en": "Availability Rating", "label_ar": "تصنيف التوفر" },
+                    { "code": "OverallCategorizationRating", "label_en": "Overall Categorization", "label_ar": "التصنيف الكلي" },
+                    { "code": "HighestInformationClassification", "label_en": "Highest Classification", "label_ar": "أعلى تصنيف للمعلومات" },
+                    { "code": "RiskHighlightedByIT", "label_en": "Risk Highlighted by IT", "label_ar": "مخاطر أشار إليها قسم تقنية المعلومات" },
+                    { "code": "AdditionalNote", "label_en": "Additional Note", "label_ar": "ملاحظات إضافية" },
+                    { "code": "Logo", "label_en": "Logo", "label_ar": "الشعار" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "آخر تحديث بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ آخر تحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+  ]
+}

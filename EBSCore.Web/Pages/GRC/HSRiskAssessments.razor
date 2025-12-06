@@ -1,0 +1,155 @@
+@page "/GRC/HSRiskAssessments"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["HSRiskAssessments"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["HazardDescription"]</th>
+            <th>@Localizer["LocationArea"]</th>
+            <th>@Localizer["RiskLevel"]</th>
+            <th>@Localizer["RiskOwner"]</th>
+            <th>@Localizer["Status"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (risks is null)
+        {
+            <tr><td colspan="6">@Localizer["Loading"]</td></tr>
+        }
+        else if (!risks.Any())
+        {
+            <tr><td colspan="6">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var risk in risks)
+            {
+                <tr>
+                    <td>@risk.HazardDescription</td>
+                    <td>@risk.LocationArea</td>
+                    <td>@risk.RiskLevel</td>
+                    <td>@risk.RiskOwner</td>
+                    <td>@risk.Status</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(risk.HazardID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(risk.HazardID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.HazardID.HasValue ? "EditRisk" : "AddRisk"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["HazardDescription"]</label>
+                    <textarea class="form-control" @bind="editing.HazardDescription"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["LocationArea"]</label>
+                    <input class="form-control" @bind="editing.LocationArea" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedActivity"]</label>
+                    <input class="form-control" @bind="editing.RelatedActivity" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["PotentialImpact"]</label>
+                    <textarea class="form-control" @bind="editing.PotentialImpact"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Likelihood"]</label>
+                    <input class="form-control" @bind="editing.Likelihood" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Severity"]</label>
+                    <input class="form-control" @bind="editing.Severity" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RiskLevel"]</label>
+                    <input class="form-control" @bind="editing.RiskLevel" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ExistingControls"]</label>
+                    <textarea class="form-control" @bind="editing.ExistingControls"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AdditionalControlsNeeded"]</label>
+                    <textarea class="form-control" @bind="editing.AdditionalControlsNeeded"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RiskOwner"]</label>
+                    <input class="form-control" @bind="editing.RiskOwner" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["NextReviewDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.NextReviewDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Status"]</label>
+                    <input class="form-control" @bind="editing.Status" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<HSRiskAssessment> risks;
+    private HSRiskAssessment editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        risks = await Http.GetFromJsonAsync<List<HSRiskAssessment>>("api/HSRiskAssessment/Get");
+    }
+
+    private void CreateNew()
+    {
+        editing = new HSRiskAssessment();
+    }
+
+    private async Task Edit(long? id)
+    {
+        var json = await Http.GetStringAsync($"api/HSRiskAssessment/GetOne?hazardId={id}");
+        var rows = System.Text.Json.JsonSerializer.Deserialize<List<HSRiskAssessment>>(json);
+        editing = rows?.FirstOrDefault();
+    }
+
+    private async Task Save()
+    {
+        await Http.PostAsJsonAsync("api/HSRiskAssessment/Save", editing);
+        risks = await Http.GetFromJsonAsync<List<HSRiskAssessment>>("api/HSRiskAssessment/Get");
+        editing = null;
+    }
+
+    private async Task Delete(long? id)
+    {
+        await Http.DeleteAsync($"api/HSRiskAssessment/Delete?hazardId={id}");
+        risks = await Http.GetFromJsonAsync<List<HSRiskAssessment>>("api/HSRiskAssessment/Get");
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+}

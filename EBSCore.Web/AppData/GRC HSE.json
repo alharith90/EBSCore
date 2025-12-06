@@ -1,0 +1,54 @@
+{
+  "pillar_code": "HSE",
+  "pillar_en": "Health, Safety & Environment",
+  "pillar_ar": "الصحة والسلامة والبيئة",
+  "modules": [
+    {
+      "module_code": "HSIncident",
+      "module_en": "Safety Incident Management",
+      "module_ar": "إدارة حوادث السلامة",
+      "table_name": "HSIncident",
+      "fields": [
+        { "code": "IncidentID", "label_en": "Incident ID", "label_ar": "معرف الحادث" },
+        { "code": "IncidentTitle", "label_en": "Incident Title", "label_ar": "عنوان الحادث" },
+        { "code": "IncidentDateTime", "label_en": "Date & Time", "label_ar": "التاريخ والوقت" },
+        { "code": "Location", "label_en": "Location", "label_ar": "الموقع" },
+        { "code": "IncidentType", "label_en": "Incident Type", "label_ar": "نوع الحادث" },
+        { "code": "PersonsInvolved", "label_en": "Persons Involved", "label_ar": "الأشخاص المعنيون" },
+        { "code": "InjurySeverity", "label_en": "Injury Severity", "label_ar": "مدى خطورة الإصابة" },
+        { "code": "Description", "label_en": "Description", "label_ar": "الوصف التفصيلي" },
+        { "code": "ImmediateActions", "label_en": "Immediate Actions Taken", "label_ar": "الإجراءات الفورية المتخذة" },
+        { "code": "RootCause", "label_en": "Root Cause", "label_ar": "السبب الجذري" },
+        { "code": "RelatedHazard", "label_en": "Related Hazard", "label_ar": "الخطر المرتبط" },
+        { "code": "RelatedActivity", "label_en": "Related Activity/Process", "label_ar": "النشاط/العملية المرتبطة" },
+        { "code": "RelatedRegulation", "label_en": "Related Regulation", "label_ar": "اللائحة ذات الصلة" },
+        { "code": "CorrectiveActions", "label_en": "Corrective Actions", "label_ar": "الإجراءات التصحيحية" },
+        { "code": "IncidentStatus", "label_en": "Incident Status", "label_ar": "حالة الحادث" },
+        { "code": "ReportedBy", "label_en": "Reported By", "label_ar": "أبلغ عنه بواسطة" },
+        { "code": "Reportable", "label_en": "Reportable to Regulator?", "label_ar": "بلاغ للجهة التنظيمية؟" },
+        { "code": "DateClosed", "label_en": "Date Closed", "label_ar": "تاريخ الإغلاق" }
+      ]
+    },
+    {
+      "module_code": "HSRiskAssessment",
+      "module_en": "Hazard & Risk Assessment",
+      "module_ar": "تقييم المخاطر والمخاطر المهنية",
+      "table_name": "HSRiskAssessment",
+      "fields": [
+        { "code": "HazardID", "label_en": "Hazard ID", "label_ar": "معرف الخطر" },
+        { "code": "HazardDescription", "label_en": "Hazard Description", "label_ar": "وصف الخطر" },
+        { "code": "LocationArea", "label_en": "Location/Area", "label_ar": "الموقع/المنطقة" },
+        { "code": "RelatedActivity", "label_en": "Related Activity/Process", "label_ar": "النشاط/العملية المرتبطة" },
+        { "code": "PotentialImpact", "label_en": "Potential Impact", "label_ar": "الأثر المحتمل" },
+        { "code": "Likelihood", "label_en": "Likelihood", "label_ar": "الاحتمالية" },
+        { "code": "Severity", "label_en": "Severity", "label_ar": "درجة الخطورة" },
+        { "code": "RiskLevel", "label_en": "Risk Level", "label_ar": "مستوى المخاطر" },
+        { "code": "ExistingControls", "label_en": "Existing Controls", "label_ar": "الضوابط الحالية" },
+        { "code": "AdditionalControlsNeeded", "label_en": "Additional Controls Needed", "label_ar": "الضوابط الإضافية المطلوبة" },
+        { "code": "RiskOwner", "label_en": "Risk Owner", "label_ar": "مالك المخاطر" },
+        { "code": "NextReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادم" },
+        { "code": "Status", "label_en": "Status", "label_ar": "الحالة" }
+      ]
+    }
+  ]
+}

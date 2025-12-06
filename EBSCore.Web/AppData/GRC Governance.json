@@ -1,0 +1,147 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "GOV",
+      "pillar_en": "Governance & Strategy",
+      "pillar_ar": "الحوكمة والاستراتيجية",
+      "categories": [
+        {
+          "category_code": "STR",
+          "category_en": "Strategy",
+          "category_ar": "الاستراتيجية",
+          "modules": [
+            {
+              "module_code": "StrategicObjective",
+              "module_en": "Strategic Objectives",
+              "module_ar": "الأهداف الاستراتيجية",
+              "tables": [
+                {
+                  "table_name": "StrategicObjective",
+                  "fields": [
+                    { "code": "ObjectiveID", "label_en": "Objective ID", "label_ar": "معرف الهدف" },
+                    { "code": "ObjectiveCode", "label_en": "Objective Code", "label_ar": "كود الهدف" },
+                    { "code": "ObjectiveNameEN", "label_en": "Objective Name", "label_ar": "اسم الهدف" },
+                    { "code": "ObjectiveNameAR", "label_en": "Objective Name (Arabic)", "label_ar": "اسم الهدف عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "Category", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "Perspective", "label_en": "Perspective", "label_ar": "المنظور الاستراتيجي" },
+                    { "code": "OwnerUserID", "label_en": "Objective Owner", "label_ar": "مالك الهدف" },
+                    { "code": "DepartmentID", "label_en": "Department", "label_ar": "الإدارة" },
+                    { "code": "StartDate", "label_en": "Start Date", "label_ar": "تاريخ البدء" },
+                    { "code": "EndDate", "label_en": "End Date", "label_ar": "تاريخ الانتهاء" },
+                    { "code": "TargetValue", "label_en": "Target Value", "label_ar": "القيمة المستهدفة" },
+                    { "code": "UnitEN", "label_en": "Unit", "label_ar": "وحدة القياس" },
+                    { "code": "UnitAR", "label_en": "Unit (Arabic)", "label_ar": "وحدة القياس عربي" },
+                    { "code": "RiskAppetiteThreshold", "label_en": "Risk Appetite Threshold", "label_ar": "حد شهية المخاطر" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "StrategicKPI",
+              "module_en": "Strategic KPIs",
+              "module_ar": "المؤشرات الاستراتيجية",
+              "tables": [
+                {
+                  "table_name": "StrategicKPI",
+                  "fields": [
+                    { "code": "KPIID", "label_en": "KPI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "UnitID", "label_en": "Unit", "label_ar": "الوحدة" },
+                    { "code": "Category", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "Type", "label_en": "Type", "label_ar": "النوع" },
+                    { "code": "ObjectiveID", "label_en": "Objective ID", "label_ar": "معرف الهدف" },
+                    { "code": "Title", "label_en": "Title", "label_ar": "العنوان" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "TargetValue", "label_en": "Target Value", "label_ar": "القيمة المستهدفة" },
+                    { "code": "ThresholdGreen", "label_en": "Green Threshold", "label_ar": "حد الأخضر" },
+                    { "code": "ThresholdRed", "label_en": "Red Threshold", "label_ar": "حد الأحمر" },
+                    { "code": "ThresholdMethod", "label_en": "Threshold Method", "label_ar": "طريقة الحد" },
+                    { "code": "Unit", "label_en": "Unit", "label_ar": "الوحدة" },
+                    { "code": "Frequency", "label_en": "Frequency", "label_ar": "التكرار" },
+                    { "code": "CalculationMethod", "label_en": "Calculation Method", "label_ar": "طريقة الحساب" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "Owner", "label_en": "Owner", "label_ar": "المالك" },
+                    { "code": "EscalationPlan", "label_en": "Escalation Plan", "label_ar": "خطة التصعيد" },
+                    { "code": "ActivationCriteria", "label_en": "Activation Criteria", "label_ar": "معايير التفعيل" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "ModifiedBy", "label_en": "Modified By", "label_ar": "عُدل بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                },
+                {
+                  "table_name": "KPIResult",
+                  "fields": [
+                    { "code": "ResultID", "label_en": "Result ID", "label_ar": "معرف النتيجة" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "KPIID", "label_en": "KPI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "Period", "label_en": "Period", "label_ar": "الفترة" },
+                    { "code": "Value", "label_en": "Value", "label_ar": "القيمة" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "Comments", "label_en": "Comments", "label_ar": "ملاحظات" },
+                    { "code": "EvidenceFile", "label_en": "Evidence File", "label_ar": "ملف الإثبات" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                },
+                {
+                  "table_name": "KPILink",
+                  "fields": [
+                    { "code": "LinkID", "label_en": "Link ID", "label_ar": "معرف الرابط" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "KPIID", "label_en": "KPI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "LinkedType", "label_en": "Linked Type", "label_ar": "نوع الربط" },
+                    { "code": "LinkedID", "label_en": "Linked ID", "label_ar": "معرف العنصر المرتبط" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "Policy",
+              "module_en": "Policy Management",
+              "module_ar": "إدارة السياسات",
+              "tables": [
+                {
+                  "table_name": "Policy",
+                  "fields": [
+                    { "code": "PolicyID", "label_en": "Policy ID", "label_ar": "معرف السياسة" },
+                    { "code": "PolicyCode", "label_en": "Policy Code", "label_ar": "كود السياسة" },
+                    { "code": "PolicyNameEN", "label_en": "Policy Name", "label_ar": "اسم السياسة" },
+                    { "code": "PolicyNameAR", "label_en": "Policy Name (Arabic)", "label_ar": "اسم السياسة عربي" },
+                    { "code": "PolicyType", "label_en": "Policy Type", "label_ar": "نوع السياسة" },
+                    { "code": "CategoryEN", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "CategoryAR", "label_en": "Category (Arabic)", "label_ar": "الفئة عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "EffectiveDate", "label_en": "Effective Date", "label_ar": "تاريخ السريان" },
+                    { "code": "ReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                    { "code": "OwnerUserID", "label_en": "Policy Owner", "label_ar": "مالك السياسة" },
+                    { "code": "ApproverUserID", "label_en": "Approver", "label_ar": "الموافق" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "RelatedRegulationIDs", "label_en": "Related Regulations", "label_ar": "التشريعات ذات الصلة" },
+                    { "code": "RelatedControlIDs", "label_en": "Related Controls", "label_ar": "الضوابط المرتبطة" },
+                    { "code": "VersionNumber", "label_en": "Version", "label_ar": "الإصدار" },
+                    { "code": "DocumentPath", "label_en": "Document Path", "label_ar": "مسار المستند" },
+                    { "code": "IsMandatory", "label_en": "Mandatory?", "label_ar": "إلزامي؟" },
+                    { "code": "AppliesToRoles", "label_en": "Applies To Roles", "label_ar": "تنطبق على الأدوار" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "آخر تحديث بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ آخر تحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

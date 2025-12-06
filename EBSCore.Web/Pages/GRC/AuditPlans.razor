@@ -1,0 +1,148 @@
+@page "/GRC/AuditPlans"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["AuditPlans"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["AuditTitle"]</th>
+            <th>@Localizer["AuditType"]</th>
+            <th>@Localizer["LeadAuditor"]</th>
+            <th>@Localizer["StartDate"]</th>
+            <th>@Localizer["EndDate"]</th>
+            <th>@Localizer["OverallResult"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (records is null)
+        {
+            <tr><td colspan="7">@Localizer["Loading"]</td></tr>
+        }
+        else if (!records.Any())
+        {
+            <tr><td colspan="7">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var item in records)
+            {
+                <tr>
+                    <td>@item.AuditTitle</td>
+                    <td>@item.AuditType</td>
+                    <td>@item.LeadAuditor</td>
+                    <td>@item.StartDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@item.EndDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@item.OverallResult</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(item.AuditID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(item.AuditID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.AuditID.HasValue ? "EditAuditPlan" : "AddAuditPlan"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AuditTitle"]</label>
+                    <input class="form-control" @bind="editing.AuditTitle" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AuditType"]</label>
+                    <input class="form-control" @bind="editing.AuditType" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Auditee"]</label>
+                    <input class="form-control" @bind="editing.Auditee" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["LeadAuditor"]</label>
+                    <input class="form-control" @bind="editing.LeadAuditor" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AuditTeam"]</label>
+                    <textarea class="form-control" @bind="editing.AuditTeam"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AuditCriteria"]</label>
+                    <textarea class="form-control" @bind="editing.AuditCriteria"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["StartDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.StartDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["EndDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.EndDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["OverallResult"]</label>
+                    <input class="form-control" @bind="editing.OverallResult" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["NextAuditDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.NextAuditDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<AuditPlan> records;
+    private AuditPlan editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        records = await Http.GetFromJsonAsync<List<AuditPlan>>("/api/AuditPlan/Get");
+    }
+
+    private void CreateNew()
+    {
+        editing = new AuditPlan();
+    }
+
+    private async Task Edit(long? id)
+    {
+        var result = await Http.GetFromJsonAsync<List<AuditPlan>>($"/api/AuditPlan/GetOne?auditId={id}");
+        editing = result?.FirstOrDefault();
+    }
+
+    private async Task Delete(long? id)
+    {
+        await Http.DeleteAsync($"/api/AuditPlan/Delete?auditId={id}");
+        records = await Http.GetFromJsonAsync<List<AuditPlan>>("/api/AuditPlan/Get");
+    }
+
+    private async Task Save()
+    {
+        await Http.PostAsJsonAsync("/api/AuditPlan/Save", editing);
+        records = await Http.GetFromJsonAsync<List<AuditPlan>>("/api/AuditPlan/Get");
+        editing = null;
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+}

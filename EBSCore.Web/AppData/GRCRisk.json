@@ -1,0 +1,189 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "RISK",
+      "pillar_en": "Risk Management",
+      "pillar_ar": "إدارة المخاطر",
+      "categories": [
+        {
+          "category_code": "REG",
+          "category_en": "Risk Register & Assessment",
+          "category_ar": "سجل وتقييم المخاطر",
+          "modules": [
+            {
+              "module_code": "RiskCore",
+              "module_en": "Risk Core & Assessments",
+              "module_ar": "المخاطر والتقييمات",
+              "tables": [
+                {
+                  "table_name": "RiskCategory",
+                  "fields": [
+                    { "code": "CategoryID", "label_en": "Category ID", "label_ar": "معرف الفئة" },
+                    { "code": "CategoryNameEN", "label_en": "Category Name", "label_ar": "اسم الفئة" },
+                    { "code": "CategoryNameAR", "label_en": "Category Name (Arabic)", "label_ar": "اسم الفئة عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "ParentCategoryID", "label_en": "Parent Category", "label_ar": "الفئة الرئيسية" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskTemplate",
+                  "fields": [
+                    { "code": "TemplateID", "label_en": "Template ID", "label_ar": "معرف القالب" },
+                    { "code": "TemplateNameEN", "label_en": "Template Name", "label_ar": "اسم القالب" },
+                    { "code": "TemplateNameAR", "label_en": "Template Name (Arabic)", "label_ar": "اسم القالب عربي" },
+                    { "code": "DefaultCategoryID", "label_en": "Default Category", "label_ar": "الفئة الافتراضية" },
+                    { "code": "DefaultImpact", "label_en": "Default Impact", "label_ar": "التأثير الافتراضي" },
+                    { "code": "DefaultLikelihood", "label_en": "Default Likelihood", "label_ar": "الاحتمالية الافتراضية" },
+                    { "code": "DefaultRiskLevel", "label_en": "Default Risk Level", "label_ar": "مستوى المخاطر الافتراضي" },
+                    { "code": "GuidanceEN", "label_en": "Guidance", "label_ar": "إرشادات" },
+                    { "code": "GuidanceAR", "label_en": "Guidance (Arabic)", "label_ar": "إرشادات عربي" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "Risk",
+                  "fields": [
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "RiskCode", "label_en": "Risk Code", "label_ar": "كود المخاطر" },
+                    { "code": "RiskNameEN", "label_en": "Risk Name", "label_ar": "اسم المخاطر" },
+                    { "code": "RiskNameAR", "label_en": "Risk Name (Arabic)", "label_ar": "اسم المخاطر عربي" },
+                    { "code": "RiskDescriptionEN", "label_en": "Risk Description", "label_ar": "وصف المخاطر" },
+                    { "code": "RiskDescriptionAR", "label_en": "Risk Description (Arabic)", "label_ar": "وصف المخاطر عربي" },
+                    { "code": "CategoryID", "label_en": "Risk Category", "label_ar": "تصنيف المخاطر" },
+                    { "code": "OwnerUserID", "label_en": "Risk Owner", "label_ar": "مالك المخاطر" },
+                    { "code": "Source", "label_en": "Risk Source", "label_ar": "مصدر المخاطر" },
+                    { "code": "PotentialImpact", "label_en": "Potential Impact", "label_ar": "الأثر المحتمل" },
+                    { "code": "InherentLikelihood", "label_en": "Inherent Likelihood", "label_ar": "الاحتمالية المتأصلة" },
+                    { "code": "InherentImpact", "label_en": "Inherent Impact", "label_ar": "التأثير المتأصل" },
+                    { "code": "InherentRiskLevel", "label_en": "Inherent Risk Level", "label_ar": "مستوى المخاطر المتأصلة" },
+                    { "code": "ExistingControls", "label_en": "Existing Controls", "label_ar": "الضوابط الحالية" },
+                    { "code": "ControlEffectiveness", "label_en": "Control Effectiveness", "label_ar": "فعالية الضوابط" },
+                    { "code": "ResidualLikelihood", "label_en": "Residual Likelihood", "label_ar": "الاحتمالية المتبقية" },
+                    { "code": "ResidualImpact", "label_en": "Residual Impact", "label_ar": "التأثير المتبقي" },
+                    { "code": "ResidualRiskLevel", "label_en": "Residual Risk Level", "label_ar": "مستوى المخاطر المتبقية" },
+                    { "code": "RiskAppetiteThreshold", "label_en": "Risk Appetite Threshold", "label_ar": "حد شهية المخاطر" },
+                    { "code": "TreatmentDecision", "label_en": "Treatment Decision", "label_ar": "قرار المعالجة" },
+                    { "code": "RiskTreatmentPlanID", "label_en": "Risk Treatment Plan", "label_ar": "خطة معالجة المخاطر" },
+                    { "code": "NextReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                    { "code": "RelatedObjectiveID", "label_en": "Related Objective", "label_ar": "الهدف المرتبط" },
+                    { "code": "RelatedComplianceObligationID", "label_en": "Related Compliance Obligation", "label_ar": "الالتزام التنظيمي المرتبط" },
+                    { "code": "RelatedIncidentID", "label_en": "Related Incident/Event", "label_ar": "الحادث/الواقعة المرتبطة" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskAssessmentSnapshot",
+                  "fields": [
+                    { "code": "SnapshotID", "label_en": "Snapshot ID", "label_ar": "معرف لقطة التقييم" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "AssessmentDate", "label_en": "Assessment Date", "label_ar": "تاريخ التقييم" },
+                    { "code": "InherentLikelihood", "label_en": "Inherent Likelihood", "label_ar": "الاحتمالية المتأصلة" },
+                    { "code": "InherentImpact", "label_en": "Inherent Impact", "label_ar": "التأثير المتأصل" },
+                    { "code": "InherentRiskLevel", "label_en": "Inherent Risk Level", "label_ar": "مستوى المخاطر المتأصلة" },
+                    { "code": "ResidualLikelihood", "label_en": "Residual Likelihood", "label_ar": "الاحتمالية المتبقية" },
+                    { "code": "ResidualImpact", "label_en": "Residual Impact", "label_ar": "التأثير المتبقي" },
+                    { "code": "ResidualRiskLevel", "label_en": "Residual Risk Level", "label_ar": "مستوى المخاطر المتبقية" },
+                    { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" },
+                    { "code": "RecordedBy", "label_en": "Recorded By", "label_ar": "تم التسجيل بواسطة" },
+                    { "code": "RecordedAt", "label_en": "Recorded At", "label_ar": "تاريخ التسجيل" }
+                  ]
+                },
+                {
+                  "table_name": "LossEvent",
+                  "fields": [
+                    { "code": "LossEventID", "label_en": "Loss Event ID", "label_ar": "معرف حدث الخسارة" },
+                    { "code": "RiskID", "label_en": "Related Risk ID", "label_ar": "معرف المخاطر المرتبطة" },
+                    { "code": "EventDate", "label_en": "Event Date", "label_ar": "تاريخ الحدث" },
+                    { "code": "DescriptionEN", "label_en": "Event Description", "label_ar": "وصف الحدث" },
+                    { "code": "DescriptionAR", "label_en": "Event Description (Arabic)", "label_ar": "وصف الحدث عربي" },
+                    { "code": "FinancialImpact", "label_en": "Financial Impact", "label_ar": "الأثر المالي" },
+                    { "code": "OperationalImpact", "label_en": "Operational Impact", "label_ar": "الأثر التشغيلي" },
+                    { "code": "RootCause", "label_en": "Root Cause", "label_ar": "السبب الجذري" },
+                    { "code": "ActionsTaken", "label_en": "Actions Taken", "label_ar": "الإجراءات المتخذة" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "RiskControlKRI",
+              "module_en": "Control & KRI Engine",
+              "module_ar": "محرك الضوابط ومؤشرات المخاطر",
+              "tables": [
+                {
+                  "table_name": "ControlLibrary",
+                  "fields": [
+                    { "code": "ControlID", "label_en": "Control ID", "label_ar": "معرف الضابط" },
+                    { "code": "ControlNameEN", "label_en": "Control Name", "label_ar": "اسم الضابط" },
+                    { "code": "ControlNameAR", "label_en": "Control Name (Arabic)", "label_ar": "اسم الضابط عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "ControlType", "label_en": "Control Type", "label_ar": "نوع الضابط" },
+                    { "code": "ControlCategory", "label_en": "Control Category", "label_ar": "فئة الضابط" },
+                    { "code": "ControlOwnerID", "label_en": "Control Owner", "label_ar": "مالك الضابط" },
+                    { "code": "Frequency", "label_en": "Frequency", "label_ar": "التكرار" },
+                    { "code": "IsKeyControl", "label_en": "Key Control", "label_ar": "ضابط رئيسي" },
+                    { "code": "ImplementationStatus", "label_en": "Implementation Status", "label_ar": "حالة التنفيذ" },
+                    { "code": "LastTestDate", "label_en": "Last Test Date", "label_ar": "تاريخ آخر اختبار" },
+                    { "code": "LastTestResult", "label_en": "Last Test Result", "label_ar": "نتيجة آخر اختبار" },
+                    { "code": "DocumentationPath", "label_en": "Documentation Reference", "label_ar": "مرجع التوثيق" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskControlMap",
+                  "fields": [
+                    { "code": "RiskControlMapID", "label_en": "Map ID", "label_ar": "معرف الربط" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "ControlID", "label_en": "Control ID", "label_ar": "معرف الضابط" },
+                    { "code": "Effectiveness", "label_en": "Effectiveness", "label_ar": "الفعالية" },
+                    { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+                  ]
+                },
+                {
+                  "table_name": "KRILibrary",
+                  "fields": [
+                    { "code": "KRIID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "KRINameEN", "label_en": "KRI Name", "label_ar": "اسم المؤشر" },
+                    { "code": "KRINameAR", "label_en": "KRI Name (Arabic)", "label_ar": "اسم المؤشر عربي" },
+                    { "code": "DescriptionEN", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "DescriptionAR", "label_en": "Description (Arabic)", "label_ar": "الوصف عربي" },
+                    { "code": "Frequency", "label_en": "Measurement Frequency", "label_ar": "تواتر القياس" },
+                    { "code": "DataSourceEN", "label_en": "Data Source", "label_ar": "مصدر البيانات" },
+                    { "code": "DataSourceAR", "label_en": "Data Source (Arabic)", "label_ar": "مصدر البيانات عربي" },
+                    { "code": "Threshold", "label_en": "Threshold Value", "label_ar": "القيمة الحدية" },
+                    { "code": "OwnerUserID", "label_en": "Owner/Monitor", "label_ar": "المالك/المراقب" },
+                    { "code": "StatusID", "label_en": "Status", "label_ar": "الحالة" }
+                  ]
+                },
+                {
+                  "table_name": "RiskKRILink",
+                  "fields": [
+                    { "code": "RiskKRILinkID", "label_en": "Risk-KRI Link ID", "label_ar": "معرف ربط المخاطر بالمؤشر" },
+                    { "code": "RiskID", "label_en": "Risk ID", "label_ar": "معرف المخاطر" },
+                    { "code": "KRIID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+                  ]
+                },
+                {
+                  "table_name": "KRIValue",
+                  "fields": [
+                    { "code": "KRIValueID", "label_en": "KRI Value ID", "label_ar": "معرف قيمة المؤشر" },
+                    { "code": "KRIID", "label_en": "KRI ID", "label_ar": "معرف المؤشر" },
+                    { "code": "MeasurementDate", "label_en": "Measurement Date", "label_ar": "تاريخ القياس" },
+                    { "code": "Value", "label_en": "Current Value", "label_ar": "القيمة الحالية" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "RecordedBy", "label_en": "Recorded By", "label_ar": "تم التسجيل بواسطة" },
+                    { "code": "RecordedAt", "label_en": "Recorded At", "label_ar": "تاريخ التسجيل" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "PageTitle": "خطة معالجة المخاطر",
+  "RelatedRisk": "الخطر المرتبط",
+  "MitigationAction": "إجراء التخفيف",
+  "ActionOwner": "مالك الإجراء",
+  "DueDate": "تاريخ الاستحقاق",
+  "CompletionStatus": "حالة الإكمال",
+  "Effectiveness": "الفعالية",
+  "ModalTitle": "تفاصيل الخطة",
+  "SaveSuccess": "تم حفظ الخطة بنجاح",
+  "DeleteTitle": "حذف الخطة",
+  "DeleteText": "هل أنت متأكد من حذف الخطة {0}؟",
+  "ConfirmDelete": "نعم، احذفها!",
+  "DeleteSuccess": "تم حذف الخطة بنجاح"
+}

@@ -1,0 +1,15 @@
+{
+  "PageTitle": "Risk Treatment Plan",
+  "RelatedRisk": "Related Risk",
+  "MitigationAction": "Mitigation Action",
+  "ActionOwner": "Action Owner",
+  "DueDate": "Due Date",
+  "CompletionStatus": "Completion Status",
+  "Effectiveness": "Effectiveness",
+  "ModalTitle": "Plan Details",
+  "SaveSuccess": "Plan saved successfully",
+  "DeleteTitle": "Delete Plan",
+  "DeleteText": "Are you sure you want to delete plan {0}?",
+  "ConfirmDelete": "Yes, delete it!",
+  "DeleteSuccess": "Plan deleted successfully"
+}

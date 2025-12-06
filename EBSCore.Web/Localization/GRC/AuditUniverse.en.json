@@ -1,0 +1,20 @@
+{
+  "AuditUniverse": "Audit Universe",
+  "AddNew": "Add New",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Loading": "Loading...",
+  "NoData": "No records found",
+  "AuditUniverseList": "Audit Universe",
+  "EntityProcessName": "Entity/Process Name",
+  "EntityOwner": "Entity Owner",
+  "RiskRating": "Inherent Risk Rating",
+  "NextAuditDue": "Next Planned Audit",
+  "AuditFrequency": "Audit Frequency",
+  "AuditPriority": "Audit Priority",
+  "LastAuditDate": "Last Audit Date",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "EditAuditUniverse": "Edit Audit Universe",
+  "AddAuditUniverse": "Add Audit Universe"
+}

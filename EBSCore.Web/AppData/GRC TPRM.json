@@ -1,0 +1,94 @@
+{
+  "pillar_code": "TPRM",
+  "pillar_en": "Third Party Risk Management",
+  "pillar_ar": "إدارة مخاطر الطرف الثالث",
+  "categories": [
+    {
+      "category_code": "TPR",
+      "category_en": "Third Party Risk",
+      "category_ar": "مخاطر الطرف الثالث",
+      "modules": [
+        {
+          "module_code": "ThirdPartyProfile",
+          "module_en": "Third Party Profile",
+          "module_ar": "ملف الطرف الثالث",
+          "tables": [
+            {
+              "table_name": "ThirdPartyProfile",
+              "fields": [
+                { "code": "ThirdPartyID", "label_en": "Third Party ID", "label_ar": "معرف الطرف الثالث" },
+                { "code": "ThirdPartyName", "label_en": "Name of Third Party", "label_ar": "اسم الطرف الثالث" },
+                { "code": "ServiceType", "label_en": "Type of Service/Product", "label_ar": "نوع الخدمة/المنتج" },
+                { "code": "CriticalityTier", "label_en": "Criticality Tier", "label_ar": "مستوى حرجية المورد" },
+                { "code": "InherentRiskRating", "label_en": "Inherent Risk Rating", "label_ar": "تصنيف المخاطر الكامنة" },
+                { "code": "CountryRegion", "label_en": "Country/Region", "label_ar": "الدولة/المنطقة" },
+                { "code": "BusinessOwner", "label_en": "Business Owner (Internal)", "label_ar": "المالك الداخلي" },
+                { "code": "ContractValue", "label_en": "Contract Value", "label_ar": "قيمة العقد" },
+                { "code": "ContractExpiryDate", "label_en": "Contract Expiry Date", "label_ar": "تاريخ انتهاء العقد" },
+                { "code": "KeySLAKPIRequirements", "label_en": "Key SLA/KPI Requirements", "label_ar": "أهم متطلبات مستوى الخدمة" },
+                { "code": "ComplianceRequirements", "label_en": "Compliance Requirements for Vendor", "label_ar": "متطلبات الامتثال على المورد" },
+                { "code": "PrivacyDataProcessing", "label_en": "Privacy/Data Processing?", "label_ar": "معالجة بيانات شخصية؟" },
+                { "code": "RelatedAssetProcess", "label_en": "Related Internal Asset/Process", "label_ar": "الأصل/العملية المرتبطة" },
+                { "code": "ContingencyPlan", "label_en": "Contingency/Alternative", "label_ar": "خطة بديلة في حال فشل المورد" },
+                { "code": "LastAssessmentDate", "label_en": "Last Assessment Date", "label_ar": "تاريخ آخر تقييم" },
+                { "code": "NextReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                { "code": "Status", "label_en": "Status", "label_ar": "الحالة" }
+              ]
+            }
+          ]
+        },
+        {
+          "module_code": "ThirdPartyAssessment",
+          "module_en": "Third Party Risk Assessment",
+          "module_ar": "تقييم مخاطر الطرف الثالث",
+          "tables": [
+            {
+              "table_name": "ThirdPartyAssessment",
+              "fields": [
+                { "code": "AssessmentID", "label_en": "Assessment ID", "label_ar": "معرف التقييم" },
+                { "code": "ThirdPartyID", "label_en": "Third Party ID", "label_ar": "معرف الطرف الثالث" },
+                { "code": "AssessmentType", "label_en": "Assessment Type", "label_ar": "نوع التقييم" },
+                { "code": "DateOfAssessment", "label_en": "Date of Assessment", "label_ar": "تاريخ التقييم" },
+                { "code": "AreasAssessed", "label_en": "Areas Assessed", "label_ar": "المجالات التي تم تقييمها" },
+                { "code": "QuestionnaireScore", "label_en": "Questionnaire Score", "label_ar": "درجة التقييم" },
+                { "code": "OverallRiskRating", "label_en": "Overall Risk Rating", "label_ar": "تصنيف المخاطر العام" },
+                { "code": "FindingsIssues", "label_en": "Findings/Issues Identified", "label_ar": "المشكلات المحددة" },
+                { "code": "RequiredMitigations", "label_en": "Required Mitigations", "label_ar": "الإجراءات التصحيحية المطلوبة" },
+                { "code": "ResidualRiskRating", "label_en": "Residual Risk Rating", "label_ar": "تصنيف المخاطر المتبقي" },
+                { "code": "ApprovedForOnboarding", "label_en": "Approved for Onboarding?", "label_ar": "هل أعتمد للتعاقد؟" },
+                { "code": "NextAssessmentDue", "label_en": "Next Assessment Due", "label_ar": "موعد التقييم القادم" },
+                { "code": "AssessedBy", "label_en": "Assessed By", "label_ar": "تم التقييم بواسطة" },
+                { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+              ]
+            }
+          ]
+        },
+        {
+          "module_code": "ThirdPartyIncident",
+          "module_en": "Third Party Incidents & Performance",
+          "module_ar": "حوادث وأداء الموردين",
+          "tables": [
+            {
+              "table_name": "ThirdPartyIncident",
+              "fields": [
+                { "code": "IssueIncidentID", "label_en": "Issue/Incident ID", "label_ar": "معرف المشكلة/الحادث" },
+                { "code": "ThirdPartyID", "label_en": "Third Party ID", "label_ar": "معرف الطرف الثالث" },
+                { "code": "Date", "label_en": "Date", "label_ar": "التاريخ" },
+                { "code": "IssueType", "label_en": "Issue Type", "label_ar": "نوع المشكلة" },
+                { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                { "code": "ImpactOnBusiness", "label_en": "Impact on Business", "label_ar": "التأثير على العمل" },
+                { "code": "Severity", "label_en": "Severity", "label_ar": "مستوى الخطورة" },
+                { "code": "RelatedSLABreach", "label_en": "Related SLA/KPI Breach", "label_ar": "مؤشر الأداء المتأثر" },
+                { "code": "ActionsTakenByVendor", "label_en": "Actions Taken by Vendor", "label_ar": "إجراءات اتخذها المورد" },
+                { "code": "ActionsTakenInternally", "label_en": "Actions Taken Internally", "label_ar": "إجراءات اتخذت داخليًا" },
+                { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                { "code": "LinkedRiskEvent", "label_en": "Linked Risk/Event", "label_ar": "مرتبط بخطر/حدث" },
+                { "code": "Notes", "label_en": "Notes", "label_ar": "ملاحظات" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

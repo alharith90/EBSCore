@@ -1,0 +1,60 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "INFOSEC",
+      "pillar_en": "Information Security",
+      "pillar_ar": "أمن المعلومات",
+      "categories": [
+        {
+          "category_code": "AST",
+          "category_en": "Asset & System Inventory",
+          "category_ar": "جرد الأصول والأنظمة",
+          "modules": [
+            {
+              "module_code": "InformationSystem",
+              "module_en": "Information Systems",
+              "module_ar": "أنظمة المعلومات",
+              "tables": [
+                {
+                  "table_name": "InformationSystem",
+                  "fields": [
+                    { "code": "SystemID", "label_en": "System ID", "label_ar": "معرف النظام" },
+                    { "code": "SystemName", "label_en": "System Name", "label_ar": "اسم النظام" },
+                    { "code": "RPO", "label_en": "Recovery Point Objective (RPO)", "label_ar": "هدف نقطة الاستعادة" },
+                    { "code": "ApplicationLifecycleStatus", "label_en": "Lifecycle Status", "label_ar": "حالة دورة الحياة" },
+                    { "code": "Type", "label_en": "Type", "label_ar": "النوع" },
+                    { "code": "RequiredFor", "label_en": "Required For", "label_ar": "مطلوب لأجل" },
+                    { "code": "SystemDescription", "label_en": "System Description", "label_ar": "وصف النظام" },
+                    { "code": "PrimaryOwnerId", "label_en": "Primary Owner", "label_ar": "المالك الأساسي" },
+                    { "code": "SecondaryOwner", "label_en": "Secondary Owner", "label_ar": "مالك ثانوي" },
+                    { "code": "BusinessOwner", "label_en": "Business Owner", "label_ar": "مالك الأعمال" },
+                    { "code": "InternetFacing", "label_en": "Internet Facing", "label_ar": "يواجه الإنترنت" },
+                    { "code": "ThirdPartyAccess", "label_en": "Third-Party Access", "label_ar": "وصول طرف ثالث" },
+                    { "code": "NumberOfUsers", "label_en": "Number of Users", "label_ar": "عدد المستخدمين" },
+                    { "code": "LicenseType", "label_en": "License Type", "label_ar": "نوع الترخيص" },
+                    { "code": "Infrastructure", "label_en": "Infrastructure Hosted", "label_ar": "البنية التحتية" },
+                    { "code": "MFAEnabled", "label_en": "MFA Enabled", "label_ar": "تفعيل المصادقة متعددة العوامل" },
+                    { "code": "MFAStatusDetails", "label_en": "MFA Status Details", "label_ar": "تفاصيل حالة MFA" },
+                    { "code": "AssociatedInformationSystems", "label_en": "Associated Information Systems", "label_ar": "الأنظمة المرتبطة" },
+                    { "code": "Confidentiality", "label_en": "Confidentiality Rating", "label_ar": "تصنيف السرية" },
+                    { "code": "Integrity", "label_en": "Integrity Rating", "label_ar": "تصنيف السلامة" },
+                    { "code": "Availability", "label_en": "Availability Rating", "label_ar": "تصنيف التوفر" },
+                    { "code": "OverallCategorizationRating", "label_en": "Overall Categorization", "label_ar": "التصنيف الكلي" },
+                    { "code": "HighestInformationClassification", "label_en": "Highest Classification", "label_ar": "أعلى تصنيف للمعلومات" },
+                    { "code": "RiskHighlightedByIT", "label_en": "Risk Highlighted by IT", "label_ar": "مخاطر أشار إليها قسم تقنية المعلومات" },
+                    { "code": "AdditionalNote", "label_en": "Additional Note", "label_ar": "ملاحظات إضافية" },
+                    { "code": "Logo", "label_en": "Logo", "label_ar": "الشعار" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "آخر تحديث بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ آخر تحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "AuditPlans": "Audit Plans",
+  "AddNew": "Add New",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Loading": "Loading...",
+  "NoData": "No records found",
+  "AuditTitle": "Audit Title",
+  "AuditType": "Audit Type",
+  "Auditee": "Auditee",
+  "LeadAuditor": "Lead Auditor",
+  "StartDate": "Start Date",
+  "EndDate": "End Date",
+  "OverallResult": "Overall Result",
+  "NextAuditDate": "Next Audit Date",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "EditAuditPlan": "Edit Audit Plan",
+  "AddAuditPlan": "Add Audit Plan"
+}

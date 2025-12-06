@@ -1,0 +1,21 @@
+{
+  "RiskTemplates": "Risk Templates",
+  "AddNew": "Add New",
+  "TemplateNameEN": "Template Name (EN)",
+  "TemplateNameAR": "Template Name (AR)",
+  "DefaultCategoryID": "Default Category",
+  "DefaultImpact": "Default Impact",
+  "DefaultLikelihood": "Default Likelihood",
+  "DefaultRiskLevel": "Default Risk Level",
+  "GuidanceEN": "Guidance (EN)",
+  "GuidanceAR": "Guidance (AR)",
+  "StatusID": "Status",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "NoData": "No templates found",
+  "Loading": "Loading...",
+  "EditTemplate": "Edit Template",
+  "AddTemplate": "Add Template"
+}

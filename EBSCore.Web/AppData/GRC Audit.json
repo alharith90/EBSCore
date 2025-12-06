@@ -1,0 +1,103 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "AUD",
+      "pillar_en": "Audit Management",
+      "pillar_ar": "إدارة التدقيق",
+      "categories": [
+        {
+          "category_code": "PLAN",
+          "category_en": "Audit Planning",
+          "category_ar": "تخطيط التدقيق",
+          "modules": [
+            {
+              "module_code": "AuditUniverse",
+              "module_en": "Audit Universe",
+              "module_ar": "مجال التدقيق",
+              "tables": [
+                {
+                  "table_name": "AuditUniverse",
+                  "fields": [
+                    { "code": "EntityProcessID", "label_en": "Audit Entity/Process ID", "label_ar": "معرف الوحدة/العملية" },
+                    { "code": "EntityProcessName", "label_en": "Entity/Process Name", "label_ar": "اسم الوحدة/العملية" },
+                    { "code": "EntityOwner", "label_en": "Entity Owner", "label_ar": "مالك الوحدة" },
+                    { "code": "RiskRating", "label_en": "Inherent Risk Rating", "label_ar": "تصنيف المخاطر الكامنة" },
+                    { "code": "LastAuditDate", "label_en": "Last Audit Date", "label_ar": "تاريخ آخر تدقيق" },
+                    { "code": "NextAuditDue", "label_en": "Next Planned Audit", "label_ar": "تاريخ التدقيق القادم" },
+                    { "code": "AuditFrequency", "label_en": "Audit Frequency", "label_ar": "تواتر التدقيق" },
+                    { "code": "AuditPriority", "label_en": "Audit Priority", "label_ar": "أولوية التدقيق" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "AuditPlan",
+              "module_en": "Audit Plan & Schedule",
+              "module_ar": "خطة وجدول التدقيق",
+              "tables": [
+                {
+                  "table_name": "AuditPlan",
+                  "fields": [
+                    { "code": "AuditID", "label_en": "Audit ID", "label_ar": "معرف التدقيق" },
+                    { "code": "AuditTitle", "label_en": "Audit Title", "label_ar": "عنوان التدقيق" },
+                    { "code": "AuditType", "label_en": "Audit Type", "label_ar": "نوع التدقيق" },
+                    { "code": "ObjectivesScope", "label_en": "Objectives & Scope", "label_ar": "الأهداف والنطاق" },
+                    { "code": "Auditee", "label_en": "Auditee", "label_ar": "الجهة الخاضعة للتدقيق" },
+                    { "code": "LeadAuditor", "label_en": "Lead Auditor", "label_ar": "المدقق الرئيسي" },
+                    { "code": "AuditTeam", "label_en": "Audit Team", "label_ar": "فريق التدقيق" },
+                    { "code": "StartDate", "label_en": "Start Date", "label_ar": "تاريخ البدء" },
+                    { "code": "EndDate", "label_en": "End Date", "label_ar": "تاريخ الانتهاء" },
+                    { "code": "AuditCriteria", "label_en": "Audit Criteria/Standards", "label_ar": "معايير التدقيق" },
+                    { "code": "FindingsCount", "label_en": "Findings Count", "label_ar": "عدد الملاحظات" },
+                    { "code": "OverallResult", "label_en": "Overall Result", "label_ar": "النتيجة الإجمالية" },
+                    { "code": "ReportIssuedDate", "label_en": "Report Issued Date", "label_ar": "تاريخ إصدار التقرير" },
+                    { "code": "RelatedRisksReviewed", "label_en": "Related Risks Reviewed", "label_ar": "المخاطر التي تمت مراجعتها" },
+                    { "code": "RelatedControlsReviewed", "label_en": "Related Controls Reviewed", "label_ar": "الضوابط التي تمت مراجعتها" },
+                    { "code": "RelatedObligationsReviewed", "label_en": "Related Obligations Reviewed", "label_ar": "الالتزامات التي تمت مراجعتها" },
+                    { "code": "NextAuditDate", "label_en": "Next Audit Date", "label_ar": "تاريخ التدقيق القادم" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "FIND",
+          "category_en": "Audit Findings & Issues",
+          "category_ar": "نتائج وقضايا التدقيق",
+          "modules": [
+            {
+              "module_code": "AuditFinding",
+              "module_en": "Audit Findings Log",
+              "module_ar": "سجل نتائج التدقيق",
+              "tables": [
+                {
+                  "table_name": "AuditFinding",
+                  "fields": [
+                    { "code": "FindingID", "label_en": "Finding ID", "label_ar": "معرف الملاحظة" },
+                    { "code": "AuditID", "label_en": "Audit ID", "label_ar": "معرف عملية التدقيق" },
+                    { "code": "FindingTitle", "label_en": "Finding Title", "label_ar": "عنوان الملاحظة" },
+                    { "code": "Criteria", "label_en": "Criteria", "label_ar": "المعايير" },
+                    { "code": "Condition", "label_en": "Condition", "label_ar": "الحالة" },
+                    { "code": "Cause", "label_en": "Cause", "label_ar": "السبب" },
+                    { "code": "Effect", "label_en": "Effect", "label_ar": "الأثر" },
+                    { "code": "Recommendation", "label_en": "Recommendation", "label_ar": "التوصية" },
+                    { "code": "Category", "label_en": "Category", "label_ar": "الفئة" },
+                    { "code": "Severity", "label_en": "Severity", "label_ar": "مستوى الخطورة" },
+                    { "code": "RelatedRiskControl", "label_en": "Related Risk/Control/Obligation", "label_ar": "المخاطر/الضوابط/الالتزامات ذات الصلة" },
+                    { "code": "ResponsibleOwner", "label_en": "Responsible Owner", "label_ar": "المالك المسؤول" },
+                    { "code": "ActionPlanLink", "label_en": "Action Plan (link)", "label_ar": "خطة الإجراء" },
+                    { "code": "DueDate", "label_en": "Due Date", "label_ar": "تاريخ الاستحقاق" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "DateClosed", "label_en": "Date Closed", "label_ar": "تاريخ الإغلاق" },
+                    { "code": "VerifiedBy", "label_en": "Verified By", "label_ar": "تم التحقق بواسطة" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

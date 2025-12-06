@@ -1,0 +1,133 @@
+{
+  "pillar_code": "BCM",
+  "pillar_en": "Business Continuity Management",
+  "pillar_ar": "إدارة استمرارية الأعمال",
+  "categories": [
+    {
+      "category_code": "CONFIG",
+      "category_en": "Impact Configuration",
+      "category_ar": "تهيئة الأثر",
+      "modules": [
+        {
+          "module_code": "ImpactAspect",
+          "module_en": "Impact Aspects",
+          "module_ar": "جوانب الأثر",
+          "tables": [
+            {
+              "table_name": "BCMImpactAspects",
+              "fields": [
+                { "code": "ImpactAspectID", "label_en": "Aspect ID", "label_ar": "معرف الجانب" },
+                { "code": "AspectName", "label_en": "Aspect Name", "label_ar": "اسم الجانب" },
+                { "code": "Description", "label_en": "Description", "label_ar": "الوصف" }
+              ]
+            }
+          ]
+        },
+        {
+          "module_code": "ImpactTimeFrame",
+          "module_en": "Impact Time Frames",
+          "module_ar": "أطر زمن الأثر",
+          "tables": [
+            {
+              "table_name": "BCMImpactTimeFrames",
+              "fields": [
+                { "code": "ImpactTimeFrameID", "label_en": "Time Frame ID", "label_ar": "معرف الإطار الزمني" },
+                { "code": "TimeLabel", "label_en": "Time Label", "label_ar": "الوصف الزمني" },
+                { "code": "MinHours", "label_en": "Minimum Hours", "label_ar": "الحد الأدنى بالساعات" },
+                { "code": "MaxHours", "label_en": "Maximum Hours", "label_ar": "الحد الأقصى بالساعات" }
+              ]
+            }
+          ]
+        },
+        {
+          "module_code": "AspectTimeImpactLevel",
+          "module_en": "Aspect x Time Impact Levels",
+          "module_ar": "مستويات الأثر حسب الجانب والزمن",
+          "tables": [
+            {
+              "table_name": "BCMAspectTimeImpactLevels",
+              "fields": [
+                { "code": "AspectTimeImpactLevelID", "label_en": "Record ID", "label_ar": "معرف السجل" },
+                { "code": "ImpactAspectID", "label_en": "Impact Aspect", "label_ar": "جانب الأثر" },
+                { "code": "ImpactTimeFrameID", "label_en": "Time Frame", "label_ar": "الإطار الزمني" },
+                { "code": "LevelID", "label_en": "Level", "label_ar": "المستوى" },
+                { "code": "ImpactLevel", "label_en": "Impact Label", "label_ar": "وصف الأثر" },
+                { "code": "Justification", "label_en": "Justification", "label_ar": "التبرير" },
+                { "code": "ImpactColor", "label_en": "Impact Color", "label_ar": "لون الأثر" },
+                { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أُنشئ بواسطة" },
+                { "code": "UpdateBy", "label_en": "Updated By", "label_ar": "حُدِّث بواسطة" },
+                { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category_code": "RECOVERY",
+      "category_en": "Recovery Strategies",
+      "category_ar": "استراتيجيات التعافي",
+      "modules": [
+        {
+          "module_code": "RecoveryStrategy",
+          "module_en": "Recovery Strategy Library",
+          "module_ar": "مكتبة استراتيجيات التعافي",
+          "tables": [
+            {
+              "table_name": "RecoveryStrategy",
+              "fields": [
+                { "code": "RecoveryStrategyID", "label_en": "Strategy ID", "label_ar": "معرف الاستراتيجية" },
+                { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                { "code": "UnitID", "label_en": "Unit", "label_ar": "الوحدة" },
+                { "code": "FailureScenario", "label_en": "Failure Scenario", "label_ar": "سيناريو الفشل" },
+                { "code": "Strategy", "label_en": "Strategy", "label_ar": "الاستراتيجية" },
+                { "code": "CostImpact", "label_en": "Cost Impact", "label_ar": "الأثر المالي" },
+                { "code": "ConfidenceLevel", "label_en": "Confidence Level", "label_ar": "مستوى الثقة" },
+                { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أُنشئ بواسطة" },
+                { "code": "ModifiedBy", "label_en": "Modified By", "label_ar": "عُدِّل بواسطة" },
+                { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+              ]
+            },
+            {
+              "table_name": "RecoveryStrategyStep",
+              "fields": [
+                { "code": "StepID", "label_en": "Step ID", "label_ar": "معرف الخطوة" },
+                { "code": "RecoveryStrategyID", "label_en": "Strategy ID", "label_ar": "معرف الاستراتيجية" },
+                { "code": "StepOrder", "label_en": "Order", "label_ar": "الترتيب" },
+                { "code": "StepDescription", "label_en": "Step Description", "label_ar": "وصف الخطوة" },
+                { "code": "ValidationCheck", "label_en": "Validation Check", "label_ar": "فحص التحقق" }
+              ]
+            }
+          ]
+        },
+        {
+          "module_code": "BcmRole",
+          "module_en": "BCM Roles & Responsibilities",
+          "module_ar": "أدوار ومسؤوليات استمرارية الأعمال",
+          "tables": [
+            {
+              "table_name": "BcmPositionResponsibility",
+              "fields": [
+                { "code": "PositionID", "label_en": "Position ID", "label_ar": "معرف المنصب" },
+                { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                { "code": "UnitID", "label_en": "Unit", "label_ar": "الوحدة" },
+                { "code": "PositionTitle", "label_en": "Position Title", "label_ar": "المسمى الوظيفي" },
+                { "code": "PositionCode", "label_en": "Position Code", "label_ar": "رمز الوظيفة" },
+                { "code": "Responsibilities", "label_en": "Responsibilities", "label_ar": "المسؤوليات" },
+                { "code": "AuthorityLevel", "label_en": "Authority Level", "label_ar": "مستوى الصلاحية" },
+                { "code": "ContactDetails", "label_en": "Contact Details", "label_ar": "بيانات الاتصال" },
+                { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أُنشئ بواسطة" },
+                { "code": "ModifiedBy", "label_en": "Modified By", "label_ar": "عُدِّل بواسطة" },
+                { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

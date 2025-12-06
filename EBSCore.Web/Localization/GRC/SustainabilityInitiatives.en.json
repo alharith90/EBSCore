@@ -1,0 +1,22 @@
+{
+  "SustainabilityInitiatives": "Sustainability Initiatives",
+  "AddNew": "Add New",
+  "Loading": "Loading...",
+  "NoData": "No records found",
+  "InitiativeName": "Initiative Name",
+  "ESGCategory": "ESG Category",
+  "StartDate": "Start Date",
+  "EndDate": "End Date",
+  "Status": "Status",
+  "Description": "Description",
+  "ResponsibleDepartment": "Responsible Department",
+  "KeyMetrics": "Key Metrics",
+  "BudgetAllocated": "Budget Allocated",
+  "Outcome": "Outcome/Impact",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "EditInitiative": "Edit Initiative",
+  "AddInitiative": "Add Initiative",
+  "Save": "Save",
+  "Cancel": "Cancel"
+}

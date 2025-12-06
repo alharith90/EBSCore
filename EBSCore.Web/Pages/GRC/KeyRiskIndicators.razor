@@ -1,0 +1,199 @@
+@page "/GRC/KeyRiskIndicators"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+
+@code {
+    private KeyRiskIndicator Current = new();
+    private List<KeyRiskIndicator> Items = new();
+    private bool ShowInput;
+    private bool ShowValidation;
+    private EditContext EditContext;
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create("KeyRiskIndicators", typeof(Program).Assembly.FullName);
+        GLocalizer = LocalizerFactory.Create("Global", typeof(Program).Assembly.FullName);
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetAsync("api/KeyRiskIndicator/Get");
+        var payload = await response.Content.ReadFromJsonAsync<string>();
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            Items = JsonConvert.DeserializeObject<List<KeyRiskIndicator>>(payload);
+        }
+    }
+
+    private void ShowForm()
+    {
+        Current = new KeyRiskIndicator();
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Edit(KeyRiskIndicator item)
+    {
+        Current = new KeyRiskIndicator
+        {
+            IndicatorID = item.IndicatorID,
+            IndicatorName = item.IndicatorName,
+            RelatedRisk = item.RelatedRisk,
+            MeasurementFrequency = item.MeasurementFrequency,
+            DataSource = item.DataSource,
+            ThresholdValue = item.ThresholdValue,
+            CurrentValue = item.CurrentValue,
+            Status = item.Status,
+            Owner = item.Owner,
+            LastUpdateDate = item.LastUpdateDate
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task SaveAsync()
+    {
+        ShowValidation = !EditContext.Validate();
+        if (ShowValidation)
+        {
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/KeyRiskIndicator/Save", Current);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+            ShowInput = false;
+        }
+    }
+
+    private async Task DeleteAsync(KeyRiskIndicator item)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Delete, "api/KeyRiskIndicator/Delete")
+        {
+            Content = JsonContent.Create(item)
+        };
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+<h4 class="mb-3">@Localizer["Title"]</h4>
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@Localizer["ListTitle"]</h5>
+            <button class="btn btn-success" @onclick="ShowForm"><i class="fas fa-plus"></i> @GLocalizer["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (Items.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["IndicatorName"]</th>
+                            <th>@Localizer["RelatedRisk"]</th>
+                            <th>@Localizer["MeasurementFrequency"]</th>
+                            <th>@Localizer["Status"]</th>
+                            <th>@GLocalizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var idx = 0; }
+                        @foreach (var item in Items)
+                        {
+                            idx++;
+                            <tr>
+                                <td>@idx</td>
+                                <td>@item.IndicatorName</td>
+                                <td>@item.RelatedRisk</td>
+                                <td>@item.MeasurementFrequency</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(item)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(item)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="mb-0">@GLocalizer["EmptyTable"]</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <EditForm EditContext="EditContext" OnValidSubmit="SaveAsync">
+        <DataAnnotationsValidator />
+        @if (ShowValidation)
+        {
+            <ValidationSummary />
+        }
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">@Localizer["FormTitle"]</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["IndicatorName"]</label>
+                        <InputText class="form-control" @bind-Value="Current.IndicatorName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RelatedRisk"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RelatedRisk" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["MeasurementFrequency"]</label>
+                        <InputText class="form-control" @bind-Value="Current.MeasurementFrequency" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DataSource"]</label>
+                        <InputText class="form-control" @bind-Value="Current.DataSource" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ThresholdValue"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ThresholdValue" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["CurrentValue"]</label>
+                        <InputText class="form-control" @bind-Value="Current.CurrentValue" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["Status"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Status" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["Owner"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Owner" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["LastUpdateDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.LastUpdateDate" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary" type="button" @onclick="(() => ShowInput = false)">@GLocalizer["Cancel"]</button>
+                <button class="btn btn-primary" type="submit">@GLocalizer["Save"]</button>
+            </div>
+        </div>
+    </EditForm>
+}

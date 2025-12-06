@@ -1,0 +1,182 @@
+@page "/GRC/ControlLibrary"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["ControlLibrary"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["ControlName"]</th>
+            <th>@Localizer["ControlType"]</th>
+            <th>@Localizer["ControlCategory"]</th>
+            <th>@Localizer["ImplementationStatus"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (controls is null)
+        {
+            <tr><td colspan="5">@Localizer["Loading"]</td></tr>
+        }
+        else if (!controls.Any())
+        {
+            <tr><td colspan="5">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var control in controls)
+            {
+                <tr>
+                    <td>@control.ControlName</td>
+                    <td>@control.ControlType</td>
+                    <td>@control.ControlCategory</td>
+                    <td>@control.ImplementationStatus</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(control.ControlID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(control.ControlID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.ControlID.HasValue ? "EditControl" : "AddControl"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ControlName"]</label>
+                    <input class="form-control" @bind="editing.ControlName" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Description"]</label>
+                    <textarea class="form-control" @bind="editing.Description"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ControlType"]</label>
+                    <input class="form-control" @bind="editing.ControlType" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ControlCategory"]</label>
+                    <input class="form-control" @bind="editing.ControlCategory" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ControlOwner"]</label>
+                    <input class="form-control" @bind="editing.ControlOwner" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Frequency"]</label>
+                    <input class="form-control" @bind="editing.Frequency" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["IsKeyControl"]</label>
+                    <input type="checkbox" class="form-check-input ms-2" @bind="editing.IsKeyControl" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ImplementationStatus"]</label>
+                    <input class="form-control" @bind="editing.ImplementationStatus" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedRisks"]</label>
+                    <textarea class="form-control" @bind="editing.RelatedRisks"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedObligations"]</label>
+                    <textarea class="form-control" @bind="editing.RelatedObligations"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["LastTestDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.LastTestDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["LastTestResult"]</label>
+                    <input class="form-control" @bind="editing.LastTestResult" />
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">@Localizer["DocumentationReference"]</label>
+                    <input class="form-control" @bind="editing.DocumentationReference" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Inject] public Microsoft.Extensions.Localization.IStringLocalizer<ControlLibrary> Localizer { get; set; }
+
+    private List<ControlLibrary> controls;
+    private ControlLibrary editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        var response = await Http.GetAsync("/api/ControlLibrary/Get");
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadFromJsonAsync<string>();
+            controls = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibrary>>(json);
+        }
+    }
+
+    private void CreateNew()
+    {
+        editing = new ControlLibrary();
+    }
+
+    private async Task Edit(long? id)
+    {
+        if (!id.HasValue) return;
+        var response = await Http.GetAsync($"/api/ControlLibrary/GetOne?controlId={id.Value}");
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadFromJsonAsync<string>();
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibrary>>(json);
+            editing = items.FirstOrDefault();
+        }
+    }
+
+    private async Task Save()
+    {
+        if (editing is null) return;
+        var response = await Http.PostAsJsonAsync("/api/ControlLibrary/Save", editing);
+        if (response.IsSuccessStatusCode)
+        {
+            editing = null;
+            await LoadData();
+        }
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+
+    private async Task Delete(long? id)
+    {
+        if (!id.HasValue) return;
+        var response = await Http.DeleteAsync($"/api/ControlLibrary/Delete?controlId={id.Value}");
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadData();
+        }
+    }
+}

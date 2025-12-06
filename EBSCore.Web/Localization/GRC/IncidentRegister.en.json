@@ -1,0 +1,17 @@
+{
+  "PageTitle": "Incident Register",
+  "IncidentDescription": "Incident Description",
+  "IncidentDate": "Date",
+  "ImpactedArea": "Impacted Area or Asset",
+  "Severity": "Severity",
+  "RootCause": "Root Cause",
+  "ActionsTaken": "Actions Taken",
+  "IncidentOwner": "Incident Owner",
+  "Status": "Status",
+  "ModalTitle": "Incident Details",
+  "SaveSuccess": "Incident saved successfully",
+  "DeleteTitle": "Delete Incident",
+  "DeleteText": "Are you sure you want to delete incident {0}?",
+  "ConfirmDelete": "Yes, delete it!",
+  "DeleteSuccess": "Incident deleted successfully"
+}

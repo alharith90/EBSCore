@@ -1,0 +1,18 @@
+{
+  "RiskCategories": "Risk Categories",
+  "AddNew": "Add New",
+  "CategoryNameEN": "Category Name (EN)",
+  "CategoryNameAR": "Category Name (AR)",
+  "DescriptionEN": "Description (EN)",
+  "DescriptionAR": "Description (AR)",
+  "ParentCategoryID": "Parent Category",
+  "StatusID": "Status",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "NoData": "No categories found",
+  "Loading": "Loading...",
+  "EditCategory": "Edit Category",
+  "AddCategory": "Add Category"
+}

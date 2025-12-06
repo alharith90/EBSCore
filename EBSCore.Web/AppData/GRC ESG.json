@@ -1,0 +1,143 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "ESG",
+      "pillar_en": "ESG & Sustainability",
+      "pillar_ar": "البيئة والاستدامة",
+      "categories": [
+        {
+          "category_code": "ENV",
+          "category_en": "Environmental Management",
+          "category_ar": "الإدارة البيئية",
+          "modules": [
+            {
+              "module_code": "EnvironmentalAspect",
+              "module_en": "Environmental Aspects & Impacts",
+              "module_ar": "الجوانب والتأثيرات البيئية",
+              "tables": [
+                {
+                  "table_name": "EnvironmentalAspect",
+                  "fields": [
+                    { "code": "AspectID", "label_en": "Aspect ID", "label_ar": "معرف الجانب" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "UnitID", "label_en": "Unit", "label_ar": "الوحدة" },
+                    { "code": "AspectDescription", "label_en": "Aspect Description", "label_ar": "وصف الجانب" },
+                    { "code": "EnvironmentalImpact", "label_en": "Environmental Impact", "label_ar": "التأثير البيئي" },
+                    { "code": "ImpactSeverity", "label_en": "Impact Severity", "label_ar": "مدى خطورة التأثير" },
+                    { "code": "FrequencyLikelihood", "label_en": "Frequency/Likelihood", "label_ar": "التكرار/الاحتمالية" },
+                    { "code": "SignificanceRating", "label_en": "Significance Rating", "label_ar": "تقييم الأهمية" },
+                    { "code": "ControlsInPlace", "label_en": "Controls in Place", "label_ar": "الضوابط الحالية" },
+                    { "code": "LegalRequirement", "label_en": "Legal Requirement", "label_ar": "المتطلبات القانونية" },
+                    { "code": "ImprovementActions", "label_en": "Improvement Actions", "label_ar": "إجراءات التحسين" },
+                    { "code": "AspectOwner", "label_en": "Aspect Owner", "label_ar": "مالك الجانب" },
+                    { "code": "MonitoringMetric", "label_en": "Monitoring Metric", "label_ar": "مؤشر الرصد" },
+                    { "code": "LastEvaluationDate", "label_en": "Last Evaluation Date", "label_ar": "تاريخ آخر تقييم" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "عُدل بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "EnvironmentalObjective",
+              "module_en": "Environmental Objectives & Programs",
+              "module_ar": "الأهداف والبرامج البيئية",
+              "tables": [
+                {
+                  "table_name": "EnvironmentalObjective",
+                  "fields": [
+                    { "code": "ObjectiveID", "label_en": "Objective ID", "label_ar": "معرف الهدف" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "UnitID", "label_en": "Unit", "label_ar": "الوحدة" },
+                    { "code": "ObjectiveDescription", "label_en": "Objective Description", "label_ar": "وصف الهدف" },
+                    { "code": "TargetValue", "label_en": "Target Value", "label_ar": "القيمة المستهدفة" },
+                    { "code": "Unit", "label_en": "Unit of Measure", "label_ar": "وحدة القياس" },
+                    { "code": "BaselineValue", "label_en": "Baseline Value", "label_ar": "القيمة الأساسية" },
+                    { "code": "CurrentValue", "label_en": "Current Value", "label_ar": "القيمة الحالية" },
+                    { "code": "TargetDate", "label_en": "Target Date", "label_ar": "التاريخ المستهدف" },
+                    { "code": "ResponsibleOwner", "label_en": "Responsible Owner", "label_ar": "المالك المسؤول" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "عُدل بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                }
+              ]
+            },
+            {
+              "module_code": "SustainabilityInitiative",
+              "module_en": "Sustainability Initiatives",
+              "module_ar": "مبادرات الاستدامة",
+              "tables": [
+                {
+                  "table_name": "SustainabilityInitiative",
+                  "fields": [
+                    { "code": "InitiativeID", "label_en": "Initiative ID", "label_ar": "معرف المبادرة" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "InitiativeName", "label_en": "Initiative Name", "label_ar": "اسم المبادرة" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "ESGCategory", "label_en": "ESG Category", "label_ar": "فئة ESG" },
+                    { "code": "StartDate", "label_en": "Start Date", "label_ar": "تاريخ البدء" },
+                    { "code": "EndDate", "label_en": "End Date", "label_ar": "تاريخ الانتهاء" },
+                    { "code": "ResponsibleDepartment", "label_en": "Responsible Department", "label_ar": "القسم المسؤول" },
+                    { "code": "KeyMetrics", "label_en": "Key Metrics", "label_ar": "المقاييس الرئيسية" },
+                    { "code": "BudgetAllocated", "label_en": "Budget Allocated", "label_ar": "الميزانية المخصصة" },
+                    { "code": "Outcome", "label_en": "Outcome/Impact", "label_ar": "النتيجة/الأثر" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "عُدل بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "ESG",
+          "category_en": "ESG Metrics & Reporting",
+          "category_ar": "مؤشرات وتقارير ESG",
+          "modules": [
+            {
+              "module_code": "ESGMetric",
+              "module_en": "ESG Metrics & Data",
+              "module_ar": "بيانات ومؤشرات ESG",
+              "tables": [
+                {
+                  "table_name": "ESGMetric",
+                  "fields": [
+                    { "code": "MetricID", "label_en": "Metric ID", "label_ar": "معرف المؤشر" },
+                    { "code": "CompanyID", "label_en": "Company", "label_ar": "الشركة" },
+                    { "code": "MetricName", "label_en": "Metric Name", "label_ar": "اسم المؤشر" },
+                    { "code": "Category", "label_en": "Category (E/S/G)", "label_ar": "الفئة (بيئي/اجتماعي/حوكمة)" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "UnitOfMeasure", "label_en": "Unit of Measure", "label_ar": "وحدة القياس" },
+                    { "code": "DataSource", "label_en": "Data Source", "label_ar": "مصدر البيانات" },
+                    { "code": "ReportingFrequency", "label_en": "Reporting Frequency", "label_ar": "تواتر الإبلاغ" },
+                    { "code": "TargetValue", "label_en": "Target or Benchmark", "label_ar": "الهدف أو المعيار" },
+                    { "code": "LatestValue", "label_en": "Latest Value", "label_ar": "أحدث قيمة" },
+                    { "code": "MeasurementDate", "label_en": "Measurement Date", "label_ar": "تاريخ القياس" },
+                    { "code": "Owner", "label_en": "Responsible Owner", "label_ar": "المالك المسؤول" },
+                    { "code": "RelatedObjective", "label_en": "Related Objective", "label_ar": "الهدف المرتبط" },
+                    { "code": "RelatedRisk", "label_en": "Related Risk", "label_ar": "الخطر المرتبط" },
+                    { "code": "Trend", "label_en": "Trend", "label_ar": "الاتجاه" },
+                    { "code": "Comments", "label_en": "Comments", "label_ar": "ملاحظات" },
+                    { "code": "CreatedBy", "label_en": "Created By", "label_ar": "أنشئ بواسطة" },
+                    { "code": "CreatedAt", "label_en": "Created At", "label_ar": "تاريخ الإنشاء" },
+                    { "code": "UpdatedBy", "label_en": "Updated By", "label_ar": "عُدل بواسطة" },
+                    { "code": "UpdatedAt", "label_en": "Updated At", "label_ar": "تاريخ التحديث" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

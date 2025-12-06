@@ -1,0 +1,283 @@
+@page "/GRC/IncidentRegister"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using System
+@using System.Linq
+@using System.Net.Http
+@using System.Net.Http.Json
+@using EBSCore.Web.Services
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["PageTitle"]</h5>
+                    <button type="button" class="btn btn-success" @onclick="ShowInput">
+                        <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                    </button>
+                </div>
+                <div class="card-body">
+                    @if (Incidents.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@Localizer["IncidentDescription"]</th>
+                                        <th>@Localizer["IncidentDate"]</th>
+                                        <th>@Localizer["ImpactedArea"]</th>
+                                        <th>@Localizer["Severity"]</th>
+                                        <th>@Localizer["IncidentOwner"]</th>
+                                        <th>@Localizer["Status"]</th>
+                                        <th>@GLocalizer["Actions"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var idx = 0; }
+                                    @foreach (var incident in Incidents)
+                                    {
+                                        idx++;
+                                        <tr>
+                                            <td>@idx</td>
+                                            <td class="text-truncate" style="max-width: 250px;">@incident.IncidentDescription</td>
+                                            <td>@incident.IncidentDate?.ToString("yyyy-MM-dd")</td>
+                                            <td>@incident.ImpactedArea</td>
+                                            <td>@incident.Severity</td>
+                                            <td>@incident.IncidentOwner</td>
+                                            <td>@incident.Status</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" @onclick="() => EditIncident(incident)"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-sm btn-danger" @onclick="() => DeleteIncident(incident)"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="mb-0">@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveIncidentAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["IncidentDescription"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.IncidentDescription" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["IncidentDate"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentIncident.IncidentDate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ImpactedArea"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.ImpactedArea" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Severity"]</label>
+                            <select class="form-select" @bind-value="CurrentIncident.Severity">
+                                @foreach (var option in SeverityOptions)
+                                {
+                                    <option value="@option">@option</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RootCause"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.RootCause" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ActionsTaken"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.ActionsTaken" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["IncidentOwner"]</label>
+                            <input class="form-control" @bind-value="CurrentIncident.IncidentOwner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Status"]</label>
+                            <select class="form-select" @bind-value="CurrentIncident.Status">
+                                @foreach (var option in StatusOptions)
+                                {
+                                    <option value="@option">@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<IncidentRegister> Incidents = new();
+    IncidentRegister CurrentIncident = new();
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    readonly string[] SeverityOptions = new[] { "Low", "Medium", "High", "Critical" };
+    readonly string[] StatusOptions = new[] { "Open", "In Progress", "Closed" };
+
+    bool _firstRenderDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentIncident);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadIncidentsAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadIncidentsAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/IncidentRegister/Get");
+            Incidents = JsonConvert.DeserializeObject<List<IncidentRegister>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentIncident = new IncidentRegister
+        {
+            IncidentDate = DateTime.UtcNow,
+            Severity = SeverityOptions.First(),
+            Status = StatusOptions.First()
+        };
+        EditContext = new EditContext(CurrentIncident);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SaveIncidentAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/IncidentRegister/Save", CurrentIncident);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadIncidentsAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditIncident(IncidentRegister incident)
+    {
+        var response = await Http.GetStringAsync($"api/IncidentRegister/GetOne?incidentId={incident.IncidentID}");
+        var data = JsonConvert.DeserializeObject<List<IncidentRegister>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentIncident = data.First();
+            EditContext = new EditContext(CurrentIncident);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeleteIncident(IncidentRegister incident)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteTitle"],
+            text = string.Format(Localizer["DeleteText"], incident.IncidentID),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = Localizer["ConfirmDelete"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/IncidentRegister/Delete")
+            {
+                Content = JsonContent.Create(new IncidentRegister { IncidentID = incident.IncidentID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentsAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}

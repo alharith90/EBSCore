@@ -1,0 +1,14 @@
+{
+  "Title": "Key Risk Indicators",
+  "ListTitle": "KRI Register",
+  "FormTitle": "KRI",
+  "IndicatorName": "KRI Name",
+  "RelatedRisk": "Related Risk",
+  "MeasurementFrequency": "Measurement Frequency",
+  "DataSource": "Data Source",
+  "ThresholdValue": "Threshold Value",
+  "CurrentValue": "Current Value",
+  "Status": "Status",
+  "Owner": "Owner/Monitor",
+  "LastUpdateDate": "Last Update Date"
+}

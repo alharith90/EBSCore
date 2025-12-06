@@ -1,0 +1,142 @@
+{
+  "pillars": [
+    {
+      "pillar_code": "COMP",
+      "pillar_en": "Compliance Management",
+      "pillar_ar": "إدارة الامتثال",
+      "categories": [
+        {
+          "category_code": "OBL",
+          "category_en": "Compliance Obligations",
+          "category_ar": "الالتزامات التنظيمية",
+          "modules": [
+            {
+              "module_code": "ObligationRegister",
+              "module_en": "Obligations Register",
+              "module_ar": "سجل الالتزامات",
+              "tables": [
+                {
+                  "table_name": "ComplianceObligation",
+                  "fields": [
+                    { "code": "ObligationID", "label_en": "Obligation ID", "label_ar": "معرف الالتزام" },
+                    { "code": "ObligationTitle", "label_en": "Obligation Title", "label_ar": "عنوان الالتزام" },
+                    { "code": "ObligationDescription", "label_en": "Description/Requirement", "label_ar": "وصف المتطلب" },
+                    { "code": "Source", "label_en": "Source", "label_ar": "المصدر" },
+                    { "code": "ClauseReference", "label_en": "Clause/Reference", "label_ar": "البند/المرجع" },
+                    { "code": "ResponsibleDepartment", "label_en": "Responsible Department", "label_ar": "الإدارة المسؤولة" },
+                    { "code": "ObligationOwner", "label_en": "Obligation Owner", "label_ar": "مالك الالتزام" },
+                    { "code": "ComplianceStatus", "label_en": "Compliance Status", "label_ar": "حالة الامتثال" },
+                    { "code": "LastAssessmentDate", "label_en": "Last Assessment Date", "label_ar": "تاريخ آخر تقييم" },
+                    { "code": "NextReviewDate", "label_en": "Next Review Date", "label_ar": "تاريخ المراجعة القادمة" },
+                    { "code": "RelatedControls", "label_en": "Related Controls", "label_ar": "الضوابط المرتبطة" },
+                    { "code": "RelatedRisks", "label_en": "Related Risks", "label_ar": "المخاطر المرتبطة" },
+                    { "code": "RelatedPolicy", "label_en": "Related Policy", "label_ar": "السياسة المرتبطة" },
+                    { "code": "EvidenceOfCompliance", "label_en": "Evidence of Compliance", "label_ar": "دليل الامتثال" },
+                    { "code": "Comments", "label_en": "Comments/Notes", "label_ar": "ملاحظات" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "CTRL",
+          "category_en": "Controls & Assurance",
+          "category_ar": "الضوابط والضمان",
+          "modules": [
+            {
+              "module_code": "ControlLibrary",
+              "module_en": "Control Library",
+              "module_ar": "مكتبة الضوابط",
+              "tables": [
+                {
+                  "table_name": "ControlLibrary",
+                  "fields": [
+                    { "code": "ControlID", "label_en": "Control ID", "label_ar": "معرف الضابط" },
+                    { "code": "ControlName", "label_en": "Control Name", "label_ar": "اسم الضابط" },
+                    { "code": "Description", "label_en": "Description", "label_ar": "الوصف" },
+                    { "code": "ControlType", "label_en": "Control Type", "label_ar": "نوع الضابط" },
+                    { "code": "ControlCategory", "label_en": "Control Category", "label_ar": "فئة الضابط" },
+                    { "code": "ControlOwner", "label_en": "Control Owner", "label_ar": "مالك الضابط" },
+                    { "code": "Frequency", "label_en": "Frequency", "label_ar": "تكرار التنفيذ" },
+                    { "code": "IsKeyControl", "label_en": "Key Control?", "label_ar": "هل الضابط رئيسي؟" },
+                    { "code": "RelatedRisks", "label_en": "Related Risks", "label_ar": "المخاطر المرتبطة" },
+                    { "code": "RelatedObligations", "label_en": "Related Obligations", "label_ar": "الالتزامات المرتبطة" },
+                    { "code": "ImplementationStatus", "label_en": "Implementation Status", "label_ar": "حالة التنفيذ" },
+                    { "code": "LastTestDate", "label_en": "Last Test Date", "label_ar": "تاريخ آخر اختبار" },
+                    { "code": "LastTestResult", "label_en": "Last Test Result", "label_ar": "نتيجة آخر اختبار" },
+                    { "code": "DocumentationReference", "label_en": "Documentation Reference", "label_ar": "مرجع التوثيق" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "ASSMT",
+          "category_en": "Compliance Assessments",
+          "category_ar": "تقييمات الامتثال",
+          "modules": [
+            {
+              "module_code": "ComplianceAssessment",
+              "module_en": "Compliance Assessments & Audits",
+              "module_ar": "تقييمات وتدقيقات الامتثال",
+              "tables": [
+                {
+                  "table_name": "ComplianceAssessment",
+                  "fields": [
+                    { "code": "AssessmentID", "label_en": "Assessment ID", "label_ar": "معرف التقييم" },
+                    { "code": "ScopeCriteria", "label_en": "Scope (Regulation/Area)", "label_ar": "النطاق" },
+                    { "code": "Assessor", "label_en": "Assessor/Auditor", "label_ar": "المقيم/المدقق" },
+                    { "code": "AssessmentDate", "label_en": "Assessment Date", "label_ar": "تاريخ التقييم" },
+                    { "code": "ComplianceScore", "label_en": "Compliance Score", "label_ar": "درجة الامتثال" },
+                    { "code": "FindingsCount", "label_en": "Findings/Issues Count", "label_ar": "عدد الملاحظات" },
+                    { "code": "Findings", "label_en": "Findings Details", "label_ar": "تفاصيل النتائج" },
+                    { "code": "ActionPlanReference", "label_en": "Action Plan Reference", "label_ar": "مرجع خطة العمل" },
+                    { "code": "NextAssessmentDue", "label_en": "Next Assessment Due", "label_ar": "موعد التقييم القادم" },
+                    { "code": "Status", "label_en": "Status", "label_ar": "الحالة" },
+                    { "code": "RelatedObligations", "label_en": "Related Obligations", "label_ar": "الالتزامات المرتبطة" },
+                    { "code": "RelatedControls", "label_en": "Related Controls", "label_ar": "الضوابط المرتبطة" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category_code": "ISSUE",
+          "category_en": "Compliance Incidents",
+          "category_ar": "حوادث عدم الامتثال",
+          "modules": [
+            {
+              "module_code": "ComplianceIssue",
+              "module_en": "Compliance Issues",
+              "module_ar": "قضايا الامتثال",
+              "tables": [
+                {
+                  "table_name": "ComplianceIssue",
+                  "fields": [
+                    { "code": "IssueID", "label_en": "Issue ID", "label_ar": "معرف القضية" },
+                    { "code": "IssueDescription", "label_en": "Issue Description", "label_ar": "وصف القضية" },
+                    { "code": "DateDetected", "label_en": "Date Detected", "label_ar": "تاريخ الاكتشاف" },
+                    { "code": "Source", "label_en": "Source", "label_ar": "المصدر" },
+                    { "code": "RelatedObligation", "label_en": "Related Obligation/Policy", "label_ar": "الالتزام/السياسة ذات الصلة" },
+                    { "code": "Severity", "label_en": "Severity Level", "label_ar": "مستوى الخطورة" },
+                    { "code": "Impact", "label_en": "Impact", "label_ar": "الأثر" },
+                    { "code": "RootCause", "label_en": "Root Cause", "label_ar": "السبب الجذري" },
+                    { "code": "CorrectiveActionPlan", "label_en": "Corrective Action Plan", "label_ar": "خطة الإجراء التصحيحي" },
+                    { "code": "TargetCompletionDate", "label_en": "Target Completion Date", "label_ar": "تاريخ الإكمال المستهدف" },
+                    { "code": "ActionStatus", "label_en": "Action Status", "label_ar": "حالة الإجراء" },
+                    { "code": "RegulatoryReportingDate", "label_en": "Regulatory Reporting Date", "label_ar": "تاريخ الإبلاغ للجهة التنظيمية" },
+                    { "code": "Status", "label_en": "Incident Status", "label_ar": "حالة الحادث" },
+                    { "code": "LessonsLearned", "label_en": "Lessons Learned/Remarks", "label_ar": "الدروس المستفادة/الملاحظات" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

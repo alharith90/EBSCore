@@ -1,0 +1,178 @@
+@page "/GRC/HSIncidents"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["HSIncidents"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["IncidentTitle"]</th>
+            <th>@Localizer["IncidentDateTime"]</th>
+            <th>@Localizer["IncidentType"]</th>
+            <th>@Localizer["InjurySeverity"]</th>
+            <th>@Localizer["IncidentStatus"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (incidents is null)
+        {
+            <tr><td colspan="6">@Localizer["Loading"]</td></tr>
+        }
+        else if (!incidents.Any())
+        {
+            <tr><td colspan="6">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var item in incidents)
+            {
+                <tr>
+                    <td>@item.IncidentTitle</td>
+                    <td>@item.IncidentDateTime?.ToString("yyyy-MM-dd")</td>
+                    <td>@item.IncidentType</td>
+                    <td>@item.InjurySeverity</td>
+                    <td>@item.IncidentStatus</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(item.IncidentID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(item.IncidentID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.IncidentID.HasValue ? "EditIncident" : "AddIncident"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["IncidentTitle"]</label>
+                    <input class="form-control" @bind="editing.IncidentTitle" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["IncidentDateTime"]</label>
+                    <input type="datetime-local" class="form-control" @bind-value="editing.IncidentDateTime" @bind-value:format="yyyy-MM-ddTHH:mm" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Location"]</label>
+                    <input class="form-control" @bind="editing.Location" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["IncidentType"]</label>
+                    <input class="form-control" @bind="editing.IncidentType" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["PersonsInvolved"]</label>
+                    <input class="form-control" @bind="editing.PersonsInvolved" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["InjurySeverity"]</label>
+                    <input class="form-control" @bind="editing.InjurySeverity" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Description"]</label>
+                    <textarea class="form-control" @bind="editing.Description"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ImmediateActions"]</label>
+                    <textarea class="form-control" @bind="editing.ImmediateActions"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RootCause"]</label>
+                    <textarea class="form-control" @bind="editing.RootCause"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedHazard"]</label>
+                    <input class="form-control" @bind="editing.RelatedHazard" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedActivity"]</label>
+                    <input class="form-control" @bind="editing.RelatedActivity" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedRegulation"]</label>
+                    <input class="form-control" @bind="editing.RelatedRegulation" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["CorrectiveActions"]</label>
+                    <textarea class="form-control" @bind="editing.CorrectiveActions"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["IncidentStatus"]</label>
+                    <input class="form-control" @bind="editing.IncidentStatus" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ReportedBy"]</label>
+                    <input class="form-control" @bind="editing.ReportedBy" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Reportable"]</label>
+                    <input type="checkbox" class="form-check-input" @bind="editing.Reportable" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["DateClosed"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.DateClosed" @bind-value:format="yyyy-MM-dd" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<HSIncident> incidents;
+    private HSIncident editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        incidents = await Http.GetFromJsonAsync<List<HSIncident>>("api/HSIncident/Get");
+    }
+
+    private void CreateNew()
+    {
+        editing = new HSIncident
+        {
+            IncidentDateTime = DateTime.UtcNow
+        };
+    }
+
+    private async Task Edit(long? id)
+    {
+        var json = await Http.GetStringAsync($"api/HSIncident/GetOne?incidentId={id}");
+        var rows = System.Text.Json.JsonSerializer.Deserialize<List<HSIncident>>(json);
+        editing = rows?.FirstOrDefault();
+    }
+
+    private async Task Save()
+    {
+        await Http.PostAsJsonAsync("api/HSIncident/Save", editing);
+        incidents = await Http.GetFromJsonAsync<List<HSIncident>>("api/HSIncident/Get");
+        editing = null;
+    }
+
+    private async Task Delete(long? id)
+    {
+        await Http.DeleteAsync($"api/HSIncident/Delete?incidentId={id}");
+        incidents = await Http.GetFromJsonAsync<List<HSIncident>>("api/HSIncident/Get");
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+}

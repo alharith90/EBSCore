@@ -1,0 +1,22 @@
+{
+  "Title": "خطط استمرارية الأعمال",
+  "FormTitle": "خطة استمرارية الأعمال",
+  "PlanName": "اسم الخطة",
+  "Scope": "النطاق (العمليات المشمولة)",
+  "RecoveryTeamRoles": "أدوار فريق التعافي",
+  "ContactList": "قائمة الاتصال",
+  "InvocationCriteria": "معايير التفعيل",
+  "RecoveryLocations": "مواقع التعافي",
+  "RecoveryStrategyDetails": "تفاصيل استراتيجية الاستعادة",
+  "KeySteps": "الخطوات والإجراءات الرئيسية",
+  "RequiredResources": "الموارد والأصول المطلوبة",
+  "DependentSystems": "الأنظمة/التطبيقات المعتمدة",
+  "PlanRTO": "هدف زمن الاستعادة للخطة",
+  "PlanRPO": "هدف نقطة الاستعادة للبيانات",
+  "BackupSource": "مصدر النسخ الاحتياطية",
+  "AlternateSupplier": "ترتيبات المورد البديل",
+  "LastTestDate": "تاريخ آخر اختبار",
+  "TestResultSummary": "ملخص نتائج الاختبار",
+  "PlanOwner": "مالك الخطة",
+  "PlanStatusID": "حالة الخطة"
+}

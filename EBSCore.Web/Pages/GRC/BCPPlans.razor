@@ -1,0 +1,244 @@
+@page "/GRC/BCPPlans"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
+
+@code {
+    private BusinessContinuityPlan Current = new();
+    private List<BusinessContinuityPlan> Items = new();
+    private bool ShowInput;
+    private bool ShowValidation;
+    private EditContext EditContext;
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create("BCPPlans", typeof(Program).Assembly.FullName);
+        GLocalizer = LocalizerFactory.Create("Global", typeof(Program).Assembly.FullName);
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetAsync("api/BCPPlan/Get");
+        var payload = await response.Content.ReadFromJsonAsync<string>();
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            Items = JsonConvert.DeserializeObject<List<BusinessContinuityPlan>>(payload);
+        }
+    }
+
+    private void ShowForm()
+    {
+        Current = new BusinessContinuityPlan();
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Edit(BusinessContinuityPlan item)
+    {
+        Current = new BusinessContinuityPlan
+        {
+            BCPID = item.BCPID,
+            PlanName = item.PlanName,
+            Scope = item.Scope,
+            RecoveryTeamRoles = item.RecoveryTeamRoles,
+            ContactList = item.ContactList,
+            InvocationCriteria = item.InvocationCriteria,
+            RecoveryLocations = item.RecoveryLocations,
+            RecoveryStrategyDetails = item.RecoveryStrategyDetails,
+            KeySteps = item.KeySteps,
+            RequiredResources = item.RequiredResources,
+            DependentSystems = item.DependentSystems,
+            PlanRTO = item.PlanRTO,
+            PlanRPO = item.PlanRPO,
+            BackupSource = item.BackupSource,
+            AlternateSupplier = item.AlternateSupplier,
+            LastTestDate = item.LastTestDate,
+            TestResultSummary = item.TestResultSummary,
+            PlanOwner = item.PlanOwner,
+            PlanStatusID = item.PlanStatusID
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task SaveAsync()
+    {
+        ShowValidation = !EditContext.Validate();
+        if (ShowValidation)
+        {
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/BCPPlan/Save", Current);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+            ShowInput = false;
+        }
+    }
+
+    private async Task DeleteAsync(BusinessContinuityPlan item)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Delete, "api/BCPPlan/Delete")
+        {
+            Content = JsonContent.Create(item)
+        };
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@Localizer["Title"]</h5>
+            <button class="btn btn-success" @onclick="ShowForm"><i class="fas fa-plus"></i> @GLocalizer["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (Items.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["PlanName"]</th>
+                            <th>@Localizer["Scope"]</th>
+                            <th>@Localizer["PlanOwner"]</th>
+                            <th>@Localizer["PlanStatusID"]</th>
+                            <th>@Localizer["LastTestDate"]</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Items)
+                        {
+                            <tr>
+                                <td>@item.BCPID</td>
+                                <td>@item.PlanName</td>
+                                <td>@item.Scope</td>
+                                <td>@item.PlanOwner</td>
+                                <td>@item.PlanStatusID</td>
+                                <td>@item.LastTestDate?.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" @onclick="() => Edit(item)">@GLocalizer["Edit"]</button>
+                                    <button class="btn btn-danger btn-sm ms-1" @onclick="() => DeleteAsync(item)">@GLocalizer["Delete"]</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">@GLocalizer["NoRecords"]</div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">@Localizer["FormTitle"]</h5>
+        </div>
+        <div class="card-body">
+            <EditForm EditContext="EditContext" OnValidSubmit="SaveAsync">
+                <DataAnnotationsValidator />
+                @if (ShowValidation)
+                {
+                    <ValidationSummary />
+                }
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["PlanName"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PlanName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["PlanOwner"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PlanOwner" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">@Localizer["Scope"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.Scope" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RecoveryTeamRoles"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.RecoveryTeamRoles" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ContactList"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.ContactList" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["InvocationCriteria"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.InvocationCriteria" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RecoveryLocations"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.RecoveryLocations" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">@Localizer["RecoveryStrategyDetails"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.RecoveryStrategyDetails" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["KeySteps"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.KeySteps" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RequiredResources"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.RequiredResources" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DependentSystems"]</label>
+                        <InputText class="form-control" @bind-Value="Current.DependentSystems" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@Localizer["PlanRTO"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PlanRTO" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@Localizer["PlanRPO"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PlanRPO" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["BackupSource"]</label>
+                        <InputText class="form-control" @bind-Value="Current.BackupSource" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["AlternateSupplier"]</label>
+                        <InputText class="form-control" @bind-Value="Current.AlternateSupplier" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@Localizer["LastTestDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.LastTestDate" />
+                    </div>
+                    <div class="col-md-9">
+                        <label class="form-label">@Localizer["TestResultSummary"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.TestResultSummary" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["PlanStatusID"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PlanStatusID" />
+                    </div>
+                </div>
+                <div class="mt-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary me-2" type="button" @onclick="() => ShowInput = false">@GLocalizer["Cancel"]</button>
+                    <button class="btn btn-primary" type="submit">@GLocalizer["Save"]</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
