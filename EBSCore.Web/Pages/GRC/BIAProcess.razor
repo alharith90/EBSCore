@@ -1,0 +1,263 @@
+@page "/GRC/BIAProcess"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
+
+@code {
+    private BusinessImpactAnalysis Current = new();
+    private List<BusinessImpactAnalysis> Items = new();
+    private bool ShowInput;
+    private bool ShowValidation;
+    private EditContext EditContext;
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create("BIAProcess", typeof(Program).Assembly.FullName);
+        GLocalizer = LocalizerFactory.Create("Global", typeof(Program).Assembly.FullName);
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetAsync("api/BIAProcess/Get");
+        var payload = await response.Content.ReadFromJsonAsync<string>();
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            Items = JsonConvert.DeserializeObject<List<BusinessImpactAnalysis>>(payload);
+        }
+    }
+
+    private void ShowForm()
+    {
+        Current = new BusinessImpactAnalysis();
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Edit(BusinessImpactAnalysis item)
+    {
+        Current = new BusinessImpactAnalysis
+        {
+            BIAID = item.BIAID,
+            ProcessName = item.ProcessName,
+            Department = item.Department,
+            ProcessOwner = item.ProcessOwner,
+            CriticalityLevel = item.CriticalityLevel,
+            MAO = item.MAO,
+            Impact1Hour = item.Impact1Hour,
+            Impact1Day = item.Impact1Day,
+            Impact1Week = item.Impact1Week,
+            ImpactDimensions = item.ImpactDimensions,
+            RTO = item.RTO,
+            RPO = item.RPO,
+            MinimumResources = item.MinimumResources,
+            InternalDependencies = item.InternalDependencies,
+            ExternalDependencies = item.ExternalDependencies,
+            RecoveryStrategies = item.RecoveryStrategies,
+            StrategyLibraryRef = item.StrategyLibraryRef,
+            AllowableDataLoss = item.AllowableDataLoss,
+            BackupAvailability = item.BackupAvailability,
+            HasAlternateWorkaround = item.HasAlternateWorkaround,
+            BCPLink = item.BCPLink,
+            LastReviewDate = item.LastReviewDate
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task SaveAsync()
+    {
+        ShowValidation = !EditContext.Validate();
+        if (ShowValidation)
+        {
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/BIAProcess/Save", Current);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+            ShowInput = false;
+        }
+    }
+
+    private async Task DeleteAsync(BusinessImpactAnalysis item)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Delete, "api/BIAProcess/Delete")
+        {
+            Content = JsonContent.Create(item)
+        };
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@Localizer["Title"]</h5>
+            <button class="btn btn-success" @onclick="ShowForm"><i class="fas fa-plus"></i> @GLocalizer["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (Items.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["ProcessName"]</th>
+                            <th>@Localizer["Department"]</th>
+                            <th>@Localizer["ProcessOwner"]</th>
+                            <th>@Localizer["CriticalityLevel"]</th>
+                            <th>@Localizer["MAO"]</th>
+                            <th>@Localizer["RTO"]</th>
+                            <th>@Localizer["RPO"]</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Items)
+                        {
+                            <tr>
+                                <td>@item.BIAID</td>
+                                <td>@item.ProcessName</td>
+                                <td>@item.Department</td>
+                                <td>@item.ProcessOwner</td>
+                                <td>@item.CriticalityLevel</td>
+                                <td>@item.MAO</td>
+                                <td>@item.RTO</td>
+                                <td>@item.RPO</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" @onclick="() => Edit(item)">@GLocalizer["Edit"]</button>
+                                    <button class="btn btn-danger btn-sm ms-1" @onclick="() => DeleteAsync(item)">@GLocalizer["Delete"]</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">@GLocalizer["NoRecords"]</div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">@Localizer["FormTitle"]</h5>
+        </div>
+        <div class="card-body">
+            <EditForm EditContext="EditContext" OnValidSubmit="SaveAsync">
+                <DataAnnotationsValidator />
+                @if (ShowValidation)
+                {
+                    <ValidationSummary />
+                }
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ProcessName"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ProcessName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["Department"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Department" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ProcessOwner"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ProcessOwner" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["CriticalityLevel"]</label>
+                        <InputText class="form-control" @bind-Value="Current.CriticalityLevel" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["MAO"]</label>
+                        <InputText class="form-control" @bind-Value="Current.MAO" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["RTO"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RTO" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["RPO"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RPO" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Impact1Hour"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Impact1Hour" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Impact1Day"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Impact1Day" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["Impact1Week"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Impact1Week" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">@Localizer["ImpactDimensions"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.ImpactDimensions" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["MinimumResources"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.MinimumResources" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["InternalDependencies"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.InternalDependencies" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ExternalDependencies"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.ExternalDependencies" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RecoveryStrategies"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.RecoveryStrategies" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["StrategyLibraryRef"]</label>
+                        <InputText class="form-control" @bind-Value="Current.StrategyLibraryRef" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["AllowableDataLoss"]</label>
+                        <InputText class="form-control" @bind-Value="Current.AllowableDataLoss" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["BackupAvailability"]</label>
+                        <InputText class="form-control" @bind-Value="Current.BackupAvailability" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["HasAlternateWorkaround"]</label>
+                        <InputCheckbox class="form-check-input ms-2" @bind-Value="Current.HasAlternateWorkaround" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["BCPLink"]</label>
+                        <InputText class="form-control" @bind-Value="Current.BCPLink" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["LastReviewDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.LastReviewDate" />
+                    </div>
+                </div>
+                <div class="mt-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary me-2" type="button" @onclick="() => ShowInput = false">@GLocalizer["Cancel"]</button>
+                    <button class="btn btn-primary" type="submit">@GLocalizer["Save"]</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}

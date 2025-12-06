@@ -1,0 +1,21 @@
+{
+  "RiskTemplates": "قوالب المخاطر",
+  "AddNew": "إضافة جديد",
+  "TemplateNameEN": "اسم القالب (إنجليزي)",
+  "TemplateNameAR": "اسم القالب (عربي)",
+  "DefaultCategoryID": "الفئة الافتراضية",
+  "DefaultImpact": "التأثير الافتراضي",
+  "DefaultLikelihood": "الاحتمالية الافتراضية",
+  "DefaultRiskLevel": "مستوى المخاطر الافتراضي",
+  "GuidanceEN": "إرشادات (إنجليزي)",
+  "GuidanceAR": "إرشادات (عربي)",
+  "StatusID": "الحالة",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "NoData": "لا توجد قوالب",
+  "Loading": "جارٍ التحميل...",
+  "EditTemplate": "تعديل قالب",
+  "AddTemplate": "إضافة قالب"
+}

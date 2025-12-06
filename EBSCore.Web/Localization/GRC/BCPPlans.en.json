@@ -1,0 +1,22 @@
+{
+  "Title": "Business Continuity Plans",
+  "FormTitle": "BCP Plan",
+  "PlanName": "BCP Name",
+  "Scope": "Scope (Processes Covered)",
+  "RecoveryTeamRoles": "Recovery Team Roles",
+  "ContactList": "Contact List",
+  "InvocationCriteria": "Invocation Criteria",
+  "RecoveryLocations": "Recovery Locations",
+  "RecoveryStrategyDetails": "Recovery Strategy Details",
+  "KeySteps": "Key Steps & Procedures",
+  "RequiredResources": "Required Resources & Assets",
+  "DependentSystems": "Dependent on Systems/Apps",
+  "PlanRTO": "RTO (for this plan)",
+  "PlanRPO": "RPO (for data recovery)",
+  "BackupSource": "Backup Source",
+  "AlternateSupplier": "Alternate Supplier Arrangements",
+  "LastTestDate": "Last Test Date",
+  "TestResultSummary": "Test Results Summary",
+  "PlanOwner": "Plan Owner",
+  "PlanStatusID": "Plan Status"
+}

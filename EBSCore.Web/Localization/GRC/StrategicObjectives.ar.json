@@ -1,0 +1,20 @@
+{
+  "Title": "الأهداف الاستراتيجية",
+  "FormTitle": "هدف استراتيجي",
+  "ObjectiveCode": "كود الهدف",
+  "ObjectiveNameEN": "اسم الهدف",
+  "ObjectiveNameAR": "اسم الهدف (عربي)",
+  "Category": "الفئة",
+  "Perspective": "المنظور الاستراتيجي",
+  "OwnerUserID": "مالك الهدف",
+  "DepartmentID": "الإدارة",
+  "StartDate": "تاريخ البدء",
+  "EndDate": "تاريخ الانتهاء",
+  "TargetValue": "القيمة المستهدفة",
+  "UnitEN": "وحدة القياس",
+  "UnitAR": "وحدة القياس (عربي)",
+  "RiskAppetiteThreshold": "حد شهية المخاطر",
+  "StatusID": "الحالة",
+  "DescriptionEN": "الوصف",
+  "DescriptionAR": "الوصف (عربي)"
+}

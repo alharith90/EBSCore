@@ -1,0 +1,240 @@
+@page "/GRC/StrategicObjectives"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
+
+@code {
+    private StrategicObjective Current = new();
+    private List<StrategicObjective> Items = new();
+    private bool ShowInput;
+    private bool ShowValidation;
+    private EditContext EditContext;
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create("StrategicObjectives", typeof(Program).Assembly.FullName);
+        GLocalizer = LocalizerFactory.Create("Global", typeof(Program).Assembly.FullName);
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetAsync("api/StrategicObjective/Get");
+        var payload = await response.Content.ReadFromJsonAsync<string>();
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            Items = JsonConvert.DeserializeObject<List<StrategicObjective>>(payload);
+        }
+    }
+
+    private void ShowForm()
+    {
+        Current = new StrategicObjective();
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Edit(StrategicObjective item)
+    {
+        Current = new StrategicObjective
+        {
+            ObjectiveID = item.ObjectiveID,
+            ObjectiveCode = item.ObjectiveCode,
+            ObjectiveNameEN = item.ObjectiveNameEN,
+            ObjectiveNameAR = item.ObjectiveNameAR,
+            DescriptionEN = item.DescriptionEN,
+            DescriptionAR = item.DescriptionAR,
+            Category = item.Category,
+            Perspective = item.Perspective,
+            OwnerUserID = item.OwnerUserID,
+            DepartmentID = item.DepartmentID,
+            StartDate = item.StartDate,
+            EndDate = item.EndDate,
+            TargetValue = item.TargetValue,
+            UnitEN = item.UnitEN,
+            UnitAR = item.UnitAR,
+            RiskAppetiteThreshold = item.RiskAppetiteThreshold,
+            StatusID = item.StatusID
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task SaveAsync()
+    {
+        ShowValidation = !EditContext.Validate();
+        if (ShowValidation)
+        {
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/StrategicObjective/Save", Current);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+            ShowInput = false;
+        }
+    }
+
+    private async Task DeleteAsync(StrategicObjective item)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Delete, "api/StrategicObjective/Delete")
+        {
+            Content = JsonContent.Create(item)
+        };
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@Localizer["Title"]</h5>
+            <button class="btn btn-success" @onclick="ShowForm"><i class="fas fa-plus"></i> @GLocalizer["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (Items.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["ObjectiveCode"]</th>
+                            <th>@Localizer["ObjectiveNameEN"]</th>
+                            <th>@Localizer["Category"]</th>
+                            <th>@Localizer["Perspective"]</th>
+                            <th>@Localizer["StartDate"]</th>
+                            <th>@Localizer["EndDate"]</th>
+                            <th>@Localizer["StatusID"]</th>
+                            <th>@GLocalizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var idx = 0; }
+                        @foreach (var item in Items)
+                        {
+                            idx++;
+                            <tr>
+                                <td>@idx</td>
+                                <td>@item.ObjectiveCode</td>
+                                <td>@item.ObjectiveNameEN</td>
+                                <td>@item.Category</td>
+                                <td>@item.Perspective</td>
+                                <td>@item.StartDate?.ToShortDateString()</td>
+                                <td>@item.EndDate?.ToShortDateString()</td>
+                                <td>@item.StatusID</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(item)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(item)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="mb-0">@GLocalizer["EmptyTable"]</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <EditForm EditContext="EditContext" OnValidSubmit="SaveAsync">
+        <DataAnnotationsValidator />
+        @if (ShowValidation)
+        {
+            <ValidationSummary />
+        }
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">@Localizer["FormTitle"]</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["ObjectiveCode"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ObjectiveCode" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["ObjectiveNameEN"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ObjectiveNameEN" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["ObjectiveNameAR"]</label>
+                        <InputText class="form-control" @bind-Value="Current.ObjectiveNameAR" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["Category"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Category" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["Perspective"]</label>
+                        <InputText class="form-control" @bind-Value="Current.Perspective" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["OwnerUserID"]</label>
+                        <InputNumber class="form-control" @bind-Value="Current.OwnerUserID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DepartmentID"]</label>
+                        <InputNumber class="form-control" @bind-Value="Current.DepartmentID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["StartDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.StartDate" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["EndDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.EndDate" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["TargetValue"]</label>
+                        <InputNumber class="form-control" @bind-Value="Current.TargetValue" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@Localizer["UnitEN"]</label>
+                        <InputText class="form-control" @bind-Value="Current.UnitEN" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">@Localizer["UnitAR"]</label>
+                        <InputText class="form-control" @bind-Value="Current.UnitAR" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RiskAppetiteThreshold"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RiskAppetiteThreshold" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["StatusID"]</label>
+                        <InputText class="form-control" @bind-Value="Current.StatusID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DescriptionEN"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.DescriptionEN" rows="3" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DescriptionAR"]</label>
+                        <InputTextArea class="form-control" @bind-Value="Current.DescriptionAR" rows="3" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary" type="button" @onclick="(() => ShowInput = false)">@GLocalizer["Cancel"]</button>
+                <button class="btn btn-primary" type="submit">@GLocalizer["Save"]</button>
+            </div>
+        </div>
+    </EditForm>
+}

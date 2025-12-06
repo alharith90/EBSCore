@@ -1,0 +1,23 @@
+{
+  "ComplianceAssessments": "تقييمات الامتثال",
+  "AddNew": "إضافة جديد",
+  "Loading": "جاري التحميل...",
+  "NoData": "لا توجد بيانات",
+  "ScopeCriteria": "النطاق",
+  "Assessor": "المقيم/المدقق",
+  "AssessmentDate": "تاريخ التقييم",
+  "ComplianceScore": "درجة الامتثال",
+  "FindingsCount": "عدد الملاحظات",
+  "Findings": "تفاصيل النتائج",
+  "ActionPlanReference": "مرجع خطة العمل",
+  "NextAssessmentDue": "موعد التقييم القادم",
+  "Status": "الحالة",
+  "RelatedObligations": "الالتزامات المرتبطة",
+  "RelatedControls": "الضوابط المرتبطة",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "EditAssessment": "تعديل تقييم",
+  "AddAssessment": "إضافة تقييم"
+}

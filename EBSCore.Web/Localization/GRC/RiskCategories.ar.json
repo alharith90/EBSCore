@@ -1,0 +1,18 @@
+{
+  "RiskCategories": "فئات المخاطر",
+  "AddNew": "إضافة جديد",
+  "CategoryNameEN": "اسم الفئة (إنجليزي)",
+  "CategoryNameAR": "اسم الفئة (عربي)",
+  "DescriptionEN": "الوصف (إنجليزي)",
+  "DescriptionAR": "الوصف (عربي)",
+  "ParentCategoryID": "الفئة الرئيسية",
+  "StatusID": "الحالة",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "NoData": "لا توجد فئات",
+  "Loading": "جارٍ التحميل...",
+  "EditCategory": "تعديل فئة",
+  "AddCategory": "إضافة فئة"
+}

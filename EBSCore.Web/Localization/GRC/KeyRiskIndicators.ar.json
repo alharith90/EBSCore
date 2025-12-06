@@ -1,0 +1,14 @@
+{
+  "Title": "مؤشرات المخاطر الرئيسية",
+  "ListTitle": "سجل مؤشرات المخاطر",
+  "FormTitle": "مؤشر مخاطر رئيسي",
+  "IndicatorName": "اسم المؤشر",
+  "RelatedRisk": "الخطر المرتبط",
+  "MeasurementFrequency": "تواتر القياس",
+  "DataSource": "مصدر البيانات",
+  "ThresholdValue": "القيمة الحدية",
+  "CurrentValue": "القيمة الحالية",
+  "Status": "الحالة",
+  "Owner": "المالك/المراقب",
+  "LastUpdateDate": "تاريخ آخر تحديث"
+}

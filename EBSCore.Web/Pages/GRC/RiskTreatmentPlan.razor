@@ -1,0 +1,274 @@
+@page "/GRC/RiskTreatmentPlan"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Newtonsoft.Json
+@using System
+@using System.Linq
+@using System.Net.Http
+@using System.Net.Http.Json
+@using EBSCore.Web.Services
+@inject IJSRuntime JS
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+@if (!ShowInputScreen)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@Localizer["PageTitle"]</h5>
+                    <button type="button" class="btn btn-success" @onclick="ShowInput">
+                        <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+                    </button>
+                </div>
+                <div class="card-body">
+                    @if (Plans.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@Localizer["RelatedRisk"]</th>
+                                        <th>@Localizer["MitigationAction"]</th>
+                                        <th>@Localizer["ActionOwner"]</th>
+                                        <th>@Localizer["DueDate"]</th>
+                                        <th>@Localizer["CompletionStatus"]</th>
+                                        <th>@Localizer["Effectiveness"]</th>
+                                        <th>@GLocalizer["Actions"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var idx = 0; }
+                                    @foreach (var plan in Plans)
+                                    {
+                                        idx++;
+                                        <tr>
+                                            <td>@idx</td>
+                                            <td class="text-truncate" style="max-width: 200px;">@plan.RelatedRisk</td>
+                                            <td class="text-truncate" style="max-width: 240px;">@plan.MitigationAction</td>
+                                            <td>@plan.ActionOwner</td>
+                                            <td>@plan.DueDate?.ToString("yyyy-MM-dd")</td>
+                                            <td>@plan.CompletionStatus</td>
+                                            <td>@plan.Effectiveness</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" @onclick="() => EditPlan(plan)"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-sm btn-danger" @onclick="() => DeletePlan(plan)"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="mb-0">@GLocalizer["EmptyTable"]</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="linear">
+        <EditForm EditContext="EditContext" OnValidSubmit="SavePlanAsync">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
+                </div>
+                <div class="card-body">
+                    <DataAnnotationsValidator />
+                    @if (ShowValidationMessage)
+                    {
+                        <ValidationSummary />
+                    }
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["RelatedRisk"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentPlan.RelatedRisk" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["MitigationAction"]</label>
+                            <textarea class="form-control" rows="3" @bind-value="CurrentPlan.MitigationAction" @bind-value:event="oninput"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["ActionOwner"]</label>
+                            <input class="form-control" @bind-value="CurrentPlan.ActionOwner" @bind-value:event="oninput" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["DueDate"]</label>
+                            <input class="form-control" type="date" @bind-value="CurrentPlan.DueDate" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["CompletionStatus"]</label>
+                            <select class="form-select" @bind-value="CurrentPlan.CompletionStatus">
+                                @foreach (var option in CompletionStatusOptions)
+                                {
+                                    <option value="@option">@option</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Effectiveness"]</label>
+                            <select class="form-select" @bind-value="CurrentPlan.Effectiveness">
+                                @foreach (var option in EffectivenessOptions)
+                                {
+                                    <option value="@option">@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-5"><i class="fas fa-save"></i> &nbsp;@GLocalizer["Save"]</button>
+                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark"><i class="fas fa-arrow-circle-left"></i> &nbsp;@GLocalizer["Cancel"]</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    bool ShowInputScreen = false;
+    bool ShowValidationMessage = false;
+
+    List<RiskTreatmentPlan> Plans = new();
+    RiskTreatmentPlan CurrentPlan = new();
+
+    EditContext EditContext = default!;
+
+    IStringLocalizer Localizer = default!;
+    IStringLocalizer GLocalizer = default!;
+
+    readonly string[] CompletionStatusOptions = new[] { "Not Started", "In Progress", "Completed" };
+    readonly string[] EffectivenessOptions = new[] { "Effective", "Partially Effective", "Ineffective" };
+
+    bool _firstRenderDone = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(CurrentPlan);
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _firstRenderDone = true;
+            await LoadPlansAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadPlansAsync()
+    {
+        try
+        {
+            var response = await Http.GetStringAsync("api/RiskTreatmentPlan/Get");
+            Plans = JsonConvert.DeserializeObject<List<RiskTreatmentPlan>>(response) ?? new();
+        }
+        catch (Exception ex)
+        {
+            if (_firstRenderDone)
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Load Failed", text = ex.Message });
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task ShowInput()
+    {
+        CurrentPlan = new RiskTreatmentPlan
+        {
+            CompletionStatus = CompletionStatusOptions.First(),
+            Effectiveness = EffectivenessOptions.First()
+        };
+        EditContext = new EditContext(CurrentPlan);
+        ShowValidationMessage = false;
+        ShowInputScreen = true;
+    }
+
+    private async Task ShowDisplay()
+    {
+        ShowInputScreen = false;
+    }
+
+    private async Task SavePlanAsync()
+    {
+        if (EditContext.Validate())
+        {
+            var response = await Http.PostAsJsonAsync("api/RiskTreatmentPlan/Save", CurrentPlan);
+            if (response.IsSuccessStatusCode)
+            {
+                await ShowDisplay();
+                await LoadPlansAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SaveSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Something went wrong" });
+            }
+        }
+        else
+        {
+            ShowValidationMessage = true;
+        }
+    }
+
+    private async Task EditPlan(RiskTreatmentPlan plan)
+    {
+        var response = await Http.GetStringAsync($"api/RiskTreatmentPlan/GetOne?actionId={plan.ActionID}");
+        var data = JsonConvert.DeserializeObject<List<RiskTreatmentPlan>>(response);
+        if (data?.Any() == true)
+        {
+            CurrentPlan = data.First();
+            EditContext = new EditContext(CurrentPlan);
+            ShowInputScreen = true;
+        }
+    }
+
+    private async Task DeletePlan(RiskTreatmentPlan plan)
+    {
+        var result = await JS.InvokeAsync<object>("Swal.fire", new
+        {
+            title = Localizer["DeleteTitle"],
+            text = string.Format(Localizer["DeleteText"], plan.ActionID),
+            icon = "warning",
+            showCancelButton = true,
+            confirmButtonColor = "#d33",
+            cancelButtonColor = "#3085d6",
+            confirmButtonText = Localizer["ConfirmDelete"],
+            cancelButtonText = GLocalizer["Cancel"]
+        });
+
+        var json = result?.ToString();
+        if (json != null && json.Contains("\"isConfirmed\":true"))
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "api/RiskTreatmentPlan/Delete")
+            {
+                Content = JsonContent.Create(new RiskTreatmentPlan { ActionID = plan.ActionID })
+            };
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadPlansAsync();
+                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeleteSuccess"] });
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
+            }
+        }
+    }
+}

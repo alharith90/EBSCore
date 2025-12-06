@@ -1,0 +1,264 @@
+@page "/GRC/PolicyLibrary"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
+
+@code {
+    private PolicyLibrary Current = new();
+    private List<PolicyLibrary> Items = new();
+    private bool ShowInput;
+    private bool ShowValidation;
+    private EditContext EditContext;
+    private IStringLocalizer Localizer;
+    private IStringLocalizer GLocalizer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create("PolicyLibrary", typeof(Program).Assembly.FullName);
+        GLocalizer = LocalizerFactory.Create("Global", typeof(Program).Assembly.FullName);
+        EditContext = new EditContext(Current);
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var response = await Http.GetAsync("api/PolicyLibrary/Get");
+        var payload = await response.Content.ReadFromJsonAsync<string>();
+        if (!string.IsNullOrWhiteSpace(payload))
+        {
+            Items = JsonConvert.DeserializeObject<List<PolicyLibrary>>(payload);
+        }
+    }
+
+    private void ShowForm()
+    {
+        Current = new PolicyLibrary();
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private void Edit(PolicyLibrary item)
+    {
+        Current = new PolicyLibrary
+        {
+            PolicyID = item.PolicyID,
+            PolicyCode = item.PolicyCode,
+            PolicyNameEN = item.PolicyNameEN,
+            PolicyNameAR = item.PolicyNameAR,
+            PolicyType = item.PolicyType,
+            CategoryEN = item.CategoryEN,
+            CategoryAR = item.CategoryAR,
+            DescriptionEN = item.DescriptionEN,
+            DescriptionAR = item.DescriptionAR,
+            EffectiveDate = item.EffectiveDate,
+            ReviewDate = item.ReviewDate,
+            OwnerUserID = item.OwnerUserID,
+            ApproverUserID = item.ApproverUserID,
+            StatusID = item.StatusID,
+            RelatedRegulationIDs = item.RelatedRegulationIDs,
+            RelatedControlIDs = item.RelatedControlIDs,
+            VersionNumber = item.VersionNumber,
+            DocumentPath = item.DocumentPath,
+            IsMandatory = item.IsMandatory,
+            AppliesToRoles = item.AppliesToRoles,
+            CreatedAt = item.CreatedAt,
+            UpdatedAt = item.UpdatedAt
+        };
+        EditContext = new EditContext(Current);
+        ShowInput = true;
+    }
+
+    private async Task SaveAsync()
+    {
+        ShowValidation = !EditContext.Validate();
+        if (ShowValidation)
+        {
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/PolicyLibrary/Save", Current);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+            ShowInput = false;
+        }
+    }
+
+    private async Task DeleteAsync(PolicyLibrary item)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Delete, "api/PolicyLibrary/Delete")
+        {
+            Content = JsonContent.Create(item)
+        };
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadAsync();
+        }
+    }
+}
+
+<h4 class="mb-3">@Localizer["Title"]</h4>
+@if (!ShowInput)
+{
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">@Localizer["ListTitle"]</h5>
+            <button class="btn btn-success" @onclick="ShowForm"><i class="fas fa-plus"></i> @GLocalizer["AddRecord"]</button>
+        </div>
+        <div class="card-body">
+            @if (Items.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["PolicyCode"]</th>
+                            <th>@Localizer["PolicyNameEN"]</th>
+                            <th>@Localizer["CategoryEN"]</th>
+                            <th>@Localizer["EffectiveDate"]</th>
+                            <th>@Localizer["ReviewDate"]</th>
+                            <th>@Localizer["StatusID"]</th>
+                            <th>@GLocalizer["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var idx = 0; }
+                        @foreach (var item in Items)
+                        {
+                            idx++;
+                            <tr>
+                                <td>@idx</td>
+                                <td>@item.PolicyCode</td>
+                                <td>@item.PolicyNameEN</td>
+                                <td>@item.CategoryEN</td>
+                                <td>@item.EffectiveDate?.ToShortDateString()</td>
+                                <td>@item.ReviewDate?.ToShortDateString()</td>
+                                <td>@item.StatusID</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" @onclick="() => Edit(item)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" @onclick="() => DeleteAsync(item)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="mb-0">@GLocalizer["EmptyTable"]</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <EditForm EditContext="EditContext" OnValidSubmit="SaveAsync">
+        <DataAnnotationsValidator />
+        @if (ShowValidation)
+        {
+            <ValidationSummary />
+        }
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">@Localizer["FormTitle"]</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["PolicyCode"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PolicyCode" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["PolicyNameEN"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PolicyNameEN" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Localizer["PolicyNameAR"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PolicyNameAR" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["PolicyType"]</label>
+                        <InputText class="form-control" @bind-Value="Current.PolicyType" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["CategoryEN"]</label>
+                        <InputText class="form-control" @bind-Value="Current.CategoryEN" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["CategoryAR"]</label>
+                        <InputText class="form-control" @bind-Value="Current.CategoryAR" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["EffectiveDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.EffectiveDate" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ReviewDate"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.ReviewDate" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["OwnerUserID"]</label>
+                        <InputNumber class="form-control" @bind-Value="Current.OwnerUserID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["ApproverUserID"]</label>
+                        <InputNumber class="form-control" @bind-Value="Current.ApproverUserID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["StatusID"]</label>
+                        <InputText class="form-control" @bind-Value="Current.StatusID" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["VersionNumber"]</label>
+                        <InputText class="form-control" @bind-Value="Current.VersionNumber" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RelatedRegulationIDs"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RelatedRegulationIDs" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["RelatedControlIDs"]</label>
+                        <InputText class="form-control" @bind-Value="Current.RelatedControlIDs" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DocumentPath"]</label>
+                        <InputText class="form-control" @bind-Value="Current.DocumentPath" />
+                    </div>
+                    <div class="col-md-6 form-check mt-4">
+                        <InputCheckbox class="form-check-input" @bind-Value="Current.IsMandatory" />
+                        <label class="form-check-label ms-2">@Localizer["IsMandatory"]</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["AppliesToRoles"]</label>
+                        <InputText class="form-control" @bind-Value="Current.AppliesToRoles" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["CreatedAt"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.CreatedAt" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["UpdatedAt"]</label>
+                        <InputDate class="form-control" @bind-Value="Current.UpdatedAt" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DescriptionEN"]</label>
+                        <InputTextArea class="form-control" rows="3" @bind-Value="Current.DescriptionEN" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">@Localizer["DescriptionAR"]</label>
+                        <InputTextArea class="form-control" rows="3" @bind-Value="Current.DescriptionAR" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary" type="button" @onclick="(() => ShowInput = false)">@GLocalizer["Cancel"]</button>
+                <button class="btn btn-primary" type="submit">@GLocalizer["Save"]</button>
+            </div>
+        </div>
+    </EditForm>
+}

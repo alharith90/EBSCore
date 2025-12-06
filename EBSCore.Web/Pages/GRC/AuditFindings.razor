@@ -1,0 +1,170 @@
+@page "/GRC/AuditFindings"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["AuditFindings"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["FindingTitle"]</th>
+            <th>@Localizer["Severity"]</th>
+            <th>@Localizer["Category"]</th>
+            <th>@Localizer["DueDate"]</th>
+            <th>@Localizer["Status"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (records is null)
+        {
+            <tr><td colspan="6">@Localizer["Loading"]</td></tr>
+        }
+        else if (!records.Any())
+        {
+            <tr><td colspan="6">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var item in records)
+            {
+                <tr>
+                    <td>@item.FindingTitle</td>
+                    <td>@item.Severity</td>
+                    <td>@item.Category</td>
+                    <td>@item.DueDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(item.FindingID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(item.FindingID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.FindingID.HasValue ? "EditAuditFinding" : "AddAuditFinding"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["FindingTitle"]</label>
+                    <input class="form-control" @bind="editing.FindingTitle" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["AuditID"]</label>
+                    <input class="form-control" @bind="editing.AuditID" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Severity"]</label>
+                    <input class="form-control" @bind="editing.Severity" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Category"]</label>
+                    <input class="form-control" @bind="editing.Category" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Criteria"]</label>
+                    <textarea class="form-control" @bind="editing.Criteria"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Condition"]</label>
+                    <textarea class="form-control" @bind="editing.Condition"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Cause"]</label>
+                    <textarea class="form-control" @bind="editing.Cause"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Effect"]</label>
+                    <textarea class="form-control" @bind="editing.Effect"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Recommendation"]</label>
+                    <textarea class="form-control" @bind="editing.Recommendation"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedRiskControl"]</label>
+                    <textarea class="form-control" @bind="editing.RelatedRiskControl"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ResponsibleOwner"]</label>
+                    <input class="form-control" @bind="editing.ResponsibleOwner" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ActionPlanLink"]</label>
+                    <input class="form-control" @bind="editing.ActionPlanLink" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["DueDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.DueDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Status"]</label>
+                    <input class="form-control" @bind="editing.Status" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["DateClosed"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.DateClosed" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["VerifiedBy"]</label>
+                    <input class="form-control" @bind="editing.VerifiedBy" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<AuditFinding> records;
+    private AuditFinding editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        records = await Http.GetFromJsonAsync<List<AuditFinding>>("/api/AuditFinding/Get");
+    }
+
+    private void CreateNew()
+    {
+        editing = new AuditFinding();
+    }
+
+    private async Task Edit(long? id)
+    {
+        var result = await Http.GetFromJsonAsync<List<AuditFinding>>($"/api/AuditFinding/GetOne?findingId={id}");
+        editing = result?.FirstOrDefault();
+    }
+
+    private async Task Delete(long? id)
+    {
+        await Http.DeleteAsync($"/api/AuditFinding/Delete?findingId={id}");
+        records = await Http.GetFromJsonAsync<List<AuditFinding>>("/api/AuditFinding/Get");
+    }
+
+    private async Task Save()
+    {
+        await Http.PostAsJsonAsync("/api/AuditFinding/Save", editing);
+        records = await Http.GetFromJsonAsync<List<AuditFinding>>("/api/AuditFinding/Get");
+        editing = null;
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+}

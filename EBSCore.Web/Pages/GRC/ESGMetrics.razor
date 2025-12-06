@@ -1,0 +1,184 @@
+@page "/GRC/ESGMetrics"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.GRC
+@inject HttpClient Http
+
+<h3>@Localizer["ESGMetrics"]</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CreateNew">@Localizer["AddNew"]</button>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Localizer["MetricName"]</th>
+            <th>@Localizer["Category"]</th>
+            <th>@Localizer["LatestValue"]</th>
+            <th>@Localizer["MeasurementDate"]</th>
+            <th>@Localizer["Owner"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (metrics is null)
+        {
+            <tr><td colspan="6">@Localizer["Loading"]</td></tr>
+        }
+        else if (!metrics.Any())
+        {
+            <tr><td colspan="6">@Localizer["NoData"]</td></tr>
+        }
+        else
+        {
+            @foreach (var metric in metrics)
+            {
+                <tr>
+                    <td>@metric.MetricName</td>
+                    <td>@metric.Category</td>
+                    <td>@metric.LatestValue</td>
+                    <td>@metric.MeasurementDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@metric.Owner</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" @onclick="() => Edit(metric.MetricID)">@Localizer["Edit"]</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2" @onclick="() => Delete(metric.MetricID)">@Localizer["Delete"]</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (editing != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">@Localizer[editing.MetricID.HasValue ? "EditMetric" : "AddMetric"]</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["MetricName"]</label>
+                    <input class="form-control" @bind="editing.MetricName" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Category"]</label>
+                    <input class="form-control" @bind="editing.Category" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Description"]</label>
+                    <textarea class="form-control" @bind="editing.Description"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["UnitOfMeasure"]</label>
+                    <input class="form-control" @bind="editing.UnitOfMeasure" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["DataSource"]</label>
+                    <input class="form-control" @bind="editing.DataSource" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["ReportingFrequency"]</label>
+                    <input class="form-control" @bind="editing.ReportingFrequency" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["TargetValue"]</label>
+                    <input class="form-control" @bind="editing.TargetValue" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["LatestValue"]</label>
+                    <input class="form-control" @bind="editing.LatestValue" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["MeasurementDate"]</label>
+                    <input type="date" class="form-control" @bind-value="editing.MeasurementDate" @bind-value:format="yyyy-MM-dd" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Owner"]</label>
+                    <input class="form-control" @bind="editing.Owner" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedObjective"]</label>
+                    <input class="form-control" @bind="editing.RelatedObjective" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["RelatedRisk"]</label>
+                    <input class="form-control" @bind="editing.RelatedRisk" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Trend"]</label>
+                    <input class="form-control" @bind="editing.Trend" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">@Localizer["Comments"]</label>
+                    <textarea class="form-control" @bind="editing.Comments"></textarea>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+                <button class="btn btn-secondary ms-2" @onclick="Cancel">@Localizer["Cancel"]</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Inject] public Microsoft.Extensions.Localization.IStringLocalizer<ESGMetrics> Localizer { get; set; }
+
+    private List<ESGMetric> metrics;
+    private ESGMetric editing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMetrics();
+    }
+
+    private async Task LoadMetrics()
+    {
+        var response = await Http.GetAsync("/api/ESGMetric/Get");
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadFromJsonAsync<string>();
+            metrics = System.Text.Json.JsonSerializer.Deserialize<List<ESGMetric>>(json);
+        }
+    }
+
+    private void CreateNew()
+    {
+        editing = new ESGMetric();
+    }
+
+    private async Task Edit(long? id)
+    {
+        if (!id.HasValue) return;
+        var response = await Http.GetAsync($"/api/ESGMetric/GetOne?metricId={id.Value}");
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadFromJsonAsync<string>();
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<ESGMetric>>(json);
+            editing = items?.FirstOrDefault();
+        }
+    }
+
+    private async Task Save()
+    {
+        var response = await Http.PostAsJsonAsync("/api/ESGMetric/Save", editing);
+        if (response.IsSuccessStatusCode)
+        {
+            editing = null;
+            await LoadMetrics();
+        }
+    }
+
+    private void Cancel()
+    {
+        editing = null;
+    }
+
+    private async Task Delete(long? id)
+    {
+        if (!id.HasValue) return;
+        await Http.DeleteAsync($"/api/ESGMetric/Delete?metricId={id.Value}");
+        await LoadMetrics();
+    }
+}

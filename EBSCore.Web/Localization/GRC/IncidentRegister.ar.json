@@ -1,0 +1,17 @@
+{
+  "PageTitle": "سجل الحوادث",
+  "IncidentDescription": "وصف الحادث",
+  "IncidentDate": "التاريخ",
+  "ImpactedArea": "المنطقة أو الأصل المتأثر",
+  "Severity": "الخطورة",
+  "RootCause": "السبب الجذري",
+  "ActionsTaken": "الإجراءات المتخذة",
+  "IncidentOwner": "مسؤول الحادث",
+  "Status": "الحالة",
+  "ModalTitle": "تفاصيل الحادث",
+  "SaveSuccess": "تم حفظ الحادث بنجاح",
+  "DeleteTitle": "حذف الحادث",
+  "DeleteText": "هل أنت متأكد من حذف الحادث {0}؟",
+  "ConfirmDelete": "نعم، احذفه!",
+  "DeleteSuccess": "تم حذف الحادث بنجاح"
+}

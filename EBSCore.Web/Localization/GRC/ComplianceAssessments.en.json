@@ -1,0 +1,23 @@
+{
+  "ComplianceAssessments": "Compliance Assessments",
+  "AddNew": "Add New",
+  "Loading": "Loading...",
+  "NoData": "No data available",
+  "ScopeCriteria": "Scope (Regulation/Area)",
+  "Assessor": "Assessor/Auditor",
+  "AssessmentDate": "Assessment Date",
+  "ComplianceScore": "Compliance Score",
+  "FindingsCount": "Findings/Issues Count",
+  "Findings": "Findings Details",
+  "ActionPlanReference": "Action Plan Reference",
+  "NextAssessmentDue": "Next Assessment Due",
+  "Status": "Status",
+  "RelatedObligations": "Related Obligations",
+  "RelatedControls": "Related Controls",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Save": "Save",
+  "Cancel": "Cancel",
+  "EditAssessment": "Edit Assessment",
+  "AddAssessment": "Add Assessment"
+}

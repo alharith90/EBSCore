@@ -1,0 +1,20 @@
+{
+  "Title": "Strategic Objectives",
+  "FormTitle": "Strategic Objective",
+  "ObjectiveCode": "Objective Code",
+  "ObjectiveNameEN": "Objective Name",
+  "ObjectiveNameAR": "Objective Name (Arabic)",
+  "Category": "Category",
+  "Perspective": "Perspective",
+  "OwnerUserID": "Objective Owner",
+  "DepartmentID": "Department/Unit",
+  "StartDate": "Start Date",
+  "EndDate": "End Date",
+  "TargetValue": "Target Value",
+  "UnitEN": "Unit",
+  "UnitAR": "Unit (Arabic)",
+  "RiskAppetiteThreshold": "Risk Appetite Threshold",
+  "StatusID": "Status",
+  "DescriptionEN": "Description",
+  "DescriptionAR": "Description (Arabic)"
+}

@@ -1,0 +1,22 @@
+{
+  "SustainabilityInitiatives": "مبادرات الاستدامة",
+  "AddNew": "إضافة جديد",
+  "Loading": "جار التحميل...",
+  "NoData": "لا توجد بيانات",
+  "InitiativeName": "اسم المبادرة",
+  "ESGCategory": "فئة ESG",
+  "StartDate": "تاريخ البدء",
+  "EndDate": "تاريخ الانتهاء",
+  "Status": "الحالة",
+  "Description": "الوصف",
+  "ResponsibleDepartment": "القسم المسؤول",
+  "KeyMetrics": "المقاييس الرئيسية",
+  "BudgetAllocated": "الميزانية المخصصة",
+  "Outcome": "النتيجة/الأثر",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "EditInitiative": "تعديل مبادرة",
+  "AddInitiative": "إضافة مبادرة",
+  "Save": "حفظ",
+  "Cancel": "إلغاء"
+}

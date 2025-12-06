@@ -1,0 +1,20 @@
+{
+  "EnvironmentalObjectives": "Environmental Objectives",
+  "AddNew": "Add New",
+  "Loading": "Loading...",
+  "NoData": "No records found",
+  "ObjectiveDescription": "Objective Description",
+  "TargetValue": "Target Value",
+  "Unit": "Unit",
+  "BaselineValue": "Baseline Value",
+  "CurrentValue": "Current Value",
+  "TargetDate": "Target Date",
+  "ResponsibleOwner": "Responsible Owner",
+  "Status": "Status",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "EditObjective": "Edit Objective",
+  "AddObjective": "Add Objective",
+  "Save": "Save",
+  "Cancel": "Cancel"
+}

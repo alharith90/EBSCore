@@ -1,0 +1,20 @@
+{
+  "AuditUniverse": "مجال التدقيق",
+  "AddNew": "إضافة جديد",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "Loading": "جارٍ التحميل...",
+  "NoData": "لا توجد بيانات",
+  "AuditUniverseList": "مجال التدقيق",
+  "EntityProcessName": "اسم الوحدة/العملية",
+  "EntityOwner": "مالك الوحدة",
+  "RiskRating": "تصنيف المخاطر الكامنة",
+  "NextAuditDue": "تاريخ التدقيق القادم",
+  "AuditFrequency": "تواتر التدقيق",
+  "AuditPriority": "أولوية التدقيق",
+  "LastAuditDate": "تاريخ آخر تدقيق",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "EditAuditUniverse": "تعديل سجل التدقيق",
+  "AddAuditUniverse": "إضافة سجل تدقيق"
+}

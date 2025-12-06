@@ -1,0 +1,20 @@
+{
+  "EnvironmentalObjectives": "الأهداف البيئية",
+  "AddNew": "إضافة جديد",
+  "Loading": "جار التحميل...",
+  "NoData": "لا توجد بيانات",
+  "ObjectiveDescription": "وصف الهدف",
+  "TargetValue": "القيمة المستهدفة",
+  "Unit": "وحدة القياس",
+  "BaselineValue": "القيمة الأساسية",
+  "CurrentValue": "القيمة الحالية",
+  "TargetDate": "التاريخ المستهدف",
+  "ResponsibleOwner": "المالك المسؤول",
+  "Status": "الحالة",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "EditObjective": "تعديل هدف",
+  "AddObjective": "إضافة هدف",
+  "Save": "حفظ",
+  "Cancel": "إلغاء"
+}
