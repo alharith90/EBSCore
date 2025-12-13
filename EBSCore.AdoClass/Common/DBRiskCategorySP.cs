@@ -1,33 +1,45 @@
-using System.Collections;
-using System.Data;
 using Microsoft.Extensions.Configuration;
+using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
 namespace EBSCore.AdoClass
 {
     public class DBRiskCategorySP : DBParentStoredProcedureClass
     {
-        public TableField Operation = new TableField("Operation", SqlDbType.NVarChar);
-        public TableField UserID = new TableField("UserID", SqlDbType.BigInt);
-        public TableField CompanyID = new TableField("CompanyID", SqlDbType.Int);
-        public TableField CategoryID = new TableField("CategoryID", SqlDbType.Int);
-        public TableField CategoryNameEN = new TableField("CategoryNameEN", SqlDbType.NVarChar);
-        public TableField CategoryNameAR = new TableField("CategoryNameAR", SqlDbType.NVarChar);
-        public TableField DescriptionEN = new TableField("DescriptionEN", SqlDbType.NVarChar);
-        public TableField DescriptionAR = new TableField("DescriptionAR", SqlDbType.NVarChar);
-        public TableField ParentCategoryID = new TableField("ParentCategoryID", SqlDbType.Int);
-        public TableField StatusID = new TableField("StatusID", SqlDbType.NVarChar);
-        public TableField CreatedBy = new TableField("CreatedBy", SqlDbType.Int);
-        public TableField UpdatedBy = new TableField("UpdatedBy", SqlDbType.Int);
-
         public DBRiskCategorySP(IConfiguration configuration)
+            : base("RiskCategorySP", configuration)
         {
-            _config = configuration;
-            Query = "RiskCategorySP";
         }
 
-        public override ArrayList GetParameters(string operation)
+        public object QueryDatabase(
+            SqlQueryType queryType,
+            string Operation = null,
+            long? UserID = null,
+            int? CompanyID = null,
+            int? CategoryID = null,
+            string CategoryNameEN = null,
+            string CategoryNameAR = null,
+            string DescriptionEN = null,
+            string DescriptionAR = null,
+            int? ParentCategoryID = null,
+            string StatusID = null,
+            int? CreatedBy = null,
+            int? UpdatedBy = null)
         {
-            return new ArrayList { Operation, UserID, CompanyID, CategoryID, CategoryNameEN, CategoryNameAR, DescriptionEN, DescriptionAR, ParentCategoryID, StatusID, CreatedBy, UpdatedBy };
+            return base.QueryDatabase(queryType, new
+            {
+                Operation,
+                UserID,
+                CompanyID,
+                CategoryID,
+                CategoryNameEN,
+                CategoryNameAR,
+                DescriptionEN,
+                DescriptionAR,
+                ParentCategoryID,
+                StatusID,
+                CreatedBy,
+                UpdatedBy
+            });
         }
     }
 }
