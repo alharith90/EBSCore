@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections;
+using System.Data;
 
 namespace EBSCore.AdoClass
 {
@@ -18,6 +20,12 @@ namespace EBSCore.AdoClass
         public DBParentStoredProcedureClass(IConfiguration configuration)
         {
             DBConnection = new DBConnectionClass(configuration);
+        }
+
+        public DBParentStoredProcedureClass(string storedProcedureName, IConfiguration configuration)
+            : this(configuration)
+        {
+            SPName = storedProcedureName;
         }
 
         // SqlQueryType : is Enumeration of all availabe operation that 
@@ -72,6 +80,51 @@ namespace EBSCore.AdoClass
                     }
             }
             return null;
+        }
+
+        protected virtual object QueryDatabase(SqlQueryType QueryType, object parameters)
+        {
+            FieldsArrayList = new ArrayList();
+
+            if (parameters != null)
+            {
+                foreach (var propertyInfo in parameters.GetType().GetProperties())
+                {
+                    var value = propertyInfo.GetValue(parameters, null);
+                    var sqlDbType = GetSqlDbType(propertyInfo.PropertyType);
+                    var tableField = new TableField(propertyInfo.Name, sqlDbType, true);
+                    tableField.SetValue(value?.ToString() ?? string.Empty, ref FieldsArrayList);
+                }
+            }
+
+            return QueryDatabase(QueryType);
+        }
+
+        private SqlDbType GetSqlDbType(Type propertyType)
+        {
+            var type = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+
+            if (type == typeof(int))
+            {
+                return SqlDbType.Int;
+            }
+
+            if (type == typeof(long))
+            {
+                return SqlDbType.BigInt;
+            }
+
+            if (type == typeof(bool))
+            {
+                return SqlDbType.Bit;
+            }
+
+            if (type == typeof(DateTime))
+            {
+                return SqlDbType.DateTime;
+            }
+
+            return SqlDbType.NVarChar;
         }
 
         // Set Or Get Stored Procedure Name
