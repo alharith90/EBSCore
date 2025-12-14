@@ -1,5 +1,5 @@
 @page "/GRC/RiskTreatmentPlan"
-@using EBSCore.Web.Models.GRC
+@using RiskTreatmentPlanModel = EBSCore.Web.Models.GRC.RiskTreatmentPlan
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
@@ -139,8 +139,8 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<RiskTreatmentPlan> Plans = new();
-    RiskTreatmentPlan CurrentPlan = new();
+    List<RiskTreatmentPlanModel> Plans = new();
+    RiskTreatmentPlanModel CurrentPlan = new();
 
     EditContext EditContext = default!;
 
@@ -175,7 +175,7 @@ else
         try
         {
             var response = await Http.GetStringAsync("api/RiskTreatmentPlan/Get");
-            Plans = JsonConvert.DeserializeObject<List<RiskTreatmentPlan>>(response) ?? new();
+            Plans = JsonConvert.DeserializeObject<List<RiskTreatmentPlanModel>>(response) ?? new();
         }
         catch (Exception ex)
         {
@@ -189,7 +189,7 @@ else
 
     private async Task ShowInput()
     {
-        CurrentPlan = new RiskTreatmentPlan
+        CurrentPlan = new RiskTreatmentPlanModel
         {
             CompletionStatus = CompletionStatusOptions.First(),
             Effectiveness = EffectivenessOptions.First()
@@ -226,10 +226,10 @@ else
         }
     }
 
-    private async Task EditPlan(RiskTreatmentPlan plan)
+    private async Task EditPlan(RiskTreatmentPlanModel plan)
     {
         var response = await Http.GetStringAsync($"api/RiskTreatmentPlan/GetOne?actionId={plan.ActionID}");
-        var data = JsonConvert.DeserializeObject<List<RiskTreatmentPlan>>(response);
+        var data = JsonConvert.DeserializeObject<List<RiskTreatmentPlanModel>>(response);
         if (data?.Any() == true)
         {
             CurrentPlan = data.First();
@@ -238,7 +238,7 @@ else
         }
     }
 
-    private async Task DeletePlan(RiskTreatmentPlan plan)
+    private async Task DeletePlan(RiskTreatmentPlanModel plan)
     {
         var result = await JS.InvokeAsync<object>("Swal.fire", new
         {
@@ -257,7 +257,7 @@ else
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "api/RiskTreatmentPlan/Delete")
             {
-                Content = JsonContent.Create(new RiskTreatmentPlan { ActionID = plan.ActionID })
+                Content = JsonContent.Create(new RiskTreatmentPlanModel { ActionID = plan.ActionID })
             };
             var response = await Http.SendAsync(request);
             if (response.IsSuccessStatusCode)
