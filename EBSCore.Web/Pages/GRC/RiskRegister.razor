@@ -1,5 +1,5 @@
 @page "/GRC/RiskRegister"
-@using EBSCore.Web.Models.GRC
+@using RiskRegisterModel = EBSCore.Web.Models.GRC.RiskRegister
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
@@ -273,8 +273,8 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<RiskRegister> ListRisks = new();
-    RiskRegister CurrentRisk = new();
+    List<RiskRegisterModel> ListRisks = new();
+    RiskRegisterModel CurrentRisk = new();
 
     EditContext EditContext = default!;
 
@@ -310,7 +310,7 @@ else
         try
         {
             var response = await Http.GetStringAsync("api/RiskRegister/Get");
-            ListRisks = JsonConvert.DeserializeObject<List<RiskRegister>>(response) ?? new();
+            ListRisks = JsonConvert.DeserializeObject<List<RiskRegisterModel>>(response) ?? new();
         }
         catch (Exception ex)
         {
@@ -324,7 +324,7 @@ else
 
     private async Task ShowInput()
     {
-        CurrentRisk = new RiskRegister
+        CurrentRisk = new RiskRegisterModel
         {
             Status = StatusOptions.First(),
             Likelihood = LikelihoodOptions.First(),
@@ -362,10 +362,10 @@ else
         }
     }
 
-    private async Task EditRisk(RiskRegister risk)
+    private async Task EditRisk(RiskRegisterModel risk)
     {
         var response = await Http.GetStringAsync($"api/RiskRegister/GetOne?riskId={risk.RiskID}");
-        var data = JsonConvert.DeserializeObject<List<RiskRegister>>(response);
+        var data = JsonConvert.DeserializeObject<List<RiskRegisterModel>>(response);
         if (data?.Any() == true)
         {
             CurrentRisk = data.First();
@@ -374,7 +374,7 @@ else
         }
     }
 
-    private async Task DeleteRisk(RiskRegister risk)
+    private async Task DeleteRisk(RiskRegisterModel risk)
     {
         var result = await JS.InvokeAsync<object>("Swal.fire", new
         {
@@ -393,7 +393,7 @@ else
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "api/RiskRegister/Delete")
             {
-                Content = JsonContent.Create(new RiskRegister { RiskID = risk.RiskID })
+                Content = JsonContent.Create(new RiskRegisterModel { RiskID = risk.RiskID })
             };
             var response = await Http.SendAsync(request);
             if (response.IsSuccessStatusCode)
