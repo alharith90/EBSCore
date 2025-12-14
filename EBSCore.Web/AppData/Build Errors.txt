@@ -1,0 +1,1012 @@
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'  
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'   
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(91,32): error CS1503: Argument 9: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(92,30): error CS1503: Argument 10: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(99,32): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(101,32): error CS1503: Argument 19: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(119,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(120,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(99,41): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(101,32): error CS1503: Argument 19: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(103,32): error CS1503: Argument 21: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(103,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(104,33): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(86,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(90,30): error CS1503: Argument 9: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(94,33): error CS1503: Argument 12: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(97,32): error CS1503: Argument 15: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(99,32): error CS1503: Argument 17: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(118,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(119,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(118,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(96,38): error CS1503: Argument 14: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(103,32): error CS1503: Argument 21: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(105,32): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(60,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'       
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(60,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(100,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(86,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(88,35): error CS1503: Argument 7: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(116,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(100,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(67,31): error CS1503: Argument 5: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(86,31): error CS1503: Argument 4: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(134,31): error CS1503: Argument 4: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(106,32): error CS1503: Argument 25: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(108,32): error CS1503: Argument 27: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(110,33): error CS1503: Argument 29: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(128,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(129,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(94,32): error CS1503: Argument 15: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(95,33): error CS1503: Argument 16: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(113,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(114,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(136,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method       
+'PolicyCode' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(137,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method 
+'PolicyNameEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(138,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method       
+'CategoryEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(139,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method    
+'EffectiveDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(140,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method       
+'ReviewDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(141,43): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method
+'StatusID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(174,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method       
+'PolicyCode' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(483, 
+545): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method 'PolicyCode' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(483,
+515): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method 'PolicyCode' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(484, 
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method 'PolicyCode' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(178,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method     
+'PolicyNameEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(522,
+548): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method 'PolicyNameEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(522,
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method 'PolicyNameEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(523, 
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method 'PolicyNameEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(182,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR' and no accessible extension method 
+'PolicyNameAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(561, 
+548): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR' and no accessible extension method 'PolicyNameAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(561,
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR' and no accessible extension method 'PolicyNameAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(562,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR' and no accessible extension method 'PolicyNameAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(186,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyType' and no accessible extension method       
+'PolicyType' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(600, 
+546): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyType' and no accessible extension method 'PolicyType' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(600,
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyType' and no accessible extension method 'PolicyType' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(601,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyType' and no accessible extension method 'PolicyType' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(190,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method       
+'CategoryEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(639,
+546): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method 'CategoryEN' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(639, 
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method 'CategoryEN' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(640,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method 'CategoryEN' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(194,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryAR' and no accessible extension method       
+'CategoryAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(678,
+546): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryAR' and no accessible extension method 'CategoryAR' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(678, 
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryAR' and no accessible extension method 'CategoryAR' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(679,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryAR' and no accessible extension method 'CategoryAR' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(198,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method    
+'EffectiveDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(706,
+257): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method 'EffectiveDate' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(706, 
+224): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method 'EffectiveDate' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(706,
+293): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method 'EffectiveDate' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(202,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method       
+'ReviewDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(732,
+254): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method 'ReviewDate' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(732, 
+224): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method 'ReviewDate' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(732,
+287): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method 'ReviewDate' accepting a first argument of type 'PolicyLibrary'   
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(206,80): error CS1061: 'PolicyLibrary' does not contain a definition for 'OwnerUserID' and no accessible extension method      
+'OwnerUserID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(758,
+255): error CS1061: 'PolicyLibrary' does not contain a definition for 'OwnerUserID' and no accessible extension method 'OwnerUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(758, 
+224): error CS1061: 'PolicyLibrary' does not contain a definition for 'OwnerUserID' and no accessible extension method 'OwnerUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(758,
+289): error CS1061: 'PolicyLibrary' does not contain a definition for 'OwnerUserID' and no accessible extension method 'OwnerUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(210,80): error CS1061: 'PolicyLibrary' does not contain a definition for 'ApproverUserID' and no accessible extension method   
+'ApproverUserID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(784,
+258): error CS1061: 'PolicyLibrary' does not contain a definition for 'ApproverUserID' and no accessible extension method 'ApproverUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(784, 
+224): error CS1061: 'PolicyLibrary' does not contain a definition for 'ApproverUserID' and no accessible extension method 'ApproverUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(784,
+295): error CS1061: 'PolicyLibrary' does not contain a definition for 'ApproverUserID' and no accessible extension method 'ApproverUserID' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(214,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method
+'StatusID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(821,
+544): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method 'StatusID' accepting a first argument of type 'PolicyLibrary'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(821, 
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method 'StatusID' accepting a first argument of type 'PolicyLibrary'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(822,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method 'StatusID' accepting a first argument of type 'PolicyLibrary'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(218,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'VersionNumber' and no accessible extension method    
+'VersionNumber' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(860,
+549): error CS1061: 'PolicyLibrary' does not contain a definition for 'VersionNumber' and no accessible extension method 'VersionNumber' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(860, 
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'VersionNumber' and no accessible extension method 'VersionNumber' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(861,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'VersionNumber' and no accessible extension method 'VersionNumber' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(222,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs' and no accessible extension    
+method 'RelatedRegulationIDs' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(899, 
+556): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs' and no accessible extension method 'RelatedRegulationIDs' accepting a first argument of 
+type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(899, 
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs' and no accessible extension method 'RelatedRegulationIDs' accepting a first argument of    
+type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(900,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs' and no accessible extension method 'RelatedRegulationIDs' accepting a first argument of    
+type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(226,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs' and no accessible extension       
+method 'RelatedControlIDs' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(938, 
+553): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs' and no accessible extension method 'RelatedControlIDs' accepting a first argument of type     
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(938,
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs' and no accessible extension method 'RelatedControlIDs' accepting a first argument of type     
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(939,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs' and no accessible extension method 'RelatedControlIDs' accepting a first argument of type     
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(230,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'DocumentPath' and no accessible extension method     
+'DocumentPath' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(977, 
+548): error CS1061: 'PolicyLibrary' does not contain a definition for 'DocumentPath' and no accessible extension method 'DocumentPath' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(977,
+516): error CS1061: 'PolicyLibrary' does not contain a definition for 'DocumentPath' and no accessible extension method 'DocumentPath' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(978,
+320): error CS1061: 'PolicyLibrary' does not contain a definition for 'DocumentPath' and no accessible extension method 'DocumentPath' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(233,86): error CS1061: 'PolicyLibrary' does not contain a definition for 'IsMandatory' and no accessible extension method      
+'IsMandatory' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003 
+,553): error CS1061: 'PolicyLibrary' does not contain a definition for 'IsMandatory' and no accessible extension method 'IsMandatory' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003
+,522): error CS1061: 'PolicyLibrary' does not contain a definition for 'IsMandatory' and no accessible extension method 'IsMandatory' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
+,325): error CS1061: 'PolicyLibrary' does not contain a definition for 'IsMandatory' and no accessible extension method 'IsMandatory' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(238,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles' and no accessible extension method   
+'AppliesToRoles' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1055 
+,550): error CS1061: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles' and no accessible extension method 'AppliesToRoles' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1055
+,516): error CS1061: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles' and no accessible extension method 'AppliesToRoles' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1056 
+,320): error CS1061: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles' and no accessible extension method 'AppliesToRoles' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(242,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'CreatedAt' and no accessible extension method        
+'CreatedAt' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1083 
+,253): error CS1061: 'PolicyLibrary' does not contain a definition for 'CreatedAt' and no accessible extension method 'CreatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1083
+,224): error CS1061: 'PolicyLibrary' does not contain a definition for 'CreatedAt' and no accessible extension method 'CreatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1083
+,285): error CS1061: 'PolicyLibrary' does not contain a definition for 'CreatedAt' and no accessible extension method 'CreatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(246,78): error CS1061: 'PolicyLibrary' does not contain a definition for 'UpdatedAt' and no accessible extension method        
+'UpdatedAt' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1109 
+,253): error CS1061: 'PolicyLibrary' does not contain a definition for 'UpdatedAt' and no accessible extension method 'UpdatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1109 
+,224): error CS1061: 'PolicyLibrary' does not contain a definition for 'UpdatedAt' and no accessible extension method 'UpdatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1109
+,285): error CS1061: 'PolicyLibrary' does not contain a definition for 'UpdatedAt' and no accessible extension method 'UpdatedAt' accepting a first argument of type 'PolicyLibrary'    
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(250,91): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionEN' and no accessible extension method    
+'DescriptionEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1147
+,553): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionEN' and no accessible extension method 'DescriptionEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1147 
+,520): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionEN' and no accessible extension method 'DescriptionEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1148
+,324): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionEN' and no accessible extension method 'DescriptionEN' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(254,91): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionAR' and no accessible extension method    
+'DescriptionAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1187 
+,553): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionAR' and no accessible extension method 'DescriptionAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1187
+,520): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionAR' and no accessible extension method 'DescriptionAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1188
+,324): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionAR' and no accessible extension method 'DescriptionAR' accepting a first argument of type
+'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(405, 
+185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return      
+type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(48,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'PolicyID'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(48,29): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyID' and no accessible extension method
+'PolicyID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(49,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'PolicyCode'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(49,31): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyCode' and no accessible extension method        
+'PolicyCode' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(50,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(50,33): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameEN' and no accessible extension method      
+'PolicyNameEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(51,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(51,33): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyNameAR' and no accessible extension method      
+'PolicyNameAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(52,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'PolicyType'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(52,31): error CS1061: 'PolicyLibrary' does not contain a definition for 'PolicyType' and no accessible extension method        
+'PolicyType' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(53,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'CategoryEN'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(53,31): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryEN' and no accessible extension method        
+'CategoryEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(54,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'CategoryAR'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(54,31): error CS1061: 'PolicyLibrary' does not contain a definition for 'CategoryAR' and no accessible extension method        
+'CategoryAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(55,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'DescriptionEN'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(55,34): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionEN' and no accessible extension method 
+'DescriptionEN' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(56,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'DescriptionAR'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(56,34): error CS1061: 'PolicyLibrary' does not contain a definition for 'DescriptionAR' and no accessible extension method     
+'DescriptionAR' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(57,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'EffectiveDate'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(57,34): error CS1061: 'PolicyLibrary' does not contain a definition for 'EffectiveDate' and no accessible extension method     
+'EffectiveDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(58,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'ReviewDate'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(58,31): error CS1061: 'PolicyLibrary' does not contain a definition for 'ReviewDate' and no accessible extension method 
+'ReviewDate' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(59,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'OwnerUserID'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(59,32): error CS1061: 'PolicyLibrary' does not contain a definition for 'OwnerUserID' and no accessible extension method       
+'OwnerUserID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(60,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'ApproverUserID'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(60,35): error CS1061: 'PolicyLibrary' does not contain a definition for 'ApproverUserID' and no accessible extension method    
+'ApproverUserID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(61,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'StatusID' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(61,29): error CS1061: 'PolicyLibrary' does not contain a definition for 'StatusID' and no accessible extension method
+'StatusID' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(62,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(62,41): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedRegulationIDs' and no accessible extension     
+method 'RelatedRegulationIDs' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(63,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(63,38): error CS1061: 'PolicyLibrary' does not contain a definition for 'RelatedControlIDs' and no accessible extension        
+method 'RelatedControlIDs' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(64,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'VersionNumber' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(64,34): error CS1061: 'PolicyLibrary' does not contain a definition for 'VersionNumber' and no accessible extension method     
+'VersionNumber' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(65,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'DocumentPath'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(65,33): error CS1061: 'PolicyLibrary' does not contain a definition for 'DocumentPath' and no accessible extension method      
+'DocumentPath' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(66,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'IsMandatory'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(66,32): error CS1061: 'PolicyLibrary' does not contain a definition for 'IsMandatory' and no accessible extension method 
+'IsMandatory' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(67,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(67,35): error CS1061: 'PolicyLibrary' does not contain a definition for 'AppliesToRoles' and no accessible extension method    
+'AppliesToRoles' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(68,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'CreatedAt'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(68,30): error CS1061: 'PolicyLibrary' does not contain a definition for 'CreatedAt' and no accessible extension method
+'CreatedAt' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(69,13): error CS0117: 'PolicyLibrary' does not contain a definition for 'UpdatedAt'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(69,30): error CS1061: 'PolicyLibrary' does not contain a definition for 'UpdatedAt' and no accessible extension method 
+'UpdatedAt' accepting a first argument of type 'PolicyLibrary' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\IncidentRegister.razor(269,69): error CS0117: 'IncidentRegister' does not contain a definition for 'IncidentID'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(139,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
+s(916,179): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(143,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
+s(948,177): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
+s(522,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate       
+return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(129,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
+cs(844,180): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(133,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
+cs(876,178): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
+cs(514,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate      
+return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(55,103): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTitle' and no accessible extension method
+'RiskTitle' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(56,103): error CS1061: 'RiskRegister' does not contain a definition for 'RiskDescription' and no accessible extension method    
+'RiskDescription' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(57,55): error CS1061: 'RiskRegister' does not contain a definition for 'RiskCategory' and no accessible extension method        
+'RiskCategory' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(58,55): error CS1061: 'RiskRegister' does not contain a definition for 'Likelihood' and no accessible extension method 
+'Likelihood' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(59,55): error CS1061: 'RiskRegister' does not contain a definition for 'Impact' and no accessible extension method 'Impact'     
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(60,55): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualRiskLevel' and no accessible extension method   
+'ResidualRiskLevel' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(61,55): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTrend' and no accessible extension method
+'RiskTrend' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(62,55): error CS1061: 'RiskRegister' does not contain a definition for 'RiskOwner' and no accessible extension method 
+'RiskOwner' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(63,55): error CS1061: 'RiskRegister' does not contain a definition for 'Status' and no accessible extension method 'Status'     
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(100,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTitle' and no accessible extension method
+'RiskTitle' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(580,1
+94): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTitle' and no accessible extension method 'RiskTitle' accepting a first argument of type 'RiskRegister' could  
+be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(580,1 
+61): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTitle' and no accessible extension method 'RiskTitle' accepting a first argument of type 'RiskRegister' could  
+be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(104,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskCategory' and no accessible extension method 
+'RiskCategory' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(611,1 
+97): error CS1061: 'RiskRegister' does not contain a definition for 'RiskCategory' and no accessible extension method 'RiskCategory' accepting a first argument of type 'RiskRegister'  
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(611,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'RiskCategory' and no accessible extension method 'RiskCategory' accepting a first argument of type 'RiskRegister'  
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(108,94): error CS1061: 'RiskRegister' does not contain a definition for 'RiskDescription' and no accessible extension method    
+'RiskDescription' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(643,2
+00): error CS1061: 'RiskRegister' does not contain a definition for 'RiskDescription' and no accessible extension method 'RiskDescription' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(643,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'RiskDescription' and no accessible extension method 'RiskDescription' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(112,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskSource' and no accessible extension method
+'RiskSource' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(674,1
+95): error CS1061: 'RiskRegister' does not contain a definition for 'RiskSource' and no accessible extension method 'RiskSource' accepting a first argument of type 'RiskRegister'      
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(674,1 
+61): error CS1061: 'RiskRegister' does not contain a definition for 'RiskSource' and no accessible extension method 'RiskSource' accepting a first argument of type 'RiskRegister'      
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(116,94): error CS1061: 'RiskRegister' does not contain a definition for 'PotentialImpact' and no accessible extension method 
+'PotentialImpact' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(706,2 
+00): error CS1061: 'RiskRegister' does not contain a definition for 'PotentialImpact' and no accessible extension method 'PotentialImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(706,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'PotentialImpact' and no accessible extension method 'PotentialImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(138,82): error CS1061: 'RiskRegister' does not contain a definition for 'InherentLikelihood' and no accessible extension        
+method 'InherentLikelihood' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(851,2
+03): error CS1061: 'RiskRegister' does not contain a definition for 'InherentLikelihood' and no accessible extension method 'InherentLikelihood' accepting a first argument of type     
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(851,1 
+61): error CS1061: 'RiskRegister' does not contain a definition for 'InherentLikelihood' and no accessible extension method 'InherentLikelihood' accepting a first argument of type     
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(142,82): error CS1061: 'RiskRegister' does not contain a definition for 'InherentImpact' and no accessible extension method     
+'InherentImpact' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(882,1 
+99): error CS1061: 'RiskRegister' does not contain a definition for 'InherentImpact' and no accessible extension method 'InherentImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(882,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'InherentImpact' and no accessible extension method 'InherentImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(146,82): error CS1061: 'RiskRegister' does not contain a definition for 'InherentRiskLevel' and no accessible extension method  
+'InherentRiskLevel' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(913,2
+02): error CS1061: 'RiskRegister' does not contain a definition for 'InherentRiskLevel' and no accessible extension method 'InherentRiskLevel' accepting a first argument of type       
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(913,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'InherentRiskLevel' and no accessible extension method 'InherentRiskLevel' accepting a first argument of type       
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(150,94): error CS1061: 'RiskRegister' does not contain a definition for 'ExistingControls' and no accessible extension method   
+'ExistingControls' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(945,2 
+01): error CS1061: 'RiskRegister' does not contain a definition for 'ExistingControls' and no accessible extension method 'ExistingControls' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(945,1
+61): error CS1061: 'RiskRegister' does not contain a definition for 'ExistingControls' and no accessible extension method 'ExistingControls' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(154,82): error CS1061: 'RiskRegister' does not contain a definition for 'ControlEffectiveness' and no accessible extension      
+method 'ControlEffectiveness' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(976,2
+05): error CS1061: 'RiskRegister' does not contain a definition for 'ControlEffectiveness' and no accessible extension method 'ControlEffectiveness' accepting a first argument of      
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(976,1 
+61): error CS1061: 'RiskRegister' does not contain a definition for 'ControlEffectiveness' and no accessible extension method 'ControlEffectiveness' accepting a first argument of 
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(158,82): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualLikelihood' and no accessible extension        
+method 'ResidualLikelihood' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1007, 
+203): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualLikelihood' and no accessible extension method 'ResidualLikelihood' accepting a first argument of type    
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1007,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualLikelihood' and no accessible extension method 'ResidualLikelihood' accepting a first argument of type    
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(162,82): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualImpact' and no accessible extension method     
+'ResidualImpact' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1038,
+199): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualImpact' and no accessible extension method 'ResidualImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1038, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualImpact' and no accessible extension method 'ResidualImpact' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(166,82): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualRiskLevel' and no accessible extension method 
+'ResidualRiskLevel' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1069, 
+202): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualRiskLevel' and no accessible extension method 'ResidualRiskLevel' accepting a first argument of type      
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1069,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'ResidualRiskLevel' and no accessible extension method 'ResidualRiskLevel' accepting a first argument of type      
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(170,104): error CS1061: 'RiskRegister' does not contain a definition for 'RiskScore' and no accessible extension method
+'RiskScore' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1102,
+194): error CS1061: 'RiskRegister' does not contain a definition for 'RiskScore' and no accessible extension method 'RiskScore' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1102,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskScore' and no accessible extension method 'RiskScore' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(174,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAppetiteThreshold' and no accessible extension     
+method 'RiskAppetiteThreshold' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1133, 
+206): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAppetiteThreshold' and no accessible extension method 'RiskAppetiteThreshold' accepting a first argument of   
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1133, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAppetiteThreshold' and no accessible extension method 'RiskAppetiteThreshold' accepting a first argument of   
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(178,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponseStrategy' and no accessible extension      
+method 'RiskResponseStrategy' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1164,
+205): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponseStrategy' and no accessible extension method 'RiskResponseStrategy' accepting a first argument of     
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1164,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponseStrategy' and no accessible extension method 'RiskResponseStrategy' accepting a first argument of     
+type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(182,82): error CS1061: 'RiskRegister' does not contain a definition for 'TreatmentPlanID' and no accessible extension method    
+'TreatmentPlanID' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1195,
+200): error CS1061: 'RiskRegister' does not contain a definition for 'TreatmentPlanID' and no accessible extension method 'TreatmentPlanID' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1195, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'TreatmentPlanID' and no accessible extension method 'TreatmentPlanID' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(186,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponse' and no accessible extension method       
+'RiskResponse' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1226, 
+197): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponse' and no accessible extension method 'RiskResponse' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1226,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskResponse' and no accessible extension method 'RiskResponse' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(190,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskOwner' and no accessible extension method
+'RiskOwner' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1257,
+194): error CS1061: 'RiskRegister' does not contain a definition for 'RiskOwner' and no accessible extension method 'RiskOwner' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1257, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskOwner' and no accessible extension method 'RiskOwner' accepting a first argument of type 'RiskRegister' 
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(211,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTrend' and no accessible extension method
+'RiskTrend' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1387, 
+194): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTrend' and no accessible extension method 'RiskTrend' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1387,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskTrend' and no accessible extension method 'RiskTrend' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(215,94): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObjectives' and no accessible extension method  
+'RelatedObjectives' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1419,
+202): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObjectives' and no accessible extension method 'RelatedObjectives' accepting a first argument of type      
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1419,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObjectives' and no accessible extension method 'RelatedObjectives' accepting a first argument of type      
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(219,94): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedIncidents' and no accessible extension method   
+'RelatedIncidents' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1451, 
+201): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedIncidents' and no accessible extension method 'RelatedIncidents' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1451,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedIncidents' and no accessible extension method 'RelatedIncidents' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(223,94): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedControls' and no accessible extension method    
+'RelatedControls' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1483,
+200): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedControls' and no accessible extension method 'RelatedControls' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1483, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedControls' and no accessible extension method 'RelatedControls' accepting a first argument of type
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(227,94): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObligations' and no accessible extension        
+method 'RelatedObligations' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1515,
+203): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObligations' and no accessible extension method 'RelatedObligations' accepting a first argument of type    
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1515, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RelatedObligations' and no accessible extension method 'RelatedObligations' accepting a first argument of type    
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(231,82): error CS1061: 'RiskRegister' does not contain a definition for 'MonitoringFrequency' and no accessible extension       
+method 'MonitoringFrequency' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1546,
+204): error CS1061: 'RiskRegister' does not contain a definition for 'MonitoringFrequency' and no accessible extension method 'MonitoringFrequency' accepting a first argument of type  
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1546,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'MonitoringFrequency' and no accessible extension method 'MonitoringFrequency' accepting a first argument of type  
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(243,82): error CS1061: 'RiskRegister' does not contain a definition for 'KRIName' and no accessible extension method 'KRIName'  
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1619,
+192): error CS1061: 'RiskRegister' does not contain a definition for 'KRIName' and no accessible extension method 'KRIName' accepting a first argument of type 'RiskRegister' could be  
+found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1619, 
+161): error CS1061: 'RiskRegister' does not contain a definition for 'KRIName' and no accessible extension method 'KRIName' accepting a first argument of type 'RiskRegister' could be  
+found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(247,82): error CS1061: 'RiskRegister' does not contain a definition for 'KRIValue' and no accessible extension method
+'KRIValue' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1650,
+193): error CS1061: 'RiskRegister' does not contain a definition for 'KRIValue' and no accessible extension method 'KRIValue' accepting a first argument of type 'RiskRegister' could   
+be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1650,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'KRIValue' and no accessible extension method 'KRIValue' accepting a first argument of type 'RiskRegister' could   
+be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(251,82): error CS1061: 'RiskRegister' does not contain a definition for 'KRIStatus' and no accessible extension method
+'KRIStatus' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1681,
+194): error CS1061: 'RiskRegister' does not contain a definition for 'KRIStatus' and no accessible extension method 'KRIStatus' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1681,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'KRIStatus' and no accessible extension method 'KRIStatus' accepting a first argument of type 'RiskRegister'       
+could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(255,82): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAlertTrigger' and no accessible extension method   
+'RiskAlertTrigger' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1712, 
+201): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAlertTrigger' and no accessible extension method 'RiskAlertTrigger' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1712,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskAlertTrigger' and no accessible extension method 'RiskAlertTrigger' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(259,94): error CS1061: 'RiskRegister' does not contain a definition for 'RiskHistoryNotes' and no accessible extension method   
+'RiskHistoryNotes' accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?)
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1744,
+201): error CS1061: 'RiskRegister' does not contain a definition for 'RiskHistoryNotes' and no accessible extension method 'RiskHistoryNotes' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(1744,
+161): error CS1061: 'RiskRegister' does not contain a definition for 'RiskHistoryNotes' and no accessible extension method 'RiskHistoryNotes' accepting a first argument of type        
+'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_RiskRegister_razor.g.cs(510,1 
+86): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type  
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(329,13): error CS0117: 'RiskRegister' does not contain a definition for 'Status'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(330,13): error CS0117: 'RiskRegister' does not contain a definition for 'Likelihood'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(331,13): error CS0117: 'RiskRegister' does not contain a definition for 'Impact'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(367,89): error CS1061: 'RiskRegister' does not contain a definition for 'RiskID' and no accessible extension method 'RiskID'    
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(382,64): error CS1061: 'RiskRegister' does not contain a definition for 'RiskID' and no accessible extension method 'RiskID'    
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(396,65): error CS0117: 'RiskRegister' does not contain a definition for 'RiskID'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\RiskRegister.razor(396,79): error CS1061: 'RiskRegister' does not contain a definition for 'RiskID' and no accessible extension method 'RiskID'    
+accepting a first argument of type 'RiskRegister' could be found (are you missing a using directive or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+
