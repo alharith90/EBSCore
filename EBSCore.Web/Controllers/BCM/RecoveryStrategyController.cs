@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
-namespace EBSCore.Web.Controllers
+namespace EBSCore.Web.Controllers.BCM
 {
     [ApiController]
     [Route("api/[controller]/[action]")]

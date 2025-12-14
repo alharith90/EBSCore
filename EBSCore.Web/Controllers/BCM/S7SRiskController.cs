@@ -12,7 +12,7 @@ using EBSCore.Web.Models.BCM;
 using EBSCore.Web.Models;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
-namespace EBSCore.Web.Controllers
+namespace EBSCore.Web.Controllers.BCM
 {
     [ApiController]
     [Route("api/[controller]/[action]")]

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using EBSCore.Web.AppCode;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
-namespace EBSCore.Web.Controllers
+namespace EBSCore.Web.Controllers.BCM
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
