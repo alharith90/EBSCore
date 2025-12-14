@@ -1,5 +1,5 @@
 @page "/GRC/IncidentRegister"
-@using EBSCore.Web.Models.GRC
+@using IncidentRegisterModel = EBSCore.Web.Models.GRC.IncidentRegister
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
@@ -147,8 +147,8 @@ else
     bool ShowInputScreen = false;
     bool ShowValidationMessage = false;
 
-    List<IncidentRegister> Incidents = new();
-    IncidentRegister CurrentIncident = new();
+    List<IncidentRegisterModel> Incidents = new();
+    IncidentRegisterModel CurrentIncident = new();
 
     EditContext EditContext = default!;
 
@@ -183,7 +183,7 @@ else
         try
         {
             var response = await Http.GetStringAsync("api/IncidentRegister/Get");
-            Incidents = JsonConvert.DeserializeObject<List<IncidentRegister>>(response) ?? new();
+            Incidents = JsonConvert.DeserializeObject<List<IncidentRegisterModel>>(response) ?? new();
         }
         catch (Exception ex)
         {
@@ -197,7 +197,7 @@ else
 
     private async Task ShowInput()
     {
-        CurrentIncident = new IncidentRegister
+        CurrentIncident = new IncidentRegisterModel
         {
             IncidentDate = DateTime.UtcNow,
             Severity = SeverityOptions.First(),
@@ -235,10 +235,10 @@ else
         }
     }
 
-    private async Task EditIncident(IncidentRegister incident)
+    private async Task EditIncident(IncidentRegisterModel incident)
     {
         var response = await Http.GetStringAsync($"api/IncidentRegister/GetOne?incidentId={incident.IncidentID}");
-        var data = JsonConvert.DeserializeObject<List<IncidentRegister>>(response);
+        var data = JsonConvert.DeserializeObject<List<IncidentRegisterModel>>(response);
         if (data?.Any() == true)
         {
             CurrentIncident = data.First();
@@ -247,7 +247,7 @@ else
         }
     }
 
-    private async Task DeleteIncident(IncidentRegister incident)
+    private async Task DeleteIncident(IncidentRegisterModel incident)
     {
         var result = await JS.InvokeAsync<object>("Swal.fire", new
         {

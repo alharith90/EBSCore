@@ -44,7 +44,7 @@ namespace EBSCore.Web.Models.GRC
 
         public string BackupAvailability { get; set; }
 
-        public bool? HasAlternateWorkaround { get; set; }
+        public bool HasAlternateWorkaround { get; set; }
 
         public string BCPLink { get; set; }
 

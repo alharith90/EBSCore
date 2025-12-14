@@ -1,6 +1,6 @@
 @page "/GRC/ControlLibrary"
 @using System.Net.Http.Json
-@using EBSCore.Web.Models.GRC
+@using ControlLibraryModel = EBSCore.Web.Models.GRC.ControlLibrary
 @inject HttpClient Http
 
 <h3>@Localizer["ControlLibrary"]</h3>
@@ -117,10 +117,10 @@
 }
 
 @code {
-    [Inject] public Microsoft.Extensions.Localization.IStringLocalizer<ControlLibrary> Localizer { get; set; }
+    [Inject] public Microsoft.Extensions.Localization.IStringLocalizer<ControlLibraryModel> Localizer { get; set; }
 
-    private List<ControlLibrary> controls;
-    private ControlLibrary editing;
+    private List<ControlLibraryModel> controls;
+    private ControlLibraryModel editing;
 
     protected override async Task OnInitializedAsync()
     {
@@ -133,13 +133,13 @@
         if (response.IsSuccessStatusCode)
         {
             var json = await response.Content.ReadFromJsonAsync<string>();
-            controls = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibrary>>(json);
+            controls = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibraryModel>>(json);
         }
     }
 
     private void CreateNew()
     {
-        editing = new ControlLibrary();
+        editing = new ControlLibraryModel();
     }
 
     private async Task Edit(long? id)
@@ -149,7 +149,7 @@
         if (response.IsSuccessStatusCode)
         {
             var json = await response.Content.ReadFromJsonAsync<string>();
-            var items = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibrary>>(json);
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<ControlLibraryModel>>(json);
             editing = items.FirstOrDefault();
         }
     }

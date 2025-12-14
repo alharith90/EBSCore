@@ -1,7 +1,11 @@
 @page "/GRC/HSRiskAssessments"
+@using System
 @using System.Net.Http.Json
 @using EBSCore.Web.Models.GRC
+@using Microsoft.Extensions.Localization
 @inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
 
 <h3>@Localizer["HSRiskAssessments"]</h3>
 
@@ -117,9 +121,11 @@
 @code {
     private List<HSRiskAssessment> risks;
     private HSRiskAssessment editing;
+    private IStringLocalizer Localizer;
 
     protected override async Task OnInitializedAsync()
     {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
         risks = await Http.GetFromJsonAsync<List<HSRiskAssessment>>("api/HSRiskAssessment/Get");
     }
 

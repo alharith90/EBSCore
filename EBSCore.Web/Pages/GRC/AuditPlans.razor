@@ -1,7 +1,11 @@
 @page "/GRC/AuditPlans"
+@using System
 @using System.Net.Http.Json
 @using EBSCore.Web.Models.GRC
+@using Microsoft.Extensions.Localization
 @inject HttpClient Http
+@inject IStringLocalizerFactory LocalizerFactory
+@inject NavigationManager Navigation
 
 <h3>@Localizer["AuditPlans"]</h3>
 
@@ -111,9 +115,11 @@
 @code {
     private List<AuditPlan> records;
     private AuditPlan editing;
+    private IStringLocalizer Localizer;
 
     protected override async Task OnInitializedAsync()
     {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
         records = await Http.GetFromJsonAsync<List<AuditPlan>>("/api/AuditPlan/Get");
     }
 
