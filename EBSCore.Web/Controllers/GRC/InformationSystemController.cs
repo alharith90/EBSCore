@@ -1,6 +1,6 @@
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
-using EBSCore.Web.Models.GRC;
+using InformationSystemModel = EBSCore.Web.Models.GRC.InformationSystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -76,7 +76,7 @@ namespace EBSCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Save([FromBody] InformationSystem infoSystem)
+        public async Task<object> Save([FromBody] InformationSystemModel infoSystem)
         {
             try
             {
