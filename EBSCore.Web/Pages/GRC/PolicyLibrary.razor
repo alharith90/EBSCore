@@ -1,5 +1,5 @@
 @page "/GRC/PolicyLibrary"
-@using EBSCore.Web.Models.GRC
+@using PolicyLibraryModel = EBSCore.Web.Models.GRC.PolicyLibrary
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Newtonsoft.Json
@@ -8,8 +8,8 @@
 @inject NavigationManager Navigation
 
 @code {
-    private PolicyLibrary Current = new();
-    private List<PolicyLibrary> Items = new();
+    private PolicyLibraryModel Current = new();
+    private List<PolicyLibraryModel> Items = new();
     private bool ShowInput;
     private bool ShowValidation;
     private EditContext EditContext;
@@ -30,20 +30,20 @@
         var payload = await response.Content.ReadFromJsonAsync<string>();
         if (!string.IsNullOrWhiteSpace(payload))
         {
-            Items = JsonConvert.DeserializeObject<List<PolicyLibrary>>(payload);
+            Items = JsonConvert.DeserializeObject<List<PolicyLibraryModel>>(payload);
         }
     }
 
     private void ShowForm()
     {
-        Current = new PolicyLibrary();
+        Current = new PolicyLibraryModel();
         EditContext = new EditContext(Current);
         ShowInput = true;
     }
 
-    private void Edit(PolicyLibrary item)
+    private void Edit(PolicyLibraryModel item)
     {
-        Current = new PolicyLibrary
+        Current = new PolicyLibraryModel
         {
             PolicyID = item.PolicyID,
             PolicyCode = item.PolicyCode,
@@ -88,7 +88,7 @@
         }
     }
 
-    private async Task DeleteAsync(PolicyLibrary item)
+    private async Task DeleteAsync(PolicyLibraryModel item)
     {
         var request = new HttpRequestMessage(HttpMethod.Delete, "api/PolicyLibrary/Delete")
         {
