@@ -19,7 +19,7 @@ namespace EBSCore.Web.Controllers
     public class StrategicObjectiveController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly DBStrategicObjectiveSP _storedProcedure;
+        private readonly DBBCMStrategicObjectiveSP _storedProcedure;
         private readonly Common _common;
         private readonly User _currentUser;
         private readonly ILogger<StrategicObjectiveController> _logger;
@@ -30,7 +30,7 @@ namespace EBSCore.Web.Controllers
             ILogger<StrategicObjectiveController> logger)
         {
             _configuration = configuration;
-            _storedProcedure = new DBStrategicObjectiveSP(_configuration);
+            _storedProcedure = new DBBCMStrategicObjectiveSP(_configuration);
             _currentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
             _common = new Common();
             _logger = logger;

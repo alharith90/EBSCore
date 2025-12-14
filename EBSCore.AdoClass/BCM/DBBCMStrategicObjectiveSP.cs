@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EBSCore.AdoClass
 {
-    public class DBStrategicObjectiveSP : DBParentStoredProcedureClass
+    public class DBBCMStrategicObjectiveSP : DBParentStoredProcedureClass
     {
         public TableField Operation = new TableField("Operation", SqlDbType.NVarChar);
         public TableField UserID = new TableField("UserID", SqlDbType.BigInt);
@@ -31,7 +31,7 @@ namespace EBSCore.AdoClass
         public TableField CreatedAt = new TableField("CreatedAt", SqlDbType.DateTime);
         public TableField UpdatedAt = new TableField("UpdatedAt", SqlDbType.DateTime);
 
-        public DBStrategicObjectiveSP(IConfiguration configuration) : base(configuration)
+        public DBBCMStrategicObjectiveSP(IConfiguration configuration) : base(configuration)
         {
             SPName = "StrategicObjectiveSP";
         }
