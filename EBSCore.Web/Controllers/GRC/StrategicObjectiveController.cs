@@ -22,6 +22,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<StrategicObjectiveController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public StrategicObjectiveController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<StrategicObjectiveController> logger)
         {
             _configuration = configuration;
@@ -37,8 +40,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvObjectives",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -56,8 +59,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvObjective",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID,
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId,
                     ObjectiveID: objectiveId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -81,8 +84,8 @@ namespace EBSCore.Web.Controllers
 
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveObjective",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     ObjectiveID: objective.ObjectiveID,
                     ObjectiveCode: objective.ObjectiveCode,
                     ObjectiveNameEN: objective.ObjectiveNameEN,
@@ -100,8 +103,8 @@ namespace EBSCore.Web.Controllers
                     UnitAR: objective.UnitAR,
                     RiskAppetiteThreshold: objective.RiskAppetiteThreshold,
                     StatusID: objective.StatusID,
-                    CreatedBy: _currentUser.UserID,
-                    ModifiedBy: _currentUser.UserID);
+                    CreatedBy: CurrentUserId,
+                    ModifiedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -119,8 +122,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteObjective",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     ObjectiveID: objective.ObjectiveID);
 
                 return "[]";

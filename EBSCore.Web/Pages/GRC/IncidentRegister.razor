@@ -266,7 +266,7 @@ else
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, "api/IncidentRegister/Delete")
             {
-                Content = JsonContent.Create(new IncidentRegister { IncidentID = incident.IncidentID })
+                Content = JsonContent.Create(new IncidentRegisterModel { IncidentID = incident.IncidentID })
             };
             var response = await Http.SendAsync(request);
             if (response.IsSuccessStatusCode)

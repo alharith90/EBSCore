@@ -28,7 +28,8 @@ namespace EBSCore.AdoClass
             string RelatedObligations = null,
             string RelatedControls = null,
             long? CreatedBy = null,
-            long? ModifiedBy = null)
+            long? ModifiedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -48,7 +49,8 @@ namespace EBSCore.AdoClass
                 RelatedObligations,
                 RelatedControls,
                 CreatedBy,
-                ModifiedBy
+                ModifiedBy,
+                SerializedObject
             });
         }
     }

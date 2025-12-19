@@ -33,7 +33,8 @@ namespace EBSCore.AdoClass
             string DateClosed = null,
             string VerifiedBy = null,
             long? CreatedBy = null,
-            long? ModifiedBy = null)
+            long? ModifiedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -58,7 +59,8 @@ namespace EBSCore.AdoClass
                 DateClosed,
                 VerifiedBy,
                 CreatedBy,
-                ModifiedBy
+                ModifiedBy,
+                SerializedObject
             });
         }
     }

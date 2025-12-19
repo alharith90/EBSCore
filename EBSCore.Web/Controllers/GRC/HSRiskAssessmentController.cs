@@ -57,7 +57,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "rtvHSRisk",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    HazardID: hazardId);
+                    HazardID: hazardId.ToString());
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -97,7 +97,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "DeleteHSRisk",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    HazardID: hazardId);
+                    HazardID: hazardId.ToString());
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }

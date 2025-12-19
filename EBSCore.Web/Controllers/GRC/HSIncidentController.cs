@@ -57,7 +57,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "rtvHSIncident",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    IncidentID: incidentId);
+                    IncidentID: incidentId.ToString());
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -97,7 +97,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "DeleteHSIncident",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    IncidentID: incidentId);
+                    IncidentID: incidentId.ToString());
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }

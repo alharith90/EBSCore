@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.Configuration;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
@@ -22,13 +23,13 @@ namespace EBSCore.AdoClass
             string Unit = null,
             string BaselineValue = null,
             string CurrentValue = null,
-            string TargetDate = null,
+            DateTime? TargetDate = null,
             string ResponsibleOwner = null,
             string Status = null,
             long? CreatedBy = null,
-            string CreatedAt = null,
+            DateTime? CreatedAt = null,
             long? UpdatedBy = null,
-            string UpdatedAt = null)
+            DateTime? UpdatedAt = null)
         {
             return base.QueryDatabase(queryType, new
             {

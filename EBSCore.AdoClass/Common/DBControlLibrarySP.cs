@@ -30,7 +30,8 @@ namespace EBSCore.AdoClass
             string LastTestResult = null,
             string DocumentationReference = null,
             long? CreatedBy = null,
-            long? ModifiedBy = null)
+            long? ModifiedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -52,7 +53,8 @@ namespace EBSCore.AdoClass
                 LastTestResult,
                 DocumentationReference,
                 CreatedBy,
-                ModifiedBy
+                ModifiedBy,
+                SerializedObject
             });
         }
     }

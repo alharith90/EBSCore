@@ -24,7 +24,8 @@ namespace EBSCore.AdoClass
             string AuditFrequency = null,
             string AuditPriority = null,
             long? CreatedBy = null,
-            long? ModifiedBy = null)
+            long? ModifiedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -40,7 +41,8 @@ namespace EBSCore.AdoClass
                 AuditFrequency,
                 AuditPriority,
                 CreatedBy,
-                ModifiedBy
+                ModifiedBy,
+                SerializedObject
             });
         }
     }

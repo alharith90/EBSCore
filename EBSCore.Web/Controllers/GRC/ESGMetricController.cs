@@ -23,6 +23,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<ESGMetricController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public ESGMetricController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<ESGMetricController> logger)
         {
             _configuration = configuration;
@@ -38,8 +41,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_metricSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvESGMetrics",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -57,9 +60,9 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_metricSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvESGMetric",
-                    CompanyID: _currentUser.CompanyID,
+                    CompanyID: CurrentCompanyId,
                     MetricID: metricId,
-                    UserID: _currentUser.UserID);
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -82,8 +85,8 @@ namespace EBSCore.Web.Controllers
 
                 _metricSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveESGMetric",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     MetricID: metric.MetricID,
                     MetricName: metric.MetricName,
                     Category: metric.Category,
@@ -101,8 +104,8 @@ namespace EBSCore.Web.Controllers
                     Comments: metric.Comments,
                     CreatedAt: metric.CreatedAt,
                     UpdatedAt: metric.UpdatedAt,
-                    UpdatedBy: _currentUser.UserID,
-                    CreatedBy: _currentUser.UserID);
+                    UpdatedBy: CurrentUserId,
+                    CreatedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -120,8 +123,8 @@ namespace EBSCore.Web.Controllers
             {
                 _metricSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteESGMetric",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     MetricID: metricId);
 
                 return "[]";

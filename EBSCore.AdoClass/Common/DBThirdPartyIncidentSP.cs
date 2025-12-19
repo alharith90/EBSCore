@@ -29,7 +29,8 @@ namespace EBSCore.AdoClass
             string LinkedRiskEvent = null,
             string Notes = null,
             int? CreatedBy = null,
-            int? UpdatedBy = null)
+            int? UpdatedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -50,7 +51,8 @@ namespace EBSCore.AdoClass
                 LinkedRiskEvent,
                 Notes,
                 CreatedBy,
-                UpdatedBy
+                UpdatedBy,
+                SerializedObject
             });
         }
     }

@@ -22,6 +22,7 @@ namespace EBSCore.AdoClass
         public TableField RiskOwner = new TableField("RiskOwner", SqlDbType.NVarChar);
         public TableField NextReviewDate = new TableField("NextReviewDate", SqlDbType.DateTime);
         public TableField Status = new TableField("Status", SqlDbType.NVarChar);
+        public TableField SerializedObject = new TableField("SerializedObject", SqlDbType.NVarChar);
         public TableField CreatedBy = new TableField("CreatedBy", SqlDbType.BigInt);
         public TableField ModifiedBy = new TableField("ModifiedBy", SqlDbType.BigInt);
         public TableField CreatedAt = new TableField("CreatedAt", SqlDbType.DateTime);
@@ -37,7 +38,8 @@ namespace EBSCore.AdoClass
             string HazardDescription = "", string LocationArea = "", string RelatedActivity = "", string PotentialImpact = "",
             string Likelihood = "", string Severity = "", string RiskLevel = "", string ExistingControls = "",
             string AdditionalControlsNeeded = "", string RiskOwner = "", string NextReviewDate = "", string Status = "",
-            string CreatedBy = "", string ModifiedBy = "", string CreatedAt = "", string UpdatedAt = "")
+            string CreatedBy = "", string ModifiedBy = "", string CreatedAt = "", string UpdatedAt = "",
+            object SerializedObject = null)
         {
             FieldsArrayList = new ArrayList();
             this.Operation.SetValue(Operation, ref FieldsArrayList);
@@ -56,6 +58,7 @@ namespace EBSCore.AdoClass
             this.RiskOwner.SetValue(RiskOwner, ref FieldsArrayList);
             this.NextReviewDate.SetValue(NextReviewDate, ref FieldsArrayList);
             this.Status.SetValue(Status, ref FieldsArrayList);
+            this.SerializedObject.SetValue(SerializedObject?.ToString() ?? string.Empty, ref FieldsArrayList);
             this.CreatedBy.SetValue(CreatedBy, ref FieldsArrayList);
             this.ModifiedBy.SetValue(ModifiedBy, ref FieldsArrayList);
             this.CreatedAt.SetValue(CreatedAt, ref FieldsArrayList);

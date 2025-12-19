@@ -30,7 +30,8 @@ namespace EBSCore.AdoClass
             string AssessedBy = null,
             string Notes = null,
             int? CreatedBy = null,
-            int? UpdatedBy = null)
+            int? UpdatedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -52,7 +53,8 @@ namespace EBSCore.AdoClass
                 AssessedBy,
                 Notes,
                 CreatedBy,
-                UpdatedBy
+                UpdatedBy,
+                SerializedObject
             });
         }
     }

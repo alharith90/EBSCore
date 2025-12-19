@@ -83,11 +83,11 @@ namespace EBSCore.Web.Controllers
                     Operation: "SavePlan",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    ActionID: plan.ActionID,
+                    ActionID: plan.ActionID?.ToString(),
                     RelatedRisk: plan.RelatedRisk,
                     MitigationAction: plan.MitigationAction,
                     ActionOwner: plan.ActionOwner,
-                    DueDate: plan.DueDate,
+                    DueDate: plan.DueDate?.ToString("o"),
                     CompletionStatus: plan.CompletionStatus,
                     TreatmentType: plan.TreatmentType,
                     AssociatedControl: plan.AssociatedControl,
@@ -115,7 +115,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "DeletePlan",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    ActionID: plan.ActionID);
+                    ActionID: plan.ActionID?.ToString());
 
                 return "[]";
             }

@@ -23,6 +23,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<SustainabilityInitiativeController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public SustainabilityInitiativeController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<SustainabilityInitiativeController> logger)
         {
             _configuration = configuration;
@@ -38,8 +41,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_initiativeSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvSustainabilityInitiatives",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -57,9 +60,9 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_initiativeSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvSustainabilityInitiative",
-                    CompanyID: _currentUser.CompanyID,
+                    CompanyID: CurrentCompanyId,
                     InitiativeID: initiativeId,
-                    UserID: _currentUser.UserID);
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -82,8 +85,8 @@ namespace EBSCore.Web.Controllers
 
                 _initiativeSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveSustainabilityInitiative",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     InitiativeID: initiative.InitiativeID,
                     InitiativeName: initiative.InitiativeName,
                     Description: initiative.Description,
@@ -97,8 +100,8 @@ namespace EBSCore.Web.Controllers
                     Status: initiative.Status,
                     CreatedAt: initiative.CreatedAt,
                     UpdatedAt: initiative.UpdatedAt,
-                    UpdatedBy: _currentUser.UserID,
-                    CreatedBy: _currentUser.UserID);
+                    UpdatedBy: CurrentUserId,
+                    CreatedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -116,8 +119,8 @@ namespace EBSCore.Web.Controllers
             {
                 _initiativeSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteSustainabilityInitiative",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     InitiativeID: initiativeId);
 
                 return "[]";
