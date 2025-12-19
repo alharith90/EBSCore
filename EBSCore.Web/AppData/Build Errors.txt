@@ -1,301 +1,19 @@
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'        
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'    
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'  
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(120,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(121,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(99,41): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(101,32): error CS1503: Argument 19: cannot convert from 'System.DateTime?' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(103,32): error CS1503: Argument 21: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(94,33): error CS1503: Argument 12: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(97,32): error CS1503: Argument 15: cannot convert from 'System.DateTime?' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(99,32): error CS1503: Argument 17: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(118,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(119,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(60,33): error CS1503: Argument 5: cannot convert from 'long' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'       
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(60,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(100,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(100,31): error CS1503: Argument 5: cannot convert from 'long' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(86,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(88,35): error CS1503: Argument 7: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(116,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(96,38): error CS1503: Argument 14: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(103,32): error CS1503: Argument 21: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(105,32): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(67,31): error CS1503: Argument 5: cannot convert from 'int' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(86,31): error CS1503: Argument 4: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(134,31): error CS1503: Argument 4: cannot convert from 'int' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(94,32): error CS1503: Argument 15: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(95,33): error CS1503: Argument 16: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(113,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(114,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(106,32): error CS1503: Argument 25: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(108,32): error CS1503: Argument 27: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(110,33): error CS1503: Argument 29: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(128,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(129,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(113,24): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,115): error CS1056: Unexpected character '$' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_RiskIndex_razor.g.cs(397,15):
+ error CS1026: ) expected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(113,24): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and 
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(141,22): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
+D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(141,22): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and 
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(150,36): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
+D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(150,36): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and 
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(151,42): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
+D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(151,42): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and 
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\MainLayout.razor(778,14): error CS0103: The name 'Body' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(6,6): error CS0103: The name 'Localizer' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(10,63): error CS0103: The name 'Localizer' does not exist in the current context
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(10,63): error CS0103: The name 'Localizer' does not exist in the current context 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(17,18): error CS0103: The name 'Localizer' does not exist in the current context
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(17,18): error CS0103: The name 'Localizer' does not exist in the current context 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(18,18): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -312,7 +30,7 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(32,34): error CS0103: T
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(39,31): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityProcessName' and no accessible extension        
 method 'EntityProcessName' accepting a first argument of type 'AuditUniverse' could be found (are you missing a using directive or an assembly reference?)
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(40,31): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityOwner' and no accessible extension method 
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(40,31): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityOwner' and no accessible extension method       
 'EntityOwner' accepting a first argument of type 'AuditUniverse' could be found (are you missing a using directive or an assembly reference?)
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(41,31): error CS1061: 'AuditUniverse' does not contain a definition for 'RiskRating' and no accessible extension method        
@@ -324,11 +42,11 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(42,31): error CS1061: '
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(43,31): error CS1061: 'AuditUniverse' does not contain a definition for 'AuditFrequency' and no accessible extension method    
 'AuditFrequency' accepting a first argument of type 'AuditUniverse' could be found (are you missing a using directive or an assembly reference?)
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(45,117): error CS0103: The name 'Localizer' does not exist in the current context
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(45,117): error CS0103: The name 'Localizer' does not exist in the current context 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(46,123): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,35): error CS0103: The name 'Localizer' does not exist in the current context 
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,35): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,53): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityProcessID' and no accessible extension method   
 'EntityProcessID' accepting a first argument of type 'AuditUniverse' could be found (are you missing a using directive or an assembly reference?)
@@ -345,15 +63,17 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(77,48): error CS0103: T
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(81,48): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(85,48): error CS0103: The name 'Localizer' does not exist in the current context 
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(85,48): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(90,66): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(91,75): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(31,80): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,104): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -379,37 +99,29 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(98,29
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
 'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -417,13 +129,25 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(92,30): error CS1503: Argument 10: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(99,32): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(101,32): error CS1503: Argument 19: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(119,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(120,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -433,115 +157,61 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(103,3
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(104,33): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(119,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(120,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(86,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(90,30): error CS1503: Argument 9: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(118,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(118,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\MainLayout.razor(778,14): error CS0103: The name 'Body' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\IncidentRegister.razor(269,69): error CS0117: 'IncidentRegister' does not contain a definition for 'IncidentID'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(233,78): error CS1503: Argument 1: cannot convert from 'bool?' to 'bool' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003 
-,397): error CS1503: Argument 2: cannot convert from 'Microsoft.AspNetCore.Components.EventCallback<bool?>' to 'Microsoft.AspNetCore.Components.EventCallback'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
-,317): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion exists (are you missing a cast?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004 
-,317): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return     
-type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(405,
-185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return      
-type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(31,80): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]        
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,104): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(139,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
-s(916,179): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(143,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
-s(948,177): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
-s(522,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate       
-return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(129,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
-cs(844,180): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(133,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g. 
-cs(876,178): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
-cs(514,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate      
-return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_RiskIndex_razor.g.cs(150,15):
- error CS1026: ) expected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,115): error CS1056: Unexpected character '$' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_RiskIndex_razor.g.cs(397,15): 
- error CS1026: ) expected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'        
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -553,9 +223,9 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(58,29): error
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -567,217 +237,15 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(58,
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'        
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(120,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(121,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'   
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(99,41): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(101,32): error CS1503: Argument 19: cannot convert from 'System.DateTime?' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(103,32): error CS1503: Argument 21: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(94,33): error CS1503: Argument 12: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(97,32): error CS1503: Argument 15: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(99,32): error CS1503: Argument 17: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(118,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(119,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(60,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'       
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(60,31): error CS1503: Argument 5: cannot convert from 'long' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(100,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(100,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(86,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(88,35): error CS1503: Argument 7: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(116,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(96,38): error CS1503: Argument 14: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(103,32): error CS1503: Argument 21: cannot convert from 'System.DateTime?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(105,32): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(67,31): error CS1503: Argument 5: cannot convert from 'int' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(86,31): error CS1503: Argument 4: cannot convert from 'int?' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(134,31): error CS1503: Argument 4: cannot convert from 'int' to 'string'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(94,32): error CS1503: Argument 15: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(95,33): error CS1503: Argument 16: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(113,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(114,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(106,32): error CS1503: Argument 25: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(108,32): error CS1503: Argument 27: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(110,33): error CS1503: Argument 29: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(128,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(129,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -791,20 +259,270 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(80,21): err
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\IncidentRegister.razor(269,69): error CS0117: 'IncidentRegister' does not contain a definition for 'IncidentID' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'  
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(120,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(121,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(99,41): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(101,32): error CS1503: Argument 19: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(103,32): error CS1503: Argument 21: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(96,38): error CS1503: Argument 14: cannot convert from 'System.DateTime?' to 'string' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(103,32): error CS1503: Argument 21: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(105,32): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(94,33): error CS1503: Argument 12: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(97,32): error CS1503: Argument 15: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(99,32): error CS1503: Argument 17: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(60,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(67,31): error CS1503: Argument 5: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(118,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(119,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(106,32): error CS1503: Argument 25: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(108,32): error CS1503: Argument 27: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(110,33): error CS1503: Argument 29: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(86,31): error CS1503: Argument 4: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(128,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(129,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(100,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(94,32): error CS1503: Argument 15: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(95,33): error CS1503: Argument 16: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(113,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(114,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(60,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(134,31): error CS1503: Argument 4: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'       
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(100,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(86,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(88,35): error CS1503: Argument 7: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(116,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(139,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
+s(916,179): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(143,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
+s(948,177): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
+s(522,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate       
+return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(233,78): error CS1503: Argument 1: cannot convert from 'bool?' to 'bool' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003
+,397): error CS1503: Argument 2: cannot convert from 'Microsoft.AspNetCore.Components.EventCallback<bool?>' to 'Microsoft.AspNetCore.Components.EventCallback'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
+,317): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion exists (are you missing a cast?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
+,317): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return     
+type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(405, 
+185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return      
+type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(129,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g. 
+cs(844,180): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(133,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
+cs(876,178): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g.
+cs(514,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate      
+return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_RiskIndex_razor.g.cs(150,15):
+ error CS1026: ) expected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,115): error CS1056: Unexpected character '$' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_RiskIndex_razor.g.cs(397,15): 
+ error CS1026: ) expected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(113,24): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(141,22): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
+D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(141,22): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and 
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(150,36): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\Workflow\WorkflowBuilder.razor(151,42): error CS0104: 'JsonSerializer' is an ambiguous reference between 'Newtonsoft.Json.JsonSerializer' and
 'System.Text.Json.JsonSerializer' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\MainLayout.razor(778,14): error CS0103: The name 'Body' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(6,6): error CS0103: The name 'Localizer' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj] 
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(10,63): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(17,18): error CS0103: The name 'Localizer' does not exist in the current context
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(17,18): error CS0103: The name 'Localizer' does not exist in the current context 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(18,18): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -839,10 +557,10 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(46,123): error CS0103: 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,35): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,53): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityProcessID' and no accessible extension method 
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(57,53): error CS1061: 'AuditUniverse' does not contain a definition for 'EntityProcessID' and no accessible extension method   
 'EntityProcessID' accepting a first argument of type 'AuditUniverse' could be found (are you missing a using directive or an assembly reference?)
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(61,48): error CS0103: The name 'Localizer' does not exist in the current context
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(61,48): error CS0103: The name 'Localizer' does not exist in the current context 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(65,48): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -856,10 +574,12 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(81,48): error CS0103: T
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(85,48): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(90,66): error CS0103: The name 'Localizer' does not exist in the current context 
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(90,66): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\AuditUniverse.razor(91,75): error CS0103: The name 'Localizer' does not exist in the current context
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(31,80): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]        
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,104): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyProfileController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
@@ -884,7 +604,7 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(59,32
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
 'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyIncidentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -892,31 +612,23 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(39,
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
-'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ThirdPartyAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -928,11 +640,23 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(99,32): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(99,32): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(101,32): error CS1503: Argument 19: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(119,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(120,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -942,52 +666,321 @@ D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(103,3
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(104,33): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(119,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\SustainabilityInitiativeController.cs(120,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\StrategicObjectiveController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
-[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(86,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(90,30): error CS1503: Argument 9: cannot convert from 'System.DateTime?' to 'string'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(118,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTreatmentPlanController.cs(118,31): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskTemplateController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\MainLayout.razor(778,14): error CS0103: The name 'Body' does not exist in the current context [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditFindingController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'    
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditUniverseController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BIAProcessController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'        
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\AuditPlanController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'     
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\RiskCategoryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\IncidentRegister.razor(269,69): error CS0117: 'IncidentRegister' does not contain a definition for 'IncidentID'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(233,78): error CS1503: Argument 1: cannot convert from 'bool?' to 'bool' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003
-,397): error CS1503: Argument 2: cannot convert from 'Microsoft.AspNetCore.Components.EventCallback<bool?>' to 'Microsoft.AspNetCore.Components.EventCallback'
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004 
-,317): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion exists (are you missing a cast?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
-,317): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return     
-type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(405, 
-185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return      
-type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(31,80): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]        
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(68,104): error CS1501: No overload for method 'NavigateTo' takes 0 arguments [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(139,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime' 
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'  
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceIssueController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(40,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(41,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(59,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(60,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(120,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\BCPPlanController.cs(121,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(99,41): error CS1503: Argument 17: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(101,32): error CS1503: Argument 19: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(103,32): error CS1503: Argument 21: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceAssessmentController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(41,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(42,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(96,38): error CS1503: Argument 14: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(102,32): error CS1503: Argument 20: cannot convert from 'System.DateTime?' to 'string' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(103,32): error CS1503: Argument 21: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(104,32): error CS1503: Argument 22: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(105,32): error CS1503: Argument 23: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(60,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(62,29): error CS1503: Argument 5: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(39,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(40,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(123,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ESGMetricController.cs(124,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(58,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(59,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'   
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(85,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(86,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(94,33): error CS1503: Argument 12: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(97,32): error CS1503: Argument 15: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(98,32): error CS1503: Argument 16: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(99,32): error CS1503: Argument 17: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(100,32): error CS1503: Argument 18: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ComplianceObligationController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(98,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\ControlLibraryController.cs(99,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(60,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(67,31): error CS1503: Argument 5: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(118,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalObjectiveController.cs(119,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(38,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(39,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(84,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(85,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(106,32): error CS1503: Argument 25: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(108,32): error CS1503: Argument 27: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(110,33): error CS1503: Argument 29: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(86,31): error CS1503: Argument 4: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(57,32): error CS1503: Argument 3: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(58,29): error CS1503: Argument 4: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named
+'SerializedObject' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(128,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\PolicyLibraryController.cs(129,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(122,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\EnvironmentalAspectController.cs(123,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSRiskAssessmentController.cs(100,31): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(82,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(83,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(94,32): error CS1503: Argument 15: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(95,33): error CS1503: Argument 16: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(113,29): error CS1503: Argument 3: cannot convert from 'string' to 'long?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\KeyRiskIndicatorController.cs(114,32): error CS1503: Argument 4: cannot convert from 'string' to 'int?'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(60,33): error CS1503: Argument 5: cannot convert from 'long' to 'string' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\InformationSystemController.cs(134,31): error CS1503: Argument 4: cannot convert from 'int' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(80,21): error CS1739: The best overload for 'QueryDatabase' does not have a parameter named 'SerializedObject'       
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\HSIncidentController.cs(100,33): error CS1503: Argument 5: cannot convert from 'long' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(86,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(88,35): error CS1503: Argument 7: cannot convert from 'System.DateTime?' to 'string'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Controllers\GRC\IncidentRegisterController.cs(116,33): error CS1503: Argument 5: cannot convert from 'int?' to 'string' 
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(139,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
 s(916,179): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
@@ -995,9 +988,21 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicObjectives.razor(143,76): error CS
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
 s(948,177): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 'string' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c 
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicObjectives_razor.g.c
 s(522,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate       
 return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\GRC\PolicyLibrary.razor(233,78): error CS1503: Argument 1: cannot convert from 'bool?' to 'bool' [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]       
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1003 
+,397): error CS1503: Argument 2: cannot convert from 'Microsoft.AspNetCore.Components.EventCallback<bool?>' to 'Microsoft.AspNetCore.Components.EventCallback'
+[D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004
+,317): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion exists (are you missing a cast?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(1004 
+,317): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return     
+type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_GRC_PolicyLibrary_razor.g.cs(405,
+185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return      
+type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\StrategicInitiatives.razor(129,76): error CS1503: Argument 1: cannot convert from 'string' to 'System.DateTime'
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g. 
@@ -1009,6 +1014,3 @@ cs(876,178): error CS0029: Cannot implicitly convert type 'System.TimeOnly?' to 
 D:\Dev\EBSCore\EBSCore.Web\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_BCM_StrategicInitiatives_razor.g. 
 cs(514,185): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate      
 return type [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-
-
-PS D:\Dev\EBSCore> 
