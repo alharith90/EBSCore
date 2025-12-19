@@ -15,40 +15,40 @@ D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(12,33): error CS0116: A nam
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(93,18): error CS0246: The type or namespace name 'S7SRisk' could not be found (are you missing a using directive or an assembly 
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(15,9): error CS0246: The type or namespace name 'PageTitleService' could not be found (are you missing a using directive or an 
-assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(96,21): error CS0246: The type or namespace name 'S7SRisk' could not be found (are you missing a using directive or an assembly 
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(100,35): error CS0115: 'RiskListResponse.OnInitializedAsync()': no suitable method found to override
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(100,35): error CS0115: 'RiskListResponse.OnInitializedAsync()': no suitable method found to override 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(15,9): error CS0246: The type or namespace name 'PageTitleService' could not be found (are you missing a using directive or an     
+assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(14,9): error CS0246: The type or namespace name 'NavigationManager' could not be found (are you missing a using directive or an    
 assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(13,9): error CS0246: The type or namespace name 'IJSRuntime' could not be found (are you missing a using directive or an assembly 
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(13,9): error CS0246: The type or namespace name 'IJSRuntime' could not be found (are you missing a using directive or an assembly  
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(12,9): error CS0246: The type or namespace name 'IStringLocalizerFactory' could not be found (are you missing a using directive    
 or an assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(94,19): error CS1527: Elements defined in a namespace cannot be explicitly declared as private, protected, protected internal, or  
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(94,19): error CS1527: Elements defined in a namespace cannot be explicitly declared as private, protected, protected internal, or 
 private protected [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(58,29): error CS8802: Only one compilation unit can have top-level statements. [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]     
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(93,27): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(15,26): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(14,27): error CS0116: A namespace cannot directly contain members such as fields, methods or statements 
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(14,27): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(13,20): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(13,20): error CS0116: A namespace cannot directly contain members such as fields, methods or statements 
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(12,33): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(93,18): error CS0246: The type or namespace name 'S7SRisk' could not be found (are you missing a using directive or an assembly    
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(15,9): error CS0246: The type or namespace name 'PageTitleService' could not be found (are you missing a using directive or an     
-assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(96,21): error CS0246: The type or namespace name 'S7SRisk' could not be found (are you missing a using directive or an assembly    
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(100,35): error CS0115: 'RiskListResponse.OnInitializedAsync()': no suitable method found to override
 [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
-D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(14,9): error CS0246: The type or namespace name 'NavigationManager' could not be found (are you missing a using directive or an    
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(15,9): error CS0246: The type or namespace name 'PageTitleService' could not be found (are you missing a using directive or an     
+assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
+D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(14,9): error CS0246: The type or namespace name 'NavigationManager' could not be found (are you missing a using directive or an 
 assembly reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
 D:\Dev\EBSCore\EBSCore.Web\Pages\BCM\RiskIndex.razor(13,9): error CS0246: The type or namespace name 'IJSRuntime' could not be found (are you missing a using directive or an assembly  
 reference?) [D:\Dev\EBSCore\EBSCore.Web\EBSCore.Web.csproj]
