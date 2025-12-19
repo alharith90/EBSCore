@@ -28,7 +28,7 @@
                     <button class="btn btn-outline-dark" @onclick="Refresh">
                         <i class="fas fa-rotate"></i> @GLocalizer["Refresh"]
                     </button>
-                    <button class="btn btn-success" @onclick="@(() => Navigation.NavigateTo(\"/BCM/RiskForm\"))">
+                    <button class="btn btn-success" @onclick="@(() => Navigation.NavigateTo("/BCM/RiskForm"))">
                         <i class="fas fa-plus"></i> @Localizer["AddRisk"]
                     </button>
                 </div>
@@ -65,7 +65,7 @@
                                     <td><span class="badge bg-primary">@risk.value.RiskLevel</span></td>
                                     <td>@risk.value.NCEMAPillar</td>
                                     <td>
-                                        <button class="btn btn-sm btn-info" @onclick="@(() => Navigation.NavigateTo($\"/BCM/RiskForm/{risk.value.RiskID}\"))">
+                                        <button class="btn btn-sm btn-info" @onclick="@(() => Navigation.NavigateTo($"/BCM/RiskForm/{risk.value.RiskID}"))">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </td>
