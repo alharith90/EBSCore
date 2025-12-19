@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="WorkflowEngine\**\*.cs" />
+    <Compile Remove="Pages\BCM\RiskIndex.razor" />
   </ItemGroup>
 
   <ItemGroup>
