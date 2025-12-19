@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Globalization;
 using System.Threading.Tasks;
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
@@ -108,8 +109,8 @@ namespace EBSCore.Web.Controllers.BCM
                     DepartmentID: initiative.DepartmentID,
                     Budget: initiative.Budget?.ToString(),
                     Progress: initiative.Progress?.ToString(),
-                    StartDate: initiative.StartDate,
-                    EndDate: initiative.EndDate,
+                    StartDate: initiative.StartDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    EndDate: initiative.EndDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                     Status: initiative.Status,
                     EscalationCriteria: initiative.EscalationCriteria,
                     EscalationContact: initiative.EscalationContact,

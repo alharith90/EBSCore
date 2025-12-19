@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Globalization;
 using System.Threading.Tasks;
 using EBSCore.AdoClass;
 using EBSCore.Web.AppCode;
@@ -114,8 +115,8 @@ namespace EBSCore.Web.Controllers.BCM
                     RiskLink: objective.RiskLink,
                     ComplianceLink: objective.ComplianceLink,
                     Status: objective.Status,
-                    StartDate: objective.StartDate,
-                    EndDate: objective.EndDate,
+                    StartDate: objective.StartDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    EndDate: objective.EndDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                     EscalationLevel: objective.EscalationLevel,
                     EscalationContact: objective.EscalationContact,
                     ActivationCriteria: objective.ActivationCriteria,

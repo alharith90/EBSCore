@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace EBSCore.Web.Models.BCM
@@ -29,9 +30,9 @@ namespace EBSCore.Web.Models.BCM
 
         public string Status { get; set; } = "On Track";
 
-        public string? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public string? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public string? EscalationLevel { get; set; }
 
