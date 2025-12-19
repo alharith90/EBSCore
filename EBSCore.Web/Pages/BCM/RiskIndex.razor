@@ -14,11 +14,6 @@
 @inject NavigationManager Navigation
 @inject PageTitleService PageTitleService
 
-@{
-    var Localizer = LocalizerFactory.Create("BCM/Risk", "");
-    var GLocalizer = LocalizerFactory.Create("Common", "");
-}
-
 <div class="row">
     <div class="col-md-8">
         <div class="card card-primary">
@@ -91,6 +86,8 @@
 
 @code {
     private List<S7SRisk> Risks { get; set; } = new();
+    private IStringLocalizer Localizer { get; set; } = default!;
+    private IStringLocalizer GLocalizer { get; set; } = default!;
     private class RiskListResponse
     {
         public List<S7SRisk>? Data { get; set; }
@@ -99,7 +96,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        PageTitleService.SetTitle(LocalizerFactory.Create("BCM/Risk", "")["RiskRegister"]);
+        Localizer = LocalizerFactory.Create("BCM/Risk", "");
+        GLocalizer = LocalizerFactory.Create("Common", "");
+        PageTitleService.SetTitle(Localizer["RiskRegister"]);
         await Refresh();
     }
 
