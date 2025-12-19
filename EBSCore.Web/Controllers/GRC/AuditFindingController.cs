@@ -21,6 +21,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<AuditFindingController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public AuditFindingController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<AuditFindingController> logger)
         {
             _configuration = configuration;
@@ -36,8 +39,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvAuditFindings",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -55,8 +58,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvAuditFinding",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     FindingID: findingId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -75,8 +78,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "SaveAuditFinding",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     SerializedObject: auditFinding);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -95,8 +98,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteAuditFinding",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     FindingID: findingId);
 
                 return Ok();

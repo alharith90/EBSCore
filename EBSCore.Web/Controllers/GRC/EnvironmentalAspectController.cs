@@ -23,6 +23,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<EnvironmentalAspectController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public EnvironmentalAspectController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<EnvironmentalAspectController> logger)
         {
             _configuration = configuration;
@@ -38,8 +41,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_aspectSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvAspects",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -57,9 +60,9 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_aspectSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvAspect",
-                    CompanyID: _currentUser.CompanyID,
+                    CompanyID: CurrentCompanyId,
                     AspectID: aspectId,
-                    UserID: _currentUser.UserID);
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -82,8 +85,8 @@ namespace EBSCore.Web.Controllers
 
                 _aspectSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveAspect",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     AspectID: aspect.AspectID,
                     UnitID: aspect.UnitID,
                     AspectDescription: aspect.AspectDescription,
@@ -100,8 +103,8 @@ namespace EBSCore.Web.Controllers
                     Status: aspect.Status,
                     CreatedAt: aspect.CreatedAt,
                     UpdatedAt: aspect.UpdatedAt,
-                    UpdatedBy: _currentUser.UserID,
-                    CreatedBy: _currentUser.UserID);
+                    UpdatedBy: CurrentUserId,
+                    CreatedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -119,8 +122,8 @@ namespace EBSCore.Web.Controllers
             {
                 _aspectSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteAspect",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     AspectID: aspectId);
 
                 return "[]";

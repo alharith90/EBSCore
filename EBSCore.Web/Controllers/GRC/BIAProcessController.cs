@@ -21,6 +21,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<BIAProcessController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public BIAProcessController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<BIAProcessController> logger)
         {
             _storedProcedure = new DBBIAProcessSP(configuration);
@@ -35,8 +38,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvBIAProcesses",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -54,8 +57,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvBIAProcess",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID,
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId,
                     BIAID: biaId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -79,8 +82,8 @@ namespace EBSCore.Web.Controllers
 
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveBIAProcess",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     BIAID: process.BIAID,
                     ProcessName: process.ProcessName,
                     Department: process.Department,
@@ -120,8 +123,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteBIAProcess",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     BIAID: process.BIAID);
 
                 return "[]";

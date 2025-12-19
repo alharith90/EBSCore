@@ -23,7 +23,8 @@ namespace EBSCore.AdoClass
             int? ParentCategoryID = null,
             string StatusID = null,
             int? CreatedBy = null,
-            int? UpdatedBy = null)
+            int? UpdatedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -38,7 +39,8 @@ namespace EBSCore.AdoClass
                 ParentCategoryID,
                 StatusID,
                 CreatedBy,
-                UpdatedBy
+                UpdatedBy,
+                SerializedObject
             });
         }
     }

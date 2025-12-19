@@ -83,9 +83,9 @@ namespace EBSCore.Web.Controllers
                     Operation: "SaveIncident",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    IncidentID: incident.IncidentID,
+                    IncidentID: incident.IncidentID?.ToString(),
                     IncidentDescription: incident.IncidentDescription,
-                    IncidentDate: incident.IncidentDate,
+                    IncidentDate: incident.IncidentDate?.ToString("o"),
                     ImpactedArea: incident.ImpactedArea,
                     Severity: incident.Severity,
                     RootCause: incident.RootCause,
@@ -113,7 +113,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "DeleteIncident",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    IncidentID: incident.IncidentID);
+                    IncidentID: incident.IncidentID?.ToString());
 
                 return "[]";
             }

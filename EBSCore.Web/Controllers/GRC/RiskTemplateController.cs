@@ -21,6 +21,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<RiskTemplateController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public RiskTemplateController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<RiskTemplateController> logger)
         {
             _configuration = configuration;
@@ -36,8 +39,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvRiskTemplates",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -55,8 +58,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvRiskTemplate",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     TemplateID: templateId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -75,8 +78,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "SaveRiskTemplate",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     SerializedObject: riskTemplate);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -95,8 +98,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteRiskTemplate",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     TemplateID: templateId);
 
                 return Ok();

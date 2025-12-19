@@ -136,11 +136,11 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["StartDate"]</label>
-                            <input type="date" class="form-control" @bind="CurrentObjective.StartDate" />
+                            <input type="date" class="form-control" @bind-value="CurrentObjective.StartDate" @bind-value:format="yyyy-MM-dd" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EndDate"]</label>
-                            <input type="date" class="form-control" @bind="CurrentObjective.EndDate" />
+                            <input type="date" class="form-control" @bind-value="CurrentObjective.EndDate" @bind-value:format="yyyy-MM-dd" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EscalationLevel"]</label>

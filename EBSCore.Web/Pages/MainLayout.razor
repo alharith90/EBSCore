@@ -1,18 +1,18 @@
+@inherits LayoutComponentBase
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
+@using EBSCore.Web.Services
+@using Microsoft.Extensions.Localization
 @inject IJSRuntime JS
 @inject HttpClient Http
 @inject NavigationManager Navigation
-﻿@inherits LayoutComponentBase
-@using EBSCore.Web.Services
-@using Microsoft.Extensions.Localization
 @inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
 @{
     var GLocalizer = LocalizerFactory.Create("Common", "");
 }
-@inject PageTitleService PageTitleService
 <!--  Delete Confirmation -->
 <div class="modal fade" id="modalDelete">
     <div class="modal-dialog">

@@ -15,6 +15,11 @@
     private EditContext EditContext;
     private IStringLocalizer Localizer;
     private IStringLocalizer GLocalizer;
+    private bool IsMandatoryValue
+    {
+        get => Current.IsMandatory ?? false;
+        set => Current.IsMandatory = value;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -230,7 +235,7 @@ else
                         <InputText class="form-control" @bind-Value="Current.DocumentPath" />
                     </div>
                     <div class="col-md-6 form-check mt-4">
-                        <InputCheckbox class="form-check-input" @bind-Value="Current.IsMandatory" />
+                        <InputCheckbox class="form-check-input" @bind-Value="IsMandatoryValue" />
                         <label class="form-check-label ms-2">@Localizer["IsMandatory"]</label>
                     </div>
                     <div class="col-md-6">

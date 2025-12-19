@@ -1,7 +1,10 @@
 @page "/GRC/AuditUniverse"
 @using System.Net.Http.Json
-@using EBSCore.Web.Models.GRC
+@using AuditUniverseModel = EBSCore.Web.Models.GRC.AuditUniverse
+@using Microsoft.Extensions.Localization
 @inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
 
 <h3>@Localizer["AuditUniverse"]</h3>
 
@@ -95,35 +98,37 @@
 }
 
 @code {
-    private List<AuditUniverse> records;
-    private AuditUniverse editing;
+    private List<AuditUniverseModel> records;
+    private AuditUniverseModel editing;
+    private IStringLocalizer Localizer;
 
     protected override async Task OnInitializedAsync()
     {
-        records = await Http.GetFromJsonAsync<List<AuditUniverse>>("/api/AuditUniverse/Get");
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        records = await Http.GetFromJsonAsync<List<AuditUniverseModel>>("/api/AuditUniverse/Get");
     }
 
     private void CreateNew()
     {
-        editing = new AuditUniverse();
+        editing = new AuditUniverseModel();
     }
 
     private async Task Edit(long? id)
     {
-        var result = await Http.GetFromJsonAsync<List<AuditUniverse>>($"/api/AuditUniverse/GetOne?entityProcessId={id}");
+        var result = await Http.GetFromJsonAsync<List<AuditUniverseModel>>($"/api/AuditUniverse/GetOne?entityProcessId={id}");
         editing = result?.FirstOrDefault();
     }
 
     private async Task Delete(long? id)
     {
         await Http.DeleteAsync($"/api/AuditUniverse/Delete?entityProcessId={id}");
-        records = await Http.GetFromJsonAsync<List<AuditUniverse>>("/api/AuditUniverse/Get");
+        records = await Http.GetFromJsonAsync<List<AuditUniverseModel>>("/api/AuditUniverse/Get");
     }
 
     private async Task Save()
     {
         await Http.PostAsJsonAsync("/api/AuditUniverse/Save", editing);
-        records = await Http.GetFromJsonAsync<List<AuditUniverse>>("/api/AuditUniverse/Get");
+        records = await Http.GetFromJsonAsync<List<AuditUniverseModel>>("/api/AuditUniverse/Get");
         editing = null;
     }
 

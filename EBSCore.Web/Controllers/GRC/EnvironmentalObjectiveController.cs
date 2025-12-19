@@ -23,6 +23,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<EnvironmentalObjectiveController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public EnvironmentalObjectiveController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<EnvironmentalObjectiveController> logger)
         {
             _configuration = configuration;
@@ -38,8 +41,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_objectiveSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvEnvironmentalObjectives",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -57,9 +60,9 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet dsResult = (DataSet)_objectiveSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvEnvironmentalObjective",
-                    CompanyID: _currentUser.CompanyID,
+                    CompanyID: CurrentCompanyId,
                     ObjectiveID: objectiveId,
-                    UserID: _currentUser.UserID);
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(dsResult.Tables[0]));
             }
@@ -82,8 +85,8 @@ namespace EBSCore.Web.Controllers
 
                 _objectiveSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveEnvironmentalObjective",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     ObjectiveID: objective.ObjectiveID,
                     UnitID: objective.UnitID,
                     ObjectiveDescription: objective.ObjectiveDescription,
@@ -96,8 +99,8 @@ namespace EBSCore.Web.Controllers
                     Status: objective.Status,
                     CreatedAt: objective.CreatedAt,
                     UpdatedAt: objective.UpdatedAt,
-                    UpdatedBy: _currentUser.UserID,
-                    CreatedBy: _currentUser.UserID);
+                    UpdatedBy: CurrentUserId,
+                    CreatedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -115,8 +118,8 @@ namespace EBSCore.Web.Controllers
             {
                 _objectiveSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteEnvironmentalObjective",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     ObjectiveID: objectiveId);
 
                 return "[]";

@@ -27,6 +27,7 @@ namespace EBSCore.AdoClass
         public TableField ReportedBy = new TableField("ReportedBy", SqlDbType.NVarChar);
         public TableField Reportable = new TableField("Reportable", SqlDbType.Bit);
         public TableField DateClosed = new TableField("DateClosed", SqlDbType.DateTime);
+        public TableField SerializedObject = new TableField("SerializedObject", SqlDbType.NVarChar);
         public TableField CreatedBy = new TableField("CreatedBy", SqlDbType.BigInt);
         public TableField ModifiedBy = new TableField("ModifiedBy", SqlDbType.BigInt);
         public TableField CreatedAt = new TableField("CreatedAt", SqlDbType.DateTime);
@@ -43,7 +44,8 @@ namespace EBSCore.AdoClass
             string PersonsInvolved = "", string InjurySeverity = "", string Description = "", string ImmediateActions = "",
             string RootCause = "", string RelatedHazard = "", string RelatedActivity = "", string RelatedRegulation = "",
             string CorrectiveActions = "", string IncidentStatus = "", string ReportedBy = "", string Reportable = "",
-            string DateClosed = "", string CreatedBy = "", string ModifiedBy = "", string CreatedAt = "", string UpdatedAt = "")
+            string DateClosed = "", string CreatedBy = "", string ModifiedBy = "", string CreatedAt = "", string UpdatedAt = "",
+            object SerializedObject = null)
         {
             FieldsArrayList = new ArrayList();
             this.Operation.SetValue(Operation, ref FieldsArrayList);
@@ -67,6 +69,7 @@ namespace EBSCore.AdoClass
             this.ReportedBy.SetValue(ReportedBy, ref FieldsArrayList);
             this.Reportable.SetValue(Reportable, ref FieldsArrayList);
             this.DateClosed.SetValue(DateClosed, ref FieldsArrayList);
+            this.SerializedObject.SetValue(SerializedObject?.ToString() ?? string.Empty, ref FieldsArrayList);
             this.CreatedBy.SetValue(CreatedBy, ref FieldsArrayList);
             this.ModifiedBy.SetValue(ModifiedBy, ref FieldsArrayList);
             this.CreatedAt.SetValue(CreatedAt, ref FieldsArrayList);

@@ -31,7 +31,8 @@ namespace EBSCore.AdoClass
             string EvidenceOfCompliance = null,
             string Comments = null,
             long? CreatedBy = null,
-            long? ModifiedBy = null)
+            long? ModifiedBy = null,
+            object SerializedObject = null)
         {
             return base.QueryDatabase(queryType, new
             {
@@ -54,7 +55,8 @@ namespace EBSCore.AdoClass
                 EvidenceOfCompliance,
                 Comments,
                 CreatedBy,
-                ModifiedBy
+                ModifiedBy,
+                SerializedObject
             });
         }
     }

@@ -22,6 +22,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<PolicyLibraryController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public PolicyLibraryController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<PolicyLibraryController> logger)
         {
             _configuration = configuration;
@@ -37,8 +40,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvPolicies",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -56,8 +59,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvPolicy",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID,
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId,
                     PolicyID: policyId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -81,8 +84,8 @@ namespace EBSCore.Web.Controllers
 
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SavePolicy",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     PolicyID: policy.PolicyID,
                     PolicyCode: policy.PolicyCode,
                     PolicyNameEN: policy.PolicyNameEN,
@@ -103,11 +106,11 @@ namespace EBSCore.Web.Controllers
                     DocumentPath: policy.DocumentPath,
                     IsMandatory: policy.IsMandatory,
                     AppliesToRoles: policy.AppliesToRoles,
-                    CreatedBy: _currentUser.UserID,
+                    CreatedBy: CurrentUserId,
                     CreatedAt: policy.CreatedAt?.ToString("o"),
-                    UpdatedBy: _currentUser.UserID,
+                    UpdatedBy: CurrentUserId,
                     UpdatedAt: DateTime.UtcNow.ToString("o"),
-                    ModifiedBy: _currentUser.UserID);
+                    ModifiedBy: CurrentUserId);
 
                 return "[]";
             }
@@ -125,8 +128,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeletePolicy",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     PolicyID: policy.PolicyID);
 
                 return "[]";

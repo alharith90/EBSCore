@@ -64,7 +64,7 @@ namespace EBSCore.Web.Controllers
                     Operation: "rtvInformationSystems",
                     UserID: _currentUser.UserID,
                     CompanyID: _currentUser.CompanyID,
-                    SystemID: systemId);
+                    SystemID: systemId.ToString());
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -83,7 +83,7 @@ namespace EBSCore.Web.Controllers
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveInformationSystem",
                     UserID: _currentUser.UserID,
-                    SystemID: infoSystem.SystemID,
+                    SystemID: infoSystem.SystemID?.ToString(),
                     CompanyID: _currentUser.CompanyID,
                     UnitID: infoSystem.UnitID,
                     SystemName: infoSystem.SystemName,
@@ -131,7 +131,7 @@ namespace EBSCore.Web.Controllers
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteInformationSystem",
                     UserID: _currentUser.UserID,
-                    SystemID: systemId,
+                    SystemID: systemId.ToString(),
                     CompanyID: _currentUser.CompanyID);
 
                 return Ok();

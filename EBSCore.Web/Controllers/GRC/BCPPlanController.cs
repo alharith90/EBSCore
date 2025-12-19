@@ -21,6 +21,9 @@ namespace EBSCore.Web.Controllers
         private readonly User _currentUser;
         private readonly ILogger<BCPPlanController> _logger;
 
+        private long? CurrentUserId => long.TryParse(_currentUser?.UserID, out var userId) ? userId : null;
+        private int? CurrentCompanyId => int.TryParse(_currentUser?.CompanyID, out var companyId) ? companyId : null;
+
         public BCPPlanController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger<BCPPlanController> logger)
         {
             _storedProcedure = new DBBCPPlanSP(configuration);
@@ -35,8 +38,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvBCPPlans",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID);
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
             }
@@ -54,8 +57,8 @@ namespace EBSCore.Web.Controllers
             {
                 DataSet result = (DataSet)_storedProcedure.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvBCPPlan",
-                    CompanyID: _currentUser.CompanyID,
-                    UserID: _currentUser.UserID,
+                    CompanyID: CurrentCompanyId,
+                    UserID: CurrentUserId,
                     BCPID: bcpId);
 
                 return Ok(JsonConvert.SerializeObject(result.Tables[0]));
@@ -79,8 +82,8 @@ namespace EBSCore.Web.Controllers
 
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "SaveBCPPlan",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     BCPID: plan.BCPID,
                     PlanName: plan.PlanName,
                     Scope: plan.Scope,
@@ -117,8 +120,8 @@ namespace EBSCore.Web.Controllers
             {
                 _storedProcedure.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteBCPPlan",
-                    UserID: _currentUser.UserID,
-                    CompanyID: _currentUser.CompanyID,
+                    UserID: CurrentUserId,
+                    CompanyID: CurrentCompanyId,
                     BCPID: plan.BCPID);
 
                 return "[]";
