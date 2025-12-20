@@ -92,19 +92,19 @@ else
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["IncidentDescription"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.IncidentDescription" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentIncident.IncidentDescription" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["IncidentDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentIncident.IncidentDate" />
+                            <input class="form-control" type="date" @bind="CurrentIncident.IncidentDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ImpactedArea"]</label>
-                            <input class="form-control" @bind-value="CurrentIncident.ImpactedArea" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentIncident.ImpactedArea" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Severity"]</label>
-                            <select class="form-select" @bind-value="CurrentIncident.Severity">
+                            <select class="form-select" @bind="CurrentIncident.Severity">
                                 @foreach (var option in SeverityOptions)
                                 {
                                     <option value="@option">@option</option>
@@ -113,19 +113,19 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RootCause"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.RootCause" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentIncident.RootCause" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ActionsTaken"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentIncident.ActionsTaken" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentIncident.ActionsTaken" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["IncidentOwner"]</label>
-                            <input class="form-control" @bind-value="CurrentIncident.IncidentOwner" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentIncident.IncidentOwner" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Status"]</label>
-                            <select class="form-select" @bind-value="CurrentIncident.Status">
+                            <select class="form-select" @bind="CurrentIncident.Status">
                                 @foreach (var option in StatusOptions)
                                 {
                                     <option value="@option">@option</option>

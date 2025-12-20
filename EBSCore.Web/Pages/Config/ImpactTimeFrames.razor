@@ -1,8 +1,8 @@
+@page "/Config/ImpactTimeFrames"
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
-﻿@page "/Config/ImpactTimeFrames"
 @using EBSCore.Web.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
@@ -97,4 +97,3 @@ else
     async Task Remove(ImpactTimeFrame e){ var res = await Http.DeleteAsync($"/api/ImpactTimeFrames/Delete/{e.ImpactTimeFrameID}"); if(res.IsSuccessStatusCode){ await LoadAsync(); } }
     void Close(){ showForm=false; }
 }
-

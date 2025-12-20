@@ -92,23 +92,23 @@ else
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RelatedRisk"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentPlan.RelatedRisk" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentPlan.RelatedRisk" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["MitigationAction"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentPlan.MitigationAction" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentPlan.MitigationAction" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ActionOwner"]</label>
-                            <input class="form-control" @bind-value="CurrentPlan.ActionOwner" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentPlan.ActionOwner" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["DueDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentPlan.DueDate" />
+                            <input class="form-control" type="date" @bind="CurrentPlan.DueDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["CompletionStatus"]</label>
-                            <select class="form-select" @bind-value="CurrentPlan.CompletionStatus">
+                            <select class="form-select" @bind="CurrentPlan.CompletionStatus">
                                 @foreach (var option in CompletionStatusOptions)
                                 {
                                     <option value="@option">@option</option>
@@ -117,7 +117,7 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Effectiveness"]</label>
-                            <select class="form-select" @bind-value="CurrentPlan.Effectiveness">
+                            <select class="form-select" @bind="CurrentPlan.Effectiveness">
                                 @foreach (var option in EffectivenessOptions)
                                 {
                                     <option value="@option">@option</option>

@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">@Localizer["AssessmentDate"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.AssessmentDate" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.AssessmentDate" @bind:format="yyyy-MM-dd" />
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">@Localizer["ComplianceScore"]</label>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["NextAssessmentDue"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.NextAssessmentDue" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.NextAssessmentDue" @bind:format="yyyy-MM-dd" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["Status"]</label>
