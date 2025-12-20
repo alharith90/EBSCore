@@ -85,11 +85,11 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["LastAssessmentDate"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.LastAssessmentDate" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.LastAssessmentDate" @bind:format="yyyy-MM-dd" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["NextReviewDate"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.NextReviewDate" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.NextReviewDate" @bind:format="yyyy-MM-dd" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["RelatedControls"]</label>

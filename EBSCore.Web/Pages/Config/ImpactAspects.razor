@@ -1,8 +1,8 @@
+@page "/Config/ImpactAspects"
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
-﻿@page "/Config/ImpactAspects"
 @using EBSCore.Web.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
@@ -92,4 +92,3 @@ else
     async Task Remove(ImpactAspect e){ var res = await Http.DeleteAsync($"/api/ImpactAspects/Delete/{e.ImpactAspectID}"); if(res.IsSuccessStatusCode){ await LoadAsync(); } }
     void Close(){ showForm=false; }
 }
-

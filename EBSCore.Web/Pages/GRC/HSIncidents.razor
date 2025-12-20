@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["IncidentDateTime"]</label>
-                    <input type="datetime-local" class="form-control" @bind-value="editing.IncidentDateTime" @bind-value:format="yyyy-MM-ddTHH:mm" />
+                    <input type="datetime-local" class="form-control" @bind="editing.IncidentDateTime" @bind:format="yyyy-MM-ddTHH:mm" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["Location"]</label>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["DateClosed"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.DateClosed" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.DateClosed" @bind:format="yyyy-MM-dd" />
                 </div>
             </div>
             <div class="mt-3">

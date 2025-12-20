@@ -97,27 +97,27 @@ else
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskTitle"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskTitle" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskTitle" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskCategory"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskCategory" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskCategory" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskDescription"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentRisk.RiskDescription" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentRisk.RiskDescription" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskSource"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskSource" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskSource" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["PotentialImpact"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentRisk.PotentialImpact" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentRisk.PotentialImpact" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Likelihood"]</label>
-                            <select class="form-select" @bind-value="CurrentRisk.Likelihood">
+                            <select class="form-select" @bind="CurrentRisk.Likelihood">
                                 @foreach (var option in LikelihoodOptions)
                                 {
                                     <option value="@option">@option</option>
@@ -126,7 +126,7 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Impact"]</label>
-                            <select class="form-select" @bind-value="CurrentRisk.Impact">
+                            <select class="form-select" @bind="CurrentRisk.Impact">
                                 @foreach (var option in ImpactOptions)
                                 {
                                     <option value="@option">@option</option>
@@ -135,63 +135,63 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["InherentLikelihood"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.InherentLikelihood" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.InherentLikelihood" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["InherentImpact"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.InherentImpact" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.InherentImpact" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["InherentRiskLevel"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.InherentRiskLevel" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.InherentRiskLevel" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ExistingControls"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRisk.ExistingControls" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRisk.ExistingControls" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ControlEffectiveness"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.ControlEffectiveness" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.ControlEffectiveness" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ResidualLikelihood"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.ResidualLikelihood" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.ResidualLikelihood" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ResidualImpact"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.ResidualImpact" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.ResidualImpact" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ResidualRiskLevel"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.ResidualRiskLevel" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.ResidualRiskLevel" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskScore"]</label>
-                            <input class="form-control" type="number" min="0" @bind-value="CurrentRisk.RiskScore" @bind-value:event="oninput" />
+                            <input class="form-control" type="number" min="0" @bind="CurrentRisk.RiskScore" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskAppetiteThreshold"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskAppetiteThreshold" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskAppetiteThreshold" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskResponseStrategy"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskResponseStrategy" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskResponseStrategy" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["TreatmentPlanID"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.TreatmentPlanID" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.TreatmentPlanID" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskResponse"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskResponse" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskResponse" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskOwner"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskOwner" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskOwner" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Status"]</label>
-                            <select class="form-select" @bind-value="CurrentRisk.Status">
+                            <select class="form-select" @bind="CurrentRisk.Status">
                                 @foreach (var option in StatusOptions)
                                 {
                                     <option value="@option">@option</option>
@@ -200,63 +200,63 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ReviewDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentRisk.ReviewDate" />
+                            <input class="form-control" type="date" @bind="CurrentRisk.ReviewDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["NextReviewDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentRisk.NextReviewDate" />
+                            <input class="form-control" type="date" @bind="CurrentRisk.NextReviewDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskTrend"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskTrend" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskTrend" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RelatedObjectives"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRisk.RelatedObjectives" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRisk.RelatedObjectives" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RelatedIncidents"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRisk.RelatedIncidents" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRisk.RelatedIncidents" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RelatedControls"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRisk.RelatedControls" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRisk.RelatedControls" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RelatedObligations"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRisk.RelatedObligations" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRisk.RelatedObligations" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["MonitoringFrequency"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.MonitoringFrequency" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.MonitoringFrequency" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["LastMonitoringDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentRisk.LastMonitoringDate" />
+                            <input class="form-control" type="date" @bind="CurrentRisk.LastMonitoringDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["NextMonitoringDate"]</label>
-                            <input class="form-control" type="date" @bind-value="CurrentRisk.NextMonitoringDate" />
+                            <input class="form-control" type="date" @bind="CurrentRisk.NextMonitoringDate" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["KRIName"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.KRIName" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.KRIName" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["KRIValue"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.KRIValue" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.KRIValue" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["KRIStatus"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.KRIStatus" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.KRIStatus" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskAlertTrigger"]</label>
-                            <input class="form-control" @bind-value="CurrentRisk.RiskAlertTrigger" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRisk.RiskAlertTrigger" @bind:event="oninput" />
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["RiskHistoryNotes"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentRisk.RiskHistoryNotes" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentRisk.RiskHistoryNotes" @bind:event="oninput"></textarea>
                         </div>
                     </div>
                 </div>

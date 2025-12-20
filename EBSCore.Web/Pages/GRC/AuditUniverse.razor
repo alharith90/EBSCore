@@ -82,11 +82,11 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["LastAuditDate"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.LastAuditDate" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.LastAuditDate" @bind:format="yyyy-MM-dd" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">@Localizer["NextAuditDue"]</label>
-                    <input type="date" class="form-control" @bind-value="editing.NextAuditDue" @bind-value:format="yyyy-MM-dd" />
+                    <input type="date" class="form-control" @bind="editing.NextAuditDue" @bind:format="yyyy-MM-dd" />
                 </div>
             </div>
             <div class="mt-3">

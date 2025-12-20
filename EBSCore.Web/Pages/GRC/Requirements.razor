@@ -26,7 +26,7 @@
                         <div class="d-flex align-items-center flex-grow-1">
                             <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
                             <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
-                            <input class="form-control ms-2" style="max-width: 280px;" placeholder="@Localizer["SearchPlaceholder"]" @bind-value="SearchTerm" @bind-value:event="oninput" />
+                            <input class="form-control ms-2" style="max-width: 280px;" placeholder="@Localizer["SearchPlaceholder"]" @bind="SearchTerm" @bind:event="oninput" />
                             <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
                         </div>
                         <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
@@ -103,7 +103,7 @@ else
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["RequirementNo"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.RequirementNo" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.RequirementNo" @bind:event="oninput" />
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">@Localizer["RequirementType"]</label>
@@ -117,23 +117,23 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RequirementTitle"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.RequirementTitle" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.RequirementTitle" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Subcategory"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.Subcategory" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.Subcategory" @bind:event="oninput" />
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["RequirementDescription"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRequirement.RequirementDescription" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRequirement.RequirementDescription" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">@Localizer["RequirementDetails"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentRequirement.RequirementDetails" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="3" @bind="CurrentRequirement.RequirementDetails" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RequirementTags"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.RequirementTags" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.RequirementTags" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RequirementFrequency"]</label>
@@ -165,7 +165,7 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["AuditReference"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.AuditReference" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.AuditReference" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["RiskCategory"]</label>
@@ -179,11 +179,11 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ControlOwner"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.ControlOwner" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.ControlOwner" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ControlOwnerFunction"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.ControlOwnerFunction" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.ControlOwnerFunction" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EvidenceRequired"]</label>
@@ -197,19 +197,19 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EvidenceDetails"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.EvidenceDetails" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.EvidenceDetails" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["ControlID"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.ControlID" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.ControlID" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EscalationProcess"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.EscalationProcess" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.EscalationProcess" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EscalationThreshold"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.EscalationThreshold" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.EscalationThreshold" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["BCMActivationType"]</label>
@@ -223,11 +223,11 @@ else
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["BCMActivationDecision"]</label>
-                            <input class="form-control" @bind-value="CurrentRequirement.BCMActivationDecision" @bind-value:event="oninput" />
+                            <input class="form-control" @bind="CurrentRequirement.BCMActivationDecision" @bind:event="oninput" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["EscalationContacts"]</label>
-                            <textarea class="form-control" rows="2" @bind-value="CurrentRequirement.EscalationContacts" @bind-value:event="oninput"></textarea>
+                            <textarea class="form-control" rows="2" @bind="CurrentRequirement.EscalationContacts" @bind:event="oninput"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Status"]</label>

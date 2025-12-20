@@ -1,8 +1,8 @@
+@page "/Config/AspectTimeImpactLevels"
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
-﻿@page "/Config/AspectTimeImpactLevels"
 @using EBSCore.Web.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
@@ -188,6 +188,5 @@ else
     async Task Remove(AspectTimeImpactLevel e){ var res = await Http.DeleteAsync($"/api/AspectTimeImpactLevels/Delete/{e.AspectTimeImpactLevelID}"); if(res.IsSuccessStatusCode){ await LoadAsync(); } }
     void Close(){ showForm=false; }
 }
-
 
 
