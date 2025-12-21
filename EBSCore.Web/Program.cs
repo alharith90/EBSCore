@@ -38,6 +38,12 @@ builder.Services.AddServerSideBlazor(); // Blazor Server
 builder.Services.AddRazorPages(); // Razor Pages hosting _Host
 builder.Services.AddScoped<PageTitleService>();
 builder.Services.AddSingleton<HtmlToPdfService>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ManageCommittee", policy => policy.RequireAssertion(HasSessionUser));
+    options.AddPolicy("ManageRoles", policy => policy.RequireAssertion(HasSessionUser));
+    options.AddPolicy("AssignMembers", policy => policy.RequireAssertion(HasSessionUser));
+});
 
 // *** 2. Register Custom Services ***
 builder.Services.AddScoped<LoggingService>(); // Logging service
@@ -155,3 +161,14 @@ app.MapBlazorHub(); // Enable Blazor Server
 app.MapFallbackToPage("/_Host"); // Fallback to Blazor app (_Host.cshtml)
 
 app.Run();
+
+static bool HasSessionUser(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext context)
+{
+    var httpContext = context.Resource as HttpContext;
+    if (httpContext == null && context.Resource is Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext filterContext)
+    {
+        httpContext = filterContext.HttpContext;
+    }
+
+    return !string.IsNullOrEmpty(httpContext?.Session?.GetString("User"));
+}
