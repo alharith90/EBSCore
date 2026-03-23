@@ -73,6 +73,7 @@ builder.Services.AddSingleton<ServiceLocator>();
 builder.Services.AddHostedService<WorkflowBackgroundService>();
 builder.Services.AddHostedService<NotificationBackgroundService>();
 builder.Services.AddHostedService<S7SNotificationBackgroundService>();
+builder.Services.AddHostedService<DbInitService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
