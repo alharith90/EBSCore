@@ -390,44 +390,44 @@ WHERE NOT EXISTS (SELECT 1 FROM AppUser WHERE UserName = 'admin');";
         {
             await using var cmd = conn.CreateCommand();
             cmd.CommandText = @"
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, Icon, [Order], IsActive, CreatedBy)
-SELECT 1, NULL, 'لوحة التحكم', 'Dashboard', '/', 'fa-solid fa-square-poll-vertical', 1, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, Icon, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 1, NULL, 'لوحة التحكم', 'Dashboard', '/', 'fa-solid fa-square-poll-vertical', 1, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 1);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 2, NULL, 'استمرارية الأعمال', 'Business Continuity', NULL, 2, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 2, NULL, 'استمرارية الأعمال', 'Business Continuity', NULL, 2, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 2);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 3, 2, 'تحليل أثر الأعمال', 'BIA', '/BCM/BIA', 1, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 3, 2, 'تحليل أثر الأعمال', 'BIA', '/BCM/BIA', 1, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 3);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 4, 2, 'الحوادث', 'Incidents', '/BCM/Incidents', 2, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 4, 2, 'الحوادث', 'Incidents', '/BCM/Incidents', 2, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 4);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 5, 2, 'الموردون', 'Suppliers', '/BCM/Suppliers', 3, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 5, 2, 'الموردون', 'Suppliers', '/BCM/Suppliers', 3, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 5);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 6, NULL, 'الضبط', 'Configuration', NULL, 3, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 6, NULL, 'الضبط', 'Configuration', NULL, 3, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 6);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 7, 6, 'الموظفون', 'Employees', '/Config/Employees', 1, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 7, 6, 'الموظفون', 'Employees', '/Config/Employees', 1, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 7);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 8, 6, 'العمليات', 'Processes', '/Config/Process', 2, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 8, 6, 'العمليات', 'Processes', '/Config/Process', 2, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 8);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 9, NULL, 'الإشعارات', 'Notifications', '/Notification/S7SNotificationIndex', 4, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 9, NULL, 'الإشعارات', 'Notifications', '/Notification/S7SNotificationIndex', 4, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 9);
 
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy)
-SELECT 10, NULL, 'الأمن', 'Security', '/Security/Roles', 5, 1, 1
+INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
+SELECT 10, NULL, 'الأمن', 'Security', '/Security/Roles', 5, 1, 1, CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 10);
 ";
             await cmd.ExecuteNonQueryAsync(cancellationToken);
