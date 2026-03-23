@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\MinAlakher.dll" />
     <None Include="Localization\Common\Process.ar.json" />
     <None Include="Localization\Common\Process.en.json" />
     <None Include="Localization\Common.ar.json" />
@@ -59,13 +58,6 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="MinAlakher">
-      <HintPath>bin\MinAlakher.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
   <ItemGroup>
     <Content Update="Pages\Config\InformationSystems - Copy %282%29.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

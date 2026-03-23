@@ -37,10 +37,18 @@
     {
         try
         {
+            var path = "/" + (args.Path ?? string.Empty).TrimStart('/');
+            if (path.StartsWith("/login", StringComparison.OrdinalIgnoreCase) ||
+                path.StartsWith("/reset-password", StringComparison.OrdinalIgnoreCase) ||
+                path.StartsWith("/access-denied", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
             var isLoggedIn = await LoggingService.EnsureLoggedIn();
             if (!isLoggedIn)
             {
-                NavigationManager.NavigateTo("/login", true); // Redirect to login page
+                NavigationManager.NavigateTo("/login", true);
             }
         }
         catch (Exception ex)
