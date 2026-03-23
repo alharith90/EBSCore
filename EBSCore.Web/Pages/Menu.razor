@@ -142,40 +142,52 @@
 
     protected override async Task OnInitializedAsync()
     {
-                var response = await Http.GetStringAsync("/api/MenuItems/Get");
-                // Deserialize the JSON string into a DataTable
-        // Some API endpoints return a JSON-string payload (double-serialized).
-        // Also guard against HTML error responses (e.g., exception handler pages).
-        var trimmed = response?.TrimStart();
-        if (!string.IsNullOrEmpty(trimmed) && trimmed.StartsWith("<"))
-        {
-            throw new Exception("Unexpected HTML response from /api/MenuItems/Get. Check server logs.");
-        }
+        await LoadMenuAsync();
+    }
 
+    private async Task LoadMenuAsync()
+    {
         try
         {
-            var token = Newtonsoft.Json.Linq.JToken.Parse(response);
-            string innerJson = token.Type == Newtonsoft.Json.Linq.JTokenType.String
-                ? (string)token
-                : token.ToString();
+            var response = await Http.GetAsync("/api/MenuItems/Get");
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized ||
+                response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                MenuItems = new DataTable();
+                ParentRows = Array.Empty<DataRow>();
+                return;
+            }
 
-            MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(innerJson);
+            response.EnsureSuccessStatusCode();
+            var payload = await response.Content.ReadAsStringAsync();
+            var trimmed = payload?.TrimStart();
+            if (!string.IsNullOrEmpty(trimmed) && trimmed.StartsWith("<"))
+            {
+                MenuItems = new DataTable();
+                ParentRows = Array.Empty<DataRow>();
+                return;
+            }
+
+            try
+            {
+                var token = Newtonsoft.Json.Linq.JToken.Parse(payload);
+                string innerJson = token.Type == Newtonsoft.Json.Linq.JTokenType.String
+                    ? (string)token
+                    : token.ToString();
+
+                MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(innerJson) ?? new DataTable();
+            }
+            catch
+            {
+                MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(payload) ?? new DataTable();
+            }
+
+            ParentRows = MenuItems.Select("ParentID IS NULL OR ParentID = '' OR ParentID = '0' OR ParentID = 'null'");
         }
         catch
         {
-            // Fallback: attempt direct DataTable parse
-            MenuItems = JsonConvert.DeserializeObject<System.Data.DataTable>(response);
+            MenuItems = new DataTable();
+            ParentRows = Array.Empty<DataRow>();
         }
-
-        // Consider multiple root representations: null, empty, '0', 'null'
-        ParentRows = MenuItems.Select("ParentID IS NULL OR ParentID = '' OR ParentID = '0' OR ParentID = 'null'");
     }
 }
-
-
-
-
-
-
-
-

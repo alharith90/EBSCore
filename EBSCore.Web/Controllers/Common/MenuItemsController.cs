@@ -20,13 +20,13 @@ namespace EBSCore.Web.Controllers
         private readonly IConfiguration Configuration;
         private readonly DBMenuItemsSP MenuItemSP;
         private readonly Common Common;
-        private readonly User CurrentUser;
+        private readonly User? CurrentUser;
 
         public MenuItemsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             MenuItemSP = new DBMenuItemsSP(Configuration);
-            CurrentUser = httpContextAccessor.HttpContext.Session.GetObject<User>("User");
+            CurrentUser = httpContextAccessor.HttpContext?.Session.GetObject<User>("User");
             Common = new Common();
         }
 
@@ -35,6 +35,11 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.UserID))
+                {
+                    return Unauthorized();
+                }
+
                 DataSet DSResult = (DataSet)MenuItemSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvMenuItems",
                     UserID: CurrentUser.UserID);
@@ -53,6 +58,11 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.UserID))
+                {
+                    return Unauthorized();
+                }
+
                 DataSet DSResult = (DataSet)MenuItemSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvMenuItemsTree",
                     UserID: CurrentUser.UserID);
@@ -71,6 +81,11 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.UserID))
+                {
+                    return Unauthorized();
+                }
+
                 DataSet DSResult = (DataSet)MenuItemSP.QueryDatabase(SqlQueryType.FillDataset,
                     Operation: "rtvMenuItem",
                     UserID: CurrentUser.UserID,
@@ -90,6 +105,10 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.UserID))
+                {
+                    return Unauthorized();
+                }
 
                 MenuItemSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "Save",
@@ -146,6 +165,11 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.UserID))
+                {
+                    return Unauthorized();
+                }
+
                 MenuItemSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
                     Operation: "DeleteMenuItem",
                     UserID: CurrentUser.UserID,

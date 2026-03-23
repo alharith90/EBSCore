@@ -44,17 +44,38 @@ namespace EBSCore.Web.Services
             await using var conn = new SqliteConnection(builder.ToString());
             await conn.OpenAsync(cancellationToken);
 
-            // Build the full table catalog from repository history schema, then apply safety/core bootstrap.
-            await ApplySchemaTablesAsync(conn, cancellationToken);
-            await ApplyAdditionalSqlTableScriptsAsync(conn, cancellationToken);
-            await CreateCoreCompatibilityTablesAsync(conn, cancellationToken);
-            await SeedUsersAsync(conn, cancellationToken);
-            await SeedMenuAsync(conn, cancellationToken);
+            await ApplyBootstrapScriptAsync(conn, cancellationToken);
+
+            var applyLegacySchema = _config.GetValue<bool>("DbInit:ApplyLegacySqlScripts", false);
+            if (applyLegacySchema)
+            {
+                // Optional compatibility mode for historical SQL Server script conversion.
+                await ApplySchemaTablesAsync(conn, cancellationToken);
+                await ApplyAdditionalSqlTableScriptsAsync(conn, cancellationToken);
+                await CreateCoreCompatibilityTablesAsync(conn, cancellationToken);
+                await SeedUsersAsync(conn, cancellationToken);
+                await SeedMenuAsync(conn, cancellationToken);
+            }
 
             _logger.LogInformation("SQLite database initialized at {DataSource}", builder.DataSource);
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+
+        private async Task ApplyBootstrapScriptAsync(SqliteConnection conn, CancellationToken cancellationToken)
+        {
+            var scriptPath = Path.Combine(_env.ContentRootPath, "AppData", "bootstrap.sqlite.sql");
+            if (!File.Exists(scriptPath))
+            {
+                _logger.LogWarning("SQLite bootstrap script not found at {Path}; skipping script bootstrap.", scriptPath);
+                return;
+            }
+
+            var script = await File.ReadAllTextAsync(scriptPath, cancellationToken);
+            await ExecuteAsync(conn, script, cancellationToken);
+            _logger.LogInformation("SQLite bootstrap script applied from {Path}", scriptPath);
+        }
 
         private async Task ApplySchemaTablesAsync(SqliteConnection conn, CancellationToken cancellationToken)
         {
