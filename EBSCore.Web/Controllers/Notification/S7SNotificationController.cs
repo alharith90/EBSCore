@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using System.Threading.Tasks;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
@@ -185,7 +185,7 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
                 var channels = await conn.QueryAsync<S7SNotificationChannel>("SELECT * FROM S7SNotificationChannel WHERE IsActive = 1 ORDER BY Name");
                 return Ok(JsonConvert.SerializeObject(channels));
             }
@@ -201,7 +201,7 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
                 var connections = await conn.QueryAsync<S7SNotificationConnection>("SELECT * FROM S7SNotificationConnection WHERE IsActive = 1 ORDER BY Name");
                 return Ok(JsonConvert.SerializeObject(connections));
             }
@@ -217,12 +217,12 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
                 if (connection.NotificationConnectionID == null)
                 {
                     var insertSql = @"INSERT INTO S7SNotificationConnection (ChannelID, Name, ProviderType, ConfigurationJson, IsDefault, IsActive, CompanyID, CreatedBy)
-                                      VALUES (@ChannelID, @Name, @ProviderType, @ConfigurationJson, ISNULL(@IsDefault,0), ISNULL(@IsActive,1), @CompanyID, @CreatedBy);
-                                      SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                                      VALUES (@ChannelID, @Name, @ProviderType, @ConfigurationJson, COALESCE(@IsDefault,0), COALESCE(@IsActive,1), @CompanyID, @CreatedBy);
+                                      SELECT last_insert_rowid();";
                     var id = await conn.ExecuteScalarAsync<int>(insertSql, new
                     {
                         connection.ChannelID,
@@ -243,11 +243,11 @@ namespace EBSCore.Web.Controllers.Notification
                                           Name = @Name,
                                           ProviderType = @ProviderType,
                                           ConfigurationJson = @ConfigurationJson,
-                                          IsDefault = ISNULL(@IsDefault, IsDefault),
-                                          IsActive = ISNULL(@IsActive, IsActive),
+                                          IsDefault = COALESCE(@IsDefault, IsDefault),
+                                          IsActive = COALESCE(@IsActive, IsActive),
                                           CompanyID = @CompanyID,
                                           UpdatedBy = @UpdatedBy,
-                                          UpdatedAt = SYSUTCDATETIME()
+                                          UpdatedAt = CURRENT_TIMESTAMP
                                       WHERE NotificationConnectionID = @NotificationConnectionID";
                     await conn.ExecuteAsync(updateSql, new
                     {
@@ -277,8 +277,8 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                await conn.ExecuteAsync("UPDATE S7SNotificationConnection SET IsActive = 0, UpdatedAt = SYSUTCDATETIME(), UpdatedBy = @UpdatedBy WHERE NotificationConnectionID = @NotificationConnectionID", new { NotificationConnectionID, UpdatedBy = currentUser?.UserID });
+                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                await conn.ExecuteAsync("UPDATE S7SNotificationConnection SET IsActive = 0, UpdatedAt = CURRENT_TIMESTAMP, UpdatedBy = @UpdatedBy WHERE NotificationConnectionID = @NotificationConnectionID", new { NotificationConnectionID, UpdatedBy = currentUser?.UserID });
                 return Ok("Deleted Successfully!");
             }
             catch (Exception ex)
@@ -293,22 +293,43 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                var pageNumber = int.TryParse(PageNumber, out var pn) ? Math.Max(pn, 1) : 1;
+                var pageSize = int.TryParse(PageSize, out var ps) ? Math.Max(ps, 1) : 10;
+                var offset = (pageNumber - 1) * pageSize;
+
+                var where = "WHERE 1=1";
                 var parameters = new DynamicParameters();
-                parameters.Add("@Operation", "List");
-                parameters.Add("@NotificationStatusID", NotificationStatusID);
-                parameters.Add("@PageNumber", PageNumber);
-                parameters.Add("@PageSize", PageSize);
-                parameters.Add("@SortColumn", SortColumn);
-                parameters.Add("@SortDirection", SortDirection);
-                parameters.Add("@SearchQuery", SearchQuery);
-                using var reader = await conn.QueryMultipleAsync("S7SNotificationHistorySP", parameters, commandType: CommandType.StoredProcedure);
-                var data = await reader.ReadAsync();
-                var page = await reader.ReadFirstOrDefaultAsync();
+                if (NotificationStatusID.HasValue)
+                {
+                    where += " AND NotificationStatusID = @NotificationStatusID";
+                    parameters.Add("@NotificationStatusID", NotificationStatusID.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(SearchQuery))
+                {
+                    where += " AND (COALESCE(Status,'') LIKE @Search OR COALESCE(ErrorMessage,'') LIKE @Search OR COALESCE(Recipient,'') LIKE @Search)";
+                    parameters.Add("@Search", $"%{SearchQuery}%");
+                }
+
+                var orderBy = string.IsNullOrWhiteSpace(SortColumn) ? "NotificationStatusID" : SortColumn;
+                if (!System.Text.RegularExpressions.Regex.IsMatch(orderBy, "^[A-Za-z0-9_]+$"))
+                {
+                    orderBy = "NotificationStatusID";
+                }
+                var sortDir = string.Equals(SortDirection, "DESC", StringComparison.OrdinalIgnoreCase) ? "DESC" : "ASC";
+
+                var dataSql = $@"SELECT * FROM S7SNotificationHistory {where} ORDER BY {orderBy} {sortDir} LIMIT @Limit OFFSET @Offset";
+                var countSql = $@"SELECT COUNT(1) FROM S7SNotificationHistory {where}";
+                parameters.Add("@Limit", pageSize);
+                parameters.Add("@Offset", offset);
+
+                var data = await conn.QueryAsync(dataSql, parameters);
+                var totalRows = await conn.ExecuteScalarAsync<long>(countSql, parameters);
                 var result = new
                 {
                     Data = data,
-                    PageCount = page == null ? 1 : page.PageCount
+                    PageCount = (int)Math.Ceiling(totalRows / (double)pageSize)
                 };
                 return Ok(JsonConvert.SerializeObject(result));
             }
