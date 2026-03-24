@@ -1,7 +1,9 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
 using System.Data;
+using System.Data.Common;
 using System.Text.RegularExpressions;
 
 namespace EBSCore.AdoClass
@@ -9,11 +11,26 @@ namespace EBSCore.AdoClass
     public class DBConnectionClass
     {
         private readonly string _connectionString;
+        private readonly string _provider;
 
         public DBConnectionClass(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection") ?? "Data Source=AppData/ebscore.db";
+            _provider = (configuration["Database:Provider"] ?? "Sqlite").Trim();
+            var sqlServerConnection = configuration.GetConnectionString("SqlServerConnection");
+            _connectionString = UseProviderSqlServer(_provider)
+                ? (sqlServerConnection ?? configuration.GetConnectionString("DefaultConnection"))
+                : configuration.GetConnectionString("DefaultConnection");
+
+            if (string.IsNullOrWhiteSpace(_connectionString))
+            {
+                throw new InvalidOperationException("A valid connection string is required for selected database provider.");
+            }
         }
+
+        private bool UseSqlServer => UseProviderSqlServer(_provider);
+
+        private static bool UseProviderSqlServer(string provider)
+            => string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase);
 
         public int ExecuteNonQuery(ref ArrayList DBFieldsArrayList, string storedProcedureName)
         {
@@ -23,37 +40,50 @@ namespace EBSCore.AdoClass
         public object ExecuteScalar(ref ArrayList DBFieldsArrayList, string storedProcedureName)
         {
             var parameters = ToDictionary(DBFieldsArrayList);
-            using var conn = CreateConnection();
-            conn.Open();
-
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = storedProcedureName;
-            foreach (var item in parameters)
+            if (UseSqlServer)
             {
-                cmd.Parameters.AddWithValue($"@{item.Key}", item.Value ?? DBNull.Value);
+                using var conn = new SqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new SqlCommand(storedProcedureName, conn) { CommandType = CommandType.StoredProcedure };
+                AddParameters(cmd, parameters);
+                return cmd.ExecuteScalar() ?? DBNull.Value;
             }
 
-            return cmd.ExecuteScalar() ?? DBNull.Value;
+            using var sqliteConn = CreateSqliteConnection();
+            sqliteConn.Open();
+            using var sqliteCmd = sqliteConn.CreateCommand();
+            sqliteCmd.CommandText = storedProcedureName;
+            AddParameters(sqliteCmd, parameters);
+            return sqliteCmd.ExecuteScalar() ?? DBNull.Value;
         }
 
         public IDataReader ExecuteReader(ref ArrayList DBFieldsArrayList, string storedProcedureName)
         {
             var parameters = ToDictionary(DBFieldsArrayList);
-            var conn = CreateConnection();
-            conn.Open();
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = storedProcedureName;
-            foreach (var item in parameters)
+            if (UseSqlServer)
             {
-                cmd.Parameters.AddWithValue($"@{item.Key}", item.Value ?? DBNull.Value);
+                var conn = new SqlConnection(_connectionString);
+                conn.Open();
+                var cmd = new SqlCommand(storedProcedureName, conn) { CommandType = CommandType.StoredProcedure };
+                AddParameters(cmd, parameters);
+                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
 
-            return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            var sqliteConn = CreateSqliteConnection();
+            sqliteConn.Open();
+            var sqliteCmd = sqliteConn.CreateCommand();
+            sqliteCmd.CommandText = storedProcedureName;
+            AddParameters(sqliteCmd, parameters);
+            return sqliteCmd.ExecuteReader(CommandBehavior.CloseConnection);
         }
 
         public DataSet FillDataset(ref ArrayList DBFieldsArrayList, string storedProcedureName)
         {
+            if (UseSqlServer)
+            {
+                return FillSqlServerDataset(storedProcedureName, ToDictionary(DBFieldsArrayList));
+            }
+
             return ExecuteStoredProcedureFillDataset(storedProcedureName, ToDictionary(DBFieldsArrayList));
         }
 
@@ -62,7 +92,7 @@ namespace EBSCore.AdoClass
             var dataSet = new DataSet();
             var table = new DataTable();
 
-            using var conn = CreateConnection();
+            using var conn = CreateDbConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
             cmd.CommandText = query;
@@ -80,12 +110,16 @@ namespace EBSCore.AdoClass
 
         public string ConnectionString => _connectionString;
 
-        public SqliteConnection DBSqlConnection => CreateConnection();
+        public IDbConnection DBSqlConnection => CreateDbConnection();
 
-        private SqliteConnection CreateConnection()
+        private DbConnection CreateDbConnection()
         {
-            return new SqliteConnection(_connectionString);
+            return UseSqlServer
+                ? new SqlConnection(_connectionString)
+                : CreateSqliteConnection();
         }
+
+        private SqliteConnection CreateSqliteConnection() => new(_connectionString);
 
         private static Dictionary<string, object?> ToDictionary(ArrayList fields)
         {
@@ -99,6 +133,43 @@ namespace EBSCore.AdoClass
             }
 
             return result;
+        }
+
+        private static void AddParameters(DbCommand command, Dictionary<string, object?> parameters)
+        {
+            foreach (var item in parameters)
+            {
+                var parameterName = item.Key.StartsWith("@", StringComparison.Ordinal) ? item.Key : $"@{item.Key}";
+                var parameter = command.CreateParameter();
+                parameter.ParameterName = parameterName;
+                parameter.Value = item.Value ?? DBNull.Value;
+                command.Parameters.Add(parameter);
+            }
+        }
+
+        private static void AddParameters(SqlCommand command, Dictionary<string, object?> parameters)
+        {
+            foreach (var item in parameters)
+            {
+                var parameterName = item.Key.StartsWith("@", StringComparison.Ordinal) ? item.Key : $"@{item.Key}";
+                command.Parameters.AddWithValue(parameterName, item.Value ?? DBNull.Value);
+            }
+        }
+
+        private DataSet FillSqlServerDataset(string procedureName, Dictionary<string, object?> parameters)
+        {
+            using var conn = new SqlConnection(_connectionString);
+            using var cmd = new SqlCommand(procedureName, conn) { CommandType = CommandType.StoredProcedure };
+            AddParameters(cmd, parameters);
+            using var adapter = new SqlDataAdapter(cmd);
+            var ds = new DataSet();
+            adapter.Fill(ds);
+            if (ds.Tables.Count == 0)
+            {
+                ds.Tables.Add(new DataTable());
+            }
+
+            return ds;
         }
 
         private DataSet ExecuteStoredProcedureFillDataset(string procedureName, Dictionary<string, object?> parameters)
@@ -120,6 +191,15 @@ namespace EBSCore.AdoClass
 
         private int ExecuteStoredProcedureNonQuery(string procedureName, Dictionary<string, object?> parameters)
         {
+            if (UseSqlServer)
+            {
+                using var conn = new SqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new SqlCommand(procedureName, conn) { CommandType = CommandType.StoredProcedure };
+                AddParameters(cmd, parameters);
+                return cmd.ExecuteNonQuery();
+            }
+
             switch (procedureName)
             {
                 case "S7SUserAuthSP":
@@ -129,6 +209,7 @@ namespace EBSCore.AdoClass
             }
         }
 
+        // SQLite compatibility implementation below
         private DataSet ExecuteUserSpFill(Dictionary<string, object?> parameters)
         {
             var operation = GetParameter(parameters, "Operation");
@@ -250,17 +331,7 @@ namespace EBSCore.AdoClass
                 var storedPassword = row["Password"]?.ToString() ?? string.Empty;
                 var isActive = Convert.ToInt32(row["UserStatus"]) == 1;
                 var ok = isActive && string.Equals(storedPassword, password, StringComparison.Ordinal);
-                outTable.Rows.Add(
-                    ok,
-                    ok ? "" : "InvalidCredentials",
-                    row["UserID"],
-                    row["Email"],
-                    row["UserFullName"],
-                    row["CompanyID"],
-                    row["CategoryID"],
-                    row["UserType"],
-                    row["UserName"],
-                    row["LastLoginAt"]?.ToString() ?? "");
+                outTable.Rows.Add(ok, ok ? "" : "InvalidCredentials", row["UserID"], row["Email"], row["UserFullName"], row["CompanyID"], row["CategoryID"], row["UserType"], row["UserName"], row["LastLoginAt"]?.ToString() ?? "");
             }
 
             var result = new DataSet();
@@ -311,23 +382,14 @@ namespace EBSCore.AdoClass
             var token = GetParameter(parameters, "Token");
             var newPassword = GetParameter(parameters, "NewPassword");
 
-            ExecuteSql("UPDATE AppUser SET Password = @Password WHERE UserID = @UserID", new Dictionary<string, object?>
-            {
-                ["@Password"] = newPassword,
-                ["@UserID"] = userId
-            });
-
-            return ExecuteSql("UPDATE PasswordResetToken SET IsUsed = 1 WHERE Token = @Token AND UserID = @UserID", new Dictionary<string, object?>
-            {
-                ["@Token"] = token,
-                ["@UserID"] = userId
-            });
+            ExecuteSql("UPDATE AppUser SET Password = @Password WHERE UserID = @UserID", new Dictionary<string, object?> { ["@Password"] = newPassword, ["@UserID"] = userId });
+            return ExecuteSql("UPDATE PasswordResetToken SET IsUsed = 1 WHERE Token = @Token AND UserID = @UserID", new Dictionary<string, object?> { ["@Token"] = token, ["@UserID"] = userId });
         }
 
         private DataSet QueryToDataSet(string sql, Dictionary<string, object?>? parameters)
         {
             var table = new DataTable();
-            using var conn = CreateConnection();
+            using var conn = CreateSqliteConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
             cmd.CommandText = sql;
@@ -349,7 +411,7 @@ namespace EBSCore.AdoClass
 
         private int ExecuteSql(string sql, Dictionary<string, object?>? parameters)
         {
-            using var conn = CreateConnection();
+            using var conn = CreateSqliteConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
             cmd.CommandText = sql;
@@ -362,7 +424,6 @@ namespace EBSCore.AdoClass
             }
             return cmd.ExecuteNonQuery();
         }
-
 
         private DataSet ExecuteGenericFillDataset(string procedureName, Dictionary<string, object?> parameters)
         {
@@ -377,12 +438,7 @@ namespace EBSCore.AdoClass
             var sqlParams = new Dictionary<string, object?>();
             foreach (var item in parameters)
             {
-                if (string.Equals(item.Key, "Operation", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                if (item.Value == null || string.IsNullOrWhiteSpace(item.Value.ToString()))
+                if (string.Equals(item.Key, "Operation", StringComparison.OrdinalIgnoreCase) || item.Value == null || string.IsNullOrWhiteSpace(item.Value.ToString()))
                 {
                     continue;
                 }
@@ -396,8 +452,7 @@ namespace EBSCore.AdoClass
             }
 
             var where = clauses.Count > 0 ? $" WHERE {string.Join(" AND ", clauses)}" : string.Empty;
-            var sql = $"SELECT * FROM [{table}] {where} LIMIT 500";
-            return QueryToDataSet(sql, sqlParams);
+            return QueryToDataSet($"SELECT * FROM [{table}] {where} LIMIT 500", sqlParams);
         }
 
         private int ExecuteGenericNonQuery(string procedureName, Dictionary<string, object?> parameters)
@@ -422,8 +477,7 @@ namespace EBSCore.AdoClass
 
             if (operation.StartsWith("Save", StringComparison.OrdinalIgnoreCase) || operation.StartsWith("Add", StringComparison.OrdinalIgnoreCase) || operation.StartsWith("Update", StringComparison.OrdinalIgnoreCase))
             {
-                var values = parameters
-                    .Where(p => !string.Equals(p.Key, "Operation", StringComparison.OrdinalIgnoreCase))
+                var values = parameters.Where(p => !string.Equals(p.Key, "Operation", StringComparison.OrdinalIgnoreCase))
                     .Where(p => p.Value != null && !string.IsNullOrWhiteSpace(p.Value.ToString()))
                     .ToDictionary(p => p.Key, p => p.Value);
 
@@ -460,13 +514,12 @@ namespace EBSCore.AdoClass
                 .Replace("_", string.Empty, StringComparison.OrdinalIgnoreCase);
             candidates.Add(baseName);
 
-            var possible = candidates
-                .SelectMany(c => new[] { c, c + "s", "BCM" + c, "S7S" + c, c + "Status", c + "Template" })
+            var possible = candidates.SelectMany(c => new[] { c, c + "s", "BCM" + c, "S7S" + c, c + "Status", c + "Template" })
                 .Where(c => !string.IsNullOrWhiteSpace(c))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
-            using var conn = CreateConnection();
+            using var conn = CreateSqliteConnection();
             conn.Open();
             foreach (var p in possible)
             {

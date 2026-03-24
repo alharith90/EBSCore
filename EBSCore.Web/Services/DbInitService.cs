@@ -1,457 +1,517 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Data.Common;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace EBSCore.Web.Services
+namespace EBSCore.Web.Services;
+
+public class DbInitService : IHostedService
 {
-    public class DbInitService : IHostedService
+    private readonly IConfiguration _config;
+    private readonly ILogger<DbInitService> _logger;
+    private readonly IHostEnvironment _env;
+
+    public DbInitService(IConfiguration config, ILogger<DbInitService> logger, IHostEnvironment env)
     {
-        private readonly IConfiguration _config;
-        private readonly ILogger<DbInitService> _logger;
-        private readonly IHostEnvironment _env;
+        _config = config;
+        _logger = logger;
+        _env = env;
+    }
 
-        public DbInitService(IConfiguration config, ILogger<DbInitService> logger, IHostEnvironment env)
+    public async Task StartAsync(CancellationToken cancellationToken)
+    {
+        var provider = (_config["Database:Provider"] ?? "Sqlite").Trim();
+        var cs = string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase)
+            ? (_config.GetConnectionString("SqlServerConnection") ?? _config.GetConnectionString("DefaultConnection"))
+            : _config.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrWhiteSpace(cs))
         {
-            _config = config;
-            _logger = logger;
-            _env = env;
+            _logger.LogWarning("Connection string is empty for provider {Provider}; DB initialization skipped.", provider);
+            return;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        await using var conn = CreateOpenConnection(provider, cs);
+        var firstTime = await IsFirstTimeDatabaseAsync(conn, provider, cancellationToken);
+
+        await EnsureMigrationHistoryTable(conn, provider, cancellationToken);
+
+        var migrations = BuildMigrationPlan(provider).ToList();
+        foreach (var migration in migrations)
         {
-            var cs = _config.GetConnectionString("DefaultConnection");
-            if (string.IsNullOrWhiteSpace(cs))
-            {
-                _logger.LogWarning("DefaultConnection is empty; SQLite initialization skipped.");
-                return;
-            }
-
-            var builder = new SqliteConnectionStringBuilder(cs);
-            if (!Path.IsPathRooted(builder.DataSource))
-            {
-                builder.DataSource = Path.Combine(_env.ContentRootPath, builder.DataSource);
-            }
-
-            var directory = Path.GetDirectoryName(builder.DataSource);
-            if (!string.IsNullOrWhiteSpace(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            await using var conn = new SqliteConnection(builder.ToString());
-            await conn.OpenAsync(cancellationToken);
-
-            await ApplyBootstrapScriptAsync(conn, cancellationToken);
-
-            var applyLegacySchema = _config.GetValue<bool>("DbInit:ApplyLegacySqlScripts", false);
-            if (applyLegacySchema)
-            {
-                // Optional compatibility mode for historical SQL Server script conversion.
-                await ApplySchemaTablesAsync(conn, cancellationToken);
-                await ApplyAdditionalSqlTableScriptsAsync(conn, cancellationToken);
-                await CreateCoreCompatibilityTablesAsync(conn, cancellationToken);
-                await SeedUsersAsync(conn, cancellationToken);
-                await SeedMenuAsync(conn, cancellationToken);
-            }
-
-            _logger.LogInformation("SQLite database initialized at {DataSource}", builder.DataSource);
+            await ApplyMigrationIfNeeded(conn, provider, migration, cancellationToken);
         }
 
-        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-
-
-        private async Task ApplyBootstrapScriptAsync(SqliteConnection conn, CancellationToken cancellationToken)
+        if (string.Equals(provider, "Sqlite", StringComparison.OrdinalIgnoreCase))
         {
-            var scriptPath = Path.Combine(_env.ContentRootPath, "AppData", "bootstrap.sqlite.sql");
-            if (!File.Exists(scriptPath))
-            {
-                _logger.LogWarning("SQLite bootstrap script not found at {Path}; skipping script bootstrap.", scriptPath);
-                return;
-            }
-
-            var script = await File.ReadAllTextAsync(scriptPath, cancellationToken);
-            await ExecuteAsync(conn, script, cancellationToken);
-            _logger.LogInformation("SQLite bootstrap script applied from {Path}", scriptPath);
+            await CompareSqliteAgainstBaselineAsync(conn, cancellationToken);
         }
 
-        private async Task ApplySchemaTablesAsync(SqliteConnection conn, CancellationToken cancellationToken)
+        _logger.LogInformation("Database initialization completed. Provider={Provider}, FirstTime={FirstTime}, MigrationsChecked={Count}", provider, firstTime, migrations.Count);
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+    private DbConnection CreateOpenConnection(string provider, string connectionString)
+    {
+        if (string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase))
         {
-            var schemaPath = Path.Combine(_env.ContentRootPath, "AppData", "SCHEMA22112025.sql");
-            if (!File.Exists(schemaPath))
-            {
-                _logger.LogWarning("Schema history file not found at {Path}; skipping full table bootstrap.", schemaPath);
-                return;
-            }
-
-            string content;
-            try
-            {
-                content = await File.ReadAllTextAsync(schemaPath, Encoding.Unicode, cancellationToken);
-            }
-            catch
-            {
-                content = await File.ReadAllTextAsync(schemaPath, cancellationToken);
-            }
-
-            // Some historical scripts are UTF-16 with null characters.
-            content = content.Replace("\0", string.Empty);
-
-            var createStatements = ConvertSqlServerTableScriptToSqlite(content);
-            var created = 0;
-            foreach (var statement in createStatements)
-            {
-                try
-                {
-                    await ExecuteAsync(conn, statement, cancellationToken);
-                    created++;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogDebug(ex, "Skipped table DDL during SQLite conversion: {Sql}", statement);
-                }
-            }
-
-            _logger.LogInformation("SQLite schema bootstrap applied {Count} CREATE TABLE statements from history schema.", created);
+            var sqlConn = new SqlConnection(connectionString);
+            sqlConn.Open();
+            return sqlConn;
         }
 
-
-        private async Task ApplyAdditionalSqlTableScriptsAsync(SqliteConnection conn, CancellationToken cancellationToken)
+        var builder = new SqliteConnectionStringBuilder(connectionString);
+        if (!Path.IsPathRooted(builder.DataSource))
         {
-            var appDataPath = Path.Combine(_env.ContentRootPath, "AppData");
-            if (!Directory.Exists(appDataPath))
+            builder.DataSource = Path.Combine(_env.ContentRootPath, builder.DataSource);
+        }
+
+        var directory = Path.GetDirectoryName(builder.DataSource);
+        if (!string.IsNullOrWhiteSpace(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        var sqliteConn = new SqliteConnection(builder.ToString());
+        sqliteConn.Open();
+        return sqliteConn;
+    }
+
+    private async Task<bool> IsFirstTimeDatabaseAsync(DbConnection conn, string provider, CancellationToken ct)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase)
+            ? "SELECT COUNT(1) FROM sys.tables"
+            : "SELECT COUNT(1) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'";
+
+        var count = Convert.ToInt32(await cmd.ExecuteScalarAsync(ct));
+        return count == 0;
+    }
+
+    private IEnumerable<MigrationItem> BuildMigrationPlan(string provider)
+    {
+        var items = new List<MigrationItem>();
+        var baseline = Path.Combine(_env.ContentRootPath, "AppData", "SQLSchemaAndData2403.sql");
+        items.Add(new MigrationItem("0001_SQLSchemaAndData2403.sql", baseline, true));
+
+        var providerFolder = Path.Combine(_env.ContentRootPath, "AppData", "Migrations", provider);
+        if (Directory.Exists(providerFolder))
+        {
+            var files = Directory.GetFiles(providerFolder, "*.sql", SearchOption.TopDirectoryOnly)
+                .OrderBy(x => x, StringComparer.OrdinalIgnoreCase);
+            foreach (var file in files)
             {
-                return;
+                items.Add(new MigrationItem(Path.GetFileName(file), file, false));
             }
-
-            var sqlFiles = Directory.GetFiles(appDataPath, "*.sql", SearchOption.TopDirectoryOnly)
-                .Where(f => !f.EndsWith("SCHEMA22112025.sql", StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            var applied = 0;
-            foreach (var file in sqlFiles)
-            {
-                string content;
-                try
-                {
-                    content = await File.ReadAllTextAsync(file, Encoding.Unicode, cancellationToken);
-                }
-                catch
-                {
-                    content = await File.ReadAllTextAsync(file, cancellationToken);
-                }
-
-                content = content.Replace("\0", string.Empty);
-                var createStatements = ConvertSqlServerTableScriptToSqlite(content);
-                foreach (var statement in createStatements)
-                {
-                    try
-                    {
-                        await ExecuteAsync(conn, statement, cancellationToken);
-                        applied++;
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogDebug(ex, "Skipped SQL file table DDL conversion for {File}", Path.GetFileName(file));
-                    }
-                }
-            }
-
-            _logger.LogInformation("SQLite additional SQL bootstrap applied {Count} CREATE TABLE statements from AppData/*.sql scripts.", applied);
         }
 
-        private static IEnumerable<string> ConvertSqlServerTableScriptToSqlite(string script)
+        return items;
+    }
+
+    private async Task EnsureMigrationHistoryTable(DbConnection conn, string provider, CancellationToken ct)
+    {
+        var sql = string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase)
+            ? @"IF OBJECT_ID('dbo.DbMigrationHistory','U') IS NULL
+                CREATE TABLE dbo.DbMigrationHistory(
+                    MigrationId INT IDENTITY(1,1) PRIMARY KEY,
+                    MigrationFileName NVARCHAR(260) NOT NULL,
+                    ProviderType NVARCHAR(32) NOT NULL,
+                    VersionChecksum NVARCHAR(128) NULL,
+                    Applied BIT NOT NULL,
+                    AppliedOn DATETIME2 NULL,
+                    ExecutionResult NVARCHAR(MAX) NULL
+                );"
+            : @"CREATE TABLE IF NOT EXISTS DbMigrationHistory(
+                    MigrationId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    MigrationFileName TEXT NOT NULL,
+                    ProviderType TEXT NOT NULL,
+                    VersionChecksum TEXT NULL,
+                    Applied INTEGER NOT NULL,
+                    AppliedOn TEXT NULL,
+                    ExecutionResult TEXT NULL
+                );";
+
+        await ExecuteNonQuery(conn, sql, ct);
+    }
+
+    private async Task ApplyMigrationIfNeeded(DbConnection conn, string provider, MigrationItem item, CancellationToken ct)
+    {
+        if (!File.Exists(item.Path))
         {
-            var statements = new List<string>();
-            var marker = "CREATE TABLE";
-            var index = 0;
-
-            while (index < script.Length)
-            {
-                var start = script.IndexOf(marker, index, StringComparison.OrdinalIgnoreCase);
-                if (start < 0) break;
-
-                var openParen = script.IndexOf('(', start);
-                if (openParen < 0) break;
-
-                var tableHeader = script[start..openParen].Trim();
-                var tableName = NormalizeTableName(tableHeader);
-                if (string.IsNullOrWhiteSpace(tableName))
-                {
-                    index = openParen + 1;
-                    continue;
-                }
-
-                var depth = 0;
-                var closeParen = -1;
-                for (var i = openParen; i < script.Length; i++)
-                {
-                    if (script[i] == '(') depth++;
-                    else if (script[i] == ')')
-                    {
-                        depth--;
-                        if (depth == 0)
-                        {
-                            closeParen = i;
-                            break;
-                        }
-                    }
-                }
-
-                if (closeParen < 0) break;
-
-                var body = script.Substring(openParen + 1, closeParen - openParen - 1);
-                var ddl = BuildSqliteCreateTable(tableName, body);
-                if (!string.IsNullOrWhiteSpace(ddl))
-                {
-                    statements.Add(ddl);
-                }
-
-                index = closeParen + 1;
-            }
-
-            return statements;
+            _logger.LogWarning("Migration file not found: {Path}", item.Path);
+            return;
         }
 
-        private static string NormalizeTableName(string createHeader)
+        var source = await ReadSqlFileAsync(item.Path, ct);
+        var checksum = ComputeChecksum(source);
+
+        if (await IsApplied(conn, item.FileName, provider, checksum, ct))
         {
-            // Expected: CREATE TABLE [schema].[table]
-            var match = Regex.Match(createHeader, @"CREATE\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]", RegexOptions.IgnoreCase);
-            if (!match.Success)
-            {
-                return string.Empty;
-            }
-
-            var schema = match.Groups["schema"].Value;
-            var table = match.Groups["table"].Value;
-            var normalized = string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase)
-                ? table
-                : $"{schema}_{table}";
-
-            return $"[{normalized}]";
+            return;
         }
 
-        private static string BuildSqliteCreateTable(string normalizedTableName, string body)
+        try
         {
-            var lines = body
-                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
-                .Select(l => l.Trim())
-                .Where(l => !string.IsNullOrWhiteSpace(l))
-                .ToList();
-
-            var columns = new List<string>();
-            var primaryKeys = new List<string>();
-            string? identityPkColumn = null;
-
-            foreach (var raw in lines)
-            {
-                var line = raw.Trim().TrimEnd(',');
-
-                if (line.StartsWith("CONSTRAINT", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (line.Contains("PRIMARY KEY", StringComparison.OrdinalIgnoreCase))
-                    {
-                        foreach (Match col in Regex.Matches(line, "\\[([^\\]]+)\\]"))
-                        {
-                            var colName = col.Groups[1].Value;
-                            if (!string.Equals(colName, "PRIMARY", StringComparison.OrdinalIgnoreCase) &&
-                                !string.Equals(colName, "CLUSTERED", StringComparison.OrdinalIgnoreCase))
-                            {
-                                primaryKeys.Add(colName);
-                            }
-                        }
-                    }
-                    continue;
-                }
-
-                if (!line.StartsWith("["))
-                {
-                    continue;
-                }
-
-                var colMatch = Regex.Match(line, @"^\[(?<name>[^\]]+)\]\s+(?<type>\[[^\]]+\](\([^\)]*\))?)\s*(?<rest>.*)$", RegexOptions.IgnoreCase);
-                if (!colMatch.Success)
-                {
-                    continue;
-                }
-
-                var name = colMatch.Groups["name"].Value;
-                var type = colMatch.Groups["type"].Value;
-                var rest = colMatch.Groups["rest"].Value;
-
-                var sqliteType = MapSqlServerTypeToSqlite(type);
-                var isIdentity = rest.Contains("IDENTITY", StringComparison.OrdinalIgnoreCase);
-                var notNull = rest.Contains("NOT NULL", StringComparison.OrdinalIgnoreCase);
-
-                if (isIdentity)
-                {
-                    identityPkColumn = name;
-                    columns.Add($"[{name}] INTEGER PRIMARY KEY AUTOINCREMENT");
-                    continue;
-                }
-
-                columns.Add($"[{name}] {sqliteType}{(notNull ? " NOT NULL" : string.Empty)}");
-            }
-
-            if (columns.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            if (identityPkColumn == null && primaryKeys.Count > 0)
-            {
-                var uniqueKeys = primaryKeys.Distinct(StringComparer.OrdinalIgnoreCase)
-                    .Select(k => $"[{k}]");
-                columns.Add($"PRIMARY KEY ({string.Join(", ", uniqueKeys)})");
-            }
-
-            return $"CREATE TABLE IF NOT EXISTS {normalizedTableName} (\n    {string.Join(",\n    ", columns)}\n);";
+            var script = BuildExecutableScript(source, provider);
+            await ExecuteBatches(conn, script, provider, ct);
+            await InsertHistory(conn, item.FileName, provider, checksum, true, "OK", ct);
+            _logger.LogInformation("Applied migration {MigrationFileName}", item.FileName);
         }
-
-        private static string MapSqlServerTypeToSqlite(string sqlServerType)
+        catch (Exception ex)
         {
-            var t = sqlServerType.Replace("[", string.Empty).Replace("]", string.Empty).Trim().ToLowerInvariant();
-
-            if (t.StartsWith("bigint") || t.StartsWith("int") || t.StartsWith("smallint") || t.StartsWith("tinyint") || t.StartsWith("bit"))
-                return "INTEGER";
-
-            if (t.StartsWith("decimal") || t.StartsWith("numeric") || t.StartsWith("money") || t.StartsWith("smallmoney") || t.StartsWith("float") || t.StartsWith("real"))
-                return "REAL";
-
-            if (t.StartsWith("date") || t.StartsWith("datetime") || t.StartsWith("smalldatetime") || t.StartsWith("time"))
-                return "TEXT";
-
-            if (t.StartsWith("binary") || t.StartsWith("varbinary") || t.StartsWith("image") || t.StartsWith("rowversion") || t.StartsWith("timestamp"))
-                return "BLOB";
-
-            return "TEXT";
-        }
-
-        private static async Task CreateCoreCompatibilityTablesAsync(SqliteConnection conn, CancellationToken cancellationToken)
-        {
-            await ExecuteAsync(conn, @"
-CREATE TABLE IF NOT EXISTS AppUser (
-    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserName TEXT NOT NULL UNIQUE,
-    Email TEXT NOT NULL UNIQUE,
-    UserFullName TEXT NOT NULL,
-    Password TEXT NOT NULL,
-    CompanyID INTEGER NOT NULL DEFAULT 1,
-    CategoryID INTEGER NOT NULL DEFAULT 1,
-    UserType INTEGER NOT NULL DEFAULT 1,
-    UserImage TEXT NULL,
-    CompanyName TEXT NULL,
-    UserStatus INTEGER NOT NULL DEFAULT 1,
-    IsDeleted INTEGER NOT NULL DEFAULT 0,
-    LastLoginAt TEXT NULL,
-    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS PasswordResetToken (
-    TokenID INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserID INTEGER NOT NULL,
-    Token TEXT NOT NULL UNIQUE,
-    ExpiresAt TEXT NOT NULL,
-    IsUsed INTEGER NOT NULL DEFAULT 0,
-    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS LoginAuditHistory (
-    AuditID INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserID INTEGER NULL,
-    UserName TEXT NULL,
-    IsSuccess INTEGER NOT NULL,
-    FailureReason TEXT NULL,
-    IPAddress TEXT NULL,
-    UserAgent TEXT NULL,
-    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS MenuItems (
-    MenuItemID INTEGER PRIMARY KEY AUTOINCREMENT,
-    ParentID INTEGER NULL,
-    LabelAR TEXT NOT NULL,
-    LabelEN TEXT NOT NULL,
-    DescriptionAR TEXT NULL,
-    DescriptionEn TEXT NULL,
-    Url TEXT NULL,
-    Icon TEXT NULL,
-    [Order] INTEGER NOT NULL DEFAULT 1,
-    IsActive INTEGER NOT NULL DEFAULT 1,
-    Permission TEXT NULL,
-    Type TEXT NULL,
-    CreatedBy INTEGER NOT NULL DEFAULT 1,
-    UpdatedBy INTEGER NULL,
-    CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TEXT NULL
-);
-", cancellationToken);
-        }
-
-        private static async Task ExecuteAsync(SqliteConnection conn, string sql, CancellationToken cancellationToken)
-        {
-            await using var cmd = conn.CreateCommand();
-            cmd.CommandText = sql;
-            await cmd.ExecuteNonQueryAsync(cancellationToken);
-        }
-
-        private static async Task SeedUsersAsync(SqliteConnection conn, CancellationToken cancellationToken)
-        {
-            await using var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-INSERT INTO AppUser (UserName, Email, UserFullName, Password, CompanyID, CategoryID, UserType, CompanyName, UserStatus, IsDeleted)
-SELECT 'admin', 'admin@ebscore.local', 'System Administrator', 'admin123', 1, 1, 1, 'EBS Demo', 1, 0
-WHERE NOT EXISTS (SELECT 1 FROM AppUser WHERE UserName = 'admin');";
-            await cmd.ExecuteNonQueryAsync(cancellationToken);
-        }
-
-        private static async Task SeedMenuAsync(SqliteConnection conn, CancellationToken cancellationToken)
-        {
-            await using var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, Icon, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 1, NULL, 'لوحة التحكم', 'Dashboard', '/', 'fa-solid fa-square-poll-vertical', 1, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 1);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 2, NULL, 'استمرارية الأعمال', 'Business Continuity', NULL, 2, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 2);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 3, 2, 'تحليل أثر الأعمال', 'BIA', '/BCM/BIA', 1, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 3);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 4, 2, 'الحوادث', 'Incidents', '/BCM/Incidents', 2, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 4);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 5, 2, 'الموردون', 'Suppliers', '/BCM/Suppliers', 3, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 5);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 6, NULL, 'الضبط', 'Configuration', NULL, 3, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 6);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 7, 6, 'الموظفون', 'Employees', '/Config/Employees', 1, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 7);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 8, 6, 'العمليات', 'Processes', '/Config/Process', 2, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 8);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 9, NULL, 'الإشعارات', 'Notifications', '/Notification/S7SNotificationIndex', 4, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 9);
-
-INSERT INTO MenuItems (MenuItemID, ParentID, LabelAR, LabelEN, Url, [Order], IsActive, CreatedBy, CreatedAt)
-SELECT 10, NULL, 'الأمن', 'Security', '/Security/Roles', 5, 1, 1, CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM MenuItems WHERE MenuItemID = 10);
-";
-            await cmd.ExecuteNonQueryAsync(cancellationToken);
+            await InsertHistory(conn, item.FileName, provider, checksum, false, ex.Message, ct);
+            _logger.LogError(ex, "Failed migration {MigrationFileName}", item.FileName);
+            throw;
         }
     }
+
+    private async Task<string> ReadSqlFileAsync(string path, CancellationToken ct)
+    {
+        try
+        {
+            return (await File.ReadAllTextAsync(path, Encoding.Unicode, ct)).Replace("\0", string.Empty);
+        }
+        catch
+        {
+            return (await File.ReadAllTextAsync(path, ct)).Replace("\0", string.Empty);
+        }
+    }
+
+    private static string BuildExecutableScript(string source, string provider)
+    {
+        return string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase)
+            ? BuildSqlServerScript(source)
+            : BuildSqliteScript(source);
+    }
+
+    private static string BuildSqlServerScript(string source)
+    {
+        // Execute against current database connection. Ignore dump-specific USE statements.
+        return Regex.Replace(source, @"^\s*USE\s+\[[^\]]+\]\s*$", string.Empty, RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    }
+
+    private static string BuildSqliteScript(string source)
+    {
+        var convertedStatements = new List<string>();
+        var batches = Regex.Split(source, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+        foreach (var rawBatch in batches)
+        {
+            var batch = rawBatch.Trim();
+            if (string.IsNullOrWhiteSpace(batch))
+            {
+                continue;
+            }
+
+            if (IsNonExecutableInSqlite(batch))
+            {
+                continue;
+            }
+
+            if (batch.StartsWith("CREATE TABLE", StringComparison.OrdinalIgnoreCase))
+            {
+                var converted = ConvertCreateTableBatch(batch);
+                if (!string.IsNullOrWhiteSpace(converted))
+                {
+                    convertedStatements.Add(converted);
+                }
+                continue;
+            }
+
+            if (batch.StartsWith("INSERT INTO", StringComparison.OrdinalIgnoreCase)
+                || batch.StartsWith("UPDATE", StringComparison.OrdinalIgnoreCase)
+                || batch.StartsWith("DELETE", StringComparison.OrdinalIgnoreCase))
+            {
+                convertedStatements.Add(ConvertDataManipulationBatch(batch));
+            }
+        }
+
+        return string.Join(";\n", convertedStatements);
+    }
+
+    private static bool IsNonExecutableInSqlite(string batch)
+    {
+        return batch.StartsWith("USE ", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("SET ANSI_", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("SET QUOTED_IDENTIFIER", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("CREATE PROCEDURE", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("CREATE PROC", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("ALTER PROCEDURE", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("CREATE FUNCTION", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("ALTER FUNCTION", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("EXEC ", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("PRINT ", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("/******", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("ALTER TABLE", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string ConvertCreateTableBatch(string batch)
+    {
+        var openParen = batch.IndexOf('(');
+        if (openParen < 0)
+        {
+            return string.Empty;
+        }
+
+        var header = batch[..openParen].Trim();
+        var tableName = NormalizeSchemaQualifiedNames(header).Replace("CREATE TABLE", string.Empty, StringComparison.OrdinalIgnoreCase).Trim();
+
+        var body = batch[openParen..];
+        var full = $"CREATE TABLE {tableName} {body}";
+        return ConvertSqlServerCreateTableToSqlite(full);
+    }
+
+    private static string ConvertDataManipulationBatch(string batch)
+    {
+        var converted = NormalizeSchemaQualifiedNames(batch);
+        converted = Regex.Replace(converted, @"\bN'", "'", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"\bGETDATE\s*\(\s*\)", "CURRENT_TIMESTAMP", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"\bISNULL\s*\(", "IFNULL(", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"\bCONVERT\s*\(\s*\w+\s*,\s*([^\)]+)\)", "$1", RegexOptions.IgnoreCase);
+        return converted.Trim();
+    }
+
+    private static string NormalizeSchemaQualifiedNames(string sql)
+    {
+        return Regex.Replace(sql, @"\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", m =>
+        {
+            var schema = m.Groups["schema"].Value;
+            var name = m.Groups["name"].Value;
+            return string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase)
+                ? $"[{name}]"
+                : $"[{schema}_{name}]";
+        }, RegexOptions.IgnoreCase);
+    }
+
+    private static string ConvertSqlServerCreateTableToSqlite(string script)
+    {
+        var marker = "CREATE TABLE";
+        var start = script.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+        if (start < 0)
+        {
+            return string.Empty;
+        }
+
+        var openParen = script.IndexOf('(', start);
+        if (openParen < 0)
+        {
+            return string.Empty;
+        }
+
+        var header = script[start..openParen].Trim();
+        var tableName = header.Replace("CREATE TABLE", string.Empty, StringComparison.OrdinalIgnoreCase).Trim();
+
+        var depth = 0;
+        var closeParen = -1;
+        for (var i = openParen; i < script.Length; i++)
+        {
+            if (script[i] == '(') depth++;
+            else if (script[i] == ')')
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    closeParen = i;
+                    break;
+                }
+            }
+        }
+
+        if (closeParen < 0)
+        {
+            return string.Empty;
+        }
+
+        var body = script[(openParen + 1)..closeParen];
+        var lines = body.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
+            .Select(l => l.Trim())
+            .Where(l => !string.IsNullOrWhiteSpace(l))
+            .ToList();
+
+        var columns = new List<string>();
+        var primaryKeys = new List<string>();
+
+        foreach (var raw in lines)
+        {
+            var line = raw.Trim().TrimEnd(',');
+
+            if (line.StartsWith("CONSTRAINT", StringComparison.OrdinalIgnoreCase))
+            {
+                if (line.Contains("PRIMARY KEY", StringComparison.OrdinalIgnoreCase))
+                {
+                    foreach (Match col in Regex.Matches(line, "\\[([^\\]]+)\\]"))
+                    {
+                        var c = col.Groups[1].Value;
+                        if (!string.Equals(c, "PRIMARY", StringComparison.OrdinalIgnoreCase)
+                            && !string.Equals(c, "CLUSTERED", StringComparison.OrdinalIgnoreCase))
+                        {
+                            primaryKeys.Add($"[{c}]");
+                        }
+                    }
+                }
+
+                continue;
+            }
+
+            var m = Regex.Match(line, @"^\[(?<col>[^\]]+)\]\s+(?<type>[a-zA-Z0-9]+)(\([^)]+\))?(?<rest>.*)$", RegexOptions.IgnoreCase);
+            if (!m.Success)
+            {
+                continue;
+            }
+
+            var col = m.Groups["col"].Value;
+            var type = m.Groups["type"].Value;
+            var rest = m.Groups["rest"].Value;
+
+            var nullable = rest.Contains("NOT NULL", StringComparison.OrdinalIgnoreCase) ? " NOT NULL" : string.Empty;
+            var autoIdentity = rest.Contains("IDENTITY", StringComparison.OrdinalIgnoreCase)
+                ? " PRIMARY KEY AUTOINCREMENT"
+                : string.Empty;
+
+            if (!string.IsNullOrEmpty(autoIdentity))
+            {
+                columns.Add($"[{col}] INTEGER{autoIdentity}");
+            }
+            else
+            {
+                columns.Add($"[{col}] {MapType(type)}{nullable}");
+            }
+        }
+
+        if (columns.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        if (primaryKeys.Count > 0 && !columns.Any(c => c.Contains("PRIMARY KEY AUTOINCREMENT", StringComparison.OrdinalIgnoreCase)))
+        {
+            columns.Add($"PRIMARY KEY ({string.Join(", ", primaryKeys.Distinct())})");
+        }
+
+        return $"CREATE TABLE IF NOT EXISTS {tableName} (\n  {string.Join(",\n  ", columns)}\n)";
+    }
+
+    private static string MapType(string sqlServerType)
+    {
+        return sqlServerType.ToLowerInvariant() switch
+        {
+            "bigint" or "int" or "smallint" or "tinyint" or "bit" => "INTEGER",
+            "decimal" or "numeric" or "money" or "smallmoney" or "float" or "real" => "REAL",
+            "datetime" or "datetime2" or "smalldatetime" or "date" or "time" => "TEXT",
+            "varbinary" or "binary" or "image" => "BLOB",
+            _ => "TEXT"
+        };
+    }
+
+    private async Task CompareSqliteAgainstBaselineAsync(DbConnection conn, CancellationToken ct)
+    {
+        var baseline = Path.Combine(_env.ContentRootPath, "AppData", "SQLSchemaAndData2403.sql");
+        if (!File.Exists(baseline))
+        {
+            return;
+        }
+
+        var source = await ReadSqlFileAsync(baseline, ct);
+        var expected = Regex.Matches(source, @"CREATE\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", RegexOptions.IgnoreCase)
+            .Select(m =>
+            {
+                var s = m.Groups["schema"].Value;
+                var n = m.Groups["name"].Value;
+                return string.Equals(s, "dbo", StringComparison.OrdinalIgnoreCase) ? n : $"{s}_{n}";
+            })
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var actual = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        await using (var cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'";
+            await using var reader = await cmd.ExecuteReaderAsync(ct);
+            while (await reader.ReadAsync(ct))
+            {
+                actual.Add(reader.GetString(0));
+            }
+        }
+
+        var missing = expected.Except(actual, StringComparer.OrdinalIgnoreCase).OrderBy(x => x).ToList();
+        _logger.LogInformation("SQLite baseline comparison: expectedTables={Expected}, actualTables={Actual}, missingTables={Missing}", expected.Count, actual.Count, missing.Count);
+        if (missing.Count > 0)
+        {
+            _logger.LogWarning("SQLite missing tables compared to SQLSchemaAndData2403.sql: {Tables}", string.Join(", ", missing.Take(50)));
+        }
+    }
+
+    private async Task<bool> IsApplied(DbConnection conn, string fileName, string provider, string checksum, CancellationToken ct)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = @"SELECT COUNT(1) FROM DbMigrationHistory
+                            WHERE MigrationFileName = @f AND ProviderType = @p AND VersionChecksum = @c AND Applied = 1";
+        AddParam(cmd, "@f", fileName);
+        AddParam(cmd, "@p", provider);
+        AddParam(cmd, "@c", checksum);
+        return Convert.ToInt32(await cmd.ExecuteScalarAsync(ct)) > 0;
+    }
+
+    private async Task InsertHistory(DbConnection conn, string fileName, string provider, string checksum, bool applied, string result, CancellationToken ct)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = @"INSERT INTO DbMigrationHistory(MigrationFileName, ProviderType, VersionChecksum, Applied, AppliedOn, ExecutionResult)
+                            VALUES(@f,@p,@c,@a,@d,@r);";
+        AddParam(cmd, "@f", fileName);
+        AddParam(cmd, "@p", provider);
+        AddParam(cmd, "@c", checksum);
+        AddParam(cmd, "@a", applied ? 1 : 0);
+        AddParam(cmd, "@d", DateTime.UtcNow.ToString("O"));
+        AddParam(cmd, "@r", result);
+        await cmd.ExecuteNonQueryAsync(ct);
+    }
+
+    private static async Task ExecuteBatches(DbConnection conn, string script, string provider, CancellationToken ct)
+    {
+        var batches = string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase)
+            ? Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase)
+            : script.Split(';');
+
+        foreach (var rawBatch in batches)
+        {
+            var batch = rawBatch.Trim();
+            if (string.IsNullOrWhiteSpace(batch))
+            {
+                continue;
+            }
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = batch;
+            await cmd.ExecuteNonQueryAsync(ct);
+        }
+    }
+
+    private static void AddParam(DbCommand cmd, string name, object? value)
+    {
+        var p = cmd.CreateParameter();
+        p.ParameterName = name;
+        p.Value = value ?? DBNull.Value;
+        cmd.Parameters.Add(p);
+    }
+
+    private static async Task ExecuteNonQuery(DbConnection conn, string sql, CancellationToken ct)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = sql;
+        await cmd.ExecuteNonQueryAsync(ct);
+    }
+
+    private static string ComputeChecksum(string value)
+    {
+        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(value));
+        return Convert.ToHexString(bytes);
+    }
+
+    private sealed record MigrationItem(string FileName, string Path, bool IsBaseline);
 }
