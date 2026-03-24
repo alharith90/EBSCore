@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace EBSCore.Web.Services;
 
@@ -123,6 +124,7 @@ public class DbInitService : IHostedService
                     MigrationFileName NVARCHAR(260) NOT NULL,
                     ProviderType NVARCHAR(32) NOT NULL,
                     VersionChecksum NVARCHAR(128) NULL,
+                    MigrationVersion NVARCHAR(64) NULL,
                     Applied BIT NOT NULL,
                     AppliedOn DATETIME2 NULL,
                     ExecutionResult NVARCHAR(MAX) NULL
@@ -132,12 +134,44 @@ public class DbInitService : IHostedService
                     MigrationFileName TEXT NOT NULL,
                     ProviderType TEXT NOT NULL,
                     VersionChecksum TEXT NULL,
+                    MigrationVersion TEXT NULL,
                     Applied INTEGER NOT NULL,
                     AppliedOn TEXT NULL,
                     ExecutionResult TEXT NULL
                 );";
 
         await ExecuteNonQuery(conn, sql, ct);
+        await EnsureHistoryExtendedColumns(conn, provider, ct);
+    }
+
+    private static async Task EnsureHistoryExtendedColumns(DbConnection conn, string provider, CancellationToken ct)
+    {
+        if (string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase))
+        {
+            await ExecuteNonQuery(conn, @"IF COL_LENGTH('dbo.DbMigrationHistory','MigrationVersion') IS NULL
+                                          ALTER TABLE dbo.DbMigrationHistory ADD MigrationVersion NVARCHAR(64) NULL;", ct);
+            return;
+        }
+
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = "PRAGMA table_info(DbMigrationHistory);";
+        var hasMigrationVersion = false;
+        await using (var reader = await cmd.ExecuteReaderAsync(ct))
+        {
+            while (await reader.ReadAsync(ct))
+            {
+                if (string.Equals(reader.GetString(1), "MigrationVersion", StringComparison.OrdinalIgnoreCase))
+                {
+                    hasMigrationVersion = true;
+                    break;
+                }
+            }
+        }
+
+        if (!hasMigrationVersion)
+        {
+            await ExecuteNonQuery(conn, "ALTER TABLE DbMigrationHistory ADD COLUMN MigrationVersion TEXT NULL;", ct);
+        }
     }
 
     private async Task ApplyMigrationIfNeeded(DbConnection conn, string provider, MigrationItem item, CancellationToken ct)
@@ -150,6 +184,7 @@ public class DbInitService : IHostedService
 
         var source = await ReadSqlFileAsync(item.Path, ct);
         var checksum = ComputeChecksum(source);
+        var version = ExtractMigrationVersion(item.FileName);
 
         if (await IsApplied(conn, item.FileName, provider, checksum, ct))
         {
@@ -160,12 +195,12 @@ public class DbInitService : IHostedService
         {
             var script = BuildExecutableScript(source, provider);
             await ExecuteBatches(conn, script, provider, ct);
-            await InsertHistory(conn, item.FileName, provider, checksum, true, "OK", ct);
+            await InsertHistory(conn, item.FileName, provider, checksum, version, true, "OK", ct);
             _logger.LogInformation("Applied migration {MigrationFileName}", item.FileName);
         }
         catch (Exception ex)
         {
-            await InsertHistory(conn, item.FileName, provider, checksum, false, ex.Message, ct);
+            await InsertHistory(conn, item.FileName, provider, checksum, version, false, ex.Message, ct);
             _logger.LogError(ex, "Failed migration {MigrationFileName}", item.FileName);
             throw;
         }
@@ -241,6 +276,12 @@ public class DbInitService : IHostedService
             if (ContainsDataManipulation(batch))
             {
                 convertedStatements.Add(ConvertDataManipulationBatch(batch));
+                continue;
+            }
+
+            if (TryConvertSimpleAlterTable(batch, out var alterTableSql))
+            {
+                convertedStatements.Add(alterTableSql);
                 continue;
             }
         }
@@ -386,9 +427,27 @@ public class DbInitService : IHostedService
         var converted = NormalizeSchemaQualifiedNames(batch);
         converted = Regex.Replace(converted, @"\bN'", "'", RegexOptions.IgnoreCase);
         converted = Regex.Replace(converted, @"\bGETDATE\s*\(\s*\)", "CURRENT_TIMESTAMP", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"\bGETUTCDATE\s*\(\s*\)", "CURRENT_TIMESTAMP", RegexOptions.IgnoreCase);
         converted = Regex.Replace(converted, @"\bISNULL\s*\(", "IFNULL(", RegexOptions.IgnoreCase);
         converted = Regex.Replace(converted, @"\bCONVERT\s*\(\s*\w+\s*,\s*([^\)]+)\)", "$1", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"CAST\s*\(\s*N?'([^']*)'\s+AS\s+DateTime2?\s*\)", "'$1'", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"CAST\s*\(\s*N?'([^']*)'\s+AS\s+Date\s*\)", "'$1'", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"CAST\s*\(\s*N?'([^']*)'\s+AS\s+Time\s*\)", "'$1'", RegexOptions.IgnoreCase);
+        converted = Regex.Replace(converted, @"\bWITH\s*\(.*?\)", string.Empty, RegexOptions.IgnoreCase);
         return converted.Trim();
+    }
+
+    private static bool TryConvertSimpleAlterTable(string batch, out string statement)
+    {
+        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]\s+DROP\s+CONSTRAINT\s+\[[^\]]+\]", RegexOptions.IgnoreCase);
+        if (match.Success)
+        {
+            statement = $"-- Skipped for SQLite compatibility: {NormalizeSchemaQualifiedNames(batch)}";
+            return true;
+        }
+
+        statement = string.Empty;
+        return false;
     }
 
     private static string NormalizeSchemaQualifiedNames(string sql)
@@ -542,7 +601,12 @@ public class DbInitService : IHostedService
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+        var expectedColumns = ExtractExpectedColumns(source);
+        var expectedSeedCounts = ExtractExpectedSeedCounts(source);
+
         var actual = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var actualColumns = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        var actualSeedCounts = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase);
         await using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'";
@@ -553,12 +617,41 @@ public class DbInitService : IHostedService
             }
         }
 
+        foreach (var table in actual)
+        {
+            actualColumns[table] = await GetActualColumns(conn, table, ct);
+            actualSeedCounts[table] = await GetTableCount(conn, table, ct);
+        }
+
         var missing = expected.Except(actual, StringComparer.OrdinalIgnoreCase).OrderBy(x => x).ToList();
+        var missingColumns = new List<string>();
+        foreach (var kv in expectedColumns)
+        {
+            if (!actualColumns.TryGetValue(kv.Key, out var colSet))
+            {
+                continue;
+            }
+
+            var colMissing = kv.Value.Except(colSet, StringComparer.OrdinalIgnoreCase).ToList();
+            if (colMissing.Count > 0)
+            {
+                missingColumns.Add($"{kv.Key}: {string.Join(", ", colMissing)}");
+            }
+        }
+
+        var seedMismatches = expectedSeedCounts
+            .Where(kv => actualSeedCounts.TryGetValue(kv.Key, out var actualCount) && actualCount < kv.Value)
+            .Select(kv => $"{kv.Key}: expected-at-least={kv.Value}, actual={actualSeedCounts.GetValueOrDefault(kv.Key)}")
+            .OrderBy(x => x, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
         _logger.LogInformation("SQLite baseline comparison: expectedTables={Expected}, actualTables={Actual}, missingTables={Missing}", expected.Count, actual.Count, missing.Count);
         if (missing.Count > 0)
         {
             _logger.LogWarning("SQLite missing tables compared to SQLSchemaAndData2403.sql: {Tables}", string.Join(", ", missing.Take(50)));
         }
+
+        await WriteGapReportAsync(expected, actual, missing, missingColumns, seedMismatches, ct);
     }
 
     private async Task<bool> IsApplied(DbConnection conn, string fileName, string provider, string checksum, CancellationToken ct)
@@ -572,18 +665,114 @@ public class DbInitService : IHostedService
         return Convert.ToInt32(await cmd.ExecuteScalarAsync(ct)) > 0;
     }
 
-    private async Task InsertHistory(DbConnection conn, string fileName, string provider, string checksum, bool applied, string result, CancellationToken ct)
+    private async Task InsertHistory(DbConnection conn, string fileName, string provider, string checksum, string version, bool applied, string result, CancellationToken ct)
     {
         await using var cmd = conn.CreateCommand();
-        cmd.CommandText = @"INSERT INTO DbMigrationHistory(MigrationFileName, ProviderType, VersionChecksum, Applied, AppliedOn, ExecutionResult)
-                            VALUES(@f,@p,@c,@a,@d,@r);";
+        cmd.CommandText = @"INSERT INTO DbMigrationHistory(MigrationFileName, ProviderType, VersionChecksum, MigrationVersion, Applied, AppliedOn, ExecutionResult)
+                            VALUES(@f,@p,@c,@v,@a,@d,@r);";
         AddParam(cmd, "@f", fileName);
         AddParam(cmd, "@p", provider);
         AddParam(cmd, "@c", checksum);
+        AddParam(cmd, "@v", version);
         AddParam(cmd, "@a", applied ? 1 : 0);
         AddParam(cmd, "@d", DateTime.UtcNow.ToString("O"));
         AddParam(cmd, "@r", result);
         await cmd.ExecuteNonQueryAsync(ct);
+    }
+
+    private static string ExtractMigrationVersion(string fileName)
+    {
+        var m = Regex.Match(fileName, @"^(?<v>\d+)");
+        return m.Success ? m.Groups["v"].Value : "baseline";
+    }
+
+    private static Dictionary<string, HashSet<string>> ExtractExpectedColumns(string source)
+    {
+        var output = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        var matches = Regex.Matches(source, @"CREATE\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]\s*\((?<body>.*?)\)\s*GO", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        foreach (Match m in matches)
+        {
+            var schema = m.Groups["schema"].Value;
+            var name = m.Groups["name"].Value;
+            var table = string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase) ? name : $"{schema}_{name}";
+            var body = m.Groups["body"].Value;
+            var cols = Regex.Matches(body, @"\[(?<col>[^\]]+)\]\s+\[", RegexOptions.IgnoreCase)
+                .Select(x => x.Groups["col"].Value)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            output[table] = cols;
+        }
+
+        return output;
+    }
+
+    private static Dictionary<string, long> ExtractExpectedSeedCounts(string source)
+    {
+        var output = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase);
+        var matches = Regex.Matches(source, @"INSERT\s+\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", RegexOptions.IgnoreCase);
+        foreach (Match m in matches)
+        {
+            var schema = m.Groups["schema"].Value;
+            var name = m.Groups["name"].Value;
+            var table = string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase) ? name : $"{schema}_{name}";
+            output[table] = output.GetValueOrDefault(table) + 1;
+        }
+
+        return output;
+    }
+
+    private static async Task<HashSet<string>> GetActualColumns(DbConnection conn, string tableName, CancellationToken ct)
+    {
+        var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = $"PRAGMA table_info([{tableName.Replace("]", "]]", StringComparison.Ordinal)}]);";
+        await using var reader = await cmd.ExecuteReaderAsync(ct);
+        while (await reader.ReadAsync(ct))
+        {
+            set.Add(reader.GetString(1));
+        }
+
+        return set;
+    }
+
+    private static async Task<long> GetTableCount(DbConnection conn, string tableName, CancellationToken ct)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = $"SELECT COUNT(1) FROM [{tableName.Replace("]", "]]", StringComparison.Ordinal)}]";
+        return Convert.ToInt64(await cmd.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture);
+    }
+
+    private async Task WriteGapReportAsync(
+        HashSet<string> expected,
+        HashSet<string> actual,
+        List<string> missingTables,
+        List<string> missingColumns,
+        List<string> seedMismatches,
+        CancellationToken ct)
+    {
+        var lines = new List<string>
+        {
+            $"GeneratedOnUtc: {DateTime.UtcNow:O}",
+            $"SchemaSource: AppData/SQLSchemaAndData2403.sql",
+            $"ExpectedTables: {expected.Count}",
+            $"ActualTables: {actual.Count}",
+            $"MissingTables: {missingTables.Count}",
+            $"MissingColumnsSets: {missingColumns.Count}",
+            $"SeedCountMismatches: {seedMismatches.Count}",
+            string.Empty,
+            "[Missing Tables]"
+        };
+        lines.AddRange(missingTables);
+        lines.Add(string.Empty);
+        lines.Add("[Missing Columns]");
+        lines.AddRange(missingColumns);
+        lines.Add(string.Empty);
+        lines.Add("[Seed Count Mismatches]");
+        lines.AddRange(seedMismatches);
+
+        var folder = Path.Combine(_env.ContentRootPath, "Logs");
+        Directory.CreateDirectory(folder);
+        var path = Path.Combine(folder, "DbGapReport-Sqlite.txt");
+        await File.WriteAllLinesAsync(path, lines, ct);
     }
 
     private static async Task ExecuteBatches(DbConnection conn, string script, string provider, CancellationToken ct)
