@@ -1,0 +1,193 @@
+@page "/Operations/Dashboard"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.Operations
+@inject HttpClient Http
+
+<h3>Operations & Service Delivery Dashboard</h3>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" @bind="Filter.StartDate" @bind:format="yyyy-MM-dd" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" @bind="Filter.EndDate" @bind:format="yyyy-MM-dd" />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" @bind="Filter.IncludeChildren" id="includeChildren" />
+            <label class="form-check-label" for="includeChildren">Include children org units</label>
+        </div>
+    </div>
+    <div class="col-md-3 d-flex align-items-end justify-content-end">
+        <button class="btn btn-primary" @onclick="LoadDashboard">Refresh</button>
+    </div>
+</div>
+
+@if (Dashboard == null)
+{
+    <p>Loading dashboard...</p>
+}
+else
+{
+    <div class="row g-3 mb-4">
+        @foreach (var kpi in Dashboard.Kpis)
+        {
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-muted small">@kpi.Label</div>
+                        <div class="h4 mb-1">@kpi.Value @kpi.Unit</div>
+                        <div class="small">Trend: @kpi.Trend</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">Queue Backlog</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Queue</th>
+                                <th>Open</th>
+                                <th>Overdue</th>
+                                <th>Breached</th>
+                                <th>Avg Age (h)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Dashboard.QueueBacklog)
+                            {
+                                <tr>
+                                    <td>@row.QueueName</td>
+                                    <td>@row.OpenItems</td>
+                                    <td>@row.OverdueItems</td>
+                                    <td>@row.BreachedItems</td>
+                                    <td>@row.AvgAgeHours</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">Critical Incidents</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>SLA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var incident in Dashboard.CriticalIncidents)
+                            {
+                                <tr>
+                                    <td>@incident.IncidentNumber</td>
+                                    <td>@incident.Title</td>
+                                    <td>@incident.StatusCode</td>
+                                    <td>@incident.SLAStatus</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="card-header">Oldest Open Service Requests</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var request in Dashboard.OldestOpenServiceRequests)
+                            {
+                                <tr>
+                                    <td>@request.RequestNumber</td>
+                                    <td>@request.Title</td>
+                                    <td>@request.PriorityCode</td>
+                                    <td>@request.StatusCode</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="card-header">Overdue Work Orders</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Due</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Dashboard.OverdueWorkOrders)
+                            {
+                                <tr>
+                                    <td>@order.WorkOrderNumber</td>
+                                    <td>@order.Title</td>
+                                    <td>@order.StatusCode</td>
+                                    <td>@order.DueAt?.ToString("yyyy-MM-dd")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private OperationsDashboardFilter Filter = new()
+    {
+        StartDate = DateTime.UtcNow.Date.AddDays(-30),
+        EndDate = DateTime.UtcNow.Date,
+        IncludeChildren = true
+    };
+
+    private OperationsDashboardResponse Dashboard;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboard();
+    }
+
+    private async Task LoadDashboard()
+    {
+        var response = await Http.PostAsJsonAsync("/api/OperationsServiceDelivery/GetDashboard", Filter);
+        if (response.IsSuccessStatusCode)
+        {
+            Dashboard = await response.Content.ReadFromJsonAsync<OperationsDashboardResponse>();
+        }
+    }
+}
