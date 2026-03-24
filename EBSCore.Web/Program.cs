@@ -161,6 +161,23 @@ app.MapControllers();
 app.MapBlazorHub(); // Enable Blazor Server
 app.MapFallbackToPage("/_Host"); // Fallback to Blazor app (_Host.cshtml)
 
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    var startupLogger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Startup");
+    var listeningUrls = app.Urls?.Where(url => url.StartsWith("http://", StringComparison.OrdinalIgnoreCase)).ToArray() ?? Array.Empty<string>();
+
+    if (listeningUrls.Length == 0)
+    {
+        startupLogger.LogInformation("Application started successfully.");
+        return;
+    }
+
+    foreach (var url in listeningUrls)
+    {
+        startupLogger.LogInformation("Application started successfully. Open this URL in your browser: {Url}", url);
+    }
+});
+
 app.Run();
 
 static bool HasSessionUser(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext context)
