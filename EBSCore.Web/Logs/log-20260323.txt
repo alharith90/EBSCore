@@ -2024,3 +2024,197 @@ System.Net.Http.HttpRequestException: Response status code does not indicate suc
 2026-03-23 23:46:03.412 +04:00 [INF] [Workflow] Polling for executions
 2026-03-23 23:46:08.414 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
 2026-03-23 23:46:08.414 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:13.419 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:13.419 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:18.433 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:18.433 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:23.448 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:23.448 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:28.459 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:28.459 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:33.463 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:33.463 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:38.466 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:38.466 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:43.479 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:43.479 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:48.484 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:48.484 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:53.485 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:53.485 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:46:58.494 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:46:58.494 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:03.506 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:03.506 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:08.510 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:08.510 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:13.517 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:13.517 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:18.533 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:18.533 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:23.577 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:23.577 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:28.580 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:28.580 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:33.614 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:33.614 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:38.618 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:38.618 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:43.624 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:43.624 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:48.630 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:48.630 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:53.634 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:53.634 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:47:58.649 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:47:58.649 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:03.651 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:03.651 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:08.663 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:08.663 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:13.674 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:13.674 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:18.678 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:18.678 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:23.688 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:23.688 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:28.695 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:28.695 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:33.695 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:33.695 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:38.709 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:38.709 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:43.710 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:43.710 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:48.711 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:48.711 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:53.718 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:53.718 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:48:58.729 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:48:58.729 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:03.744 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:03.744 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:08.764 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:08.764 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:13.780 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:13.780 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:18.798 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:18.798 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:23.805 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:23.805 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:28.810 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:28.810 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:33.815 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:33.815 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:38.815 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:38.815 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:43.818 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:43.818 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:48.831 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:48.831 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:53.844 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:53.844 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:49:58.861 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:49:58.861 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:03.865 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:03.865 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:08.877 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:08.877 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:13.881 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:13.881 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:18.882 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:18.882 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:23.892 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:23.892 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:28.895 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:28.895 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:33.896 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:33.896 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:38.907 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:38.907 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:43.910 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:43.910 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:48.917 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:48.917 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:53.923 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:53.923 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:50:58.930 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:50:58.930 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:03.942 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:03.942 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:08.954 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:08.954 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:13.957 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:13.957 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:18.958 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:18.958 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:23.959 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:23.959 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:28.963 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:28.963 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:33.975 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:33.975 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:38.987 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:38.987 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:44.008 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:44.008 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:49.011 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:49.011 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:54.017 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:54.017 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:51:59.021 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:51:59.021 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:04.025 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:04.025 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:09.038 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:09.038 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:14.043 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:14.043 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:19.046 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:19.046 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:24.056 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:24.056 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:29.068 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:29.068 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:34.071 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:34.071 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:39.078 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:39.078 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:44.086 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:44.086 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:49.097 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:49.097 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:54.108 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:54.108 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:52:59.118 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:52:59.118 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:04.128 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:04.128 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:09.130 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:09.130 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:14.135 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:14.135 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:19.143 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:19.143 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:24.157 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:24.157 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:29.162 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-23 23:53:29.162 +04:00 [INF] [Workflow] Polling for executions
+2026-03-23 23:53:32.421 +04:00 [Error] EBSCore.Web.Services.S7SNotificationBackgroundService S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-23 23:53:32.421 +04:00 [ERR] S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-23 23:53:32.424 +04:00 [Error] EBSCore.Web.Services.NotificationBackgroundService Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-23 23:53:32.424 +04:00 [ERR] Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-23 23:53:32.424 +04:00 [Error] EBSCore.Web.Services.WorkflowBackgroundService Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-23 23:53:32.424 +04:00 [ERR] Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
