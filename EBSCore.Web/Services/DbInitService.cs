@@ -203,7 +203,7 @@ public class DbInitService : IHostedService
 
         foreach (var rawBatch in batches)
         {
-            var batch = rawBatch.Trim();
+            var batch = StripComments(rawBatch).Trim();
             if (string.IsNullOrWhiteSpace(batch))
             {
                 continue;
@@ -214,25 +214,45 @@ public class DbInitService : IHostedService
                 continue;
             }
 
-            if (batch.StartsWith("CREATE TABLE", StringComparison.OrdinalIgnoreCase))
+            if (TryConvertCreateTableStatements(batch, out var createTables))
             {
-                var converted = ConvertCreateTableBatch(batch);
-                if (!string.IsNullOrWhiteSpace(converted))
+                foreach (var converted in createTables)
                 {
-                    convertedStatements.Add(converted);
+                    if (!string.IsNullOrWhiteSpace(converted))
+                    {
+                        convertedStatements.Add(converted);
+                    }
                 }
                 continue;
             }
 
-            if (batch.StartsWith("INSERT INTO", StringComparison.OrdinalIgnoreCase)
-                || batch.StartsWith("UPDATE", StringComparison.OrdinalIgnoreCase)
-                || batch.StartsWith("DELETE", StringComparison.OrdinalIgnoreCase))
+            if (TryConvertCreateIndexStatements(batch, out var indexes))
+            {
+                convertedStatements.AddRange(indexes);
+                continue;
+            }
+
+            if (TryConvertAlterTableAddColumn(batch, out var alter))
+            {
+                convertedStatements.Add(alter);
+                continue;
+            }
+
+            if (ContainsDataManipulation(batch))
             {
                 convertedStatements.Add(ConvertDataManipulationBatch(batch));
+                continue;
             }
         }
 
         return string.Join(";\n", convertedStatements);
+    }
+
+    private static bool ContainsDataManipulation(string batch)
+    {
+        return Regex.IsMatch(batch, @"\bINSERT\s+INTO\b", RegexOptions.IgnoreCase)
+            || Regex.IsMatch(batch, @"\bUPDATE\b", RegexOptions.IgnoreCase)
+            || Regex.IsMatch(batch, @"\bDELETE\s+FROM\b", RegexOptions.IgnoreCase);
     }
 
     private static bool IsNonExecutableInSqlite(string batch)
@@ -248,7 +268,101 @@ public class DbInitService : IHostedService
             || batch.StartsWith("EXEC ", StringComparison.OrdinalIgnoreCase)
             || batch.StartsWith("PRINT ", StringComparison.OrdinalIgnoreCase)
             || batch.StartsWith("/******", StringComparison.OrdinalIgnoreCase)
-            || batch.StartsWith("ALTER TABLE", StringComparison.OrdinalIgnoreCase);
+            || batch.StartsWith("CREATE TRIGGER", StringComparison.OrdinalIgnoreCase)
+            || batch.StartsWith("ALTER TRIGGER", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string StripComments(string sql)
+    {
+        var withoutBlock = Regex.Replace(sql, @"/\*.*?\*/", string.Empty, RegexOptions.Singleline);
+        var withoutLine = Regex.Replace(withoutBlock, @"^\s*--.*$", string.Empty, RegexOptions.Multiline);
+        return withoutLine;
+    }
+
+    private static bool TryConvertCreateTableStatements(string batch, out IReadOnlyList<string> statements)
+    {
+        var matches = Regex.Matches(batch, @"CREATE\s+TABLE\s+\[[^\]]+\]\.\[[^\]]+\]\s*\(", RegexOptions.IgnoreCase);
+        if (matches.Count == 0)
+        {
+            statements = Array.Empty<string>();
+            return false;
+        }
+
+        var list = new List<string>();
+        foreach (Match m in matches)
+        {
+            var statement = ExtractCreateTableStatement(batch, m.Index);
+            var converted = ConvertCreateTableBatch(statement);
+            if (!string.IsNullOrWhiteSpace(converted))
+            {
+                list.Add(converted);
+            }
+        }
+
+        statements = list;
+        return statements.Count > 0;
+    }
+
+    private static string ExtractCreateTableStatement(string batch, int startIndex)
+    {
+        var openParen = batch.IndexOf('(', startIndex);
+        if (openParen < 0)
+        {
+            return batch[startIndex..];
+        }
+
+        var depth = 0;
+        for (var i = openParen; i < batch.Length; i++)
+        {
+            if (batch[i] == '(') depth++;
+            else if (batch[i] == ')')
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    return batch[startIndex..(i + 1)];
+                }
+            }
+        }
+
+        return batch[startIndex..];
+    }
+
+    private static bool TryConvertCreateIndexStatements(string batch, out IReadOnlyList<string> statements)
+    {
+        var matches = Regex.Matches(batch, @"CREATE\s+(UNIQUE\s+)?(NONCLUSTERED\s+|CLUSTERED\s+)?INDEX\s+\[[^\]]+\]\s+ON\s+\[[^\]]+\]\.\[[^\]]+\]\s*\([^)]+\)", RegexOptions.IgnoreCase);
+        if (matches.Count == 0)
+        {
+            statements = Array.Empty<string>();
+            return false;
+        }
+
+        statements = matches
+            .Select(m => NormalizeSchemaQualifiedNames(m.Value).Trim())
+            .Where(m => !string.IsNullOrWhiteSpace(m))
+            .ToList();
+        return statements.Count > 0;
+    }
+
+    private static bool TryConvertAlterTableAddColumn(string batch, out string statement)
+    {
+        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]\s+ADD\s+\[(?<col>[^\]]+)\]\s+(?<type>[a-zA-Z0-9]+)(\([^)]+\))?(?<rest>[^;]*)", RegexOptions.IgnoreCase);
+        if (!match.Success)
+        {
+            statement = string.Empty;
+            return false;
+        }
+
+        var schema = match.Groups["schema"].Value;
+        var table = match.Groups["table"].Value;
+        var column = match.Groups["col"].Value;
+        var type = match.Groups["type"].Value;
+        var rest = match.Groups["rest"].Value;
+        var tableName = string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase) ? table : $"{schema}_{table}";
+        var nullable = rest.Contains("NOT NULL", StringComparison.OrdinalIgnoreCase) ? " NOT NULL" : string.Empty;
+
+        statement = $"ALTER TABLE [{tableName}] ADD COLUMN [{column}] {MapType(type)}{nullable}";
+        return true;
     }
 
     private static string ConvertCreateTableBatch(string batch)

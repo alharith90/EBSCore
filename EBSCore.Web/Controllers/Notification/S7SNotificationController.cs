@@ -8,10 +8,12 @@ using NotificationTemplate = EBSCore.Web.Models.S7SNotificationTemplate;
 using NotificationStatus = EBSCore.Web.Models.S7SNotificationStatus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Data;
+using System.Data.Common;
 using Microsoft.Data.Sqlite;
 using System.Threading.Tasks;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
@@ -185,7 +187,7 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = CreateConnection();
                 var channels = await conn.QueryAsync<S7SNotificationChannel>("SELECT * FROM S7SNotificationChannel WHERE IsActive = 1 ORDER BY Name");
                 return Ok(JsonConvert.SerializeObject(channels));
             }
@@ -201,7 +203,7 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = CreateConnection();
                 var connections = await conn.QueryAsync<S7SNotificationConnection>("SELECT * FROM S7SNotificationConnection WHERE IsActive = 1 ORDER BY Name");
                 return Ok(JsonConvert.SerializeObject(connections));
             }
@@ -217,10 +219,15 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = CreateConnection();
+                var isSqlServer = IsSqlServer();
                 if (connection.NotificationConnectionID == null)
                 {
-                    var insertSql = @"INSERT INTO S7SNotificationConnection (ChannelID, Name, ProviderType, ConfigurationJson, IsDefault, IsActive, CompanyID, CreatedBy)
+                    var insertSql = isSqlServer
+                        ? @"INSERT INTO S7SNotificationConnection (ChannelID, Name, ProviderType, ConfigurationJson, IsDefault, IsActive, CompanyID, CreatedBy)
+                                      VALUES (@ChannelID, @Name, @ProviderType, @ConfigurationJson, COALESCE(@IsDefault,0), COALESCE(@IsActive,1), @CompanyID, @CreatedBy);
+                                      SELECT CAST(SCOPE_IDENTITY() AS INT);"
+                        : @"INSERT INTO S7SNotificationConnection (ChannelID, Name, ProviderType, ConfigurationJson, IsDefault, IsActive, CompanyID, CreatedBy)
                                       VALUES (@ChannelID, @Name, @ProviderType, @ConfigurationJson, COALESCE(@IsDefault,0), COALESCE(@IsActive,1), @CompanyID, @CreatedBy);
                                       SELECT last_insert_rowid();";
                     var id = await conn.ExecuteScalarAsync<int>(insertSql, new
@@ -277,7 +284,7 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = CreateConnection();
                 await conn.ExecuteAsync("UPDATE S7SNotificationConnection SET IsActive = 0, UpdatedAt = CURRENT_TIMESTAMP, UpdatedBy = @UpdatedBy WHERE NotificationConnectionID = @NotificationConnectionID", new { NotificationConnectionID, UpdatedBy = currentUser?.UserID });
                 return Ok("Deleted Successfully!");
             }
@@ -293,7 +300,8 @@ namespace EBSCore.Web.Controllers.Notification
         {
             try
             {
-                using var conn = new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
+                using var conn = CreateConnection();
+                var isSqlServer = IsSqlServer();
                 var pageNumber = int.TryParse(PageNumber, out var pn) ? Math.Max(pn, 1) : 1;
                 var pageSize = int.TryParse(PageSize, out var ps) ? Math.Max(ps, 1) : 10;
                 var offset = (pageNumber - 1) * pageSize;
@@ -319,7 +327,9 @@ namespace EBSCore.Web.Controllers.Notification
                 }
                 var sortDir = string.Equals(SortDirection, "DESC", StringComparison.OrdinalIgnoreCase) ? "DESC" : "ASC";
 
-                var dataSql = $@"SELECT * FROM S7SNotificationHistory {where} ORDER BY {orderBy} {sortDir} LIMIT @Limit OFFSET @Offset";
+                var dataSql = isSqlServer
+                    ? $@"SELECT * FROM S7SNotificationHistory {where} ORDER BY {orderBy} {sortDir} OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY"
+                    : $@"SELECT * FROM S7SNotificationHistory {where} ORDER BY {orderBy} {sortDir} LIMIT @Limit OFFSET @Offset";
                 var countSql = $@"SELECT COUNT(1) FROM S7SNotificationHistory {where}";
                 parameters.Add("@Limit", pageSize);
                 parameters.Add("@Offset", offset);
@@ -338,6 +348,24 @@ namespace EBSCore.Web.Controllers.Notification
                 _logger.LogError(ex, "Error retrieving history");
                 return BadRequest("Error retrieving history");
             }
+        }
+
+        private bool IsSqlServer()
+        {
+            var provider = (configuration["Database:Provider"] ?? "Sqlite").Trim();
+            return string.Equals(provider, "SqlServer", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private DbConnection CreateConnection()
+        {
+            if (IsSqlServer())
+            {
+                var sqlServerConnectionString = configuration.GetConnectionString("SqlServerConnection")
+                    ?? configuration.GetConnectionString("DefaultConnection");
+                return new SqlConnection(sqlServerConnectionString);
+            }
+
+            return new SqliteConnection(configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }
