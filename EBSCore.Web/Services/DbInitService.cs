@@ -291,7 +291,7 @@ public class DbInitService : IHostedService
 
     private static bool ContainsDataManipulation(string batch)
     {
-        return Regex.IsMatch(batch, @"\bINSERT\s+INTO\b", RegexOptions.IgnoreCase)
+        return Regex.IsMatch(batch, @"\bINSERT(\s+INTO)?\s+\[", RegexOptions.IgnoreCase)
             || Regex.IsMatch(batch, @"\bUPDATE\b", RegexOptions.IgnoreCase)
             || Regex.IsMatch(batch, @"\bDELETE\s+FROM\b", RegexOptions.IgnoreCase);
     }
@@ -322,7 +322,10 @@ public class DbInitService : IHostedService
 
     private static bool TryConvertCreateTableStatements(string batch, out IReadOnlyList<string> statements)
     {
-        var matches = Regex.Matches(batch, @"CREATE\s+TABLE\s+\[[^\]]+\]\.\[[^\]]+\]\s*\(", RegexOptions.IgnoreCase);
+        var matches = Regex.Matches(
+            batch,
+            @"CREATE\s+TABLE\s+(?:\[[^\]]+\]\.)?\[[^\]]+\]\s*\(",
+            RegexOptions.IgnoreCase);
         if (matches.Count == 0)
         {
             statements = Array.Empty<string>();
@@ -371,7 +374,11 @@ public class DbInitService : IHostedService
 
     private static bool TryConvertCreateIndexStatements(string batch, out IReadOnlyList<string> statements)
     {
-        var matches = Regex.Matches(batch, @"CREATE\s+(UNIQUE\s+)?(NONCLUSTERED\s+|CLUSTERED\s+)?INDEX\s+\[[^\]]+\]\s+ON\s+\[[^\]]+\]\.\[[^\]]+\]\s*\([^)]+\)", RegexOptions.IgnoreCase);
+        var normalizedBatch = NormalizeSchemaQualifiedNames(batch);
+        var matches = Regex.Matches(
+            normalizedBatch,
+            @"CREATE\s+(UNIQUE\s+)?(NONCLUSTERED\s+|CLUSTERED\s+)?INDEX\s+\[[^\]]+\]\s+ON\s+\[[^\]]+\]\s*\([^)]+\)",
+            RegexOptions.IgnoreCase | RegexOptions.Singleline);
         if (matches.Count == 0)
         {
             statements = Array.Empty<string>();
@@ -379,7 +386,10 @@ public class DbInitService : IHostedService
         }
 
         statements = matches
-            .Select(m => NormalizeSchemaQualifiedNames(m.Value).Trim())
+            .Select(m => Regex.Replace(m.Value, @"\b(CLUSTERED|NONCLUSTERED)\b", string.Empty, RegexOptions.IgnoreCase))
+            .Select(m => Regex.Replace(m, @"\s+WITH\s*\(.*?\)", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Singleline))
+            .Select(m => Regex.Replace(m, @"\s+ON\s+\[[^\]]+\]\s*$", string.Empty, RegexOptions.IgnoreCase))
+            .Select(m => Regex.Replace(m, @"\s+", " ").Trim())
             .Where(m => !string.IsNullOrWhiteSpace(m))
             .ToList();
         return statements.Count > 0;
@@ -387,14 +397,14 @@ public class DbInitService : IHostedService
 
     private static bool TryConvertAlterTableAddColumn(string batch, out string statement)
     {
-        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]\s+ADD\s+\[(?<col>[^\]]+)\]\s+(?<type>[a-zA-Z0-9]+)(\([^)]+\))?(?<rest>[^;]*)", RegexOptions.IgnoreCase);
+        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+(?:\[(?<schema>[^\]]+)\]\.)?\[(?<table>[^\]]+)\]\s+ADD\s+\[(?<col>[^\]]+)\]\s+(?<type>[a-zA-Z0-9]+)(\([^)]+\))?(?<rest>[^;]*)", RegexOptions.IgnoreCase);
         if (!match.Success)
         {
             statement = string.Empty;
             return false;
         }
 
-        var schema = match.Groups["schema"].Value;
+        var schema = match.Groups["schema"].Success ? match.Groups["schema"].Value : "dbo";
         var table = match.Groups["table"].Value;
         var column = match.Groups["col"].Value;
         var type = match.Groups["type"].Value;
@@ -439,7 +449,7 @@ public class DbInitService : IHostedService
 
     private static bool TryConvertSimpleAlterTable(string batch, out string statement)
     {
-        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]\s+DROP\s+CONSTRAINT\s+\[[^\]]+\]", RegexOptions.IgnoreCase);
+        var match = Regex.Match(batch, @"ALTER\s+TABLE\s+(?:\[(?<schema>[^\]]+)\]\.)?\[(?<table>[^\]]+)\]\s+DROP\s+CONSTRAINT\s+\[[^\]]+\]", RegexOptions.IgnoreCase);
         if (match.Success)
         {
             statement = $"-- Skipped for SQLite compatibility: {NormalizeSchemaQualifiedNames(batch)}";
@@ -452,7 +462,7 @@ public class DbInitService : IHostedService
 
     private static string NormalizeSchemaQualifiedNames(string sql)
     {
-        return Regex.Replace(sql, @"\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", m =>
+        sql = Regex.Replace(sql, @"\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", m =>
         {
             var schema = m.Groups["schema"].Value;
             var name = m.Groups["name"].Value;
@@ -460,6 +470,18 @@ public class DbInitService : IHostedService
                 ? $"[{name}]"
                 : $"[{schema}_{name}]";
         }, RegexOptions.IgnoreCase);
+
+        // Handle unbracketed two-part names e.g. dbo.Table or HangFire.Job
+        sql = Regex.Replace(sql, @"(?<![\w\]])(?<schema>[A-Za-z_][\w]*)\.(?<name>[A-Za-z_][\w]*)(?![\w\[])", m =>
+        {
+            var schema = m.Groups["schema"].Value;
+            var name = m.Groups["name"].Value;
+            return string.Equals(schema, "dbo", StringComparison.OrdinalIgnoreCase)
+                ? $"[{name}]"
+                : $"[{schema}_{name}]";
+        });
+
+        return sql;
     }
 
     private static string ConvertSqlServerCreateTableToSqlite(string script)
@@ -708,7 +730,7 @@ public class DbInitService : IHostedService
     private static Dictionary<string, long> ExtractExpectedSeedCounts(string source)
     {
         var output = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase);
-        var matches = Regex.Matches(source, @"INSERT\s+\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", RegexOptions.IgnoreCase);
+        var matches = Regex.Matches(source, @"INSERT(\s+INTO)?\s+\[(?<schema>[^\]]+)\]\.\[(?<name>[^\]]+)\]", RegexOptions.IgnoreCase);
         foreach (Match m in matches)
         {
             var schema = m.Groups["schema"].Value;
@@ -749,6 +771,15 @@ public class DbInitService : IHostedService
         List<string> seedMismatches,
         CancellationToken ct)
     {
+        var folder = Path.Combine(_env.ContentRootPath, "Logs");
+        Directory.CreateDirectory(folder);
+        var path = Path.Combine(folder, "DbGapReport-Sqlite.txt");
+
+        var previous = await TryReadPreviousGapReportAsync(path, ct);
+        var restoredTables = previous.MissingTables.Except(missingTables, StringComparer.OrdinalIgnoreCase).OrderBy(x => x).ToList();
+        var restoredColumns = previous.MissingColumns.Except(missingColumns, StringComparer.OrdinalIgnoreCase).OrderBy(x => x).ToList();
+        var restoredSeed = previous.SeedMismatches.Except(seedMismatches, StringComparer.OrdinalIgnoreCase).OrderBy(x => x).ToList();
+
         var lines = new List<string>
         {
             $"GeneratedOnUtc: {DateTime.UtcNow:O}",
@@ -758,9 +789,24 @@ public class DbInitService : IHostedService
             $"MissingTables: {missingTables.Count}",
             $"MissingColumnsSets: {missingColumns.Count}",
             $"SeedCountMismatches: {seedMismatches.Count}",
+            $"PreviouslyMissingTables: {previous.MissingTables.Count}",
+            $"PreviouslyMissingColumnsSets: {previous.MissingColumns.Count}",
+            $"PreviouslySeedCountMismatches: {previous.SeedMismatches.Count}",
+            $"RestoredTablesSincePreviousRun: {restoredTables.Count}",
+            $"RestoredColumnsSincePreviousRun: {restoredColumns.Count}",
+            $"RestoredSeedCountsSincePreviousRun: {restoredSeed.Count}",
             string.Empty,
-            "[Missing Tables]"
+            "[Restored Since Previous Run - Tables]"
         };
+        lines.AddRange(restoredTables);
+        lines.Add(string.Empty);
+        lines.Add("[Restored Since Previous Run - Columns]");
+        lines.AddRange(restoredColumns);
+        lines.Add(string.Empty);
+        lines.Add("[Restored Since Previous Run - Seed Count]");
+        lines.AddRange(restoredSeed);
+        lines.Add(string.Empty);
+        lines.Add("[Missing Tables]");
         lines.AddRange(missingTables);
         lines.Add(string.Empty);
         lines.Add("[Missing Columns]");
@@ -769,10 +815,49 @@ public class DbInitService : IHostedService
         lines.Add("[Seed Count Mismatches]");
         lines.AddRange(seedMismatches);
 
-        var folder = Path.Combine(_env.ContentRootPath, "Logs");
-        Directory.CreateDirectory(folder);
-        var path = Path.Combine(folder, "DbGapReport-Sqlite.txt");
         await File.WriteAllLinesAsync(path, lines, ct);
+    }
+
+    private static async Task<GapReportSnapshot> TryReadPreviousGapReportAsync(string path, CancellationToken ct)
+    {
+        if (!File.Exists(path))
+        {
+            return new GapReportSnapshot(new List<string>(), new List<string>(), new List<string>());
+        }
+
+        var lines = await File.ReadAllLinesAsync(path, ct);
+        return new GapReportSnapshot(
+            ReadSection(lines, "[Missing Tables]"),
+            ReadSection(lines, "[Missing Columns]"),
+            ReadSection(lines, "[Seed Count Mismatches]"));
+    }
+
+    private static List<string> ReadSection(string[] lines, string header)
+    {
+        var list = new List<string>();
+        var start = Array.FindIndex(lines, x => string.Equals(x.Trim(), header, StringComparison.OrdinalIgnoreCase));
+        if (start < 0)
+        {
+            return list;
+        }
+
+        for (var i = start + 1; i < lines.Length; i++)
+        {
+            var value = lines[i].Trim();
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                break;
+            }
+
+            if (value.StartsWith("[", StringComparison.Ordinal))
+            {
+                break;
+            }
+
+            list.Add(value);
+        }
+
+        return list;
     }
 
     private static async Task ExecuteBatches(DbConnection conn, string script, string provider, CancellationToken ct)
@@ -817,4 +902,5 @@ public class DbInitService : IHostedService
     }
 
     private sealed record MigrationItem(string FileName, string Path, bool IsBaseline);
+    private sealed record GapReportSnapshot(List<string> MissingTables, List<string> MissingColumns, List<string> SeedMismatches);
 }
