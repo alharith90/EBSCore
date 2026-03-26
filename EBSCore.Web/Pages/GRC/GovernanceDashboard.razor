@@ -1,0 +1,116 @@
+@page "/GRC/GovernanceDashboard"
+@using EBSCore.Web.Models.GRC
+@using Microsoft.Extensions.Localization
+@using Newtonsoft.Json
+@using EBSCore.Web.Services
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IStringLocalizerFactory LocalizerFactory
+@inject PageTitleService PageTitleService
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label class="form-label">@Localizer["OrganisationUnitId"]</label>
+        <input class="form-control" type="number" @bind="OrganisationUnitId" />
+    </div>
+    <div class="col-md-3 form-check mt-4">
+        <input class="form-check-input" type="checkbox" id="rollup" @bind="IncludeChildren" />
+        <label class="form-check-label" for="rollup">@Localizer["IncludeChildren"]</label>
+    </div>
+    <div class="col-md-3 mt-4">
+        <button class="btn btn-primary" @onclick="LoadAsync"><i class="fas fa-sync"></i> @Localizer["Refresh"]</button>
+    </div>
+</div>
+
+@if (Dashboard == null)
+{
+    <div class="alert alert-info">@Localizer["Loading"]</div>
+}
+else
+{
+    <div class="row g-3 mb-3">
+        <div class="col-md-3"><div class="card"><div class="card-body"><h6>@Localizer["ActiveRisks"]</h6><h4>@Dashboard.ExecutiveSummary.TotalActiveRisks</h4></div></div></div>
+        <div class="col-md-3"><div class="card"><div class="card-body"><h6>@Localizer["CriticalRisks"]</h6><h4>@Dashboard.ExecutiveSummary.CriticalRisks</h4></div></div></div>
+        <div class="col-md-3"><div class="card"><div class="card-body"><h6>@Localizer["ControlEffectivenessRate"]</h6><h4>@Dashboard.ExecutiveSummary.ControlEffectivenessRate%</h4></div></div></div>
+        <div class="col-md-3"><div class="card"><div class="card-body"><h6>@Localizer["GovernanceHealth"]</h6><h4>@Dashboard.ExecutiveSummary.GovernanceHealthScore</h4></div></div></div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">@Localizer["RiskHeatmap"]</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead><tr><th>@Localizer["Likelihood"]</th><th>@Localizer["Impact"]</th><th>@Localizer["Count"]</th></tr></thead>
+                        <tbody>
+                        @foreach (var cell in Dashboard.Heatmap)
+                        {
+                            <tr><td>@cell.Likelihood</td><td>@cell.Impact</td><td>@cell.Count</td></tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">@Localizer["Alerts"]</div>
+                <div class="card-body table-responsive" style="max-height:350px; overflow:auto;">
+                    <table class="table table-sm table-striped">
+                        <thead><tr><th>@Localizer["Type"]</th><th>@Localizer["Description"]</th><th>@Localizer["Severity"]</th></tr></thead>
+                        <tbody>
+                        @foreach (var alert in Dashboard.Alerts)
+                        {
+                            <tr><td>@alert.AlertType</td><td>@alert.Description</td><td>@alert.Severity</td></tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">@Localizer["OrganisationScorecards"]</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>@Localizer["Unit"]</th><th>@Localizer["RiskCount"]</th><th>@Localizer["HighRiskCount"]</th><th>@Localizer["ComplianceScore"]</th><th>@Localizer["Findings"]</th><th>@Localizer["OverdueActions"]</th><th>@Localizer["Health"]</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var unit in Dashboard.OrganisationScorecards)
+                        {
+                            <tr>
+                                <td>@unit.UnitName</td><td>@unit.RiskCount</td><td>@unit.HighRiskCount</td><td>@unit.ComplianceScore</td><td>@unit.AuditFindingsCount</td><td>@unit.OverdueActions</td><td>@unit.GovernanceHealthScore</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    GovernanceDashboardResponse? Dashboard;
+    int? OrganisationUnitId;
+    bool IncludeChildren = true;
+    IStringLocalizer Localizer = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
+        PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var url = $"api/GovernanceDashboard/Get?organisationUnitId={(OrganisationUnitId.HasValue ? OrganisationUnitId.Value.ToString() : string.Empty)}&includeChildren={IncludeChildren}";
+        var json = await Http.GetStringAsync(url);
+        Dashboard = JsonConvert.DeserializeObject<GovernanceDashboardResponse>(json);
+    }
+}
