@@ -1,4 +1,3 @@
-using Dapper;
 using EBSCore.AdoClass;
 using EBSCore.AdoClass.Notification;
 using EBSCore.AdoClass.Common;
@@ -12,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
@@ -186,7 +185,20 @@ namespace EBSCore.Web.Controllers.Notification
             try
             {
                 using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                var channels = await conn.QueryAsync<S7SNotificationChannel>("SELECT * FROM S7SNotificationChannel WHERE IsActive = 1 ORDER BY Name");
+                await conn.OpenAsync();
+                const string sql = "SELECT NotificationChannelID, Name, IsActive FROM S7SNotificationChannel WHERE IsActive = 1 ORDER BY Name";
+                var channels = new List<S7SNotificationChannel>();
+                using var command = new SqlCommand(sql, conn);
+                using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    channels.Add(new S7SNotificationChannel
+                    {
+                        NotificationChannelID = reader["NotificationChannelID"] == DBNull.Value ? null : Convert.ToInt32(reader["NotificationChannelID"]),
+                        Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                        IsActive = reader["IsActive"] != DBNull.Value && Convert.ToBoolean(reader["IsActive"])
+                    });
+                }
                 return Ok(JsonConvert.SerializeObject(channels));
             }
             catch (Exception ex)
@@ -202,7 +214,33 @@ namespace EBSCore.Web.Controllers.Notification
             try
             {
                 using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                var connections = await conn.QueryAsync<S7SNotificationConnection>("SELECT * FROM S7SNotificationConnection WHERE IsActive = 1 ORDER BY Name");
+                await conn.OpenAsync();
+                const string sql = @"SELECT NotificationConnectionID, ChannelID, Name, ProviderType, ConfigurationJson,
+                                            IsDefault, IsActive, CompanyID, CreatedBy, CreatedAt, UpdatedBy, UpdatedAt
+                                     FROM S7SNotificationConnection
+                                     WHERE IsActive = 1
+                                     ORDER BY Name";
+                var connections = new List<S7SNotificationConnection>();
+                using var command = new SqlCommand(sql, conn);
+                using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    connections.Add(new S7SNotificationConnection
+                    {
+                        NotificationConnectionID = reader["NotificationConnectionID"] == DBNull.Value ? null : Convert.ToInt32(reader["NotificationConnectionID"]),
+                        ChannelID = reader["ChannelID"] == DBNull.Value ? null : Convert.ToInt32(reader["ChannelID"]),
+                        Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                        ProviderType = reader["ProviderType"] == DBNull.Value ? null : reader["ProviderType"].ToString(),
+                        ConfigurationJson = reader["ConfigurationJson"] == DBNull.Value ? null : reader["ConfigurationJson"].ToString(),
+                        IsDefault = reader["IsDefault"] != DBNull.Value && Convert.ToBoolean(reader["IsDefault"]),
+                        IsActive = reader["IsActive"] != DBNull.Value && Convert.ToBoolean(reader["IsActive"]),
+                        CompanyID = reader["CompanyID"] == DBNull.Value ? null : Convert.ToInt32(reader["CompanyID"]),
+                        CreatedBy = reader["CreatedBy"] == DBNull.Value ? null : Convert.ToInt32(reader["CreatedBy"]),
+                        CreatedAt = reader["CreatedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["CreatedAt"]),
+                        UpdatedBy = reader["UpdatedBy"] == DBNull.Value ? null : Convert.ToInt32(reader["UpdatedBy"]),
+                        UpdatedAt = reader["UpdatedAt"] == DBNull.Value ? null : Convert.ToDateTime(reader["UpdatedAt"])
+                    });
+                }
                 return Ok(JsonConvert.SerializeObject(connections));
             }
             catch (Exception ex)
@@ -218,22 +256,22 @@ namespace EBSCore.Web.Controllers.Notification
             try
             {
                 using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+                await conn.OpenAsync();
                 if (connection.NotificationConnectionID == null)
                 {
                     var insertSql = @"INSERT INTO S7SNotificationConnection (ChannelID, Name, ProviderType, ConfigurationJson, IsDefault, IsActive, CompanyID, CreatedBy)
                                       VALUES (@ChannelID, @Name, @ProviderType, @ConfigurationJson, ISNULL(@IsDefault,0), ISNULL(@IsActive,1), @CompanyID, @CreatedBy);
                                       SELECT CAST(SCOPE_IDENTITY() AS INT);";
-                    var id = await conn.ExecuteScalarAsync<int>(insertSql, new
-                    {
-                        connection.ChannelID,
-                        connection.Name,
-                        connection.ProviderType,
-                        connection.ConfigurationJson,
-                        connection.IsDefault,
-                        connection.IsActive,
-                        connection.CompanyID,
-                        CreatedBy = currentUser?.UserID
-                    });
+                    using var insertCommand = new SqlCommand(insertSql, conn);
+                    insertCommand.Parameters.AddWithValue("@ChannelID", (object?)connection.ChannelID ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@Name", (object?)connection.Name ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@ProviderType", (object?)connection.ProviderType ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@ConfigurationJson", (object?)connection.ConfigurationJson ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@IsDefault", (object?)connection.IsDefault ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@IsActive", (object?)connection.IsActive ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@CompanyID", (object?)connection.CompanyID ?? DBNull.Value);
+                    insertCommand.Parameters.AddWithValue("@CreatedBy", (object?)currentUser?.UserID ?? DBNull.Value);
+                    var id = (int)(await insertCommand.ExecuteScalarAsync() ?? 0);
                     connection.NotificationConnectionID = id;
                 }
                 else
@@ -249,18 +287,17 @@ namespace EBSCore.Web.Controllers.Notification
                                           UpdatedBy = @UpdatedBy,
                                           UpdatedAt = SYSUTCDATETIME()
                                       WHERE NotificationConnectionID = @NotificationConnectionID";
-                    await conn.ExecuteAsync(updateSql, new
-                    {
-                        connection.ChannelID,
-                        connection.Name,
-                        connection.ProviderType,
-                        connection.ConfigurationJson,
-                        connection.IsDefault,
-                        connection.IsActive,
-                        connection.CompanyID,
-                        connection.NotificationConnectionID,
-                        UpdatedBy = currentUser?.UserID
-                    });
+                    using var updateCommand = new SqlCommand(updateSql, conn);
+                    updateCommand.Parameters.AddWithValue("@ChannelID", (object?)connection.ChannelID ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@Name", (object?)connection.Name ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@ProviderType", (object?)connection.ProviderType ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@ConfigurationJson", (object?)connection.ConfigurationJson ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@IsDefault", (object?)connection.IsDefault ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@IsActive", (object?)connection.IsActive ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@CompanyID", (object?)connection.CompanyID ?? DBNull.Value);
+                    updateCommand.Parameters.AddWithValue("@NotificationConnectionID", connection.NotificationConnectionID);
+                    updateCommand.Parameters.AddWithValue("@UpdatedBy", (object?)currentUser?.UserID ?? DBNull.Value);
+                    await updateCommand.ExecuteNonQueryAsync();
                 }
 
                 return Ok(JsonConvert.SerializeObject(connection));
@@ -278,7 +315,12 @@ namespace EBSCore.Web.Controllers.Notification
             try
             {
                 using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                await conn.ExecuteAsync("UPDATE S7SNotificationConnection SET IsActive = 0, UpdatedAt = SYSUTCDATETIME(), UpdatedBy = @UpdatedBy WHERE NotificationConnectionID = @NotificationConnectionID", new { NotificationConnectionID, UpdatedBy = currentUser?.UserID });
+                await conn.OpenAsync();
+                const string sql = "UPDATE S7SNotificationConnection SET IsActive = 0, UpdatedAt = SYSUTCDATETIME(), UpdatedBy = @UpdatedBy WHERE NotificationConnectionID = @NotificationConnectionID";
+                using var command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@UpdatedBy", (object?)currentUser?.UserID ?? DBNull.Value);
+                command.Parameters.AddWithValue("@NotificationConnectionID", NotificationConnectionID);
+                await command.ExecuteNonQueryAsync();
                 return Ok("Deleted Successfully!");
             }
             catch (Exception ex)
@@ -294,21 +336,28 @@ namespace EBSCore.Web.Controllers.Notification
             try
             {
                 using var conn = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                var parameters = new DynamicParameters();
-                parameters.Add("@Operation", "List");
-                parameters.Add("@NotificationStatusID", NotificationStatusID);
-                parameters.Add("@PageNumber", PageNumber);
-                parameters.Add("@PageSize", PageSize);
-                parameters.Add("@SortColumn", SortColumn);
-                parameters.Add("@SortDirection", SortDirection);
-                parameters.Add("@SearchQuery", SearchQuery);
-                using var reader = await conn.QueryMultipleAsync("S7SNotificationHistorySP", parameters, commandType: CommandType.StoredProcedure);
-                var data = await reader.ReadAsync();
-                var page = await reader.ReadFirstOrDefaultAsync();
+                await conn.OpenAsync();
+                using var command = new SqlCommand("S7SNotificationHistorySP", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddWithValue("@Operation", "List");
+                command.Parameters.AddWithValue("@NotificationStatusID", (object?)NotificationStatusID ?? DBNull.Value);
+                command.Parameters.AddWithValue("@PageNumber", (object?)PageNumber ?? DBNull.Value);
+                command.Parameters.AddWithValue("@PageSize", (object?)PageSize ?? DBNull.Value);
+                command.Parameters.AddWithValue("@SortColumn", (object?)SortColumn ?? DBNull.Value);
+                command.Parameters.AddWithValue("@SortDirection", (object?)SortDirection ?? DBNull.Value);
+                command.Parameters.AddWithValue("@SearchQuery", (object?)SearchQuery ?? DBNull.Value);
+
+                using var adapter = new SqlDataAdapter(command);
+                var dataSet = new DataSet();
+                adapter.Fill(dataSet);
+                var data = dataSet.Tables.Count > 0 ? dataSet.Tables[0] : new DataTable();
+                var page = dataSet.Tables.Count > 1 && dataSet.Tables[1].Rows.Count > 0 ? dataSet.Tables[1].Rows[0] : null;
                 var result = new
                 {
                     Data = data,
-                    PageCount = page == null ? 1 : page.PageCount
+                    PageCount = page == null ? 1 : page["PageCount"]
                 };
                 return Ok(JsonConvert.SerializeObject(result));
             }
