@@ -73,7 +73,6 @@ builder.Services.AddSingleton<ServiceLocator>();
 builder.Services.AddHostedService<WorkflowBackgroundService>();
 builder.Services.AddHostedService<NotificationBackgroundService>();
 builder.Services.AddHostedService<S7SNotificationBackgroundService>();
-builder.Services.AddHostedService<DbInitService>();
 
 // *** 3. Configure Localization ***
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
@@ -160,23 +159,6 @@ app.MapControllers();
 
 app.MapBlazorHub(); // Enable Blazor Server
 app.MapFallbackToPage("/_Host"); // Fallback to Blazor app (_Host.cshtml)
-
-app.Lifetime.ApplicationStarted.Register(() =>
-{
-    var startupLogger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Startup");
-    var listeningUrls = app.Urls?.Where(url => url.StartsWith("http://", StringComparison.OrdinalIgnoreCase)).ToArray() ?? Array.Empty<string>();
-
-    if (listeningUrls.Length == 0)
-    {
-        startupLogger.LogInformation("Application started successfully.");
-        return;
-    }
-
-    foreach (var url in listeningUrls)
-    {
-        startupLogger.LogInformation("Application started successfully. Open this URL in your browser: {Url}", url);
-    }
-});
 
 app.Run();
 
