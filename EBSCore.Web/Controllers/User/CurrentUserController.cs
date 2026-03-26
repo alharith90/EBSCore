@@ -6,16 +6,13 @@ using AuthLoginRequest = EBSCore.Web.Models.Security.LoginRequest;
 using AuthResetPasswordRequest = EBSCore.Web.Models.Security.ResetPasswordRequest;
 using AuthResetPasswordConfirmRequest = EBSCore.Web.Models.Security.ResetPasswordConfirmRequest;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Data.Sqlite;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Data;
-using System.IO;
 using System.Text.Json;
 using static EBSCore.AdoClass.DBParentStoredProcedureClass;
 
@@ -31,16 +28,15 @@ namespace EBSCore.Web.Controllers
         private readonly DBS7SUserAuthSP authSP;
         private readonly DBSecuritySP securitySP;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IHostEnvironment hostEnvironment;
+        private readonly MinAlakherTools.MinAlakherEncryption encryption = new MinAlakherTools.MinAlakherEncryption();
         private const int DefaultLockMinutes = 15;
         private const int DefaultMaxAttempts = 5;
 
-        public CurrentUserController(ILogger<CurrentUserController> logger, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IHostEnvironment hostEnvironment)
+        public CurrentUserController(ILogger<CurrentUserController> logger, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             this.logger = logger;
             this.configuration = configuration;
             this.httpContextAccessor = httpContextAccessor;
-            this.hostEnvironment = hostEnvironment;
             authSP = new DBS7SUserAuthSP(configuration);
             securitySP = new DBSecuritySP(configuration);
         }
@@ -74,50 +70,36 @@ namespace EBSCore.Web.Controllers
                 var ip = common.getIPAddres(HttpContext);
                 common.LogInfo("Login POST", $"User:{request.UserName} Session:{HttpContext?.Session?.Id} IP:{ip}");
 
-                DataRow loginRow;
-                try
+                var loginDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "Login",
+                    UserName: request.UserName,
+                    Email: request.UserName,
+                    Password: request.Password,
+                    IPAddress: ip,
+                    UserAgent: userAgent,
+                    LockDurationMinutes: DefaultLockMinutes.ToString(),
+                    MaxFailedAttempts: DefaultMaxAttempts.ToString());
+
+                var loginTable = loginDs?.Tables.Count > 0 ? loginDs.Tables[0] : new DataTable();
+                if (loginTable.Rows.Count == 0)
                 {
-                    var loginDs = (DataSet)authSP.QueryDatabase(SqlQueryType.FillDataset,
-                        Operation: "Login",
-                        UserName: request.UserName,
-                        Email: request.UserName,
-                        Password: request.Password,
-                        IPAddress: ip,
-                        UserAgent: userAgent,
-                        LockDurationMinutes: DefaultLockMinutes.ToString(),
-                        MaxFailedAttempts: DefaultMaxAttempts.ToString());
-
-                    var loginTable = loginDs?.Tables.Count > 0 ? loginDs.Tables[0] : new DataTable();
-                    if (loginTable.Rows.Count == 0)
-                    {
-                        return Unauthorized(LocalizerString("InvalidCredentials"));
-                    }
-
-                    loginRow = loginTable.Rows[0];
-                    var isAuthenticated = loginRow.Table.Columns.Contains("IsAuthenticated") && Convert.ToBoolean(loginRow["IsAuthenticated"]);
-                    var reason = loginRow.Table.Columns.Contains("Reason") ? loginRow["Reason"].ToString() : string.Empty;
-
-                    if (!isAuthenticated)
-                    {
-                        if (string.Equals(reason, "AccountLocked", StringComparison.OrdinalIgnoreCase))
-                        {
-                            common.LogInfo("Login locked", $"User:{request.UserName} Reason:{reason}");
-                            return Unauthorized(LocalizerString("AccountLocked"));
-                        }
-
-                        common.LogInfo("Login failed", $"User:{request.UserName} Reason:{reason}");
-                        return Unauthorized(LocalizerString("InvalidCredentials"));
-                    }
+                    return Unauthorized(LocalizerString("InvalidCredentials"));
                 }
-                catch
+
+                var loginRow = loginTable.Rows[0];
+                var isAuthenticated = loginRow.Table.Columns.Contains("IsAuthenticated") && Convert.ToBoolean(loginRow["IsAuthenticated"]);
+                var reason = loginRow.Table.Columns.Contains("Reason") ? loginRow["Reason"].ToString() : string.Empty;
+
+                if (!isAuthenticated)
                 {
-                    var sqliteUser = TryAuthenticateSqlite(request.UserName, request.Password);
-                    if (sqliteUser == null)
+                    if (string.Equals(reason, "AccountLocked", StringComparison.OrdinalIgnoreCase))
                     {
-                        return Unauthorized(LocalizerString("InvalidCredentials"));
+                        common.LogInfo("Login locked", $"User:{request.UserName} Reason:{reason}");
+                        return Unauthorized(LocalizerString("AccountLocked"));
                     }
 
-                    loginRow = sqliteUser;
+                    common.LogInfo("Login failed", $"User:{request.UserName} Reason:{reason}");
+                    return Unauthorized(LocalizerString("InvalidCredentials"));
                 }
 
                 var user = new User
@@ -134,30 +116,32 @@ namespace EBSCore.Web.Controllers
 
                 HttpContext.Session.SetString("User", System.Text.Json.JsonSerializer.Serialize(user));
 
-                try
+                var payload = System.Text.Json.JsonSerializer.Serialize(new { user.UserID, user.UserName, issued = DateTime.UtcNow });
+                var encryptedTicket = encryption.Encrypt(payload, common.getEncryptionPassword());
+                var options = new CookieOptions
                 {
-                    authSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
-                        Operation: "UpdateLastLogin",
-                        UserID: user.UserID);
-                }
-                catch
+                    HttpOnly = true,
+                    Secure = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.Strict
+                };
+                if (request.KeepMeSignedIn)
                 {
-                    // SQLite bootstrap mode does not require this SP.
+                    options.Expires = DateTimeOffset.UtcNow.AddDays(30);
                 }
 
-                try
-                {
-                    var permissionsDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
-                        Operation: "rtvUserEffectivePermissions",
-                        CurrentUserID: user.UserID,
-                        UserID: user.UserID);
-                    var permissions = permissionsDs?.Tables.Count > 0 ? permissionsDs.Tables[0] : new DataTable();
-                    HttpContext.Session.SetString("Permissions", JsonConvert.SerializeObject(permissions));
-                }
-                catch
-                {
-                    HttpContext.Session.SetString("Permissions", "[]");
-                }
+                Response.Cookies.Append("AppAuth", encryptedTicket, options);
+
+                authSP.QueryDatabase(SqlQueryType.ExecuteNonQuery,
+                    Operation: "UpdateLastLogin",
+                    UserID: user.UserID);
+
+                var permissionsDs = (DataSet)securitySP.QueryDatabase(SqlQueryType.FillDataset,
+                    Operation: "rtvUserEffectivePermissions",
+                    CurrentUserID: user.UserID,
+                    UserID: user.UserID);
+                var permissions = permissionsDs?.Tables.Count > 0 ? permissionsDs.Tables[0] : new DataTable();
+                HttpContext.Session.SetString("Permissions", JsonConvert.SerializeObject(permissions));
 
                 common.LogInfo("Login succeeded", $"User:{request.UserName} UserID:{user.UserID}");
                 return Ok(user);
@@ -176,6 +160,7 @@ namespace EBSCore.Web.Controllers
             {
                 common.LogInfo("Logout", $"Session:{HttpContext?.Session?.Id}");
                 HttpContext.Session.Clear();
+                Response.Cookies.Delete("AppAuth");
                 return Ok();
             }
             catch (Exception ex)
@@ -345,63 +330,5 @@ namespace EBSCore.Web.Controllers
                 return key;
             }
         }
-
-        private DataRow? TryAuthenticateSqlite(string userNameOrEmail, string password)
-        {
-            try
-            {
-                var cs = configuration.GetConnectionString("DefaultConnection");
-                if (string.IsNullOrWhiteSpace(cs))
-                {
-                    return null;
-                }
-
-                var builder = new SqliteConnectionStringBuilder(cs);
-                if (!Path.IsPathRooted(builder.DataSource))
-                {
-                    builder.DataSource = Path.Combine(hostEnvironment.ContentRootPath, builder.DataSource);
-                }
-
-                using var conn = new SqliteConnection(builder.ToString());
-                conn.Open();
-                using var cmd = conn.CreateCommand();
-                cmd.CommandText = @"SELECT UserID, Email, UserFullName, CompanyID, CategoryID, UserType, UserName, LastLoginAt
-                                    FROM AppUser
-                                    WHERE (UserName = $u OR Email = $u) AND Password = $p AND IFNULL(UserStatus,1)=1 AND IFNULL(IsDeleted,0)=0
-                                    LIMIT 1";
-                cmd.Parameters.AddWithValue("$u", userNameOrEmail);
-                cmd.Parameters.AddWithValue("$p", password);
-
-                using var reader = cmd.ExecuteReader();
-                if (!reader.Read()) return null;
-
-                var dt = new DataTable();
-                dt.Columns.Add("UserID");
-                dt.Columns.Add("Email");
-                dt.Columns.Add("UserFullName");
-                dt.Columns.Add("CompanyID");
-                dt.Columns.Add("CategoryID");
-                dt.Columns.Add("UserType");
-                dt.Columns.Add("UserName");
-                dt.Columns.Add("LastLoginAt");
-
-                var row = dt.NewRow();
-                row["UserID"] = reader["UserID"].ToString();
-                row["Email"] = reader["Email"].ToString();
-                row["UserFullName"] = reader["UserFullName"].ToString();
-                row["CompanyID"] = reader["CompanyID"].ToString();
-                row["CategoryID"] = reader["CategoryID"].ToString();
-                row["UserType"] = reader["UserType"].ToString();
-                row["UserName"] = reader["UserName"].ToString();
-                row["LastLoginAt"] = reader["LastLoginAt"].ToString();
-                dt.Rows.Add(row);
-                return row;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
     }
 }
