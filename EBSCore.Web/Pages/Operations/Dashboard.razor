@@ -25,14 +25,14 @@
     </div>
 </div>
 
-@if (Dashboard == null)
+@if (DashboardData == null)
 {
     <p>Loading dashboard...</p>
 }
 else
 {
     <div class="row g-3 mb-4">
-        @foreach (var kpi in Dashboard.Kpis)
+        @foreach (var kpi in DashboardData.Kpis)
         {
             <div class="col-md-3">
                 <div class="card h-100">
@@ -62,7 +62,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var row in Dashboard.QueueBacklog)
+                            @foreach (var row in DashboardData.QueueBacklog)
                             {
                                 <tr>
                                     <td>@row.QueueName</td>
@@ -92,7 +92,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var incident in Dashboard.CriticalIncidents)
+                            @foreach (var incident in DashboardData.CriticalIncidents)
                             {
                                 <tr>
                                     <td>@incident.IncidentNumber</td>
@@ -121,7 +121,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var request in Dashboard.OldestOpenServiceRequests)
+                            @foreach (var request in DashboardData.OldestOpenServiceRequests)
                             {
                                 <tr>
                                     <td>@request.RequestNumber</td>
@@ -150,7 +150,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var order in Dashboard.OverdueWorkOrders)
+                            @foreach (var order in DashboardData.OverdueWorkOrders)
                             {
                                 <tr>
                                     <td>@order.WorkOrderNumber</td>
@@ -175,7 +175,7 @@ else
         IncludeChildren = true
     };
 
-    private OperationsDashboardResponse Dashboard;
+    private OperationsDashboardResponse DashboardData;
 
     protected override async Task OnInitializedAsync()
     {
@@ -187,7 +187,7 @@ else
         var response = await Http.PostAsJsonAsync("/api/OperationsServiceDelivery/GetDashboard", Filter);
         if (response.IsSuccessStatusCode)
         {
-            Dashboard = await response.Content.ReadFromJsonAsync<OperationsDashboardResponse>();
+            DashboardData = await response.Content.ReadFromJsonAsync<OperationsDashboardResponse>();
         }
     }
 }
