@@ -1,0 +1,238 @@
+@page "/Operations/SupplyChainDashboard"
+@using System.Net.Http.Json
+@using EBSCore.Web.Models.Operations
+@inject HttpClient Http
+
+<h3>Supply Chain & Inventory Performance Dashboard</h3>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" @bind="Filter.StartDate" @bind:format="yyyy-MM-dd" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" @bind="Filter.EndDate" @bind:format="yyyy-MM-dd" />
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Period</label>
+        <select class="form-select" @bind="Filter.PeriodCode">
+            <option value="MTD">Month to Date</option>
+            <option value="QTD">Quarter to Date</option>
+            <option value="YTD">Year to Date</option>
+            <option value="CUSTOM">Custom</option>
+        </select>
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" @bind="Filter.IncludeChildren" id="includeChildrenSc" />
+            <label class="form-check-label" for="includeChildrenSc">Org rollup</label>
+        </div>
+    </div>
+    <div class="col-md-2 d-flex align-items-end justify-content-end">
+        <button class="btn btn-primary" @onclick="LoadDashboard">Refresh</button>
+    </div>
+</div>
+
+@if (Dashboard == null)
+{
+    <p>Loading dashboard...</p>
+}
+else
+{
+    <div class="row g-3 mb-4">
+        @foreach (var kpi in Dashboard.Kpis)
+        {
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-muted small">@kpi.Label</div>
+                        <div class="h4 mb-1">@kpi.Value @kpi.Unit</div>
+                        <div class="small">Trend: @kpi.Trend</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">Low Stock / Replenishment Due</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Warehouse</th>
+                                <th>Available</th>
+                                <th>ROP</th>
+                                <th>Suggested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Dashboard.ReplenishmentDue)
+                            {
+                                <tr>
+                                    <td>@row.ItemCode</td>
+                                    <td>@row.WarehouseName</td>
+                                    <td>@row.AvailableQty</td>
+                                    <td>@row.ReorderPointQty</td>
+                                    <td>@row.SuggestedReplenishmentQty</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">Supply vs Demand Gap</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Demand</th>
+                                <th>Supply</th>
+                                <th>Gap</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Dashboard.SupplyDemandGaps)
+                            {
+                                <tr>
+                                    <td>@row.ItemCode</td>
+                                    <td>@row.DemandQty</td>
+                                    <td>@row.SupplyQty</td>
+                                    <td>@row.GapQty</td>
+                                    <td>@row.GapStatus</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="card-header">Inventory Aging (Top Exposure)</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Warehouse</th>
+                                <th>91-180</th>
+                                <th>181-365</th>
+                                <th>365+</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Dashboard.InventoryAging)
+                            {
+                                <tr>
+                                    <td>@row.ItemCode</td>
+                                    <td>@row.WarehouseName</td>
+                                    <td>@row.Age91To180Qty</td>
+                                    <td>@row.Age181To365Qty</td>
+                                    <td>@row.Age365PlusQty</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="card-header">Organisation Supply Chain Scorecard</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Org Unit</th>
+                                <th>On Hand</th>
+                                <th>Low Stock</th>
+                                <th>Reorder Due</th>
+                                <th>Health</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Dashboard.OrganisationScorecards)
+                            {
+                                <tr>
+                                    <td>@row.UnitName</td>
+                                    <td>@row.OnHandQty</td>
+                                    <td>@row.LowStockCount</td>
+                                    <td>@row.ReorderDueCount</td>
+                                    <td>@row.SupplyHealthScore</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card mt-3">
+                <div class="card-header">Active Alerts</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Severity</th>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Triggered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var alert in Dashboard.Alerts)
+                            {
+                                <tr>
+                                    <td>@alert.AlertSeverityCode</td>
+                                    <td>@alert.AlertTitle</td>
+                                    <td>@alert.AlertMessage</td>
+                                    <td>@alert.TriggeredAt.ToString("yyyy-MM-dd HH:mm")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private SupplyChainDashboardFilter Filter = new()
+    {
+        StartDate = DateTime.UtcNow.Date.AddDays(-30),
+        EndDate = DateTime.UtcNow.Date,
+        PeriodCode = "MTD",
+        IncludeChildren = true
+    };
+
+    private SupplyChainDashboardResponse Dashboard;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboard();
+    }
+
+    private async Task LoadDashboard()
+    {
+        var response = await Http.PostAsJsonAsync("/api/SupplyChainInventory/GetDashboard", Filter);
+        if (response.IsSuccessStatusCode)
+        {
+            Dashboard = await response.Content.ReadFromJsonAsync<SupplyChainDashboardResponse>();
+        }
+    }
+}
