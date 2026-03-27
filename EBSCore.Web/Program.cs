@@ -6,14 +6,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
+using Serilog;
+using Serilog.Events;
 using System.Globalization;
 using System.IO;
 using System.Net;
 using static System.Reflection.Metadata.BlobBuilder;
-using Serilog;
-using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var primaryHttpUrl = builder.Configuration["RunConfiguration:PrimaryHttpUrl"] ?? "http://localhost:1490";
+var configuredUrls = builder.Configuration["ASPNETCORE_URLS"];
+if (builder.Environment.IsDevelopment() && string.IsNullOrWhiteSpace(configuredUrls))
+{
+    builder.WebHost.UseUrls(primaryHttpUrl);
+}
 
 // Ensure log folder exists early
 var logDirectory = Path.Combine(builder.Environment.ContentRootPath, "Logs");
@@ -91,6 +98,24 @@ builder.Services.AddSession(options =>
 // *** 6. Build the Application ***
 var app = builder.Build();
 ServiceLocator.SetServiceProvider(app.Services);
+
+var printStartupUrlBanner = app.Configuration.GetValue("RunConfiguration:PrintStartupUrlBanner", true);
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    var activeUrl = app.Urls.FirstOrDefault() ?? configuredUrls ?? primaryHttpUrl;
+    Log.Information("EBSCore.Web is listening on {StartupUrl}", activeUrl);
+
+    if (printStartupUrlBanner)
+    {
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("====================================================");
+        Console.WriteLine($"EBSCore.Web started successfully at: {activeUrl}");
+        Console.WriteLine("====================================================");
+        Console.ResetColor();
+        Console.WriteLine();
+    }
+});
 
 // *** 7. Configure Middleware ***
 if (!app.Environment.IsDevelopment())
