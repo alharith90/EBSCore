@@ -5,172 +5,150 @@
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
 @using EBSCore.Web.Services
-@using Microsoft.AspNetCore.Components.Web
 @using System.Net.Http.Json
-@using System.Linq
-@using EBSCore.Web.Pages.Controls
+
 @inject IJSRuntime JS
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject IStringLocalizerFactory LocalizerFactory
 @inject PageTitleService PageTitleService
 
-@if (!ShowInputScreen)
-{
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <div class="card-tools w-100 d-flex align-items-center justify-content-between">
-                        <h5 class="mb-0">@Localizer["PageTitle"]</h5>
+<div class="modern-admin-page">
+    <div class="modern-page-header">
+        <h4 class="mb-0">@Localizer["PageTitle"]</h4>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary" @onclick="LoadTemplates">
+                <i class="fas fa-rotate"></i> @GLocalizer["Refresh"]
+            </button>
+            <button class="btn btn-success" @onclick="StartCreate">
+                <i class="fas fa-plus"></i> @GLocalizer["AddRecord"]
+            </button>
+        </div>
+    </div>
 
-                        <button class="btn btn-success" @onclick="ShowInput">
-                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    @if (Templates.Any())
+    <div class="card modern-card">
+        <div class="card-header">
+            <EditForm EditContext="SearchContext" OnValidSubmit="ApplySearch" class="d-flex gap-2 flex-wrap">
+                <InputText class="form-control" @bind-Value="SearchQuery" placeholder="@GLocalizer["Search"]..." />
+                <button class="btn btn-outline-dark" type="submit"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
+            </EditForm>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover modern-table align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>@Localizer["Name"]</th>
+                        <th>@Localizer["TemplateKey"]</th>
+                        <th>@Localizer["Channel"]</th>
+                        <th>@Localizer["Subject"]</th>
+                        <th>@Localizer["Active"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (FilteredTemplates.Count == 0)
                     {
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>@Localizer["Name"]</th>
-                                    <th>@Localizer["TemplateKey"]</th>
-                                    <th>@Localizer["Channel"]</th>
-                                    <th>@Localizer["Subject"]</th>
-                                    <th>@Localizer["Active"]</th>
-                                    <th>@GLocalizer["Actions"]</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    var idx = 0;
-                                }
-                                @foreach (var t in Templates)
-                                {
-                                    idx++;
-                                    <tr>
-                                        <td>@idx</td>
-                                        <td>@t.Name</td>
-                                        <td>@t.TemplateKey</td>
-                                        <td>@t.ChannelID</td>
-                                        <td>@t.Subject</td>
-                                        <td>
-                                            @if (t.IsActive)
-                                            {
-                                                <span class="badge bg-success">@Localizer["Active"]</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge bg-secondary">@Localizer["Inactive"]</span>
-                                            }
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info"
-                                                    @onclick="() => EditTemplate(t)">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">@GLocalizer["EmptyTable"]</td>
+                        </tr>
                     }
                     else
                     {
-                        <p>@GLocalizer["EmptyTable"]</p>
+                        var idx = 0;
+                        foreach (var t in FilteredTemplates)
+                        {
+                            idx++;
+                            <tr @onclick="() => OpenRead(t)">
+                                <td>@idx</td>
+                                <td>@t.Name</td>
+                                <td>@t.TemplateKey</td>
+                                <td>@t.ChannelID</td>
+                                <td>@t.Subject</td>
+                                <td>
+                                    <span class="badge @(t.IsActive ? "bg-success" : "bg-secondary")">@(t.IsActive ? Localizer["Active"] : Localizer["Inactive"])</span>
+                                </td>
+                            </tr>
+                        }
                     }
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-}
-else
+</div>
+
+@if (IsDrawerOpen)
 {
-    <div class="linear">
+    <div class="workspace-backdrop" @onclick="CloseDrawer"></div>
+    <div class="record-workspace-drawer">
+        <div class="workspace-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">@DrawerTitle</h5>
+                <small class="text-muted">@Localizer["EditTemplate"]</small>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CloseDrawer"><i class="fas fa-xmark"></i></button>
+        </div>
+
         <EditForm EditContext="EditContext" OnValidSubmit="SaveTemplateAsync">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">@Localizer["EditTemplate"]</h5>
-                </div>
+            <DataAnnotationsValidator />
+            <div class="workspace-body">
+                @if (ShowValidationMessage)
+                {
+                    <div class="alert alert-danger">@Localizer["ValidationError"]</div>
+                }
 
-                <div class="card-body">
-                    <DataAnnotationsValidator />
-
-                    @if (ShowValidationMessage)
-                    {
-                        <ValidationSummary />
-                    }
-
+                <div class="workspace-section">
+                    <h6>@Localizer["BasicInfo"]</h6>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Name"]</label>
-                            <input class="form-control"
-                                   @bind-value="CurrentTemplate.Name"
-                                   @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentTemplate.Name" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["TemplateKey"]</label>
-                            <input class="form-control"
-                                   @bind-value="CurrentTemplate.TemplateKey"
-                                   @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentTemplate.TemplateKey" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Channel"]</label>
-                            <input class="form-control"
-                                   type="number"
-                                   @bind-value="CurrentTemplate.ChannelID"
-                                   @bind-value:event="oninput" />
+                            <InputNumber TValue="int" class="form-control" @bind-Value="CurrentTemplate.ChannelID" disabled="@IsReadMode" />
                         </div>
-
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label class="form-label">@Localizer["Subject"]</label>
-                            <input class="form-control"
-                                   @bind-value="CurrentTemplate.Subject"
-                                   @bind-value:event="oninput" />
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label">@Localizer["Body"]</label>
-                            <textarea class="form-control"
-                                      rows="5"
-                                      @bind-value="CurrentTemplate.Body"
-                                      @bind-value:event="oninput"></textarea>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       @bind="CurrentTemplate.UseDesign" />
-                                <label class="form-check-label">@Localizer["UseDesign"]</label>
-                            </div>
-
-                            <div class="form-check mt-2">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       @bind="CurrentTemplate.IsActive" />
-                                <label class="form-check-label">@Localizer["Active"]</label>
-                            </div>
+                            <InputText class="form-control" @bind-Value="CurrentTemplate.Subject" disabled="@IsReadMode" />
                         </div>
                     </div>
                 </div>
 
-                <div class="card-footer d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success px-5">
-                        <i class="fas fa-save"></i>&nbsp;@GLocalizer["Save"]
-                    </button>
+                <div class="workspace-section">
+                    <h6>@Localizer["Body"]</h6>
+                    <InputTextArea class="form-control" rows="8" @bind-Value="CurrentTemplate.Body" disabled="@IsReadMode" />
+                </div>
 
-                    <button type="button"
-                            @onclick="ShowDisplay"
-                            class="btn btn-light btn-outline-dark">
-                        <i class="fas fa-arrow-circle-left"></i>&nbsp;@GLocalizer["Cancel"]
-                    </button>
+                <div class="workspace-section">
+                    <h6>@Localizer["Options"]</h6>
+                    <div class="d-flex gap-4">
+                        <div class="form-check">
+                            <InputCheckbox class="form-check-input" @bind-Value="CurrentTemplate.UseDesign" disabled="@IsReadMode" />
+                            <label class="form-check-label">@Localizer["UseDesign"]</label>
+                        </div>
+                        <div class="form-check">
+                            <InputCheckbox class="form-check-input" @bind-Value="CurrentTemplate.IsActive" disabled="@IsReadMode" />
+                            <label class="form-check-label">@Localizer["Active"]</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workspace-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" @onclick="CloseDrawer">@GLocalizer["Cancel"]</button>
+                <div class="d-flex gap-2">
+                    @if (IsReadMode)
+                    {
+                        <button type="button" class="btn btn-primary" @onclick="SwitchToEdit">@GLocalizer["Edit"]</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> @GLocalizer["Save"]</button>
+                    }
                 </div>
             </div>
         </EditForm>
@@ -178,20 +156,24 @@ else
 }
 
 @code {
-    // UI
-    bool ShowInputScreen = false;
-    bool ShowValidationMessage = false;
+    private bool IsDrawerOpen;
+    private bool IsReadMode;
+    private bool ShowValidationMessage;
+    private string SearchQuery = string.Empty;
 
-    // Data
-    List<S7SNotificationTemplate> Templates = new();
-    S7SNotificationTemplate CurrentTemplate = new();
+    private List<S7SNotificationTemplate> Templates = new();
+    private List<S7SNotificationTemplate> FilteredTemplates = new();
+    private S7SNotificationTemplate CurrentTemplate = new();
 
-    // Form
-    EditContext EditContext = default!;
+    private EditContext EditContext = default!;
+    private EditContext SearchContext = new(new object());
 
-    // Localization
-    IStringLocalizer Localizer = default!;
-    IStringLocalizer GLocalizer = default!;
+    private IStringLocalizer Localizer = default!;
+    private IStringLocalizer GLocalizer = default!;
+
+    private string DrawerTitle => CurrentTemplate.NotificationTemplateID.HasValue
+        ? (IsReadMode ? Localizer["ViewTemplate"] : Localizer["EditTemplate"])
+        : GLocalizer["AddRecord"];
 
     protected override async Task OnInitializedAsync()
     {
@@ -199,6 +181,7 @@ else
         GLocalizer = LocalizerFactory.Create("Common", "");
         PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
 
+        EditContext = new EditContext(CurrentTemplate);
         await LoadTemplates();
     }
 
@@ -206,24 +189,75 @@ else
     {
         var json = await Http.GetStringAsync("api/S7SNotification/RtvTemplates");
         Templates = JsonConvert.DeserializeObject<List<S7SNotificationTemplate>>(json) ?? new();
+        ApplySearch();
     }
 
-    private void ShowInput()
+    private void ApplySearch()
+    {
+        var query = SearchQuery?.Trim();
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            FilteredTemplates = Templates.OrderBy(t => t.Name).ToList();
+            return;
+        }
+
+        FilteredTemplates = Templates
+            .Where(t => (t.Name ?? string.Empty).Contains(query, StringComparison.OrdinalIgnoreCase)
+                     || (t.TemplateKey ?? string.Empty).Contains(query, StringComparison.OrdinalIgnoreCase)
+                     || (t.Subject ?? string.Empty).Contains(query, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(t => t.Name)
+            .ToList();
+    }
+
+    private void StartCreate()
     {
         CurrentTemplate = new S7SNotificationTemplate { IsActive = true, UseDesign = true, ChannelID = 1 };
         EditContext = new EditContext(CurrentTemplate);
-        ShowInputScreen = true;
+        IsReadMode = false;
+        IsDrawerOpen = true;
         ShowValidationMessage = false;
     }
 
-    private void ShowDisplay()
+    private void OpenRead(S7SNotificationTemplate t)
     {
-        ShowInputScreen = false;
+        CurrentTemplate = CloneTemplate(t);
+        EditContext = new EditContext(CurrentTemplate);
+        IsReadMode = true;
+        IsDrawerOpen = true;
+        ShowValidationMessage = false;
     }
 
-    private void EditTemplate(S7SNotificationTemplate t)
+    private void SwitchToEdit() => IsReadMode = false;
+
+    private void CloseDrawer()
     {
-        CurrentTemplate = new S7SNotificationTemplate
+        IsDrawerOpen = false;
+        IsReadMode = false;
+        ShowValidationMessage = false;
+    }
+
+    private async Task SaveTemplateAsync()
+    {
+        if (!EditContext.Validate())
+        {
+            ShowValidationMessage = true;
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/S7SNotification/SaveTemplate", CurrentTemplate);
+        if (!response.IsSuccessStatusCode)
+        {
+            ShowValidationMessage = true;
+            return;
+        }
+
+        await LoadTemplates();
+        IsReadMode = true;
+        await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SavedSuccessfully"].Value });
+    }
+
+    private static S7SNotificationTemplate CloneTemplate(S7SNotificationTemplate t)
+        => new()
         {
             NotificationTemplateID = t.NotificationTemplateID,
             Name = t.Name,
@@ -234,22 +268,4 @@ else
             UseDesign = t.UseDesign,
             IsActive = t.IsActive
         };
-
-        EditContext = new EditContext(CurrentTemplate);
-        ShowInputScreen = true;
-    }
-
-    private async Task SaveTemplateAsync()
-    {
-        if (EditContext.Validate())
-        {
-            await Http.PostAsJsonAsync("api/S7SNotification/SaveTemplate", CurrentTemplate);
-            await LoadTemplates();
-            ShowDisplay();
-        }
-        else
-        {
-            ShowValidationMessage = true;
-        }
-    }
 }

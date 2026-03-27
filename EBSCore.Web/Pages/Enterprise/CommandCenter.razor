@@ -1,0 +1,76 @@
+@page "/Enterprise/CommandCenter"
+
+<div class="modern-admin-page">
+    <div class="modern-page-header">
+        <div>
+            <h4 class="mb-0">Executive Enterprise Command Center</h4>
+            <small class="text-muted">Cross-functional dashboard layer aligned with the modern DesignTemplate card and workspace standards.</small>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        @foreach (var module in Modules)
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="card modern-card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="mb-0">@module.Name</h6>
+                            <span class="badge bg-light text-dark">@module.Health</span>
+                        </div>
+                        <p class="text-muted small mb-3">@module.Description</p>
+                        <a class="btn btn-sm btn-outline-primary mt-auto" href="@module.Route">Open module</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="card modern-card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Enterprise Module Coverage</h6>
+            <span class="text-muted small">12 domain modules tracked</span>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover modern-table align-middle">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Capability</th>
+                        <th>Primary Page</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var module in Modules)
+                    {
+                        <tr>
+                            <td>@module.Name</td>
+                            <td>@module.Capability</td>
+                            <td><a href="@module.Route">@module.Route</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+    private readonly List<ModuleItem> Modules = new()
+    {
+        new("Finance and Budget Management", "Budget control and forecast workspace", "/Enterprise/FinanceBudget", "Healthy", "Highest-priority universal ERP domain."),
+        new("HR and Workforce Analytics", "Workforce planning and KPI oversight", "/Config/Employees", "Healthy", "Employee and org insight module."),
+        new("Sales and Revenue Performance", "Pipeline and revenue trend tracking", "/Operations/Dashboard", "Monitored", "Revenue execution monitoring."),
+        new("Operations and Service Delivery", "Service throughput and delivery KPIs", "/Operations/Dashboard", "Healthy", "Operational performance visibility."),
+        new("Project and PMO Portfolio", "Program portfolio governance", "/Workflow/List", "Healthy", "Project lifecycle management."),
+        new("Procurement and Supplier Performance", "Supplier risk and SLA controls", "/GRC/ThirdPartyProfiles", "Monitored", "Procurement performance assurance."),
+        new("Risk, Compliance, and Audit", "Risk register and controls assurance", "/GRC/GovernanceDashboard", "Healthy", "Integrated GRC monitoring."),
+        new("Supply Chain and Inventory", "Inventory balance and logistics", "/Operations/SupplyChainDashboard", "Monitored", "Supply chain KPIs and stock health."),
+        new("Customer Service and SLA", "Notification and service event orchestration", "/Notification/S7SNotifications", "Monitored", "Service response and SLA traces."),
+        new("Data Quality and Master Data Governance", "Reference and lookup quality controls", "/Sys/Lookup", "Healthy", "Master data stewardship."),
+        new("ESG and Sustainability", "Sustainability metrics and initiatives", "/GRC/ESGMetrics", "Healthy", "ESG reporting and tracking."),
+        new("Enterprise Command Center", "Cross-functional command layer", "/Enterprise/CommandCenter", "Healthy", "Unified leadership overview.")
+    };
+
+    private sealed record ModuleItem(string Name, string Capability, string Route, string Health, string Description);
+}

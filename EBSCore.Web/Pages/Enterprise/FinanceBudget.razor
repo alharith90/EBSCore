@@ -1,0 +1,260 @@
+@page "/Enterprise/FinanceBudget"
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="modern-admin-page">
+    <div class="modern-page-header">
+        <div>
+            <h4 class="mb-0">Finance & Budget Management</h4>
+            <small class="text-muted">Unified finance workspace using the same record drawer and table standards.</small>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary" @onclick="Reload"><i class="fas fa-rotate"></i> Refresh</button>
+            <button class="btn btn-success" @onclick="CreateRecord"><i class="fas fa-plus"></i> Add Budget Line</button>
+        </div>
+    </div>
+
+    <div class="card modern-card">
+        <div class="card-header d-flex gap-2 flex-wrap">
+            <InputText class="form-control" @bind-Value="SearchQuery" placeholder="Search account, owner, status" />
+            <select class="form-select" style="max-width:220px" @bind="SelectedStatus">
+                <option value="">All statuses</option>
+                @foreach (var status in Statuses)
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <button class="btn btn-outline-dark" @onclick="ApplyFilters"><i class="fas fa-search"></i> Filter</button>
+        </div>
+
+        <div class="card-body table-responsive">
+            <table class="table table-hover modern-table align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Account</th>
+                        <th>Cost Center</th>
+                        <th>Owner</th>
+                        <th>Allocated</th>
+                        <th>Forecast</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!FilteredRows.Any())
+                    {
+                        <tr><td colspan="7" class="text-center text-muted py-4">No budget lines matched your filters.</td></tr>
+                    }
+                    else
+                    {
+                        var idx = 0;
+                        foreach (var row in FilteredRows)
+                        {
+                            idx++;
+                            <tr @onclick="() => OpenRead(row)">
+                                <td>@idx</td>
+                                <td>@row.AccountName</td>
+                                <td>@row.CostCenter</td>
+                                <td>@row.Owner</td>
+                                <td>@row.AllocatedAmount.ToString("C0")</td>
+                                <td>@row.ForecastAmount.ToString("C0")</td>
+                                <td><span class="badge @(row.Status == "On Track" ? "bg-success" : row.Status == "At Risk" ? "bg-warning text-dark" : "bg-danger")">@row.Status</span></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (IsDrawerOpen)
+{
+    <div class="workspace-backdrop" @onclick="CloseDrawer"></div>
+    <div class="record-workspace-drawer">
+        <div class="workspace-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">@(CurrentRow.Id == 0 ? "Add Budget Line" : IsReadMode ? "Budget Line Details" : "Edit Budget Line")</h5>
+                <small class="text-muted">Read-first workspace with one-click edit, aligned to Customers-style interaction.</small>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @onclick="CloseDrawer"><i class="fas fa-xmark"></i></button>
+        </div>
+
+        <EditForm EditContext="EditContext" OnValidSubmit="Save">
+            <DataAnnotationsValidator />
+            <div class="workspace-body">
+                <div class="workspace-section">
+                    <h6>Financial Identity</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Account Name</label>
+                            <InputText class="form-control" @bind-Value="CurrentRow.AccountName" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cost Center</label>
+                            <InputText class="form-control" @bind-Value="CurrentRow.CostCenter" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Owner</label>
+                            <InputText class="form-control" @bind-Value="CurrentRow.Owner" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" @bind="CurrentRow.Status" disabled="@IsReadMode">
+                                @foreach (var status in Statuses)
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workspace-section">
+                    <h6>Budget Values</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Allocated Amount</label>
+                            <InputNumber TValue="decimal" class="form-control" @bind-Value="CurrentRow.AllocatedAmount" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Forecast Amount</label>
+                            <InputNumber TValue="decimal" class="form-control" @bind-Value="CurrentRow.ForecastAmount" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Notes</label>
+                            <InputTextArea class="form-control" rows="5" @bind-Value="CurrentRow.Notes" disabled="@IsReadMode" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workspace-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" @onclick="CloseDrawer">Cancel</button>
+                <div class="d-flex gap-2">
+                    @if (IsReadMode)
+                    {
+                        <button type="button" class="btn btn-primary" @onclick="SwitchToEdit">Edit</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Save</button>
+                    }
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    private readonly List<string> Statuses = new() { "On Track", "At Risk", "Over Budget" };
+    private List<FinanceBudgetRow> Rows = new();
+    private List<FinanceBudgetRow> FilteredRows = new();
+
+    private FinanceBudgetRow CurrentRow = new();
+    private EditContext EditContext = default!;
+
+    private bool IsDrawerOpen;
+    private bool IsReadMode;
+    private string? SearchQuery;
+    private string? SelectedStatus;
+
+    protected override void OnInitialized()
+    {
+        Rows = new()
+        {
+            new() { Id = 1, AccountName = "Corporate Operations", CostCenter = "CC-100", Owner = "Finance Controller", AllocatedAmount = 950000, ForecastAmount = 910000, Status = "On Track", Notes = "Quarterly cadence healthy." },
+            new() { Id = 2, AccountName = "Digital Transformation", CostCenter = "CC-220", Owner = "Program Office", AllocatedAmount = 1200000, ForecastAmount = 1380000, Status = "At Risk", Notes = "Vendor scope creep requires approval." },
+            new() { Id = 3, AccountName = "Regional Expansion", CostCenter = "CC-320", Owner = "COO", AllocatedAmount = 760000, ForecastAmount = 920000, Status = "Over Budget", Notes = "Logistics inflation exceeds baseline." }
+        };
+
+        EditContext = new EditContext(CurrentRow);
+        ApplyFilters();
+    }
+
+    private void Reload() => ApplyFilters();
+
+    private void ApplyFilters()
+    {
+        IEnumerable<FinanceBudgetRow> query = Rows;
+
+        if (!string.IsNullOrWhiteSpace(SearchQuery))
+        {
+            query = query.Where(r =>
+                r.AccountName.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+                || r.CostCenter.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+                || r.Owner.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(SelectedStatus))
+        {
+            query = query.Where(r => r.Status.Equals(SelectedStatus, StringComparison.OrdinalIgnoreCase));
+        }
+
+        FilteredRows = query.OrderBy(r => r.AccountName).ToList();
+    }
+
+    private void CreateRecord()
+    {
+        CurrentRow = new FinanceBudgetRow { Status = Statuses[0] };
+        EditContext = new EditContext(CurrentRow);
+        IsReadMode = false;
+        IsDrawerOpen = true;
+    }
+
+    private void OpenRead(FinanceBudgetRow row)
+    {
+        CurrentRow = row.Clone();
+        EditContext = new EditContext(CurrentRow);
+        IsReadMode = true;
+        IsDrawerOpen = true;
+    }
+
+    private void SwitchToEdit() => IsReadMode = false;
+
+    private void CloseDrawer()
+    {
+        IsDrawerOpen = false;
+        IsReadMode = false;
+    }
+
+    private Task Save()
+    {
+        if (CurrentRow.Id == 0)
+        {
+            CurrentRow.Id = Rows.Max(r => r.Id) + 1;
+            Rows.Add(CurrentRow.Clone());
+        }
+        else
+        {
+            var existing = Rows.FirstOrDefault(r => r.Id == CurrentRow.Id);
+            if (existing is not null)
+            {
+                existing.AccountName = CurrentRow.AccountName;
+                existing.CostCenter = CurrentRow.CostCenter;
+                existing.Owner = CurrentRow.Owner;
+                existing.AllocatedAmount = CurrentRow.AllocatedAmount;
+                existing.ForecastAmount = CurrentRow.ForecastAmount;
+                existing.Status = CurrentRow.Status;
+                existing.Notes = CurrentRow.Notes;
+            }
+        }
+
+        IsReadMode = true;
+        ApplyFilters();
+        return Task.CompletedTask;
+    }
+
+    private sealed class FinanceBudgetRow
+    {
+        public int Id { get; set; }
+        public string AccountName { get; set; } = string.Empty;
+        public string CostCenter { get; set; } = string.Empty;
+        public string Owner { get; set; } = string.Empty;
+        public decimal AllocatedAmount { get; set; }
+        public decimal ForecastAmount { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public string? Notes { get; set; }
+
+        public FinanceBudgetRow Clone() => (FinanceBudgetRow)MemberwiseClone();
+    }
+}
