@@ -48,13 +48,16 @@ namespace EBSCore.Web.Controllers
         {
             try
             {
+                var companyId = TryParseNullableInt(_currentUser?.CompanyID);
+                var userId = TryParseNullableLong(_currentUser?.UserID);
+
                 var risks = TableRows(GetTable(_riskSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvRisks", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
-                var controls = TableRows(GetTable(_controlSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvControls", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
-                var assessments = TableRows(GetTable(_complianceAssessmentSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvComplianceAssessments", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
-                var audits = TableRows(GetTable(_auditPlanSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvAuditPlans", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
-                var findings = TableRows(GetTable(_auditFindingSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvAuditFindings", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
+                var controls = TableRows(GetTable(_controlSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvControls", CompanyID: companyId, UserID: userId)));
+                var assessments = TableRows(GetTable(_complianceAssessmentSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvComplianceAssessments", CompanyID: companyId, UserID: userId)));
+                var audits = TableRows(GetTable(_auditPlanSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvAuditPlans", CompanyID: companyId, UserID: userId)));
+                var findings = TableRows(GetTable(_auditFindingSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvAuditFindings", CompanyID: companyId, UserID: userId)));
                 var actions = TableRows(GetTable(_riskTreatmentPlanSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvPlans", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
-                var issues = TableRows(GetTable(_complianceIssueSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvComplianceIssues", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
+                var issues = TableRows(GetTable(_complianceIssueSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvComplianceIssues", CompanyID: companyId, UserID: userId)));
                 var units = TableRows(GetTable(_organisationUnitSP.QueryDatabase(SqlQueryType.FillDataset, Operation: "rtvOrganisationUnits", CompanyID: _currentUser?.CompanyID, UserID: _currentUser?.UserID)));
 
                 var selectedUnits = ResolveUnitScope(units, organisationUnitId, includeChildren);
@@ -435,6 +438,16 @@ namespace EBSCore.Web.Controllers
         private static int TryParseInt(string value)
         {
             return int.TryParse(value, out var parsed) ? parsed : 0;
+        }
+
+        private static int? TryParseNullableInt(string value)
+        {
+            return int.TryParse(value, out var parsed) ? parsed : (int?)null;
+        }
+
+        private static long? TryParseNullableLong(string value)
+        {
+            return long.TryParse(value, out var parsed) ? parsed : (long?)null;
         }
     }
 }
