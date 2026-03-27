@@ -228,7 +228,7 @@ namespace EBSCore.Web.Controllers.Notification
                     connections.Add(new S7SNotificationConnection
                     {
                         NotificationConnectionID = reader["NotificationConnectionID"] == DBNull.Value ? null : Convert.ToInt32(reader["NotificationConnectionID"]),
-                        ChannelID = reader["ChannelID"] == DBNull.Value ? null : Convert.ToInt32(reader["ChannelID"]),
+                        ChannelID = reader["ChannelID"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ChannelID"]),
                         Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
                         ProviderType = reader["ProviderType"] == DBNull.Value ? null : reader["ProviderType"].ToString(),
                         ConfigurationJson = reader["ConfigurationJson"] == DBNull.Value ? null : reader["ConfigurationJson"].ToString(),
