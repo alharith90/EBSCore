@@ -5,69 +5,171 @@
 @using Microsoft.JSInterop
 @using Newtonsoft.Json
 @using EBSCore.Web.Services
-@using Microsoft.AspNetCore.Components.Web
 @using System.Net.Http.Json
-@using System.Linq
-@using EBSCore.Web.Pages.Controls
+
 @inject IJSRuntime JS
 @inject HttpClient Http
-@inject NavigationManager Navigation
+@inject NavigationManager NavigationManager
 @inject IStringLocalizerFactory LocalizerFactory
 @inject PageTitleService PageTitleService
 
-<h3>@Localizer["PageTitle"]</h3>
-<div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <span>@Localizer["Connections"]</span>
-        <button class="btn btn-outline-primary" @onclick="LoadConnections">@Localizer["Refresh"]</button>
+<div class="modern-admin-page">
+    <div class="modern-page-header">
+        <h4 class="mb-0">@Localizer["PageTitle"]</h4>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary" @onclick="LoadConnections">
+                <i class="fas fa-rotate"></i> @Localizer["Refresh"]
+            </button>
+            <button class="btn btn-success" @onclick="StartCreate">
+                <i class="fas fa-plus"></i> @Localizer["AddConnection"]
+            </button>
+        </div>
     </div>
-    <div class="card-body table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>@Localizer["Name"]</th>
-                    <th>@Localizer["Channel"]</th>
-                    <th>@Localizer["Provider"]</th>
-                    <th>@Localizer["IsDefault"]</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Connections.Count == 0)
-                {
-                    <tr><td colspan="5" class="text-center text-muted">@Localizer["NoData"]</td></tr>
-                }
-                else
-                {
-                    @foreach (var connection in Connections)
+
+    <div class="card modern-card">
+        <div class="card-body table-responsive">
+            <table class="table table-hover modern-table align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>@Localizer["Name"]</th>
+                        <th>@Localizer["Channel"]</th>
+                        <th>@Localizer["Provider"]</th>
+                        <th>@Localizer["IsDefault"]</th>
+                        <th>@Localizer["Status"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Connections.Count == 0)
                     {
-                        <tr>
-                            <td>@connection.NotificationConnectionID</td>
-                            <td>@connection.Name</td>
-                            <td>@connection.ChannelID</td>
-                            <td>@connection.ProviderType</td>
-                            <td>@(connection.IsDefault ? Localizer["Yes"] : Localizer["No"])</td>
-                        </tr>
+                        <tr><td colspan="6" class="text-center text-muted py-4">@Localizer["NoData"]</td></tr>
                     }
-                }
-            </tbody>
-        </table>
+                    else
+                    {
+                        @foreach (var connection in Connections)
+                        {
+                            <tr @onclick="() => OpenView(connection)">
+                                <td>@connection.NotificationConnectionID</td>
+                                <td>@connection.Name</td>
+                                <td>@connection.ChannelID</td>
+                                <td>@connection.ProviderType</td>
+                                <td>
+                                    @if (connection.IsDefault)
+                                    {
+                                        <span class="badge bg-primary">@Localizer["Yes"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-light text-dark">@Localizer["No"]</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge @(connection.IsActive ? "bg-success" : "bg-secondary")">@(connection.IsActive ? Localizer["Active"] : Localizer["Inactive"])</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
+@if (IsDrawerOpen)
+{
+    <div class="workspace-backdrop" @onclick="CloseDrawer"></div>
+    <div class="record-workspace-drawer">
+        <div class="workspace-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">@DrawerTitle</h5>
+                <small class="text-muted">@Localizer["ConnectionWorkspaceSubtitle"]</small>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CloseDrawer"><i class="fas fa-xmark"></i></button>
+        </div>
+
+        <EditForm EditContext="EditContext" OnValidSubmit="SaveConnectionAsync">
+            <DataAnnotationsValidator />
+            <div class="workspace-body">
+                @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+                {
+                    <div class="alert alert-danger">@ErrorMessage</div>
+                }
+
+                <div class="workspace-section">
+                    <h6>@Localizer["BasicInfo"]</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Name"]</label>
+                            <InputText class="form-control @(FieldInvalid(nameof(CurrentConnection.Name)) ? "input-validation-error" : "")" @bind-Value="CurrentConnection.Name" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Channel"]</label>
+                            <InputNumber TValue="int" class="form-control @(FieldInvalid(nameof(CurrentConnection.ChannelID)) ? "input-validation-error" : "")" @bind-Value="CurrentConnection.ChannelID" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@Localizer["Provider"]</label>
+                            <InputText class="form-control" @bind-Value="CurrentConnection.ProviderType" disabled="@IsReadMode" />
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end gap-4">
+                            <div class="form-check">
+                                <InputCheckbox class="form-check-input" @bind-Value="CurrentConnection.IsDefault" disabled="@IsReadMode" />
+                                <label class="form-check-label">@Localizer["IsDefault"]</label>
+                            </div>
+                            <div class="form-check">
+                                <InputCheckbox class="form-check-input" @bind-Value="CurrentConnection.IsActive" disabled="@IsReadMode" />
+                                <label class="form-check-label">@Localizer["IsActive"]</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workspace-section">
+                    <h6>@Localizer["Configuration"]</h6>
+                    <InputTextArea class="form-control" rows="8" @bind-Value="CurrentConnection.ConfigurationJson" disabled="@IsReadMode" />
+                </div>
+            </div>
+
+            <div class="workspace-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" @onclick="CloseDrawer">@Localizer["Close"]</button>
+                <div class="d-flex gap-2">
+                    @if (IsReadMode)
+                    {
+                        <button type="button" class="btn btn-primary" @onclick="SwitchToEdit">@Localizer["Edit"]</button>
+                    }
+                    else
+                    {
+                        @if (CurrentConnection.NotificationConnectionID.HasValue)
+                        {
+                            <button type="button" class="btn btn-outline-danger" @onclick="DeleteConnectionAsync">@Localizer["Delete"]</button>
+                        }
+                        <button class="btn btn-success" type="submit">@Localizer["Save"]</button>
+                    }
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
 @code {
     private List<S7SNotificationConnection> Connections { get; set; } = new();
+    private S7SNotificationConnection CurrentConnection { get; set; } = new();
+    private EditContext EditContext { get; set; } = default!;
+    private bool IsDrawerOpen { get; set; }
+    private bool IsReadMode { get; set; }
+    private string? ErrorMessage { get; set; }
     private IStringLocalizer Localizer { get; set; } = default!;
+
+    private string DrawerTitle => CurrentConnection.NotificationConnectionID.HasValue
+        ? (IsReadMode ? Localizer["ViewConnection"] : Localizer["EditConnection"])
+        : Localizer["AddConnection"];
 
     protected override async Task OnInitializedAsync()
     {
         Localizer = LocalizerFactory.Create(new Uri(NavigationManager.Uri).AbsolutePath, "");
         PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        EditContext = new EditContext(CurrentConnection);
         await LoadConnections();
     }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = default!;
 
     private async Task LoadConnections()
     {
@@ -81,4 +183,92 @@
             Connections = new List<S7SNotificationConnection>();
         }
     }
+
+    private void OpenView(S7SNotificationConnection connection)
+    {
+        CurrentConnection = CloneConnection(connection);
+        EditContext = new EditContext(CurrentConnection);
+        IsReadMode = true;
+        IsDrawerOpen = true;
+        ErrorMessage = null;
+    }
+
+    private void StartCreate()
+    {
+        CurrentConnection = new S7SNotificationConnection { IsActive = true };
+        EditContext = new EditContext(CurrentConnection);
+        IsReadMode = false;
+        IsDrawerOpen = true;
+        ErrorMessage = null;
+    }
+
+    private void SwitchToEdit() => IsReadMode = false;
+
+    private void CloseDrawer()
+    {
+        IsDrawerOpen = false;
+        IsReadMode = false;
+        ErrorMessage = null;
+    }
+
+    private bool FieldInvalid(string fieldName)
+        => EditContext.GetValidationMessages(new FieldIdentifier(CurrentConnection, fieldName)).Any();
+
+    private async Task SaveConnectionAsync()
+    {
+        ErrorMessage = null;
+
+        if (string.IsNullOrWhiteSpace(CurrentConnection.Name) || CurrentConnection.ChannelID <= 0)
+        {
+            ErrorMessage = Localizer["ConnectionValidationMessage"];
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/S7SNotification/SaveConnection", CurrentConnection);
+        if (!response.IsSuccessStatusCode)
+        {
+            ErrorMessage = Localizer["SaveFailed"];
+            return;
+        }
+
+        await LoadConnections();
+        IsReadMode = true;
+        await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["SavedSuccessfully"].Value });
+    }
+
+    private async Task DeleteConnectionAsync()
+    {
+        if (!CurrentConnection.NotificationConnectionID.HasValue)
+        {
+            return;
+        }
+
+        var response = await Http.DeleteAsync($"api/S7SNotification/DeleteConnection/{CurrentConnection.NotificationConnectionID.Value}");
+        if (!response.IsSuccessStatusCode)
+        {
+            ErrorMessage = Localizer["DeleteFailed"];
+            return;
+        }
+
+        CloseDrawer();
+        await LoadConnections();
+        await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = Localizer["DeletedSuccessfully"].Value });
+    }
+
+    private static S7SNotificationConnection CloneConnection(S7SNotificationConnection connection)
+        => new()
+        {
+            NotificationConnectionID = connection.NotificationConnectionID,
+            ChannelID = connection.ChannelID,
+            Name = connection.Name,
+            ProviderType = connection.ProviderType,
+            ConfigurationJson = connection.ConfigurationJson,
+            IsDefault = connection.IsDefault,
+            IsActive = connection.IsActive,
+            CompanyID = connection.CompanyID,
+            CreatedAt = connection.CreatedAt,
+            CreatedBy = connection.CreatedBy,
+            UpdatedAt = connection.UpdatedAt,
+            UpdatedBy = connection.UpdatedBy
+        };
 }

@@ -1,7 +1,6 @@
 @page "/Workflow/List"
 @using EBSCore.Web.Models.Workflow
 @using EBSCore.Web.Services
-@using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.Extensions.Localization
 @using Microsoft.JSInterop
@@ -15,142 +14,129 @@
 @inject IStringLocalizerFactory LocalizerFactory
 @inject PageTitleService PageTitleService
 
-@if (!ShowInputScreen)
-{
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <div class="card-tools w-100 d-flex align-items-center gap-2">
-                        <div class="d-flex align-items-center flex-grow-1">
-                            <label class="form-label me-2 mb-0">@Localizer["UnitName"]</label>
-                            <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
-                            <button class="btn btn-outline-dark ms-2" @onclick="ApplySearch">
-                                <i class="fas fa-search"></i> @GLocalizer["Search"]
-                            </button>
-                        </div>
+<div class="modern-admin-page">
+    <div class="modern-page-header">
+        <h4 class="mb-0">@Localizer["PageTitle"]</h4>
+        <button type="button" class="btn btn-success" @onclick="StartCreate">
+            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
+        </button>
+    </div>
 
-                        <button type="button" class="btn btn-success ms-2" @onclick="ShowInput">
-                            <i class="fas fa-plus"></i>&nbsp; @GLocalizer["AddRecord"]
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    @if (ListWorkflows.Any())
-                    {
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>@Localizer["WorkflowName"]</th>
-                                    <th>@Localizer["WorkflowCode"]</th>
-                                    <th>@Localizer["Status"]</th>
-                                    <th>@Localizer["Priority"]</th>
-                                    <th>@Localizer["Frequency"]</th>
-                                    <th>@GLocalizer["Actions"]</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    var idx = 0;
-                                }
-                                @foreach (var w in ListWorkflows)
-                                {
-                                    idx++;
-                                    <tr>
-                                        <td>@idx</td>
-                                        <td>@w.WorkflowName</td>
-                                        <td>@w.WorkflowCode</td>
-                                        <td>@w.Status</td>
-                                        <td>@w.Priority</td>
-                                        <td>@w.Frequency</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info" @onclick="() => EditWorkflow(w)">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-
-                                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteWorkflow(w)">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <p>@GLocalizer["EmptyTable"]</p>
-                    }
-                </div>
+    <div class="card modern-card">
+        <div class="card-header">
+            <div class="d-flex align-items-center gap-2">
+                <label class="form-label mb-0">@Localizer["UnitName"]</label>
+                <UnitTreeSelector @bind-Value="SelectedUnitID" OnValueChanged="@(_ => ApplySearch())" />
+                <button class="btn btn-outline-dark" @onclick="ApplySearch"><i class="fas fa-search"></i> @GLocalizer["Search"]</button>
             </div>
         </div>
+
+        <div class="card-body table-responsive">
+            @if (ListWorkflows.Any())
+            {
+                <table class="table table-hover modern-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Localizer["WorkflowName"]</th>
+                            <th>@Localizer["WorkflowCode"]</th>
+                            <th>@Localizer["Status"]</th>
+                            <th>@Localizer["Priority"]</th>
+                            <th>@Localizer["Frequency"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var idx = 0; }
+                        @foreach (var w in ListWorkflows)
+                        {
+                            idx++;
+                            <tr @onclick="() => OpenRead(w)">
+                                <td>@idx</td>
+                                <td>@w.WorkflowName</td>
+                                <td>@w.WorkflowCode</td>
+                                <td>@w.Status</td>
+                                <td>@w.Priority</td>
+                                <td>@w.Frequency</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted mb-0">@GLocalizer["EmptyTable"]</p>
+            }
+        </div>
     </div>
-}
-else
+</div>
+
+@if (IsDrawerOpen)
 {
-    <div class="linear">
+    <div class="workspace-backdrop" @onclick="CloseDrawer"></div>
+    <div class="record-workspace-drawer">
+        <div class="workspace-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">@DrawerTitle</h5>
+                <small class="text-muted">@Localizer["WorkflowDrawerSubtitle"]</small>
+            </div>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CloseDrawer"><i class="fas fa-xmark"></i></button>
+        </div>
+
         <EditForm EditContext="EditContext" OnValidSubmit="SaveWorkflowAsync">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">@Localizer["ModalTitle"]</h5>
-                </div>
+            <DataAnnotationsValidator />
+            <div class="workspace-body">
+                @if (ShowValidationMessage)
+                {
+                    <div class="alert alert-danger">@Localizer["PleaseFixValidation"]</div>
+                }
 
-                <div class="card-body">
-                    <DataAnnotationsValidator />
-
-                    @if (ShowValidationMessage)
-                    {
-                        <ValidationSummary />
-                    }
-
+                <div class="workspace-section">
+                    <h6>@Localizer["BasicInfo"]</h6>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["UnitName"]</label>
                             <UnitTreeSelector @bind-Value="CurrentWorkflow.UnitID" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["WorkflowName"]</label>
-                            <input class="form-control" @bind-value="CurrentWorkflow.WorkflowName" @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentWorkflow.WorkflowName" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["WorkflowCode"]</label>
-                            <input class="form-control" @bind-value="CurrentWorkflow.WorkflowCode" @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentWorkflow.WorkflowCode" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Status"]</label>
-                            <input class="form-control" @bind-value="CurrentWorkflow.Status" @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentWorkflow.Status" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Priority"]</label>
-                            <input class="form-control" @bind-value="CurrentWorkflow.Priority" @bind-value:event="oninput" />
+                            <InputText class="form-control" @bind-Value="CurrentWorkflow.Priority" disabled="@IsReadMode" />
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">@Localizer["Frequency"]</label>
-                            <input class="form-control" @bind-value="CurrentWorkflow.Frequency" @bind-value:event="oninput" />
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label">@Localizer["WorkflowDescription"]</label>
-                            <textarea class="form-control" rows="3" @bind-value="CurrentWorkflow.WorkflowDescription" @bind-value:event="oninput"></textarea>
+                            <InputText class="form-control" @bind-Value="CurrentWorkflow.Frequency" disabled="@IsReadMode" />
                         </div>
                     </div>
                 </div>
 
-                <div class="card-footer d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success px-5">
-                        <i class="fas fa-save"></i> &nbsp; @GLocalizer["Save"]
-                    </button>
+                <div class="workspace-section">
+                    <h6>@Localizer["WorkflowDescription"]</h6>
+                    <InputTextArea class="form-control" rows="4" @bind-Value="CurrentWorkflow.WorkflowDescription" disabled="@IsReadMode" />
+                </div>
+            </div>
 
-                    <button type="button" @onclick="ShowDisplay" class="btn btn-light btn-outline-dark">
-                        <i class="fas fa-arrow-circle-left"></i> &nbsp; @GLocalizer["Cancel"]
-                    </button>
+            <div class="workspace-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" @onclick="CloseDrawer">@GLocalizer["Cancel"]</button>
+                <div class="d-flex gap-2">
+                    @if (IsReadMode)
+                    {
+                        <button type="button" class="btn btn-primary" @onclick="SwitchToEdit">@GLocalizer["Edit"]</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> @GLocalizer["Save"]</button>
+                    }
                 </div>
             </div>
         </EditForm>
@@ -158,31 +144,33 @@ else
 }
 
 @code {
-    // UI State
-    bool ShowInputScreen = false;
-    bool ShowValidationMessage = false;
+    bool IsDrawerOpen;
+    bool IsReadMode;
+    bool ShowValidationMessage;
 
-    // Data
     List<WorkflowSummary> ListWorkflows = new();
     WorkflowDefinition CurrentWorkflow = new();
     string? SelectedUnitID;
 
-    // Forms
     EditContext EditContext = default!;
 
-    // Localization
     IStringLocalizer Localizer = default!;
     IStringLocalizer GLocalizer = default!;
 
-    bool _firstRenderDone = false;
+    bool _firstRenderDone;
 
-    protected override async Task OnInitializedAsync()
+    string DrawerTitle => CurrentWorkflow.WorkflowID.HasValue
+        ? (IsReadMode ? Localizer["ViewWorkflow"] : Localizer["ModalTitle"])
+        : Localizer["ModalTitle"];
+
+    protected override Task OnInitializedAsync()
     {
         EditContext = new EditContext(CurrentWorkflow);
 
         Localizer = LocalizerFactory.Create(new Uri(Navigation.Uri).AbsolutePath, "");
         GLocalizer = LocalizerFactory.Create("Common", "");
         PageTitleService.CurrentPageTitle = Localizer["PageTitle"];
+        return Task.CompletedTask;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -195,21 +183,15 @@ else
         }
     }
 
-    private async Task ApplySearch()
-    {
-        await LoadWorkflowListAsync();
-    }
+    private async Task ApplySearch() => await LoadWorkflowListAsync();
 
     private async Task LoadWorkflowListAsync()
     {
         try
         {
-            string response;
-
-            if (!string.IsNullOrEmpty(SelectedUnitID))
-                response = await Http.GetStringAsync($"api/S7SWorkflow/GetByUnit?UnitID={SelectedUnitID}");
-            else
-                response = await Http.GetStringAsync("api/S7SWorkflow/Get");
+            string response = !string.IsNullOrEmpty(SelectedUnitID)
+                ? await Http.GetStringAsync($"api/S7SWorkflow/GetByUnit?UnitID={SelectedUnitID}")
+                : await Http.GetStringAsync("api/S7SWorkflow/Get");
 
             ListWorkflows = JsonConvert.DeserializeObject<List<WorkflowSummary>>(response) ?? new();
         }
@@ -224,88 +206,53 @@ else
         StateHasChanged();
     }
 
-    private async Task ShowInput()
+    private void StartCreate()
     {
         CurrentWorkflow = new WorkflowDefinition { UnitID = SelectedUnitID };
         EditContext = new EditContext(CurrentWorkflow);
         ShowValidationMessage = false;
-        ShowInputScreen = true;
+        IsReadMode = false;
+        IsDrawerOpen = true;
     }
 
-    private async Task ShowDisplay()
+    private async Task OpenRead(WorkflowSummary workflow)
     {
-        ShowInputScreen = false;
+        var item = await Http.GetFromJsonAsync<WorkflowDefinition>($"api/S7SWorkflow/GetByID?workflowID={workflow.WorkflowID}");
+        CurrentWorkflow = item ?? new WorkflowDefinition();
+        EditContext = new EditContext(CurrentWorkflow);
+        IsReadMode = true;
+        ShowValidationMessage = false;
+        IsDrawerOpen = true;
+    }
+
+    private void SwitchToEdit() => IsReadMode = false;
+
+    private void CloseDrawer()
+    {
+        IsDrawerOpen = false;
+        IsReadMode = false;
+        ShowValidationMessage = false;
     }
 
     private async Task SaveWorkflowAsync()
     {
-        if (EditContext.Validate())
+        if (!EditContext.Validate())
         {
-            var response = await Http.PostAsJsonAsync("api/S7SWorkflow/Save", CurrentWorkflow);
+            ShowValidationMessage = true;
+            return;
+        }
 
-            if (response.IsSuccessStatusCode)
-            {
-                await ShowDisplay();
-                await LoadWorkflowListAsync();
-                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Workflow saved successfully" });
-            }
-            else
-            {
-                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Save failed" });
-            }
+        var response = await Http.PostAsJsonAsync("api/S7SWorkflow/Save", CurrentWorkflow);
+
+        if (response.IsSuccessStatusCode)
+        {
+            IsReadMode = true;
+            await LoadWorkflowListAsync();
+            await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Workflow saved successfully" });
         }
         else
         {
-            ShowValidationMessage = true;
-        }
-    }
-
-    private async Task EditWorkflow(WorkflowSummary workflow)
-    {
-        var response = await Http.GetStringAsync($"api/S7SWorkflow/GetOne?workflowID={workflow.WorkflowID}");
-        var data = JsonConvert.DeserializeObject<List<WorkflowDefinition>>(response);
-
-        if (data?.Any() == true)
-        {
-            CurrentWorkflow = data.First();
-            EditContext = new EditContext(CurrentWorkflow);
-            ShowInputScreen = true;
-        }
-    }
-
-    private async Task DeleteWorkflow(WorkflowSummary workflow)
-    {
-        var result = await JS.InvokeAsync<object>("Swal.fire", new
-        {
-            title = "Are you sure?",
-            text = $"Workflow ID {workflow.WorkflowID} will be deleted.",
-            icon = "warning",
-            showCancelButton = true,
-            confirmButtonColor = "#d33",
-            cancelButtonColor = "#3085d6",
-            confirmButtonText = "Yes, delete it!",
-            cancelButtonText = "Cancel"
-        });
-
-        var json = result?.ToString();
-        if (json != null && json.Contains("\"isConfirmed\":true"))
-        {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "api/S7SWorkflow/Delete")
-            {
-                Content = JsonContent.Create(new { workflowID = workflow.WorkflowID })
-            };
-
-            var response = await Http.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await LoadWorkflowListAsync();
-                await JS.InvokeVoidAsync("Toast.fire", new { icon = "success", title = "Workflow deleted successfully" });
-            }
-            else
-            {
-                await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Deletion failed" });
-            }
+            await JS.InvokeVoidAsync("Swal.fire", new { icon = "error", title = "Error!", text = response.ReasonPhrase ?? "Save failed" });
         }
     }
 }

@@ -1,0 +1,110 @@
+.modern-admin-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modern-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.modern-card {
+    background: #fff;
+    border: 1px solid #e8ecf3;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.modern-card .card-header {
+    border-bottom: 1px solid #edf1f7;
+    background: #fff;
+    padding: .9rem 1rem;
+}
+
+.modern-card .card-body,
+.modern-card .card-footer {
+    padding: 1rem;
+}
+
+.modern-table thead th {
+    background-color: #f8fafe;
+    color: #55627a;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.modern-table tbody tr {
+    cursor: pointer;
+}
+
+.modern-table tbody tr:hover {
+    background: #f5f9ff;
+}
+
+.workspace-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 16, 30, .45);
+    z-index: 1060;
+}
+
+.record-workspace-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(960px, 92vw);
+    height: 100vh;
+    background: #fff;
+    box-shadow: -16px 0 36px rgba(15, 23, 42, .24);
+    z-index: 1070;
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace-header,
+.workspace-footer {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #edf1f7;
+}
+
+.workspace-footer {
+    border-top: 1px solid #edf1f7;
+    border-bottom: 0;
+}
+
+.workspace-body {
+    overflow: auto;
+    padding: 1rem 1.2rem;
+    flex: 1;
+}
+
+.workspace-section {
+    border: 1px solid #eef2f8;
+    border-radius: 12px;
+    padding: .85rem;
+    margin-bottom: 1rem;
+}
+
+.workspace-section h6 {
+    color: #51617b;
+    margin-bottom: .75rem;
+    font-weight: 600;
+}
+
+.input-validation-error,
+.form-control.input-validation-error,
+.form-select.input-validation-error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 .1rem rgba(220, 53, 69, .2);
+}
+
+@media (max-width: 768px) {
+    .record-workspace-drawer {
+        width: 100vw;
+    }
+}
