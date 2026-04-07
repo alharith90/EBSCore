@@ -1,0 +1,226 @@
+2026-03-27 12:09:10.018 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:10.018 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:15.268 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:15.268 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:20.267 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:20.267 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:25.282 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:25.282 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:30.297 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:30.297 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:35.300 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:35.300 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:35.792 +04:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Routing.Matching.AmbiguousMatchException: The request matched multiple endpoints. Matches: 
+
+EBSCore.Web.Controllers.StrategicObjectiveController.Get (EBSCore.Web)
+EBSCore.Web.Controllers.BCM.StrategicObjectiveController.Get (EBSCore.Web)
+/_Host
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.SelectAsync(HttpContext httpContext, CandidateSet candidateSet)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.SelectEndpointWithPoliciesAsync(HttpContext httpContext, IEndpointSelectorPolicy[] policies, CandidateSet candidateSet)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatch|10_1(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task matchTask)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-03-27 12:09:35.792 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Routing.Matching.AmbiguousMatchException: The request matched multiple endpoints. Matches: 
+
+EBSCore.Web.Controllers.StrategicObjectiveController.Get (EBSCore.Web)
+EBSCore.Web.Controllers.BCM.StrategicObjectiveController.Get (EBSCore.Web)
+/_Host
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, Span`1 candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.SelectAsync(HttpContext httpContext, CandidateSet candidateSet)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.SelectEndpointWithPoliciesAsync(HttpContext httpContext, IEndpointSelectorPolicy[] policies, CandidateSet candidateSet)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatch|10_1(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task matchTask)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-03-27 12:09:37.981 +04:00 [Error] EBSCore.Web.Controllers.BCM.StrategicInitiativeController Error retrieving strategic initiatives
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'StrategicInitiativeSP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in D:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in D:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 69
+   at EBSCore.AdoClass.DBStrategicInitiativeSP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String InitiativeID, String ObjectiveID, String Title, String Description, String OwnerID, String DepartmentID, String Budget, String Progress, String StartDate, String EndDate, String Status, String EscalationCriteria, String EscalationContact, String ActivationCriteria, String ActivationTrigger, String ActivationStatus, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in D:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategicInitiativeSP.cs:line 93
+   at EBSCore.Web.Controllers.BCM.StrategicInitiativeController.Get(String UnitID) in D:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategicInitiativeController.cs:line 49
+ClientConnectionId:7bb2fe26-d0e1-4bf5-916e-d6329846f3d2
+Error Number:2812,State:62,Class:16
+2026-03-27 12:09:37.981 +04:00 [ERR] Error retrieving strategic initiatives
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'StrategicInitiativeSP'.
+   at EBSCore.AdoClass.DBConnectionClass.FillDataset(ArrayList& DBFieldsArrayList, String storedProcedureName) in D:\Dev\EBSCore\EBSCore.AdoClass\DB\DBConnectionClass.cs:line 122
+   at EBSCore.AdoClass.DBParentStoredProcedureClass.QueryDatabase(SqlQueryType QueryType) in D:\Dev\EBSCore\EBSCore.AdoClass\DB\DBParentStoredProcedureClass.cs:line 69
+   at EBSCore.AdoClass.DBStrategicInitiativeSP.QueryDatabase(SqlQueryType queryType, String Operation, String UserID, String CompanyID, String UnitID, String InitiativeID, String ObjectiveID, String Title, String Description, String OwnerID, String DepartmentID, String Budget, String Progress, String StartDate, String EndDate, String Status, String EscalationCriteria, String EscalationContact, String ActivationCriteria, String ActivationTrigger, String ActivationStatus, String CreatedBy, String ModifiedBy, String CreatedAt, String UpdatedAt) in D:\Dev\EBSCore\EBSCore.AdoClass\BCM\DBStrategicInitiativeSP.cs:line 93
+   at EBSCore.Web.Controllers.BCM.StrategicInitiativeController.Get(String UnitID) in D:\Dev\EBSCore\EBSCore.Web\Controllers\BCM\StrategicInitiativeController.cs:line 49
+ClientConnectionId:7bb2fe26-d0e1-4bf5-916e-d6329846f3d2
+Error Number:2812,State:62,Class:16
+2026-03-27 12:09:40.333 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:40.333 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:45.348 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:45.348 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:50.349 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:50.349 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:09:55.362 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:09:55.362 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:00.365 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:00.365 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:05.378 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:05.378 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:10.395 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:10.395 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:15.401 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:15.401 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:20.414 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:20.414 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:25.431 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:25.431 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:30.449 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:30.449 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:35.481 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:35.481 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:40.493 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:40.493 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:45.498 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:45.498 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:50.499 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:50.499 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:10:55.520 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:10:55.520 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:00.536 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:00.536 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:05.565 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:05.565 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:10.574 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:10.574 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:15.575 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:15.575 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:20.580 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:20.580 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:25.598 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:25.598 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:30.613 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:30.613 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:35.629 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:35.629 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:40.645 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:40.645 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:45.656 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:45.656 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:50.658 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:50.658 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:11:55.675 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:11:55.675 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:00.694 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:00.694 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:05.703 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:05.703 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:10.710 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:10.710 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:15.730 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:15.730 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:20.729 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:20.729 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:25.740 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:25.740 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:30.742 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:30.742 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:35.744 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:35.744 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:40.762 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:40.762 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:45.776 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:45.776 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:50.792 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:50.792 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:12:55.805 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:12:55.805 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:00.806 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:00.806 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:05.809 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:05.809 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:10.824 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:10.824 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:15.833 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:15.833 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:20.842 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:20.842 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:25.855 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:25.855 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:30.856 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:30.856 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:35.857 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:35.857 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:40.859 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 12:13:40.859 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 12:13:43.876 +04:00 [Error] EBSCore.Web.Services.S7SNotificationBackgroundService S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 12:13:43.876 +04:00 [ERR] S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 12:13:43.886 +04:00 [Error] EBSCore.Web.Services.NotificationBackgroundService Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 12:13:43.886 +04:00 [ERR] Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 12:13:43.886 +04:00 [Error] EBSCore.Web.Services.WorkflowBackgroundService Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-27 12:13:43.886 +04:00 [ERR] Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-27 14:38:34.989 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:38:34.989 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:38:40.191 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:38:40.191 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:38:45.192 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:38:45.192 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:38:49.958 +04:00 [Error] EBSCore.Web.Services.S7SNotificationBackgroundService S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 14:38:49.958 +04:00 [ERR] S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 14:38:49.982 +04:00 [Error] EBSCore.Web.Services.NotificationBackgroundService Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 14:38:49.982 +04:00 [ERR] Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 14:38:49.982 +04:00 [Error] EBSCore.Web.Services.WorkflowBackgroundService Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-27 14:38:49.982 +04:00 [ERR] Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-27 14:39:58.426 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:39:58.465 +04:00 [Information]  EBSCore.Web is listening on "http://localhost:1490"
+2026-03-27 14:39:58.426 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:39:58.465 +04:00 [INF] EBSCore.Web is listening on http://localhost:1490
+2026-03-27 14:40:03.604 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:40:03.604 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:40:08.614 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:40:08.614 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:40:13.615 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:40:13.615 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:40:18.616 +04:00 [Information] EBSCore.Web.Services.WorkflowBackgroundService [Workflow] Polling for executions
+2026-03-27 14:40:18.616 +04:00 [INF] [Workflow] Polling for executions
+2026-03-27 14:40:22.220 +04:00 [Error] EBSCore.Web.Services.S7SNotificationBackgroundService S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 14:40:22.220 +04:00 [ERR] S7SNotificationBackgroundService loop error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.S7SNotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\S7SNotificationBackgroundService.cs:line 50
+2026-03-27 14:40:22.243 +04:00 [Error] EBSCore.Web.Services.NotificationBackgroundService Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 14:40:22.243 +04:00 [ERR] Notification background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.NotificationBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\NotificationBackgroundService.cs:line 47
+2026-03-27 14:40:22.244 +04:00 [Error] EBSCore.Web.Services.WorkflowBackgroundService Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
+2026-03-27 14:40:22.244 +04:00 [ERR] Workflow background service error
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at EBSCore.Web.Services.WorkflowBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\Dev\EBSCore\EBSCore.Web\Services\WorkflowBackgroundService.cs:line 49
